@@ -13,28 +13,10 @@ To be an app for proactive environmentalists to learn knowledge about how to pro
 - [Jacob Baum]()
 
 
+## A Short History of How the Project Came to be
+  One of the major problems that we, as a species, face in the next few years is the drastic effect that climate change has on the planet. We can already see some of these effects through the record-breaking temperatures recorded globally, forest fires becoming more frequent, and the strain on our clean energy and water reserves.
+  
+  The team ***Greenguard*** is founded by teammates with the thought of resolving this problem. We believe that a strong social awareness and a coordinated effort are crucial to make the changes. Therefore, the team decided to make an app to tell people some unknown facts about the environment and how they could make a change.
 
-
-
-
-
-=============================
-# Project Repository
-
-This repository will be used for team projects.
-
-Several sets of instructions are included in this repository. They should each be treated as separate assignments with their own due dates and sets of requirements.
-
-1. See the [App Map & Wireframes](instructions-0a-app-map-wireframes.md) and [Prototyping](./instructions-0b-prototyping.md) instructions for the requirements of the initial user experience design of the app.
-
-1. Delete the contents of this file and replace with the contents of a proper README.md, as described in the [project setup instructions](./instructions-0c-project-setup.md)
-
-1. See the [Sprint Planning instructions](instructions-0d-sprint-planning.md) for the requirements of Sprint Planning for each Sprint.
-
-1. See the [Front-End Development instructions](./instructions-1-front-end.md) for the requirements of the initial Front-End Development.
-
-1. See the [Back-End Development instructions](./instructions-2-back-end.md) for the requirements of the initial Back-End Development.
-
-1. See the [Database Integration instructions](./instructions-3-database.md) for the requirements of integrating a database into the back-end.
-
-1. See the [Deployment instructions](./instructions-4-deployment.md) for the requirements of deploying an app.
+  ## How To Contribute to the file
+Please check [CONTRIBUTING.md](./CONTRIBUTING.md)
