@@ -3,14 +3,13 @@
 # Project Greenguard
 
 ## Product Vision Statement
-To be an app for proactive environmentalists to learn knowledge about how to protect the environment in different cities.
+To help proactive environmentalists to learn knowledge about how to protect the environment in different cities.
 
 ## Team Members:
 - [Minwu Kim](https://github.com/minwukim)
 - [Tasnim Ahmed](https://github.com/tasnimahmed11)
-- [Sachin Iyer]()
-- [Xi Liu]()
-- [Jacob Baum]()
+- [Sachin Iyer](https://github.com/sachiniyer)
+- [Xi Liu](https://github.com/xi-liu-cs)
 
 
 ## A Short History of How the Project Came to be
