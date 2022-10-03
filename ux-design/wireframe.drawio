@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-10-03T15:44:34.358Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="9-50BXk3ax0TtK-08xwK" version="20.4.0" type="github">
+<mxfile host="app.diagrams.net" modified="2022-10-03T17:31:47.458Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 Edg/105.0.1343.42" etag="Ea3cFP4clsweGIrmVk9t" version="20.4.0" type="github">
   <diagram id="AQFI6UG3dmrKnwbbd0p1" name="Page-1">
-    <mxGraphModel dx="946" dy="614" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1037" dy="571" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -13,17 +13,48 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="2" value="&lt;div&gt;entry point: entire map and side panel&lt;/div&gt;" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="330" y="60" width="120" height="60" as="geometry" />
+        <mxCell id="XZwGA0tTDyMO1BIwxY2l-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="2" target="XZwGA0tTDyMO1BIwxY2l-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="435" y="190" />
+              <mxPoint x="435" y="190" />
+            </Array>
+          </mxGeometry>
         </mxCell>
-        <mxCell id="0Y4MVhz9-gonjYsTBbe1-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="4" target="0Y4MVhz9-gonjYsTBbe1-4">
+        <mxCell id="XZwGA0tTDyMO1BIwxY2l-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="2" target="XZwGA0tTDyMO1BIwxY2l-9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="480" y="100" />
+              <mxPoint x="480" y="160" />
+              <mxPoint x="635" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2" value="&lt;div&gt;entry point: entire map and side panel&lt;/div&gt;" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="330" y="70" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0Y4MVhz9-gonjYsTBbe1-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="4" target="0Y4MVhz9-gonjYsTBbe1-4" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="4" value="after click according to location: information panel shown on the side with historical facts tab and events tab" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="100" y="250" width="160" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="0Y4MVhz9-gonjYsTBbe1-4" value="after clicking on events tab: opens a panel with all the nearby events information" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="0Y4MVhz9-gonjYsTBbe1-4" value="after clicking on events tab: opens a panel with all the nearby events information" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="100" y="380" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="XZwGA0tTDyMO1BIwxY2l-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="XZwGA0tTDyMO1BIwxY2l-4">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="435" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XZwGA0tTDyMO1BIwxY2l-4" value="a search option based on keywords and coordinates" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="250" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="XZwGA0tTDyMO1BIwxY2l-8" value="show a list of matching results with links pointing to the relevant location data and webpages" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="370" width="170" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="XZwGA0tTDyMO1BIwxY2l-9" value="a menu to choose which dataset to select from" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="570" y="250" width="130" height="90" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
