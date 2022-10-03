@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-10-03T15:06:46.729Z" agent="5.0 (X11)" version="20.4.0" etag="CIVARzf4rKcfgTsFQsiW" type="github">
+<mxfile host="app.diagrams.net" modified="2022-10-03T15:07:19.059Z" agent="5.0 (X11)" version="20.4.0" etag="Yhth1yHg4T9d8cPGUZq8" type="github">
   <diagram id="AQFI6UG3dmrKnwbbd0p1" name="Page-1">
     <mxGraphModel dx="1422" dy="751" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -16,7 +16,7 @@
         <mxCell id="2" value="&lt;div&gt;entry point: entire map and side panel&lt;/div&gt;" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="330" y="60" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="4" value="after click according to location: information panel shown on the side" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="4" value="after click according to location: information panel shown on the side with historical facts" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="100" y="250" width="160" height="80" as="geometry" />
         </mxCell>
       </root>
