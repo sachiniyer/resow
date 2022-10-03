@@ -20,8 +20,8 @@ The specific order is shown below:
     
         e.g:  34-Implement-SignIn-feature
 3. Commit and push the changes.
-4. Make a pull request and ask for other teammates approval
-5. Squash and merge the changes to the main branch
+4. Make a pull request after you are done. Make sure to close the issue by entering the corresponding issue number. (using '#' sign)
+5. Wait for the teammates review. If the changes are approved. Squash and merge the changes to the main branch
 6. Notify the teammates if there is a possibility of code collisions. 
 
 ## Detail rules of how and what to contribute
