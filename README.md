@@ -9,7 +9,6 @@ To help eliminate waste of all kinds and connect people through shared resources
 - [Minwu Kim](https://github.com/minwukim)
 - [Tasnim Ahmed](https://github.com/tasnimahmed11)
 - [Sachin Iyer](https://github.com/sachiniyer)
-- [Xi Liu](https://github.com/xi-liu-cs)
 - [Jacob Baum](https://github.com/JacobLBaum)
 
 
