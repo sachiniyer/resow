@@ -17,5 +17,7 @@ To help eliminate waste of all kinds and connect people through shared resources
 
   The ***Re-Sow*** project seeks to solve this problem by presenting a solution for people to connect with others nearby to better distribute the great excess that leads to waste that occurs everyday. Re-Sow will allow people with excess resources to post their excess with their location to invite others nearby to take their excess off their hands. This brings a new waste disposal solution into the hands of everyday consumers as they have a sustainable alternative to throwing away useful excess.
 
+  Curious about the title ***Re-Sow***? The name is derived by combining the word ***Resource*** and ***Sow***
+
   ## How To Contribute to the file
 Please check [CONTRIBUTING.md](./CONTRIBUTING.md)
