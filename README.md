@@ -1,6 +1,6 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=8742764&assignment_repo_type=AssignmentRepo)
 
-# Project Greenguard
+# Project Re-Sow
 
 ## Product Vision Statement
 To help eliminate waste of all kinds and connect people through shared resources.
@@ -9,7 +9,6 @@ To help eliminate waste of all kinds and connect people through shared resources
 - [Minwu Kim](https://github.com/minwukim)
 - [Tasnim Ahmed](https://github.com/tasnimahmed11)
 - [Sachin Iyer](https://github.com/sachiniyer)
-- [Xi Liu](https://github.com/xi-liu-cs)
 - [Jacob Baum](https://github.com/JacobLBaum)
 
 
