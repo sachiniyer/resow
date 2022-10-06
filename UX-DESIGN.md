@@ -3,7 +3,7 @@
 ## 1. App Map
 ![App map](ux-design/appmap/appmap.png)
 
-The web app doesn't have a home page. It shows the map when you open the app.
+The web app doesn't have a home page. It shows the map when you open it.
 
 There are 4 main branches in the web app:
 - Map: Users can view the locations of the items uploaded by other users.
@@ -11,7 +11,7 @@ There are 4 main branches in the web app:
 - User Profile: Users can edit their profiles and view the posts they uploaded or saved.
 - Messages: Users can send and receive text messages with other users.
 
-## 2. Wireframes and Prototype
+## 2. Wireframes
 ### Overview
 ![Wireframe overview](ux-design/wireframes/wireframe.png)
 
@@ -19,9 +19,8 @@ There are 4 main branches in the web app:
 
 ### 1. Homepage/Map
 
-It is the default/main page of the web app.
-
 ![Homepage/map](ux-design/wireframes/Map.png)
+- It is the default/main page of the web app.
 - It is a map with each of the pins indicates the location of the item uploaded by other users.
 - The nav bar below shows 4 main branches of the web app (map / upload items / user profile / messages).
 
@@ -73,4 +72,4 @@ It is the default/main page of the web app.
 
 
 # 3. Prototype
-Please check [prototype](ux-design.prototype.fig)
+Please check [prototype](ux-design/prototype/prototype.fig)
