@@ -72,6 +72,8 @@ There are 4 main branches in the web app:
 
 
 # 3. Prototype
-There are two versions of the prototype
-- To check the images with no repetition, please check [prototype1.fig](ux-design/prototype/prototype1.fig)
-- To check the prototypes with seamless workflow, please check [prototype2.fig](ux-design/prototype/prototype2.fig)
+
+Please check [prototype.fig](ux-design/prototype/prototype.fig)
+
+*PLease note that, for seamless interactions, there is a repetition of an image in the prototype. In order to see the raw figma file, please check [prototype_raw.fig](ux-design/prototype/prototype_raw.fig)*
+
