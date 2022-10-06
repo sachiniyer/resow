@@ -48,6 +48,13 @@ To be updated when the project reaches the stage
 - Product Owner: Minwu Kim
 - Scrum Master: Jacob Baum
 
+### Sprint 2
+- TBD
+### Sprint 3
+- TBD
+### Sprint 4
+- TBD
+
 
 
 
