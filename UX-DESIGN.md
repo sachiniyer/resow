@@ -73,7 +73,7 @@ There are 4 main branches in the web app:
 
 # 3. Prototype
 
-Please check [prototype.fig](ux-design/prototype/prototype.fig)
+Please check [prototype](https://www.figma.com/proto/Ux0FloKCoQX1PC741yCRVs/Mobile-Application?page-id=0%3A1&node-id=5%3A2&viewport=378%2C318%2C0.18&scaling=scale-down&starting-point-node-id=5%3A2)
 
 *PLease note that, for seamless interactions, there is a repetition of an image in the prototype. In order to see the raw figma file, please check [prototype_raw.fig](ux-design/prototype/prototype_raw.fig)*
 
