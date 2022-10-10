@@ -9,14 +9,14 @@ import Typography from '@mui/material/Typography';
 export default function Message(props) {
 
   return (
-    <Card sx={{ display: 'flex', width: 0.5 }}>
+    <Card sx={{ display: 'flex', width: 0.5}}>
       <CardMedia
         component="img"
         sx={{ width: 151 }}
         image={props.img}
         alt="some image"
       />
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', width: 1, align:"right" }}>
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Box sx={{ display: 'grid', gap: 0, gridTemplateColumns: 'repeat(2, 1fr)' }}>
             <Typography component="div" variant="h5" align="left">

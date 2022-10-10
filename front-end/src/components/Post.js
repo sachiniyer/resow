@@ -16,7 +16,7 @@ export default function PostCard(props) {
         image={props.img}
         alt="User Image"
       />
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', width: 1, align: "right" }}>
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Box sx={{ display: 'grid', gap: 0, gridTemplateColumns: 'repeat(2, 1fr)' }}>
             <Typography component="div" variant="h5" align="left">
