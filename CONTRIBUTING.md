@@ -37,8 +37,22 @@ The specific order is shown below:
 - Focus on a small unit feature for every issue.
 
 ## 5. instructions for setting up the local development environment 
-To be updated when the front-end development begins
 
+### Frontend
+```
+cd front-end
+npm install
+npm start
+```
+Audit fix is not that important
+
+### Backend
+```
+cd back-end
+npm install
+npm start
+
+```
 ## 6. instructions for building and testing the project
 To be updated when the project reaches the stage
 
