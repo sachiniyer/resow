@@ -15,6 +15,7 @@ function PreviewWindow(props){
                 <div className = "itemInfo">
                     <p className = "title">{props.title}</p>
                     <p className = "location">{props.location}</p>
+                    <p className = "description">{props.description}</p>
                 </div>
             </div>       
         </div>
