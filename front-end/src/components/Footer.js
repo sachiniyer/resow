@@ -1,4 +1,3 @@
-import logo from '../static/resowLogo.png';
 import './Footer.css';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
