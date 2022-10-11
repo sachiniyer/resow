@@ -26,8 +26,10 @@ function App() {
         thumbnailURL = {logo}
         profileURL = {logo}
         sellerName = "Foo Barstein"
-        title = "Giving away my lovely bunnie rabbit!!"
+        title = "Cute rabbit needs a new home"
         location = "400 Broome St"
+        description = "Giving away my lovely bunnie rabbit!!"
+        
       />
       
 

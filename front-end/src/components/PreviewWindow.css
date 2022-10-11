@@ -1,10 +1,10 @@
 .window{
 
-    width: 300px;
+    width: 400px;
     height: 350px;
     background-color: rgb(255, 255, 255);
     border: 2px solid #187c4e;
-    border-radius: 25px;
+    border-radius: 15px;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -14,8 +14,8 @@
 
 .thumbnail{
 
-    margin-top: 20px;
-    width: 250px;
+    margin-top: 10px;
+    width: 370px;
     height: 200px;
     object-fit: cover;
     border: 2px solid #187c4e;
@@ -40,10 +40,10 @@
 .profileImg{
 
     margin-top: 10px;
-    margin-left: 25px;
+    margin-left: 5px;
     width: 80px;
-    border-radius: 40px;
     height: 80px;
+    border-radius: 40px;
     object-fit: cover;
     border: solid black;
 
@@ -54,8 +54,8 @@
     width:100px;
     height:20px;
     margin-top: 2px;
-    margin-left: 20px;
-    font-size: 1ch;
+    margin-left: 11px;
+    font-size: 1.4ch;
     text-align: center;
 
 }
@@ -69,11 +69,12 @@
 
 .title{
 
-    width:150px;
+    width:250px;
     height:40px;
-    margin-top: 25px;
+    margin-top: 15px;
     margin-left: 15px;
-    font-size: 1.3ch;
+    font-size: 1.4ch;
+    font-weight: bold;
     text-align: left;
 
 }
@@ -88,5 +89,16 @@
     font-size: 1.3ch;
     color: rgb(77, 76, 76);
     font-style: italic;
+
+}
+
+.description{
+
+    width: 250px;
+    height:40px;
+    margin-top: 10px;
+    margin-left: 15px;
+    font-size: 1.3ch;
+    text-align: left;
 
 }
