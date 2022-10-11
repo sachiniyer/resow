@@ -21,6 +21,16 @@ function App() {
         />
       </header>
 
+      {/* sample for previewbox component */}
+      <PreviewWindow 
+        thumbnailURL = {logo}
+        profileURL = {logo}
+        sellerName = "Foo Barstein"
+        title = "Giving away my lovely bunnie rabbit!!"
+        location = "400 Broome St"
+      />
+      
+
     </div>
   );
 }
