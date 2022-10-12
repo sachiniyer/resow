@@ -1,26 +1,38 @@
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import './App.css';
-import MessageCard from './components/Message'
-import PostCard from './components/Post'
+
+
+//header and footer added to index
+
+
+import Homepage from './pages/Homepage';
+import UploadItem from './pages/UploadItem';
+import UserProfile from './pages/UserProfile';
+import Messages from './pages/Messages';
+
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-body">
-        <PostCard
-          img="/resowLogo.png"
-          postTitle="Post Sample"
-          name="user x"
-          time="1"
-          message="selling my old bunnie rabbits to someone that will care for them deeply"
-        />
-        <MessageCard
-          img="/resowLogo.png"
-          name="user x"
-          date="mm.dd.yyyy"
-          message="when are you coming to pick the bunnie rabbits"
-        />
-      </header>
+      <Router>
+        <main className="App-main">
+          <Routes>
+            {/* a route for the home page */}
+            <Route path="/Homepage" element={<Homepage />} />
 
+            {/* a route for the upload item page */}
+            <Route path = "/UploadItem" element={<UploadItem/>} />
+
+            {/* a route for the user profile page */}
+            <Route path = "/UserProfile" element={<UserProfile/>} />
+
+            {/* a route for the messages page */}
+            <Route path = "/Messages" element={<Messages/>} />
+          </Routes>
+        </main>
+      </Router>
     </div>
   );
 }
