@@ -15,10 +15,10 @@ function Footer() {
     <footer className="App-footer">
       <Container maxWidth="sm">
         <Box display="flex" justifyContent="space-between">
-          <Button className="Nav-button" color="success" href="#map" variant="contained">Map</Button>
-          <Button className="navButton" color="success" href="#upload" variant="contained">Upload</Button>
-          <Button className="navButton" color="success" href="#profile" variant="contained">Profile</Button>
-          <Button className="navButton" color="success" href="#messages" variant="contained">Messages</Button>
+          <Button className="Nav-button" color="success" href="/Homepage" variant="contained">Map</Button>
+          <Button className="navButton" color="success" href="/UploadItem" variant="contained">Upload</Button>
+          <Button className="navButton" color="success" href="/UserProfile" variant="contained">Profile</Button>
+          <Button className="navButton" color="success" href="/Messages" variant="contained">Messages</Button>
         </Box>
       </Container>
     </footer>
