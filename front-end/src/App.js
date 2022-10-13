@@ -1,6 +1,7 @@
 import './App.css';
 import MessageCard from './components/Message'
 import PostCard from './components/Post'
+import PreviewWindow from './components/PreviewWindow';
 
 function App() {
   return (
@@ -19,8 +20,15 @@ function App() {
           date="mm.dd.yyyy"
           message="when are you coming to pick the bunnie rabbits"
         />
+        <PreviewWindow 
+          thumbnailURL = "/resowLogo.png"
+          profileURL = "/resowLogo.png"
+          sellerName = "Foo Barstein"
+          title = "Cute rabbit needs a new home"
+          location = "400 Broome St"
+          
+        />
       </header>
-
     </div>
   );
 }
