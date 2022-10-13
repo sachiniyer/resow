@@ -9,7 +9,7 @@ export default function Message(props) {
 
   return (
     <Card sx={{
-      display: { xs: 'block', sm: 'block', md: 'flex' },
+      display: "flex",
       width: { xs: 0.9, sm: 0.75, md: 0.5 }
     }} >
       <Box
@@ -19,6 +19,8 @@ export default function Message(props) {
           width: 350,
           maxHeight: { xs: 100, md: 150 },
           maxWidth: { xs: 100, md: 150 },
+          mt: "auto",
+          mb: "auto",
         }}
         alt="Image of the good"
         src={props.img}
@@ -26,7 +28,7 @@ export default function Message(props) {
       <Box sx={{ display: 'flex', flexDirection: 'column', width: 1, align: "right" }}>
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Box sx={{ display: 'grid', gap: 0, gridTemplateColumns: 'repeat(2, 1fr)' }}>
-            <Typography component="div" variant="h5" align="left">
+            <Typography component="div" variant="body1" align="left">
               {props.name}
             </Typography>
             <Typography component="div" variant="body1" align="right">

@@ -9,7 +9,7 @@ export default function PostCard(props) {
 
   return (
     <Card sx={{
-      display: { xs: 'block', sm: 'block', md: 'flex' },
+      display: "flex",
       width: { xs: 0.9, sm: 0.75, md: 0.5 }
     }} >
       <Box
@@ -19,6 +19,8 @@ export default function PostCard(props) {
           width: 350,
           maxHeight: { xs: 100, md: 150 },
           maxWidth: { xs: 100, md: 150 },
+          mt: "auto",
+          mb: "auto",
         }}
         alt="User Profile"
         src={props.img}
@@ -35,12 +37,12 @@ export default function PostCard(props) {
                 {props.name}
               </Typography>
               <Typography component="div" variant="body1" align="right">
-                {props.time + " hr ago"}
+                {props.time}
               </Typography>
             </Box>
           </Box>
           <Typography variant="subtitle1" color="text.secondary" component="div">
-            {props.message}
+            {props.location}
           </Typography>
         </CardContent>
       </Box>
