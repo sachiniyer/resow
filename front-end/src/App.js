@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import './App.css';
+import Header from './components/Header'
+import Footer from './components/Footer';
 
 
 //Pages
@@ -11,6 +13,7 @@ import Messages from './pages/Messages';
 function App() {
   return (
     <div className="App">
+      <Header />
       <header className="App-body">
         <Router>
           <main className="Router">
@@ -31,6 +34,7 @@ function App() {
           </main>
       </Router>
       </header>
+      <Footer/>
     </div>
   );
 }
