@@ -5,12 +5,7 @@ import App from './App';
 import Header from './components/Header'
 import Footer from './components/Footer';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
-import Homepage from './pages/Homepage';
-import UploadItem from './pages/UploadItem';
-import UserProfile from './pages/UserProfile';
-import Messages from './pages/Messages';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -18,25 +13,7 @@ root.render(
   <React.StrictMode>
     <Header />
     <App />
-    <Router>
-      <main className="Router">
-        <Routes>
-          {/* a route for the home page */}
-          <Route path="/Homepage" element={<Homepage />} />
-
-          {/* a route for the upload item page */}
-          <Route path = "/UploadItem" element={<UploadItem/>} />
-
-          {/* a route for the user profile page */}
-          <Route path = "/UserProfile" element={<UserProfile/>} />
-
-          {/* a route for the messages page */}
-          <Route path = "/Messages" element={<Messages/>} />
-
-        </Routes>
-        </main>
-      </Router>
-      <Footer />
+    <Footer />
   </React.StrictMode>
 );
 
