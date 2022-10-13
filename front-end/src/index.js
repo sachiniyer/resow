@@ -13,14 +13,6 @@ import UserProfile from './pages/UserProfile';
 import Messages from './pages/Messages';
 
 
-import ItemList from './pages/ItemsList';
-import ItemDetails from './pages/ItemDetails';
-import PastUploads from './pages/PastUpload';
-import SavedPost from './pages/SavedPost';
-import ChatPage from './pages/ChatPage';  //must be fixed later
-
-
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
