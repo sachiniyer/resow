@@ -1,9 +1,4 @@
 
-
-
-
-
-
 function ItemList() {
     return (
       <div className="ItemList">

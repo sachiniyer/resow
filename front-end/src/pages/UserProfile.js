@@ -1,7 +1,4 @@
 
-
-
-
 function UserProfile() {
   return (
     <div className="UserProfile">

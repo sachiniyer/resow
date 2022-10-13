@@ -1,7 +1,5 @@
 
 
-
-
 function EditProfile() {
     return (
       <div className="EditProfile">

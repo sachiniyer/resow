@@ -1,7 +1,5 @@
 
 
-
-
 function PastUploads() {
     return (
       <div className="PastUploads">

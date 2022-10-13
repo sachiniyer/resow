@@ -3,13 +3,18 @@ import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import './App.css';
 
 
-//header and footer added to index
-
-
 import Homepage from './pages/Homepage';
 import UploadItem from './pages/UploadItem';
 import UserProfile from './pages/UserProfile';
 import Messages from './pages/Messages';
+
+
+import ItemList from './pages/ItemsList';
+import ItemDetails from './pages/ItemDetails';
+import PastUploads from './pages/PastUpload';
+import SavedPost from './pages/SavedPost';
+import ChatPage from './pages/ChatPage';  //must be fixed later
+
 
 
 
@@ -30,6 +35,22 @@ function App() {
 
             {/* a route for the messages page */}
             <Route path = "/Messages" element={<Messages/>} />
+
+            {/* a route for the list page */}
+            <Route path = "/ItemsList" element={<ItemList/>} />
+
+            {/* a route for the item details page */}
+            <Route path = "/ItemsDetails" element={<ItemDetails/>} />
+
+            {/* a route for the past upload page */}
+            <Route path = "/PastUploads" element={<PastUploads/>} /> 
+
+            {/* a route for the saved post page */}
+            <Route path = "/SavedPost" element={<SavedPost/>} />
+
+            {/* a route for the chat inbox page */}
+            <Route path = "/User?ChatInbox" element={<ChatPage/>} />
+
           </Routes>
         </main>
       </Router>

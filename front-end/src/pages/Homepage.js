@@ -1,6 +1,5 @@
 
 
-
 function Homepage() {
   return (
     <div className="Homepage">

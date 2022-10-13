@@ -1,9 +1,6 @@
 
 
 
-
-
-
 function SavedPost() {
     return (
       <div className="SavedPost">

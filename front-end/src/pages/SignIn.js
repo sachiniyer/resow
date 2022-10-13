@@ -1,11 +1,5 @@
 
 
-
-
-
-
-
-
 function SignIn() {
     return (
       <div className="SignIn">

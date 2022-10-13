@@ -1,7 +1,4 @@
 
-
-
-
 function ChatPage() {
     return (
       <div className="ChatPage">

@@ -1,9 +1,4 @@
 
-
-
-
-
-
 function ItemDetails() {
     return (
       <div className="ItemDetails">

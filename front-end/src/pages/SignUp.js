@@ -1,9 +1,5 @@
 
 
-
-
-
-
 function SignUp() {
     return (
       <div className="SignUp">
