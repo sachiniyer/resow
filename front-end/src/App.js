@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import './App.css';
 
+
+//Pages
 import Homepage from './pages/Homepage';
 import UploadItem from './pages/UploadItem';
 import UserProfile from './pages/UserProfile';
@@ -14,7 +16,7 @@ function App() {
           <main className="Router">
             <Routes>
               {/* a route for the home page */}
-              <Route path="/Homepage" element={<Homepage />} />
+              <Route path="/" element={<Homepage />} />
 
               {/* a route for the upload item page */}
               <Route path = "/UploadItem" element={<UploadItem/>} />
