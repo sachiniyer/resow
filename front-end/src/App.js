@@ -15,6 +15,7 @@ import ItemDetails from './pages/ItemDetails'
 import PastUpload from './pages/PastUpload'
 import SavedPost from './pages/SavedPost'
 import ChatPage from './pages/ChatPage'
+import EditProfile from './pages/EditProfile'
 function App() {
   return (
     <div className="App">
@@ -40,6 +41,9 @@ function App() {
 
               {/* a route for the items list page */}
               <Route path = "/ItemDetails" element={<ItemDetails/>} />
+
+              {/* a route for the edit profile page */}
+              <Route path = "/UserProfile/EditProfile" element={<EditProfile/>} />
 
               {/* a route for the saved post page */}
               <Route path = "/UserProfile/SavedPost" element={<SavedPost/>} />

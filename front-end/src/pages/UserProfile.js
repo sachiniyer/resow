@@ -5,10 +5,11 @@ function UserProfile() {
   return (
     <div className="UserProfile">
       <h1> User Profile Page </h1>
-
-      <Link to ="/PastUpload"> PastUpload </Link>
-      <Link to ="/UserProfile/SavedPost"> SavedPost </Link>
-
+      <ul>
+        <li> <Link to ="/PastUpload"> PastUpload </Link> </li>
+        <li> <Link to ="/UserProfile/SavedPost"> SavedPost </Link> </li>
+        <li> <Link to ="/UserProfile/EditProfile"> Edit Profile </Link> </li>
+      </ul>
     </div>
   );
 }
