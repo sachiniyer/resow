@@ -2,11 +2,13 @@ import './App.css';
 import MessageCard from './components/Message'
 import PostCard from './components/Post'
 import PreviewWindow from './components/PreviewWindow';
+import SearchBar from './components/SearchBar';
 
 function App() {
   return (
     <div className="App">
       <header className="App-body">
+        <SearchBar></SearchBar>
         <PostCard
           img="/resowLogo.png"
           postTitle="Post Sample"
