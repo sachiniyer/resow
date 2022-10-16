@@ -81,7 +81,6 @@ function App() {
           
         />
       </header>
-      <Footer>
       <Footer/>
     </div>
   );
