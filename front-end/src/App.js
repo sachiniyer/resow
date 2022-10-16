@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import './App.css';
-import Header from './components/Header'
+
+
 import Footer from './components/Footer';
 import MessageCard from './components/Message'
 import PostCard from './components/Post'
@@ -22,6 +23,7 @@ import EditProfile from './pages/EditProfile'
 function App() {
   return (
     <div className="App">
+      <Footer/>
       <header className="App-body">
         <Router>
           <main className="Router">
@@ -81,7 +83,6 @@ function App() {
           
         />
       </header>
-      <Footer/>
     </div>
   );
 }
