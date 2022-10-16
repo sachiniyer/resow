@@ -1,12 +1,8 @@
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import './App.css';
 
-
 import Footer from './components/Footer';
-import MessageCard from './components/Message'
-import PostCard from './components/Post'
-import PreviewWindow from './components/PreviewWindow';
-
+//removed unneeded components - previewwindow, post card, message card
 
 //Main Pages
 import Homepage from './pages/Homepage';
@@ -61,27 +57,6 @@ function App() {
             </Routes>
           </main>
         </Router>      
-        <PostCard
-          img="/resowLogo.png"
-          postTitle="Post Sample"
-          name="user x"
-          time="1"
-          message="selling my old bunnie rabbits to someone that will care for them deeply"
-        />
-        <MessageCard
-          img="/resowLogo.png"
-          name="user x"
-          date="mm.dd.yyyy"
-          message="when are you coming to pick the bunnie rabbits"
-        />
-        <PreviewWindow 
-          thumbnailURL = "/resowLogo.png"
-          profileURL = "/resowLogo.png"
-          sellerName = "Foo Barstein"
-          title = "Cute rabbit needs a new home"
-          location = "400 Broome St"
-          
-        />
       </header>
     </div>
   );
