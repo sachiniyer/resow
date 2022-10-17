@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import MessageCard from './components/Message'
 import PostCard from './components/Post'
 import PreviewWindow from './components/PreviewWindow';
+import SearchBar from './components/SearchBar';
 
 
 //Main Pages
@@ -25,6 +26,7 @@ function App() {
     <div className="App">
       <Footer/>
       <header className="App-body">
+        <SearchBar></SearchBar>
         <Router>
           <main className="Router">
             <Routes>
