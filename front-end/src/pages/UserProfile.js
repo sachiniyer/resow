@@ -15,32 +15,27 @@ function UserProfile(props) {
     <>
       <div className="UserProfile">
 
-        <div className="Image">
+        <div className="NameImage">
           <img className="ProfilePicture" src = "https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg"
            alt = "userimage"/>
+           <h2> {props.fullname} </h2>
         </div>
 
         <div className = "UserDetails">
-          <p> {props.fullname} </p>
+          <p> @{props.username} </p>
           <p> {props.email} </p>
         
         </div>
 
         <div className = "Buttons">
-          <ul>
-            <li> <Link to="/PastUpload"> PastUpload </Link> </li>
-            <li> <Link to="/UserProfile/SavedPost"> SavedPost </Link> </li>
-            <li> <Link to="/UserProfile/EditProfile"> Edit Profile </Link> </li>
-          </ul>
+          <div> <Link to="/UserProfile/EditProfile"><button class> Edit Profile </button></Link> </div>
+          <div> <Link to="/PastUpload"><button> Past Uploads </button></Link> </div>
+          <div> <Link to="/UserProfile/SavedPost"><button> Saved Posts </button></Link> </div>
         </div>
 
-
-        
       </div>
       
       </>
-
-
       );
 }
 

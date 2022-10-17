@@ -31,7 +31,7 @@ function App() {
               <Route path = "/UploadItem" element={<UploadItem/>} />
 
               {/* a route for the user profile page */}
-              <Route path = "/UserProfile" element={<UserProfile fullname = "Foo Bar" email = "foobar@school.edu"/>} />
+              <Route path = "/UserProfile" element={<UserProfile fullname = "Foo Bar" email = "foobar@school.edu" username = "foobar1"/>} />
 
               {/* a route for the messages page */}
               <Route path = "/Messages" element={<Messages/>} />
