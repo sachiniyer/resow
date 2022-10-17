@@ -9,6 +9,15 @@ import './UserProfile.css';
   )
 }*/
 
+function AllButtons(props){
+  return(
+    <div>
+      <Link to={props.link}><button className = "ButtonStyle"> {props.text} </button></Link>
+    </div>
+  )
+  
+}
+
 
 function UserProfile(props) {
   return (
@@ -28,9 +37,9 @@ function UserProfile(props) {
         </div>
 
         <div className = "Buttons">
-          <div> <Link to="/UserProfile/EditProfile"><button class> Edit Profile </button></Link> </div>
-          <div> <Link to="/PastUpload"><button> Past Uploads </button></Link> </div>
-          <div> <Link to="/UserProfile/SavedPost"><button> Saved Posts </button></Link> </div>
+          <AllButtons link = "/UserProfile/EditProfile" text = "Edit Profile"/>
+          <AllButtons link = "/PastUpload" text = "Past Uploads" />
+          <AllButtons link = "/UserProfile/SavedPost" text = "Saved Posts" />
         </div>
 
       </div>
