@@ -1,11 +1,17 @@
 .Image{
+    
     object-position: center top;
 }
 
 .ProfilePicture{
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    object-fit: fill;
     border: 1px solid grey; 
+    align-items: flex-start
 }
+
+.UserDetails{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
