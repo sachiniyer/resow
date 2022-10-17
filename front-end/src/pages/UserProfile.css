@@ -1,0 +1,11 @@
+.Image{
+    object-position: center top;
+}
+
+.ProfilePicture{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: fill;
+    border: 1px solid grey; 
+}
