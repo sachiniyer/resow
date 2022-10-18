@@ -12,13 +12,12 @@ function EditProfile(props) {
           <div className="TopPart">
             <img className="ProfilePicture" src = "https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg"
             alt = "userimage"/>
-            <h2 className="FullName"> {props.fullname} </h2>
-            <p className="Username"> @{props.username} </p>
           </div>
 
           <Box sx={{ width: '100%', height: "100%"}} className = "UserDetails">
             <Stack direction= "column" alignItems="center">
             <TextField label="Full Name" defaultValue = {props.fullname} variant="filled" color="success" focused />
+            <TextField label="Username" defaultValue = {props.username} variant="filled" color="success" focused />
             <TextField label="Email ID" defaultValue = {props.email} variant="filled" color="success" focused />
             <TextField label="Filled success" variant="filled" color="success" focused />
             </Stack>
