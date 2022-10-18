@@ -70,9 +70,6 @@ function App() {
             </Routes>
           </Router>  
         </main>    
-
-      </header>
-
     </div>
   );
 }
