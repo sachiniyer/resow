@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import './App.css';
 
 import Footer from './components/Footer';
-//removed unneeded components - previewwindow, post card, message card
 
 //Main Pages
 import Homepage from './pages/Homepage';
@@ -20,15 +19,20 @@ function App() {
   return (
     <div className="App">
       <Footer/>
-      <header className="App-body">
-        <Router>
-          <main className="Router">
+        <main className="App-body">
+          <Router>
             <Routes>
               {/* a route for the home page */}
               <Route path="/" element={<Homepage />} />
 
               {/* a route for the upload item page */}
-              <Route path = "/UploadItem" element={<UploadItem/>} />
+              <Route path = "/UploadItem" element={<UploadItem
+              thumbnailURL = "/resowLogo.png"
+              profileURL = "/resowLogo.png"
+              sellerName = "Foo Barstein"
+              title = "Cute rabbit needs a new home"
+              location = "400 Broome St"
+              descriptions = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "/>} />
 
               {/* a route for the user profile page */}
               <Route path = "/UserProfile" element={<UserProfile fullname = "Foo Bar" email = "foobar@school.edu" username = "foobar1"/>} />
@@ -40,7 +44,14 @@ function App() {
               <Route path = "/Map/ItemsList" element={<ItemsList/>} />
 
               {/* a route for the items list page */}
-              <Route path = "/ItemDetails" element={<ItemDetails/>} />
+              <Route path = "/ItemDetails" element={<ItemDetails 
+                                                      thumbnailURL = "/resowLogo.png"
+                                                      profileURL = "/resowLogo.png"
+                                                      sellerName = "Foo Barstein"
+                                                      title = "Cute rabbit needs a new home"
+                                                      location = "400 Broome St"
+                                                      descriptions = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "/>} 
+                                                      />
 
               {/* a route for the edit profile page */}
               <Route path = "/UserProfile/EditProfile" element={<EditProfile/>} />
@@ -55,9 +66,8 @@ function App() {
               <Route path = "/User#?ChatInbox" element={<ChatPage/>} />
 
             </Routes>
-          </main>
-        </Router>      
-      </header>
+          </Router>  
+        </main>    
     </div>
   );
 }
