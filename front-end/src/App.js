@@ -3,10 +3,6 @@ import './App.css';
 
 
 import Footer from './components/Footer';
-import MessageCard from './components/Message'
-import PostCard from './components/Post'
-import PreviewWindow from './components/PreviewWindow';
-import SearchBar from './components/SearchBar';
 
 
 //Main Pages
@@ -25,16 +21,20 @@ function App() {
   return (
     <div className="App">
       <Footer/>
-      <header className="App-body">
-        <SearchBar></SearchBar>
-        <Router>
-          <main className="Router">
+        <main className="App-body">
+          <Router>
             <Routes>
               {/* a route for the home page */}
               <Route path="/" element={<Homepage />} />
 
               {/* a route for the upload item page */}
-              <Route path = "/UploadItem" element={<UploadItem/>} />
+              <Route path = "/UploadItem" element={<UploadItem
+              thumbnailURL = "/resowLogo.png"
+              profileURL = "/resowLogo.png"
+              sellerName = "Foo Barstein"
+              title = "Cute rabbit needs a new home"
+              location = "400 Broome St"
+              descriptions = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "/>} />
 
               {/* a route for the user profile page */}
               <Route path = "/UserProfile" element={<UserProfile/>} />
@@ -68,38 +68,11 @@ function App() {
               <Route path = "/User#?ChatInbox" element={<ChatPage/>} />
 
             </Routes>
-          </main>
-        </Router>      
-        {/* <PostCard
-          img="/resowLogo.png"
-          postTitle="Post Sample"
-          name="user x"
-          time="1"
-          message="selling my old bunnie rabbits to someone that will care for them deeply"
-        />
-        <MessageCard
-          img="/resowLogo.png"
-          name="user x"
-          date="mm.dd.yyyy"
-          message="when are you coming to pick the bunnie rabbits"
-        />
-        <PreviewWindow 
-          thumbnailURL = "/resowLogo.png"
-          profileURL = "/resowLogo.png"
-          sellerName = "Foo Barstein"
-          title = "Cute rabbit needs a new home"
-          location = "400 Broome St"
-          
-        />  */}
-        {/* <ItemDetails
-        thumbnailURL = "/resowLogo.png"
-        profileURL = "/resowLogo.png"
-        sellerName = "Foo Barstein"
-        title = "Cute rabbit needs a new home"
-        location = "400 Broome St"
-        descriptions = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
-        /> */}
+          </Router>  
+        </main>    
+
       </header>
+
     </div>
   );
 }
