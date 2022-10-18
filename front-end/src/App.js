@@ -21,8 +21,8 @@ function App() {
   return (
     <div className="App">
       <Footer/>
-        <Router>
-          <main className="App-body">
+        <main className="App-body">
+          <Router>
             <Routes>
               {/* a route for the home page */}
               <Route path="/" element={<Homepage />} />
@@ -61,8 +61,8 @@ function App() {
               <Route path = "/User#?ChatInbox" element={<ChatPage/>} />
 
             </Routes>
-          </main>
-        </Router>      
+          </Router>  
+        </main>    
     </div>
   );
 }
