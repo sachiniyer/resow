@@ -15,11 +15,12 @@ function EditProfile(props) {
           </div>
 
           <Box sx={{ width: '100%', height: "100%"}} className = "UserDetails">
-            <Stack direction= "column" alignItems="center">
+            <Stack spacing={1} direction= "column" alignItems="center">
             <TextField label="Full Name" defaultValue = {props.fullname} variant="filled" color="success" focused />
             <TextField label="Username" defaultValue = {props.username} variant="filled" color="success" focused />
             <TextField label="Email ID" defaultValue = {props.email} variant="filled" color="success" focused />
-            <TextField label="Filled success" variant="filled" color="success" focused />
+            <TextField label="Phone Number" defaultValue = {props.tel} variant="filled" color="success" focused />
+            <TextField label="Location" defaultValue = {props.location} variant="filled" color="success" focused />
             </Stack>
           </Box>
 
