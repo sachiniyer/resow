@@ -3,7 +3,15 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 
+import EmailIcon from '@mui/icons-material/Email';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 
+function TextContainer(props){
+  return(
+    <Box sx={{ border: 1, borderRadius: '15px', m: 1, p: 1, minWidth: '30%', color:'grey.800', bgcolor:'#e5e4e2'}}> {props.icon} {props.text} </Box>
+  );
+}
 
 
 function UserProfile(props) {
@@ -18,15 +26,15 @@ function UserProfile(props) {
            <p className="Username"> @{props.username} </p>
         </div>
 
-        <Box sx={{ width: '100%' }} className = "UserDetails">
+        <Box sx={{ width: '100%', height: "100%"}} className = "UserDetails">
           <Stack direction= "column" alignItems="center">
-            <p> {props.email} </p>
-            <p> {props.tel} </p>
-            <p> {props.location} </p>
+            <TextContainer icon = <EmailIcon fontSize="large"/> text = {props.email} />
+            <TextContainer icon = <LocalPhoneIcon fontSize="large"/> text = {props.tel} />
+            <TextContainer icon = <HomeRoundedIcon fontSize="large"/>text = {props.location} />
           </Stack>
         </Box>
 
-        <Box>
+        <Box sx={{m: 2}}>
           <Stack spacing={2} direction= "column" alignItems="center" >
             <Stack spacing={2} direction = "row" alignItems="center" justifyContent="center">
               <Button color="success" href="/PastUpload" variant="contained">Past Uploads</Button>

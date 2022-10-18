@@ -8,6 +8,7 @@
 .TopPart{
     padding: 0px;
     margin: 0px;
+    margin-top: 2px;
     object-position: center top;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -32,7 +33,7 @@
 }
 
 .UserDetails{
-    font-size: 25px;
+    font-size: 22px;
     font-family:Verdana, Geneva, Tahoma, sans-serif
 }
 
