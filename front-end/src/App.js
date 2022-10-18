@@ -56,12 +56,7 @@ function App() {
                                                       />
 
               {/* a route for the edit profile page */}
-              <Route path = "/UserProfile/EditProfile" element={<EditProfile
-                                                                  fullname = "Foo Bar" 
-                                                                  email = "foobar@school.edu" 
-                                                                  tel = "+971234567" 
-                                                                  username ="foobar1" />} 
-                                                                  />
+              <Route path = "/UserProfile/EditProfile" element={<EditProfile fullname = "Foo Bar" email = "foobar@school.edu" username = "foobar1" tel = "+9711234567" location = "New York, USA"/>} />
 
               {/* a route for the saved post page */}
               <Route path = "/UserProfile/SavedPost" element={<SavedPost/>} />
