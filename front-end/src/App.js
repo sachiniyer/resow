@@ -46,7 +46,14 @@ function App() {
               <Route path = "/Map/ItemsList" element={<ItemsList/>} />
 
               {/* a route for the items list page */}
-              <Route path = "/ItemDetails" element={<ItemDetails/>} />
+              <Route path = "/ItemDetails" element={<ItemDetails 
+                                                      thumbnailURL = "/resowLogo.png"
+                                                      profileURL = "/resowLogo.png"
+                                                      sellerName = "Foo Barstein"
+                                                      title = "Cute rabbit needs a new home"
+                                                      location = "400 Broome St"
+                                                      descriptions = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "/>} 
+                                                      />
 
               {/* a route for the edit profile page */}
               <Route path = "/UserProfile/EditProfile" element={<EditProfile/>} />
@@ -63,6 +70,9 @@ function App() {
             </Routes>
           </Router>  
         </main>    
+
+      </header>
+
     </div>
   );
 }

@@ -1,0 +1,8 @@
+.carousel{  
+  max-width:350px;
+  max-height:350px;
+}   
+.carousel-item img {
+    object-fit: cover;
+    object-position: 50% 50%;
+}
