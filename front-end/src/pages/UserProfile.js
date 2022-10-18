@@ -1,22 +1,9 @@
-import { Link } from "react-router-dom";
 import './UserProfile.css';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
 
-/*function UserImage(props){
-  return(
-    <div>
-      <img className = "UserImage" src="./images/profilepic.jpeg" alt={props.alt} height = "100px" width = "100px"/> 
-    </div>
-  )
-}*/
 
-function AllButtons(props){
-  return(
-    <div>
-      <Link to={props.link}><button className = "ButtonStyle"> {props.text} </button></Link>
-    </div>
-  )
-  
-}
 
 
 function UserProfile(props) {
@@ -31,21 +18,26 @@ function UserProfile(props) {
            <p className="Username"> @{props.username} </p>
         </div>
 
-        <div className = "UserDetails">
-          <p> {props.email} </p>
-          <p> Phone Number </p>
-          <p>  New York, USA </p>
-        </div>
+        <Box sx={{ width: '100%' }} className = "UserDetails">
+          <Stack direction= "column" alignItems="center">
+            <p> {props.email} </p>
+            <p> {props.tel} </p>
+            <p> {props.location} </p>
+          </Stack>
+        </Box>
 
-        <div className = "Buttons">
-          <AllButtons link = "/UserProfile/EditProfile" text = "Edit Profile"/>
-          <AllButtons link = "/PastUpload" text = "Past Uploads" />
-          <AllButtons link = "/UserProfile/SavedPost" text = "Saved Posts" />
-          <AllButtons link = "/" text = "Sign Out" />
-        </div>
-
+        <Box>
+          <Stack spacing={2} direction= "column" alignItems="center" >
+            <Stack spacing={2} direction = "row" alignItems="center" justifyContent="center">
+              <Button color="success" href="/PastUpload" variant="contained">Past Uploads</Button>
+              <Button color="success" href="/UserProfile/SavedPost" variant="contained">Saved Posts</Button>
+            </Stack>
+            <Button color="success" href="/UserProfile/EditProfile" variant="contained">Edit Profile</Button>
+            <Button color="success" href="/" variant="contained">Sign Out</Button>
+          </Stack>
+        </Box>
+  
       </div>
-      
       </>
       );
 }

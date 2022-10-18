@@ -9,53 +9,36 @@
     padding: 0px;
     margin: 0px;
     object-position: center top;
-    font-family:Verdana, Geneva, Tahoma, sans-serif
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 .ProfilePicture{
     width: 150px;
     height: 150px;
     margin-top: 30px;
+    margin-bottom: 20px;
     object-position: center top;
     border-radius: 50%;
     border: 1px solid grey; 
 }
 .FullName{
-    line-height: 0px;
+    line-height: 20px;
+    font-size: 35px;
+    font-weight: bold;
 }
 .Username{
-    line-height: 20px;
-    font-size: 25px;
+    line-height: 30px;
+    font-size: 20px;
     font-style: italic;
 }
 
 .UserDetails{
-    border: 1px solid grey; 
-    margin: 30px;
-    font-size: 30px;
     font-family:Verdana, Geneva, Tahoma, sans-serif
 }
 
 p{
-    line-height: 20px;
     font-size: 25px;
     font-family:Verdana, Geneva, Tahoma, sans-serif
-
 }
 
-.Buttons{
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-}
 
-.ButtonStyle{
-    width: 210px;
-    background-color: #187c4e; 
-    font-size: 15px;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 10px;
-    margin: 5px 0px;
-    align-items: center;
-}
 
