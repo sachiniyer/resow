@@ -9,6 +9,7 @@ function UserProfile() {
         <li> <Link to ="/PastUpload"> PastUpload </Link> </li>
         <li> <Link to ="/UserProfile/SavedPost"> SavedPost </Link> </li>
         <li> <Link to ="/UserProfile/EditProfile"> Edit Profile </Link> </li>
+        <li> <Link to ="/SignIn"> Sign In </Link> </li>
       </ul>
     </div>
   );

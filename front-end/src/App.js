@@ -21,6 +21,7 @@ import PastUpload from './pages/PastUpload'
 import SavedPost from './pages/SavedPost'
 import ChatPage from './pages/ChatPage'
 import EditProfile from './pages/EditProfile'
+import SignIn from './pages/SignIn';
 function App() {
   return (
     <div className="App">
@@ -41,6 +42,9 @@ function App() {
 
               {/* a route for the messages page */}
               <Route path = "/Messages" element={<Messages/>} />
+
+              {/* a route for the messages page */}
+              <Route path = "/SignIn" element={<SignIn/>} />
 
               {/* a route for the items list page */}
               <Route path = "/Map/ItemsList" element={<ItemsList/>} />
