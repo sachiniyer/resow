@@ -43,5 +43,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "ol": "^7.1.0",
+    "react-openlayers": "^0.3.0"
   }
 }

@@ -1,38 +1,26 @@
-import { Link } from "react-router-dom";
-import MessageCard from '../components/Message'
-import PostCard from '../components/Post'
-import PreviewWindow from '../components/PreviewWindow';
-import SearchBar from '../components/SearchBar';
+import React from "react";
+import * as olProj from 'ol/proj'
+import * as olExtent from 'ol/extent'
+import { layer, Map, Layers } from "react-openlayers";
 
+var resolutions = [];
+var matrixIds = [];
+var proj3857 = olProj.get("EPSG:3857");
+var maxResolution = olExtent.getWidth(proj3857.getExtent()) / 256;
+
+for (var i = 0; i < 18; i++) {
+  matrixIds[i] = i.toString();
+  resolutions[i] = maxResolution / Math.pow(2, i);
+}
 
 function Homepage() {
   return (
-    <div className="Homepage">
-        <h1> Map Page </h1>
-        <SearchBar></SearchBar>
-        <Link to ="/Map/ItemsList"> List Pages </Link>
-        <PostCard
-          img="/resowLogo.png"
-          postTitle="Post Sample"
-          name="user x"
-          time="1"
-          message="selling my old bunnie rabbits to someone that will care for them deeply"
-        />
-        <MessageCard
-          img="/resowLogo.png"
-          name="user x"
-          date="mm.dd.yyyy"
-          message="when are you coming to pick the bunnie rabbits"
-        />
-        <PreviewWindow 
-          thumbnailURL = "/resowLogo.png"
-          profileURL = "/resowLogo.png"
-          sellerName = "Foo Barstein"
-          title = "Cute rabbit needs a new home"
-          location = "400 Broome St"
-        />
-    </div>
-  );
+    <Map view={{ center: [0, 0], zoom: 2 }}>
+      <Layers>
+        <layer.Tile />
+      </Layers>
+    </Map>
+  )
 }
 
 export default Homepage;
