@@ -33,9 +33,11 @@
 }
 
 .UserDetails{
-    font-size: 22px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif
+    margin: auto;
+    width: 60%;
+    position: center;
+    border: 1px solid grey;
+    
 }
-
 
 

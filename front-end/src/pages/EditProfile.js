@@ -14,7 +14,7 @@ function EditProfile(props) {
             alt = "userimage"/>
           </div>
 
-          <Box sx={{ width: '25%', height: "100%", borderRadius: '15px', backgroundColor: '#e5e4e2', p:2}} className = "UserDetails">
+          <Box sx={{borderRadius: '15px', backgroundColor: '#e5e4e2', p:2, m: 'auto'}} className = "UserDetails" >
             <Stack spacing={1} direction= "column" alignItems="center">
             <TextField label="Full Name" defaultValue = {props.fullname} variant="filled" color="success" focused />
             <TextField label="Username" defaultValue = {props.username} variant="filled" color="success" focused />
