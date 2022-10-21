@@ -4,33 +4,41 @@ import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
+import AspectRatio from '@mui/joy/AspectRatio';
+
 
 
 export default function ItemDetails(props){
     return(
         <>
-        <Box sx={{marginTop:2}}></Box>
-        <ImgCarousel/>
-        <Box sx={{ borderBottom:"solid", paddingBottom: 2, width:350, display: 'grid', columnGap:0, gridTemplateColumns: 'repeat(2, 1fr)' }}>
-            <Box sx={{width:140}}>
-                <Avatar sx={{width: 100, height: 100, marginLeft:2.5, marginTop:2}} alt="thumbnail" src={props.profileURL}/>
-                <Box sx={{ width:140, wordWrap: "break-word", marginTop: 0, marginLeft:0, fontSize: "0.7em"}}>
+        <Box sx={{width:{xs:0.9,sm:0.5,md: 0.3}, paddingTop:1}}>
+            <ImgCarousel/>
+        </Box>
+        <Box sx={{width:{xs:0.9,sm:0.5,md: 0.3}, display: 'flex'}}>
+            <Box sx={{width:0.3,height:1,textAlign:"center",justifyContent:"center"}}>
+                <AspectRatio ratio="1/1"> 
+                 <Avatar sx={{border:"solid",justifyContent:"center",width: 0.5}} alt="thumbnail" src={props.profileURL}/> 
+                </AspectRatio>
+                <Box sx={{width:1, wordWrap: "break-word",fontSize: "10px"}}>
                      {props.sellerName}
                 </Box>
             </Box>
-            <Box sx={{width:210,marginLeft:0}}>
-                <Box sx={{width:200, wordWrap: "break-word", marginTop: 3, marginLeft:0, fontSize: "1em", textAlign:"left"}}>
+            <Box sx={{width:0.05}}></Box>
+            <Box>
+                <Box sx={{height:0.1}}></Box>
+                <Box sx={{height:0.4,wordWrap: "break-word",fontSize: {xs:"18px",sm:"20px",md: "20px"}, textAlign:"left"}}>
                     {props.title}
                 </Box>
-                <Box sx={{ width:200, wordWrap: "break-word", marginTop: 1.5, marginLeft:0, fontSize: "0.7em", textAlign:"left", color:"#2596be"}}>
+                <Box sx={{height:0.2}}></Box>
+                <Box sx={{height:0.3, wordWrap: "break-word", fontSize: "15px", textAlign:"left", color:"#2596be"}}>
                     {props.location}
                 </Box>
             </Box>
           </Box>
-          <Box sx={{width:300, marginTop:1.5, textAlign:"left",marginLeft:3,marginBottom:7}}>
+          <Box sx={{borderTop:"solid",width:{xs:0.9,sm:0.5,md: 0.3}, marginTop:1.5, paddingTop:1.5, textAlign:"left",marginBottom:7,fontSize: "15px"}}>
             {props.descriptions}
           </Box>
-          <Box sx={{position: "fixed", bottom: 5, marginLeft:9}}>
+          <Box sx={{position: "fixed", bottom: 5}}>
           <ButtonGroup variant="contained" aria-label="outlined success button group">
             <Button color="success">Location</Button>
             <Button color="success">Message</Button>

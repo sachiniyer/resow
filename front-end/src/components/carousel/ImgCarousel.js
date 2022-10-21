@@ -1,6 +1,8 @@
-import Carousel from 'react-bootstrap/Carousel';
+import Carousel from 'react-material-ui-carousel'
 import * as React from 'react';
-import './ImgCarousel.css'
+import AspectRatio from '@mui/joy/AspectRatio';
+import Box from '@mui/material/Box';
+
 
 function ImgCarousel(props) {
     
@@ -11,21 +13,20 @@ function ImgCarousel(props) {
         "./logo192.png",
     ]
   return (
-    <Carousel width={400} height={400} border={"solid"}>
-
-        {imgList.map((url) => {
-            return (
-                <Carousel.Item>
-                    <img 
-                      src = {url} 
-                      width={350}
-                      height={350}
-                    />
-                </Carousel.Item>
+   
+      <Carousel>
+        {
+            imgList.map( (item, i) => 
+            
+            <Box sx={{width:1}}>
+              <AspectRatio objectFit="cover" ratio="1/1">
+                <img src = {item}/> 
+              </AspectRatio>
+            </Box>
+            
             )
-        })}
-      
-    </Carousel>
+        }
+      </Carousel> 
   );
 }
 
