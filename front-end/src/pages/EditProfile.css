@@ -34,7 +34,7 @@
 
 .UserDetails{
     margin: auto;
-    width: 60%;
+    width: auto;
     position: center;
     border: 1px solid grey;
     
