@@ -3,30 +3,25 @@ import * as React from 'react';
 import AspectRatio from '@mui/joy/AspectRatio';
 import Box from '@mui/material/Box';
 
-
 function ImgCarousel(props) {
-    
-    const imgList = [
-        "./logo.svg",
-        "./sample.png",
-        "./sample2.png",
-        "./logo192.png",
-    ]
+
   return (
    
-      <Carousel>
+      <Carousel animation="slide">
         {
-            imgList.map( (item, i) => 
-            
-            <Box sx={{width:1}}>
+            props.imgList && props.imgList.map((item, i) => 
+
+            <Box key={i} sx={{width:1}}>
+
               <AspectRatio objectFit="cover" ratio="1/1">
-                <img src = {item}/> 
+                <img src = {item} alt = {"image"+item.id}/> 
               </AspectRatio>
+              
             </Box>
-            
             )
         }
       </Carousel> 
+
   );
 }
 
