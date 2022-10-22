@@ -13,9 +13,11 @@ export default function ItemDetails(props){
 
     const [itemDetails,setItemDetails] = useState({})
 
+    const id = props.id
+
     async function fetchData() {
       const result = await axios(
-        "https://my.api.mockaroo.com/items/123?key=59c3eda0"
+        "https://my.api.mockaroo.com/items/"+id+"?key=59c3eda0"
       );
       setItemDetails(result.data);
     }
