@@ -21,23 +21,5 @@
     border-radius: 50%;
     border: 1px solid grey; 
 }
-.FullName{
-    line-height: 20px;
-    font-size: 35px;
-    font-weight: bold;
-}
-.Username{
-    line-height: 30px;
-    font-size: 20px;
-    font-style: italic;
-}
-
-.UserDetails{
-    margin: auto;
-    width: auto;
-    position: center;
-    border: 1px solid grey;
-    
-}
 
 
