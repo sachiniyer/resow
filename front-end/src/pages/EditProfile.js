@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 
 import InputAdornment from '@mui/material/InputAdornment';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import EmailIcon from '@mui/icons-material/Email';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
@@ -14,8 +15,12 @@ import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 
 function TextFieldContainer(props){
   return(
-    <Box sx={{ border: 1, borderRadius: '15px', m: 1, p: 1, minWidth: '30%', color:'grey.800', bgcolor:'#e5e4e2'}}> 
-      {props.icon} {props.text} 
+    <Box sx={{ border: 1, borderRadius: '15px', m: 1, p: 1, color:'grey.800', bgcolor:'#e5e4e2'}}> 
+      <TextField label={props.label}
+        InputProps={{startAdornment: ( <InputAdornment position="start"> {props.icon} </InputAdornment>),}} 
+        variant="standard" 
+        defaultValue = {props.text}
+        color="success"/>
     </Box>
   );
 }
@@ -29,37 +34,13 @@ function EditProfile(props) {
             alt = "userimage"/>
           </div>
 
-          
+    
             <Stack spacing={1} direction= "column" alignItems="center">
-              <TextField label="Full Name" 
-                          InputProps={{startAdornment: ( <InputAdornment position="start"><AccountCircle /></InputAdornment>),}} 
-                          variant="standard" 
-                          defaultValue = {props.fullname}
-                          color="success"/>
-
-              <TextField label="Username" 
-                          InputProps={{startAdornment: ( <InputAdornment position="start"><AccountCircle /></InputAdornment>),}} 
-                          variant="standard" 
-                          defaultValue = {props.username}
-                          color="success"/>
-
-              <TextField label="Email ID" 
-                          InputProps={{startAdornment: ( <InputAdornment position="start"><EmailIcon /></InputAdornment>),}} 
-                          variant="standard" 
-                          defaultValue = {props.email}
-                          color="success"/>
-              
-              <TextField label="Phone Number" 
-                          InputProps={{startAdornment: ( <InputAdornment position="start"><LocalPhoneIcon /></InputAdornment>),}} 
-                          variant="standard" 
-                          defaultValue = {props.tel}
-                          color="success"/>
-
-              <TextField label="Location" 
-                          InputProps={{startAdornment: ( <InputAdornment position="start"><HomeRoundedIcon /></InputAdornment>),}} 
-                          variant="standard" 
-                          defaultValue = {props.location}
-                          color="success"/>
+              <TextFieldContainer label="Full Name" icon = <AccountCircle/> text = {props.fullname}/>
+              <TextFieldContainer label="Username" icon = <AlternateEmailIcon/> text = {props.username}/>
+              <TextFieldContainer label="Email ID" icon = <EmailIcon /> text = {props.email}/>
+              <TextFieldContainer label = "Phone Number" icon = <LocalPhoneIcon/> text = {props.tel} /> 
+              <TextFieldContainer label="Location" icon = <HomeRoundedIcon /> text = {props.location} />
             </Stack>
 
           <Box sx={{m: 2}}>
@@ -68,7 +49,7 @@ function EditProfile(props) {
               <Button color="success" href="/UserProfile" variant="contained">Revert Changes</Button>
             </Stack>
           </Box>
-          
+
         </div>
       </>
       
