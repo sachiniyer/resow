@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import AspectRatio from '@mui/joy/AspectRatio';
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function ItemDetails(props){
 
@@ -54,7 +55,7 @@ export default function ItemDetails(props){
           <Box sx={{position: "fixed", bottom: 5}}>
           <ButtonGroup variant="contained" aria-label="outlined success button group">
             <Button color="success">Location</Button>
-            <Button color="success">Message</Button>
+            <Button component={Link} to="/User#?ChatInbox" color="success">Message</Button>
           </ButtonGroup>
           </Box>
         </>
