@@ -1,25 +1,30 @@
-import React from "react";
-import * as olProj from 'ol/proj'
-import * as olExtent from 'ol/extent'
-import { layer, Map, Layers } from "react-openlayers";
+import React, { useEffect, useState } from "react";
+import Point from 'ol/geom/Point'
+import Feature from 'ol/Feature';
+import Box from '@mui/material/Box'
 
-var resolutions = [];
-var matrixIds = [];
-var proj3857 = olProj.get("EPSG:3857");
-var maxResolution = olExtent.getWidth(proj3857.getExtent()) / 256;
-
-for (var i = 0; i < 18; i++) {
-  matrixIds[i] = i.toString();
-  resolutions[i] = maxResolution / Math.pow(2, i);
-}
+import MapWrapper from "../components/Map";
 
 function Homepage() {
+  const [features, setFeatures] = useState([])
+
+  useEffect(() => {
+    let parsedFeatures = [
+      new Feature({
+        geometry: new Point([0, 0]),
+        name: "some point"
+      })
+    ]
+    setFeatures(parsedFeatures)
+
+  }, [])
+
+
   return (
-    <Map view={{ center: [0, 0], zoom: 2 }}>
-      <Layers>
-        <layer.Tile />
-      </Layers>
-    </Map>
+
+    <Box sx={{ height: 1, width: 1 }}>
+      <MapWrapper features={features} />
+    </Box>
   )
 }
 
