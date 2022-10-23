@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Point from 'ol/geom/Point'
 import Feature from 'ol/Feature';
-import Box from '@mui/material/Box'
-
 import MapWrapper from "../components/Map";
 
 function Homepage() {
@@ -21,10 +19,7 @@ function Homepage() {
 
 
   return (
-
-    <Box sx={{ height: 1, width: 1 }}>
-      <MapWrapper features={features} />
-    </Box>
+    <MapWrapper features={features} />
   )
 }
 

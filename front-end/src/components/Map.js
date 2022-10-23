@@ -79,7 +79,7 @@ function MapWrapper(props) {
 
   }
   return (
-    <Box sx={{ display: "flex", height: 1000, width: 1000 }} ref={mapElement}></Box>
+    <Box component="span" sx={{ display: "block", height: "85vh", width: "100vw", m: 0, p: 0 }} ref={mapElement}></Box>
   )
 
 }
