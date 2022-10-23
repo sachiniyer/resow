@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import Stack from '@mui/material/Stack';
 
 function SignIn(props) {
   const theme = {
@@ -21,39 +22,42 @@ function SignIn(props) {
         <TextField fullWidth label="Username" id="username" sx={{ m: 1 }} />
         <TextField type={showPassword ? "text" : "password"} fullWidth label="Password" id="password" sx={{ m: 1 }} />
         <VisibilityIcon onClick={() => setShowPassword(s => !s)} sx={{cursor: 'pointer'}}/>
-        <Button sx={{ m: 2 }}
-          onClick={ async () => {
-            let username = document.getElementById('username').value
-            let password = document.getElementById('password').value
-            if (username && password) {
-              const response = await fetch('https://63532326d0bca53a8ebaecb3.mockapi.io/users')
-              .then((response) => response.json())
-              .then(function (users) {
-                console.log(typeof(users));
-                console.log(users);
+        <Stack spacing={2} direction= "column" alignItems="center" >
+          <Button color="success" sx={{ m: 2 }}
+            onClick={ async () => {
+              let username = document.getElementById('username').value
+              let password = document.getElementById('password').value
+              if (username && password) {
+                const response = await fetch('https://63532326d0bca53a8ebaecb3.mockapi.io/users')
+                .then((response) => response.json())
+                .then(function (users) {
+                  console.log(typeof(users));
+                  console.log(users);
 
-                for (let user in users) {
-                  console.log("user.name=",users[user].name)
-                  console.log(user[user])
-                  if (users[user].name == username) {setvalidUser(true)}
-                }
-                console.log(validUser)
-                if (validUser) {alert('Logged in');}
-                else {
-                  alert('User not found')
-                  document.getElementById('username').value = ''
-                  document.getElementById('password').value = ''
-                }
-              })
-            }
-            else {
-              alert('All fields must be filled')
-            }
-          }}
-        >
-          Login
-        </Button>
-        <Button href="/Register">Register</Button>
+                  for (let user in users) {
+                    console.log("user.name=",users[user].name)
+                    console.log(user[user])
+                    if (users[user].name == username) {setvalidUser(true)}
+                  }
+                  console.log(validUser)
+                  if (validUser) {alert('Logged in');}
+                  else {
+                    alert('User not found')
+                    document.getElementById('username').value = ''
+                    document.getElementById('password').value = ''
+                  }
+                })
+              }
+              else {
+                alert('All fields must be filled')
+              }
+            }}
+          >
+            Sign In
+          </Button>
+          <Button color="success" href="/Register">Register</Button>
+        </Stack>
+        
       </Box>
     </div>
   );
