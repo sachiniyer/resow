@@ -44,7 +44,7 @@ function App() {
               <Route path = "/Map/ItemsList" element={<ItemsList/>} />
 
               {/* a route for the items list page */}
-              <Route path = "/ItemDetails" element={<ItemDetails id = "1" />} />
+              <Route path = "/ItemDetails/:id" exact={true} element={<ItemDetails/>} />
 
               {/* a route for the edit profile page */}
               <Route path = "/UserProfile/EditProfile" element={<EditProfile/>} />
