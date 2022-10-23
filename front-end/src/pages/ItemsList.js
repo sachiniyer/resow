@@ -1,5 +1,8 @@
 import PostCard from '../components/Post';
 import { useEffect,useState } from 'react';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 
@@ -23,6 +26,9 @@ function ItemList(props) {
         {itemList && itemList.map((item) => (
           <PostCard key={item.id} info = {item}/>
         ))}
+        <Box sx={{position: "fixed", bottom: 10}}>
+            <Button component={Link} to="/" variant="contained" color="success">Map</Button>
+        </Box>
       </>
     );
   }

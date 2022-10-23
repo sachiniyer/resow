@@ -54,7 +54,7 @@ export default function ItemDetails({match}){
           <Box sx={{borderTop:"solid",width:{xs:0.9,sm:0.5,md: 0.3}, marginTop:1.5, paddingTop:1.5, textAlign:"left",marginBottom:7,fontSize: "15px"}}>
             {itemDetails.descriptions}
           </Box>
-          <Box sx={{position: "fixed", bottom: 5}}>
+          <Box sx={{position: "fixed", bottom: 10}}>
           <ButtonGroup variant="contained" aria-label="outlined success button group">
             <Button color="success">Location</Button>
             <Button component={Link} to="/User#?ChatInbox" color="success">Message</Button>
