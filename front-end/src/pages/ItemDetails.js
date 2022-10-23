@@ -1,19 +1,32 @@
 import * as React from 'react';
 import { useEffect,useState } from 'react';
 import ImgCarousel from '../components/carousel/ImgCarousel';
+import ContactBox from '../components/ContactBox';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import AspectRatio from '@mui/joy/AspectRatio';
 import axios from "axios";
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Portal from '@mui/material/Portal';
 import { Link } from "react-router-dom";
 
-export default function ItemDetails(props){
+export default function ItemDetails({match}){
 
     const [itemDetails,setItemDetails] = useState({})
 
-    const id = props.id
+    const id = match
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClick = () => {
+      setOpen((prev) => !prev);
+    };
+
+    const handleClickAway = () => {
+      setOpen(false);
+    };
 
     async function fetchData() {
       const result = await axios(
@@ -51,15 +64,15 @@ export default function ItemDetails(props){
                 </Box>
             </Box>
           </Box>
+          {open ? (<ContactBox info={itemDetails}/>) : null}
           <Box sx={{borderTop:"solid",width:{xs:0.9,sm:0.5,md: 0.3}, marginTop:1.5, paddingTop:1.5, textAlign:"left",marginBottom:7,fontSize: "15px"}}>
             {itemDetails.descriptions}
           </Box>
-          <Box sx={{position: "fixed", bottom: 5}}>
-          <ButtonGroup variant="contained" aria-label="outlined success button group">
-            <Button color="success">Location</Button>
-            <Button component={Link} to="/User#?ChatInbox" color="success">Message</Button>
-          </ButtonGroup>
-          </Box>
+          <ClickAwayListener onClickAway={handleClickAway}>
+            <Box sx={{position: "fixed",bottom: 20}}>
+              <Button onClick={handleClick} color="success" variant="contained"> Contact info</Button>
+            </Box>
+          </ClickAwayListener>
         </>
     )
 }
