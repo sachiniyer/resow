@@ -11,13 +11,6 @@ function Homepage() {
         <h1> Map Page </h1>
         <SearchBar></SearchBar>
         <Link to ="/Map/ItemsList"> List Pages </Link>
-        <PostCard
-          img="/resowLogo.png"
-          postTitle="Post Sample"
-          name="user x"
-          time="1"
-          message="selling my old bunnie rabbits to someone that will care for them deeply"
-        />
         <MessageCard
           img="/resowLogo.png"
           name="user x"
