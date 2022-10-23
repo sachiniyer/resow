@@ -42,9 +42,7 @@ function UserProfile(props) {
             </Stack>
             <Button color="success" href="/UserProfile/EditProfile" variant="contained">Edit Profile</Button>
             <Button color="success" href="/" variant="contained">Sign Out</Button>
-            <a href='/SignIn'>
-              <Button color="success" href="/" variant="contained">Sign Out</Button>
-            </a>
+            <Button color="success" href="/SignIn" variant="contained">Sign In</Button>
           </Stack>
         </Box>
   

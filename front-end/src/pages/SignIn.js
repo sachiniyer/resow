@@ -12,6 +12,7 @@ function SignIn(props) {
   }
 
   const [showPassword, setShowPassword] = useState(false);
+  const [validUser, setvalidUser] = useState(false);
 
   return (
     <div className="SignIn" justifyContent="center">
@@ -23,28 +24,36 @@ function SignIn(props) {
         <Button sx={{ m: 2 }}
           onClick={ async () => {
             let username = document.getElementById('username').value
-            const response = await fetch('https://63532326d0bca53a8ebaecb3.mockapi.io/users')
-            .then((response) => response.json())
-            .then(function (users) {
-              let validUser = false
-              console.log(typeof(users));
-              console.log(users);
-              
-              for (let user in users) {
-                console.log("user.name=",users[user].name)
-                console.log(user[user])
-                if (users[user].name == username) {validUser = true}
-              }
-              console.log(validUser)
-              if (validUser) {alert('logged in');}})
-            
+            let password = document.getElementById('password').value
+            if (username && password) {
+              const response = await fetch('https://63532326d0bca53a8ebaecb3.mockapi.io/users')
+              .then((response) => response.json())
+              .then(function (users) {
+                console.log(typeof(users));
+                console.log(users);
+
+                for (let user in users) {
+                  console.log("user.name=",users[user].name)
+                  console.log(user[user])
+                  if (users[user].name == username) {setvalidUser(true)}
+                }
+                console.log(validUser)
+                if (validUser) {alert('Logged in');}
+                else {
+                  alert('User not found')
+                  document.getElementById('username').value = ''
+                  document.getElementById('password').value = ''
+                }
+              })
+            }
+            else {
+              alert('All fields must be filled')
+            }
           }}
         >
           Login
         </Button>
-        <a href="/Register" rel="noreferrer">
-          <Button>Register</Button>
-        </a>
+        <Button href="/Register">Register</Button>
       </Box>
     </div>
   );
