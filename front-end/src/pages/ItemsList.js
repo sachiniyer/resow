@@ -26,7 +26,7 @@ function ItemList(props) {
         {itemList && itemList.map((item) => (
           <PostCard key={item.id} info = {item}/>
         ))}
-        <Box sx={{position: "fixed", bottom: 10}}>
+        <Box sx={{position: "fixed", bottom: 20}}>
             <Button component={Link} to="/" variant="contained" color="success">Map</Button>
         </Box>
       </>
