@@ -32,17 +32,17 @@ function EditProfile(props) {
       <>
         <div className="EditProfile">
 
-          <Box className ="Container" sx={{border: 1, color:'grey.800', mt: 3, mb: 2}}>
+          <Box className ="Container" sx={{mt: 3, mb: 2}}>
 
             <Stack direction="row" style={{ justifyContent: "center", display: "flex", p: 2}} spacing={1}>
               <Avatar
               alt="Profile Picture"
-              src="https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg"
+              src={props.source}
               sx={{ width: 120, height: 120 }}
               />
             </Stack>
 
-            <Fab size="small" color="success" aria-label="edit">
+            <Fab className = "EditButton" sx={{position: 'absolute', top: 80, left: '52%', zIndex: 'tooltip'}} size="small" color="success" aria-label="edit">
               <EditIcon />
             </Fab>
 
