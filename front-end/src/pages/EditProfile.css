@@ -4,22 +4,3 @@
     right:0px;
     left:0px;
 }
-
-.TopPart{
-    padding: 0px;
-    margin: 0px;
-    margin-top: 2px;
-    object-position: center top;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-}
-.ProfilePicture{
-    width: 150px;
-    height: 150px;
-    margin-top: 30px;
-    margin-bottom: 20px;
-    object-position: center top;
-    border-radius: 50%;
-    border: 1px solid grey; 
-}
-
-
