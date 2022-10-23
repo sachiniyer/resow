@@ -9,11 +9,11 @@ import AspectRatio from '@mui/joy/AspectRatio';
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-export default function ItemDetails(props){
+export default function ItemDetails({match}){
 
     const [itemDetails,setItemDetails] = useState({})
 
-    const id = props.id
+    const id = match
 
     async function fetchData() {
       const result = await axios(
