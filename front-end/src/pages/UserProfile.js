@@ -2,7 +2,6 @@ import './UserProfile.css';
 import * as React from 'react';
 import { useEffect,useState } from 'react';
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
@@ -42,17 +41,17 @@ function UserProfile(props) {
       <div className="UserProfile">
 
         <div className="TopPart">
-          <img className="ProfilePicture" src = "https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg"
+          <img className="ProfilePicture" src = {userDetails.avatar}
            alt = "userimage"/>
-           <h2 className="FullName"> {props.fullname} </h2>
-           <p className="Username"> @{props.username} </p>
+           <h2 className="FullName"> {userDetails.full_name} </h2>
+           <p className="Username"> @{userDetails.username} </p>
         </div>
 
         <Box sx={{ width: '100%', height: "100%"}} className = "UserDetails">
           <Stack direction= "column" alignItems="center">
-            <TextContainer icon = <EmailIcon fontSize="large"/> text = {props.email} />
-            <TextContainer icon = <LocalPhoneIcon fontSize="large"/> text = {props.tel} />
-            <TextContainer icon = <HomeRoundedIcon fontSize="large"/>text = {props.location} />
+            <TextContainer icon = <EmailIcon fontSize="large"/> text = {userDetails.email} />
+            <TextContainer icon = <LocalPhoneIcon fontSize="large"/> text = {userDetails.phone} />
+            <TextContainer icon = <HomeRoundedIcon fontSize="large"/>text = {userDetails.location} />
           </Stack>
         </Box>
 
