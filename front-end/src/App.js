@@ -44,7 +44,8 @@ function App() {
               <Route path = "/Messages" element={<Messages/>} />
 
               {/* a route for the messages page */}
-              <Route path = "/SignIn" element={<SignIn/>} />
+              <Route path = "/SignIn" element={<SignIn
+                                                profileURL = "/resowLogo.png"/>} />
 
               {/* a route for the items list page */}
               <Route path = "/Map/ItemsList" element={<ItemsList/>} />
