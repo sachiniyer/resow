@@ -70,22 +70,5 @@ function EditProfile(props) {
   }
   
   export default EditProfile;
-
-
-
-
-  /*
-
-  <Box sx={{borderRadius: '15px', backgroundColor: '#e5e4e2', p:2, m: 'auto'}} className = "UserDetails" >
-            <Stack spacing={1} direction= "column" alignItems="center">
-            <TextField label="Full Name" defaultValue = {props.fullname} variant="filled" color="success" focused />
-            <TextField label="Username" defaultValue = {props.username} variant="filled" color="success" focused />
-            <TextField label="Email ID" defaultValue = {props.email} variant="filled" color="success" focused />
-            <TextField label="Phone Number" defaultValue = {props.tel} variant="filled" color="success" focused />
-            <TextField label="Location" defaultValue = {props.location} variant="filled" color="success" focused />
-            </Stack>
-          </Box>
-
-  */
   
   
