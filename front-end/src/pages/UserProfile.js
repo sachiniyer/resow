@@ -13,7 +13,11 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 
 function TextContainer(props){
   return(
-    <Box sx={{ border: 1, borderRadius: '15px', m: 1, p: 1, minWidth: '30%', color:'grey.800', bgcolor:'#e5e4e2'}}> {props.icon} {props.text} </Box>
+    <Box sx={{ border: 1, borderRadius: '15px', m: 1, p: 1, minWidth: '30%', minHeight:'10%', color:'grey.800', bgcolor:'#e5e4e2'}}> 
+      <Stack spacing = {5} direction = "row" alignItems="center" justifyContent="center">
+        {props.icon} {props.text} 
+      </Stack>
+    </Box>
   );
 }
 
