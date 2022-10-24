@@ -8,7 +8,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import CreateIcon from '@mui/icons-material/Create';
+import AddIcon from '@mui/icons-material/Add';
 import PersonIcon from '@mui/icons-material/Person';
 import ListIcon from '@mui/icons-material/List';
 
@@ -40,7 +40,7 @@ function Footer() {
           <Box>
             <a href="/UploadItem">
               <Avatar sx={{ backgroundColor: "white", width: 40, height: 40 }}>
-                <CreateIcon color="success" fontSize="medium" />
+                <AddIcon color="success" fontSize="medium" />
               </Avatar>
             </a>
           </Box>
