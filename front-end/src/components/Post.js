@@ -9,7 +9,7 @@ export default function PostCard(props) {
   const link = "/ItemDetails/"+props.info.id
 
   return (
-    <div class="Post">
+    <div className="Post">
       <Card sx={{
         display: "flex",
         width: { xs: 0.9, sm: 0.75, md: 0.5 },
