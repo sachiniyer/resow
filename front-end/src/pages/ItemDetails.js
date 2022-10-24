@@ -1,41 +1,75 @@
 import * as React from 'react';
+import { useEffect,useState } from 'react';
 import ImgCarousel from '../components/carousel/ImgCarousel';
+import ContactBox from '../components/ContactBox';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
+import AspectRatio from '@mui/joy/AspectRatio';
+import axios from "axios";
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 
+export default function ItemDetails({match}){
 
-export default function ItemDetails(props){
+    const [itemDetails,setItemDetails] = useState({})
+
+    const id = match
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClick = () => {
+      setOpen((prev) => !prev);
+    };
+
+    const handleClickAway = () => {
+      setOpen(false);
+    };
+
+    async function fetchData() {
+      const result = await axios(
+        "https://my.api.mockaroo.com/items/"+id+"?key=59c3eda0"
+      );
+      setItemDetails(result.data);
+    }
+
+    useEffect(() => {
+      fetchData();
+    }, []);
+
     return(
         <>
-        <Box sx={{marginTop:2}}></Box>
-        <ImgCarousel/>
-        <Box sx={{ borderBottom:"solid", paddingBottom: 2, width:350, display: 'grid', columnGap:0, gridTemplateColumns: 'repeat(2, 1fr)' }}>
-            <Box sx={{width:140}}>
-                <Avatar sx={{width: 100, height: 100, marginLeft:2.5, marginTop:2}} alt="thumbnail" src={props.profileURL}/>
-                <Box sx={{ width:140, wordWrap: "break-word", marginTop: 0, marginLeft:0, fontSize: "0.7em"}}>
-                     {props.sellerName}
+        <Box sx={{width:{xs:0.9,sm:0.5,md: 0.3}, paddingTop:1}}>
+            <ImgCarousel imgList = {itemDetails.imgList}/>  
+        </Box>
+        <Box sx={{width:{xs:0.9,sm:0.5,md: 0.3}, display: 'flex'}}>
+            <Box sx={{width:0.3,height:1,textAlign:"center",justifyContent:"center"}}>
+                <AspectRatio ratio="1/1"> 
+                 <Avatar sx={{border:"solid",justifyContent:"center",width: 0.5}} alt="thumbnail" src={itemDetails.profileURL}/> 
+                </AspectRatio>
+                <Box sx={{width:1, wordWrap: "break-word",fontSize: "10px"}}>
+                    {itemDetails.sellerName}
                 </Box>
             </Box>
-            <Box sx={{width:210,marginLeft:0}}>
-                <Box sx={{width:200, wordWrap: "break-word", marginTop: 3, marginLeft:0, fontSize: "1em", textAlign:"left"}}>
-                    {props.title}
+            <Box sx={{width:0.05}}></Box>
+            <Box sx={{width: 1}}>
+                <Box sx={{height:0.1}}></Box>
+                <Box sx={{width:1, flexWrap:"wrap", wordWrap: "break-word",fontSize: {xs:"15px",sm:"20px",md: "20px"}, textAlign:"left"}}>
+                  {itemDetails.title}
                 </Box>
-                <Box sx={{ width:200, wordWrap: "break-word", marginTop: 1.5, marginLeft:0, fontSize: "0.7em", textAlign:"left", color:"#2596be"}}>
-                    {props.location}
+                <Box sx={{marginTop:1,wordWrap: "break-word", fontSize: "12px", textAlign:"left", color:"#2596be"}}>
+                    {itemDetails.location}
                 </Box>
             </Box>
           </Box>
-          <Box sx={{width:300, marginTop:1.5, textAlign:"left",marginLeft:3,marginBottom:7}}>
-            {props.descriptions}
+          {open ? (<ContactBox info={itemDetails}/>) : null}
+          <Box sx={{borderTop:"solid",width:{xs:0.9,sm:0.5,md: 0.3}, marginTop:1.5, paddingTop:1.5, textAlign:"left",marginBottom:7,fontSize: "15px"}}>
+            {itemDetails.descriptions}
           </Box>
-          <Box sx={{position: "fixed", bottom: 5, marginLeft:9}}>
-          <ButtonGroup variant="contained" aria-label="outlined success button group">
-            <Button color="success">Location</Button>
-            <Button color="success">Message</Button>
-          </ButtonGroup>
-          </Box>
+          <ClickAwayListener onClickAway={handleClickAway}>
+            <Box sx={{position: "fixed",bottom: 20}}>
+              <Button onClick={handleClick} color="success" variant="contained"> Contact info</Button>
+            </Box>
+          </ClickAwayListener>
         </>
     )
 }

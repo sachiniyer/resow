@@ -1,51 +1,47 @@
 import * as React from 'react';
-
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
+import { Link } from "react-router-dom";
 
 export default function PostCard(props) {
 
-  return (
-    <Card sx={{
-      display: "flex",
-      width: { xs: 0.9, sm: 0.75, md: 0.5 }
-    }} >
-      <Box
-        component="img"
-        sx={{
-          height: 233,
-          width: 350,
-          maxHeight: { xs: 100, md: 150 },
-          maxWidth: { xs: 100, md: 150 },
-          mt: "auto",
-          mb: "auto",
-        }}
-        alt="User Profile"
-        src={props.img}
-      />
-      <Box sx={{ display: 'flex', flexDirection: 'column', width: 1, align: "right" }}>
-        <CardContent sx={{ flex: '1 0 auto' }}>
-          <Box sx={{ display: 'grid', gap: 0, gridTemplateColumns: 'repeat(2, 1fr)' }}>
+  const link = "/ItemDetails/" + props.info.id
 
-            <Typography component="div" variant="h5" align="left">
-              {props.postTitle}
-            </Typography>
-            <Box>
-              <Typography component="div" variant="body1" align="right">
-                {props.name}
-              </Typography>
-              <Typography component="div" variant="body1" align="right">
-                {props.time}
-              </Typography>
-            </Box>
+  return (
+    <Box sx={{display: 'flex',  justifyContent: 'center' }}>
+      <Card sx={{
+        display: "flex",
+        width: { xs: 0.9, sm: 0.75, md: 0.5 },
+        margin: 1,
+        textDecoration: 'none'
+      }}
+        component={Link} to={link}
+      >
+        <Box
+          component="img"
+          sx={{
+            height: 233,
+            width: 350,
+            maxHeight: { xs: 100, md: 150 },
+            maxWidth: { xs: 100, md: 150 },
+            mt: "auto",
+            mb: "auto",
+          }}
+          alt="thumbnail"
+          src={props.info.imgList[0]}
+        />
+        <Box sx={{ width: 1 }}>
+          <Box sx={{ height: 0.1 }}></Box>
+          <Box sx={{ marginLeft: "1em", width: 0.9, flexWrap: "wrap", wordWrap: "break-word", fontSize: { xs: "15px", sm: "20px", md: "20px" }, textAlign: "left" }}>
+            {props.info.title}
           </Box>
-          <Typography variant="subtitle1" color="text.secondary" component="div">
-            {props.location}
-          </Typography>
-        </CardContent>
-      </Box>
-    </Card >
+          <Box sx={{ height: 0.1 }}></Box>
+          <Box sx={{ color: "#2596be", marginLeft: "1em", width: 0.9, flexWrap: "wrap", wordWrap: "break-word", fontSize: { xs: "15px", sm: "20px", md: "20px" }, textAlign: "left" }}>
+            {props.info.location}
+          </Box>
+
+        </Box>
+      </Card >
+    </Box>
   );
 }

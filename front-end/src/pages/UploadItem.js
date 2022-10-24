@@ -86,17 +86,6 @@ function UploadItem() {
   );
 }
 
-/*
-
-
-
-
-<Box sx={{width:300, marginTop:1.5, textAlign:"left",marginLeft:3,marginBottom:7}}>
-  {props.descriptions}
-</Box>
-
-*/
-
 export default UploadItem;
 
 

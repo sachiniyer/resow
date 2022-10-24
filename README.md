@@ -10,6 +10,7 @@ To help eliminate waste of all kinds and connect people through shared resources
 - [Tasnim Ahmed](https://github.com/tasnimahmed11)
 - [Sachin Iyer](https://github.com/sachiniyer)
 - [Jacob Baum](https://github.com/JacobLBaum)
+- [Bhavicka Mohta](https://github.com/vicka1228)
 
 
 ## A Short History of How the Project Came to be
