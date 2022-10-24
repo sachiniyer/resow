@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import SearchBar from '../components/SearchBar';
 import PostCard from '../components/Post';
 import axios from "axios";
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
@@ -25,25 +25,27 @@ function SavedPost(props) {
     fetchData();
   }, []);
 
-    return (
-      <>
-      <section className="SavedPost">
+  return (
+    <>
+      <section>
         <br></br>
         <SearchBar></SearchBar>
         <br></br>
-        { data && data.map((item) => (
-          <PostCard 
-            key={item.id}  
-            info={item}
-          />
-        ))}
+        <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          {data && data.map((item) => (
+            <PostCard
+              key={item.id}
+              info={item}
+            />
+          ))}
+        </Box>
       </section>
 
-      <Box sx={{position: "fixed", bottom: 20}}>
-            <Button component={Link} to="/UserProfile" variant="contained" color="success">Back to Profile</Button>
+      <Box sx={{ position: "fixed", bottom: 20 }}>
+        <Button component={Link} to="/UserProfile" variant="contained" color="success">Back to Profile</Button>
       </Box>
     </>
-    );
-  }
+  );
+}
 
-  export default SavedPost
+export default SavedPost

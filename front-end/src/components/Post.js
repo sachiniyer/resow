@@ -2,21 +2,20 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import { Link } from "react-router-dom";
-import './Post.css';
 
 export default function PostCard(props) {
 
-  const link = "/ItemDetails/"+props.info.id
+  const link = "/ItemDetails/" + props.info.id
 
   return (
-    <div className="Post">
+    <Box sx={{display: 'flex',  justifyContent: 'center' }}>
       <Card sx={{
         display: "flex",
         width: { xs: 0.9, sm: 0.75, md: 0.5 },
         margin: 1,
-        textDecoration: 'none' 
-      }} 
-      component={Link} to={link}
+        textDecoration: 'none'
+      }}
+        component={Link} to={link}
       >
         <Box
           component="img"
@@ -31,18 +30,18 @@ export default function PostCard(props) {
           alt="thumbnail"
           src={props.info.imgList[0]}
         />
-        <Box sx={{width: 1}}>
-            <Box sx={{height:0.1}}></Box>
-            <Box sx={{marginLeft:"1em", width:0.9,flexWrap:"wrap", wordWrap: "break-word",fontSize: {xs:"15px",sm:"20px",md: "20px"}, textAlign:"left"}}>
-              {props.info.title}
-            </Box>
-            <Box sx={{height:0.1}}></Box>
-            <Box sx={{color:"#2596be",marginLeft:"1em", width:0.9,flexWrap:"wrap", wordWrap: "break-word",fontSize: {xs:"15px",sm:"20px",md: "20px"}, textAlign:"left"}}>
-              {props.info.location}  
-            </Box>
-            
+        <Box sx={{ width: 1 }}>
+          <Box sx={{ height: 0.1 }}></Box>
+          <Box sx={{ marginLeft: "1em", width: 0.9, flexWrap: "wrap", wordWrap: "break-word", fontSize: { xs: "15px", sm: "20px", md: "20px" }, textAlign: "left" }}>
+            {props.info.title}
+          </Box>
+          <Box sx={{ height: 0.1 }}></Box>
+          <Box sx={{ color: "#2596be", marginLeft: "1em", width: 0.9, flexWrap: "wrap", wordWrap: "break-word", fontSize: { xs: "15px", sm: "20px", md: "20px" }, textAlign: "left" }}>
+            {props.info.location}
+          </Box>
+
         </Box>
       </Card >
-    </div>
+    </Box>
   );
 }
