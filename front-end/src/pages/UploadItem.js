@@ -59,7 +59,7 @@ function UploadItem() {
     <>
     <Box sx={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column', height: '100vh' }}>
       <Box sx={{ height: '90vh', flexGrow: 0, display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-        <h1> Upload Item Page</h1>
+        <h1> Upload Resource</h1>
         <Box sx={{ marginTop: 2 }}></Box>
         <ImgCarousel imgList={itemPics}/>  
 
@@ -87,12 +87,16 @@ function UploadItem() {
           maxRows={5}
           id='description'
         />
-      </Box>
-      
-      <ButtonGroup sx={{ position: 'fixed', justifyContent: 'center', bottom: "2vh", left: "3vw", right: "3vw" }} variant="contained" aria-label="outlined success button group">
+
+        <Button sx={{ marginTop: 2 }} color="success" href="/PastUpload" variant="contained">Past Uploads</Button>
+
+        <ButtonGroup sx={{marginTop: 2, justifyContent: 'center'}} variant="contained" aria-label="outlined success button group">
           <Button href='/' color="success">Discard</Button>
           <Button onClick={postItem} color="success">Post</Button>
-      </ButtonGroup>
+        </ButtonGroup>
+      </Box>
+      
+      
     </Box>
     </>
   );
