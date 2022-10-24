@@ -30,58 +30,70 @@ function UploadItem() {
     }
   }
 
+  async function postItem() {
+    let title = document.getElementById('title').value
+    let description = document.getElementById('description').value
+    let data = {title: title, description: description, photos: itemPics}
+
+    const url = 'https://63532326d0bca53a8ebaecb3.mockapi.io/posts'
+
+    const response = await fetch(url, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      //mode: 'cors', // no-cors, *cors, same-origin
+      //cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      //credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: 'follow', // manual, *follow, error
+      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      body: JSON.stringify(data) // body data type must match "Content-Type" header
+    })
+    .then((response) => response.json())
+    .then((data) => console.log('response:',data))
+    .then(alert('Posted!'));
+  }
+
   return (
     <>
-      <Box sx={{width:{xs:0.9,sm:0.5,md: 0.3}, paddingTop:1}}>
-          <ImgCarousel imgList={itemPics}/>  
+    <Box sx={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column', height: '100vh' }}>
+      <Box sx={{ height: '90vh', flexGrow: 0, display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+        <h1> Upload Item Page</h1>
+        <Box sx={{ marginTop: 2 }}></Box>
+        <ImgCarousel imgList={itemPics}/>  
+
+        <IconButton color="primary" aria-label="upload picture" component="label">
+        <input
+          hidden
+          accept="image/*"
+          style={{ display: 'none' }}
+          id="raised-button-file"
+          multiple
+          type="file"
+          onChange={handleUpload}
+        />
+        <label htmlFor="raised-button-file">
+          <PhotoCamera />
+        </label>    
+        </IconButton>
+
+        <TextField fullWidth label="Post Title" id="title" />
+        <TextField
+          fullWidth
+          placeholder="Post Description"
+          multiline
+          rows={3}
+          maxRows={5}
+          id='description'
+        />
       </Box>
-      <Box sx={{width:{xs:0.9,sm:0.5,md: 0.3}}}>
-          
-          <Box>
-            <h1> Upload Item Page</h1>
-          </Box>
-
-          <Box>
-            <IconButton color="primary" aria-label="upload picture" component="label">
-
-            <input
-              hidden
-              accept="image/*"
-              style={{ display: 'none' }}
-              id="raised-button-file"
-              multiple
-              type="file"
-              onChange={handleUpload}
-            />
-            <label htmlFor="raised-button-file">
-              <PhotoCamera />
-            </label>    
-            </IconButton>
-          </Box>
-    
-
-          
-
-          <Box>
-            <TextField fullWidth label="Post Title" id="fullWidth" />
-            <TextField
-              fullWidth
-              placeholder="Post Description"
-              multiline
-              rows={3}
-              maxRows={5}
-            />
-          </Box>
-
-          <Link to ='/PastUpload'> PastUpload</Link>
-      </Box>
-      <Box sx={{position: "fixed", bottom: 5}}>
-        <ButtonGroup variant="contained" aria-label="outlined success button group">
+      
+      <ButtonGroup sx={{ position: 'fixed', justifyContent: 'center', bottom: "2vh", left: "3vw", right: "3vw" }} variant="contained" aria-label="outlined success button group">
           <Button href='/' color="success">Discard</Button>
-          <Button href='/PastUpload' color="success">Post</Button>
-        </ButtonGroup>
-      </Box>
-
+          <Button onClick={postItem} color="success">Post</Button>
+      </ButtonGroup>
+    </Box>
     </>
   );
 }
