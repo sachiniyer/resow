@@ -5,12 +5,9 @@ import ContactBox from '../components/ContactBox';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
 import AspectRatio from '@mui/joy/AspectRatio';
 import axios from "axios";
 import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Portal from '@mui/material/Portal';
-import { Link } from "react-router-dom";
 
 export default function ItemDetails({match}){
 
