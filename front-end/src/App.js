@@ -7,7 +7,7 @@ import Footer from './components/Footer';
 import Homepage from './pages/Homepage';
 import UploadItem from './pages/UploadItem';
 import UserProfile from './pages/UserProfile';
-import Messages from './pages/Messages';
+
 //Pages accessed from other pages
 import ItemsList from './pages/ItemsList'
 import ItemDetails from './pages/ItemDetails'
@@ -34,16 +34,20 @@ function App() {
               descriptions="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " />} />
 
             {/* a route for the user profile page */}
-            <Route path="/UserProfile" element={<UserProfile />} />
-
-            {/* a route for the messages page */}
-            <Route path="/Messages" element={<Messages />} />
+            <Route path="/UserProfile" element={<UserProfile fullname="Foo Bar" email="foobar@school.edu" username="foobar1" tel="+9711234567" location="New York, USA" />} />
 
             {/* a route for the items list page */}
             <Route path="/Map/ItemsList" element={<ItemsList />} />
 
             {/* a route for the items list page */}
-            <Route path="/ItemDetails/:id" exact={true} element={<ItemDetails />} />
+            <Route path="/ItemDetails" element={<ItemDetails
+              thumbnailURL="/resowLogo.png"
+              profileURL="/resowLogo.png"
+              sellerName="Foo Barstein"
+              title="Cute rabbit needs a new home"
+              location="400 Broome St"
+              descriptions="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " />}
+            />
 
             {/* a route for the edit profile page */}
             <Route path="/UserProfile/EditProfile" element={<EditProfile />} />
