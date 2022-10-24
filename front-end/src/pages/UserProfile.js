@@ -1,4 +1,8 @@
 import './UserProfile.css';
+import * as React from 'react';
+import { useEffect,useState } from 'react';
+import axios from "axios";
+
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
@@ -9,28 +13,49 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 
 function TextContainer(props){
   return(
-    <Box sx={{ border: 1, borderRadius: '15px', m: 1, p: 1, minWidth: '30%', color:'grey.800', bgcolor:'#e5e4e2'}}> {props.icon} {props.text} </Box>
+    <Box sx={{ border: 1, borderRadius: '15px', m: 1, p: 1, minWidth: '30%', minHeight:'10%', color:'grey.800', bgcolor:'#e5e4e2'}}> 
+      <Stack spacing = {5} direction = "row" alignItems="center" justifyContent="center">
+        {props.icon} {props.text} 
+      </Stack>
+    </Box>
   );
 }
 
 
 function UserProfile(props) {
+
+  const [userDetails,setUserDetails] = useState([]);
+
+  useEffect(() => {
+    async function fetchData(){
+      const response = await axios (
+        "https://my.api.mockaroo.com/users.json?key=13a3e900"
+      );
+
+      setUserDetails(response.data);
+
+    }
+
+    fetchData();
+
+  }, []);
+
   return (
     <>
       <div className="UserProfile">
 
         <div className="TopPart">
-          <img className="ProfilePicture" src = "https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg"
+          <img className="ProfilePicture" src = {userDetails.avatar}
            alt = "userimage"/>
-           <h2 className="FullName"> {props.fullname} </h2>
-           <p className="Username"> @{props.username} </p>
+           <h2 className="FullName"> {userDetails.full_name} </h2>
+           <p className="Username"> @{userDetails.username} </p>
         </div>
 
         <Box sx={{ width: '100%', height: "100%"}} className = "UserDetails">
           <Stack direction= "column" alignItems="center">
-            <TextContainer icon = <EmailIcon fontSize="large"/> text = {props.email} />
-            <TextContainer icon = <LocalPhoneIcon fontSize="large"/> text = {props.tel} />
-            <TextContainer icon = <HomeRoundedIcon fontSize="large"/>text = {props.location} />
+            <TextContainer icon = <EmailIcon fontSize="large"/> text = {userDetails.email} />
+            <TextContainer icon = <LocalPhoneIcon fontSize="large"/> text = {userDetails.phone} />
+            <TextContainer icon = <HomeRoundedIcon fontSize="large"/>text = {userDetails.location} />
           </Stack>
         </Box>
 
