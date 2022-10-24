@@ -40,7 +40,7 @@ function SavedPost(props) {
       </section>
 
       <Box sx={{position: "fixed", bottom: 20}}>
-            <Button component={Link} to="/UserProfile.js" variant="contained" color="success">Back to Profile</Button>
+            <Button component={Link} to="/UserProfile" variant="contained" color="success">Back to Profile</Button>
       </Box>
     </>
     );
