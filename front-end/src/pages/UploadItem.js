@@ -11,21 +11,15 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 
 function UploadItem() {
   return (
-    <div className="UploadItem">
+    <Box sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }}>
+      <Box sx={{ flexGrow: 0, display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
         <h1> Upload Item Page</h1>
-        <Box sx={{marginTop:2}}></Box>
-        <ImgCarousel/>
+        <Box sx={{ marginTop: 2 }}></Box>
+        <ImgCarousel />
         <IconButton color="primary" aria-label="upload picture" component="label">
           <input hidden accept="image/*" type="file" />
           <PhotoCamera />
         </IconButton>
-        <Box sx={{position: "fixed", bottom: 5, marginLeft:9}}>
-          <ButtonGroup variant="contained" aria-label="outlined success button group">
-            <Button color="success">Discard</Button>
-            <Button color="success">Post</Button>
-          </ButtonGroup>
-        </Box>
-
         <Box>
           <TextField fullWidth label="Post Title" id="fullWidth" />
           <TextField
@@ -36,22 +30,16 @@ function UploadItem() {
             maxRows={5}
           />
         </Box>
-        
-        <Link to ='/PastUpload'> PastUpload</Link>
-    </div>
+        <Link to='/PastUpload'> PastUpload</Link>
+      </Box>
+      <ButtonGroup sx={{ position: 'fixed', justifyContent: 'center', bottom: "2vh", left: "3vw", right: "3vw" }} variant="contained" aria-label="outlined success button group">
+        <Button color="success">Discard</Button>
+        <Button color="success">Post</Button>
+      </ButtonGroup>
+
+    </Box>
   );
 }
-
-/*
-
-
-
-
-<Box sx={{width:300, marginTop:1.5, textAlign:"left",marginLeft:3,marginBottom:7}}>
-  {props.descriptions}
-</Box>
-
-*/
 
 export default UploadItem;
 
