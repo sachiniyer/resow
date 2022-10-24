@@ -52,27 +52,24 @@ function EditProfile(props) {
     <Box sx={{ height: "calc(100vh - 59px)" }}>
 
       <Box sx={{ mt: 3, mb: 2 }}>
-
         <Stack direction="row" style={{ justifyContent: "center", display: "absolute" }} >
           <Avatar
-            src={props.source}
+            src={userDetails.avatar}
             alt="Profile Picture"
-            sx={{ width: 120, height: 120 }}
+            sx={{ border: 1, width: 120, height: 120 }}
           />
           <Fab component="label" sx={{ display: "absolute", mt: "80px", ml: "-40px", zIndex: 'tooltip' }} size="small" color="success" >
             <input hidden accept="image/*" type="file" />
             <EditIcon />
           </Fab >
         </Stack>
-
-
       </Box>
 
       <Stack spacing={1} direction="column" alignItems="center">
         <TextFieldContainer label="Full Name" icon=<AccountCircle /> text={userDetails.full_name} />
         <TextFieldContainer label="Username" icon=<AlternateEmailIcon /> text={userDetails.username} />
         <TextFieldContainer label="Email ID" icon=<EmailIcon /> text={userDetails.email} />
-        <TextFieldContainer label="Phone Number" icon=<LocalPhoneIcon /> text={userDetails.tel} />
+        <TextFieldContainer label="Phone Number" icon=<LocalPhoneIcon /> text={userDetails.phone} />
         <TextFieldContainer label="Location" icon=<HomeRoundedIcon /> text={userDetails.location} />
       </Stack>
 

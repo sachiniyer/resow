@@ -6,6 +6,7 @@ import axios from "axios";
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
+import Avatar from '@mui/material/Avatar';
 
 import EmailIcon from '@mui/icons-material/Email';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
@@ -45,8 +46,13 @@ function UserProfile(props) {
       <div className="UserProfile">
 
         <div className="TopPart">
-          <img className="ProfilePicture" src = {userDetails.avatar}
-           alt = "userimage"/>
+          <Stack direction="row" style={{ justifyContent: "center", display: "absolute" }} >
+            <Avatar
+              src={userDetails.avatar}
+              alt="Profile Picture"
+              sx={{ border: 1, width: 120, height: 120 }}
+            />
+          </Stack>
            <h2 className="FullName"> {userDetails.full_name} </h2>
            <p className="Username"> @{userDetails.username} </p>
         </div>
