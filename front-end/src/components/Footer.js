@@ -17,7 +17,7 @@ function Footer() {
 
   return (
     <>
-      <Box sx={{ zIndex: 1, position: "fixed", width: 1, alignItems: "center", justifyContent: "center", display: "flex", backgroundColor: "green" }}>
+      <Box className="theBox" sx={{ zIndex:999999, position: "fixed", width: 1, alignItems: "center", justifyContent: "center", display: "flex", backgroundColor: "green" }}>
         <Box sx={{ width: { xs: 0.85, sm: 0.45, md: 0.3 }, margin: 1, display: "flex", justifyContent: "space-between" }}>
           <Box sx={{ height: 40, width: 0.45, fontSize: 30, color: "white", fontWeight: 100, fontFamily: 'monospace' }}>
             <a href="/">Re-sow</a>

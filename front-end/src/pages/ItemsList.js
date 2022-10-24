@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { Link } from "react-router-dom";
 import axios from "axios";
+import SearchBar from '../components/SearchBar';
 
 
 function ItemList(props) {
@@ -23,6 +24,7 @@ function ItemList(props) {
 
     return (
       <>
+      <SearchBar/>
         {itemList && itemList.map((item) => (
           <PostCard key={item.id} info = {item}/>
         ))}
