@@ -37,7 +37,7 @@ function EditProfile(props) {
   useEffect(() => {
     async function fetchData(){
       const response = await axios (
-        "https://my.api.mockaroo.com/users.json?key=13a3e900"
+        "https://my.api.mockaroo.com/user_mock_data2.json?key=13a3e900"
       );
 
       setUserDetails(response.data);
