@@ -26,6 +26,10 @@ function App() {
             {/* a route for the home page */}
             <Route path="/" element={<Homepage />} />
 
+            {/* a route for the home page */}
+            <Route path="/UserProfile" element={<UserProfile />} />
+
+
             {/* a route for the upload item page */}
             <Route path="/UploadItem" element={<UploadItem
               thumbnailURL="/resowLogo.png"
