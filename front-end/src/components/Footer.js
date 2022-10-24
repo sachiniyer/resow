@@ -17,50 +17,50 @@ function Footer() {
 
   return (
     <>
-    <Box sx = {{zIndex:1, position:"fixed",width:1,alignItems:"center",justifyContent:"center",display:"flex",backgroundColor:"green"}}>
-      <Box sx={{width:{xs:0.85,sm:0.45,md: 0.25}, margin: 1,display:"flex", justifyContent:"space-between"}}>
-        <Box sx={{height:40,width:0.45,fontSize:30,color:"white", fontWeight:100,fontFamily:'monospace'}}>
-          <a href="/">Re-sow</a>
-        </Box>
-        
-        <Box>
-          <a href="/">
-            <Avatar sx={{backgroundColor:"white", width: 40, height: 40 }}>
-              <LocationOnIcon color="success" fontSize = "medium" />
-            </Avatar>
-          </a>
-        </Box>
-        <Box>
-          <a href="/Map/ItemsList">
-            <Avatar sx={{backgroundColor:"white", width: 40, height: 40 }}>
-              <ListIcon color="success" fontSize = "medium"/>
-            </Avatar>
-          </a>
-        </Box>
-        <Box>
-          <a href="/UploadItem">
-            <Avatar sx={{backgroundColor:"white", width: 40, height: 40 }}>
-              <CreateIcon color="success" fontSize = "medium"/>
-            </Avatar>
-          </a>
-        </Box>
-        <Box>
-          <a href="/UserProfile">
-            <Avatar sx={{backgroundColor:"white", width: 40, height: 40 }}>
-              <PersonIcon color="success" fontSize = "medium"/>
-            </Avatar>
-          </a>
+      <Box sx={{ zIndex: 1, position: "fixed", width: 1, alignItems: "center", justifyContent: "center", display: "flex", backgroundColor: "green" }}>
+        <Box sx={{ width: { xs: 0.85, sm: 0.45, md: 0.50 }, margin: 1, display: "flex", justifyContent: "space-between" }}>
+          <Box sx={{ height: 40, width: 0.45, fontSize: 30, color: "white", fontWeight: 100, fontFamily: 'monospace' }}>
+            <a href="/">Re-sow</a>
+          </Box>
+
+          <Box>
+            <a href="/">
+              <Avatar sx={{ backgroundColor: "white", width: 40, height: 40 }}>
+                <LocationOnIcon color="success" fontSize="medium" />
+              </Avatar>
+            </a>
+          </Box>
+          <Box>
+            <a href="/Map/ItemsList">
+              <Avatar sx={{ backgroundColor: "white", width: 40, height: 40 }}>
+                <ListIcon color="success" fontSize="medium" />
+              </Avatar>
+            </a>
+          </Box>
+          <Box>
+            <a href="/UploadItem">
+              <Avatar sx={{ backgroundColor: "white", width: 40, height: 40 }}>
+                <CreateIcon color="success" fontSize="medium" />
+              </Avatar>
+            </a>
+          </Box>
+          <Box>
+            <a href="/UserProfile">
+              <Avatar sx={{ backgroundColor: "white", width: 40, height: 40 }}>
+                <PersonIcon color="success" fontSize="medium" />
+              </Avatar>
+            </a>
+          </Box>
         </Box>
       </Box>
-    </Box>
-    <Box sx={{border:"solid", height:53, opacity:0}}>
+      <Box sx={{ border: "solid", height: 53, opacity: 0 }}>
 
-    </Box>
+      </Box>
     </>
 
 
 
-   
+
   );
 }
 
