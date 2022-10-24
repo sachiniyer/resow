@@ -53,6 +53,7 @@ function UserProfile(props) {
 
         <Box sx={{ width: '100%', height: "100%"}} className = "UserDetails">
           <Stack direction= "column" alignItems="center">
+
             <TextContainer icon = <EmailIcon fontSize="large"/> text = {userDetails.email} />
             <TextContainer icon = <LocalPhoneIcon fontSize="large"/> text = {userDetails.phone} />
             <TextContainer icon = <HomeRoundedIcon fontSize="large"/>text = {userDetails.location} />
@@ -67,6 +68,7 @@ function UserProfile(props) {
             </Stack>
             <Button color="success" href="/UserProfile/EditProfile" variant="contained">Edit Profile</Button>
             <Button color="success" href="/" variant="contained">Sign Out</Button>
+            <Button color="success" href="/SignIn" variant="contained">Sign In</Button>
           </Stack>
         </Box>
   
