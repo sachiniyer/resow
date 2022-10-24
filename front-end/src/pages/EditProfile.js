@@ -9,6 +9,7 @@ import TextField from '@mui/material/TextField';
 
 import Fab from '@mui/material/Fab';
 import EditIcon from '@mui/icons-material/Edit';
+import IconButton from '@mui/material/IconButton';
 
 import InputAdornment from '@mui/material/InputAdornment';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -35,19 +36,21 @@ function EditProfile(props) {
     <>
       <div className="EditProfile">
 
-        <Box className="Container" sx={{ mt: 3, mb: 2 }}>
+        <Box sx={{ mt: 3, mb: 2 }}>
 
-          <Stack direction="row" style={{ justifyContent: "center", display: "flex", p: 2 }} spacing={1}>
+          <Stack direction="row" style={{ justifyContent: "center", display: "absolute" }} >
             <Avatar
-              alt="Profile Picture"
               src={props.source}
+              alt="Profile Picture"
               sx={{ width: 120, height: 120 }}
             />
+            <IconButton component="label" sx={{ display: "absolute", mt: "80px", ml: "-40px", zIndex: 'tooltip' }} size="small" color="success" >
+              <input hidden accept="image/*" type="file" />
+              <EditIcon />
+            </IconButton >
+
           </Stack>
 
-          <Fab className="EditButton" sx={{ position: 'absolute', top: 80, left: '52%', zIndex: 'tooltip' }} size="small" color="success" aria-label="edit">
-            <EditIcon />
-          </Fab>
 
         </Box>
 
