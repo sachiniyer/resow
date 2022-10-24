@@ -31,6 +31,7 @@ function TextFieldContainer(props) {
 }
 
 function EditProfile(props) {
+
   const [userDetails,setUserDetails] = useState([]);
 
   useEffect(() => {
@@ -68,11 +69,11 @@ function EditProfile(props) {
       </Box>
 
       <Stack spacing={1} direction="column" alignItems="center">
-        <TextFieldContainer label="Full Name" icon=<AccountCircle /> text={props.fullname} />
-        <TextFieldContainer label="Username" icon=<AlternateEmailIcon /> text={props.username} />
-        <TextFieldContainer label="Email ID" icon=<EmailIcon /> text={props.email} />
-        <TextFieldContainer label="Phone Number" icon=<LocalPhoneIcon /> text={props.tel} />
-        <TextFieldContainer label="Location" icon=<HomeRoundedIcon /> text={props.location} />
+        <TextFieldContainer label="Full Name" icon=<AccountCircle /> text={userDetails.fullname} />
+        <TextFieldContainer label="Username" icon=<AlternateEmailIcon /> text={userDetails.username} />
+        <TextFieldContainer label="Email ID" icon=<EmailIcon /> text={userDetails.email} />
+        <TextFieldContainer label="Phone Number" icon=<LocalPhoneIcon /> text={userDetails.tel} />
+        <TextFieldContainer label="Location" icon=<HomeRoundedIcon /> text={userDetails.location} />
       </Stack>
 
       <Box sx={{ m: 2 }}>
