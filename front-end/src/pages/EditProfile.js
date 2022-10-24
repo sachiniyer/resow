@@ -7,7 +7,7 @@ import Avatar from '@mui/material/Avatar';
 import TextField from '@mui/material/TextField';
 
 import EditIcon from '@mui/icons-material/Edit';
-import IconButton from '@mui/material/IconButton';
+import Fab from '@mui/material/Fab';
 
 import InputAdornment from '@mui/material/InputAdornment';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -41,11 +41,10 @@ function EditProfile(props) {
             alt="Profile Picture"
             sx={{ width: 120, height: 120 }}
           />
-          <IconButton component="label" sx={{ display: "absolute", mt: "80px", ml: "-40px", zIndex: 'tooltip' }} size="small" color="success" >
+          <Fab component="label" sx={{ display: "absolute", mt: "80px", ml: "-40px", zIndex: 'tooltip' }} size="small" color="success" >
             <input hidden accept="image/*" type="file" />
             <EditIcon />
-          </IconButton >
-
+          </Fab >
         </Stack>
 
 
