@@ -14,7 +14,7 @@ function ImgCarousel(props) {
             <Box key={i} sx={{width:1,zIndex:-1}}>
 
               <AspectRatio objectFit="cover" ratio="1/1">
-                <img src = {item} alt = {"image"+item.id}/> 
+                <img src = {item} alt = {"resource image"}/> 
               </AspectRatio>
               
             </Box>
