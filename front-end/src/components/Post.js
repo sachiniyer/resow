@@ -8,7 +8,6 @@ export default function PostCard(props) {
   const link = "/ItemDetails/" + props.info.id
 
   return (
-    <Box sx={{display: 'flex',  justifyContent: 'center' }}>
       <Card sx={{
         display: "flex",
         width: { xs: 0.9, sm: 0.75, md: 0.5 },
@@ -42,6 +41,5 @@ export default function PostCard(props) {
 
         </Box>
       </Card >
-    </Box>
   );
 }
