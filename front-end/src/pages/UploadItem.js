@@ -57,7 +57,7 @@ function UploadItem() {
 
   return (
     <>
-    <Box sx={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column', height: '100vh' }}>
+    <Box sx={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column', height: 'calc(100vh - 59px)' }}>
       <Box sx={{ height: '90vh', flexGrow: 0, display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
         <h1> Upload Resource</h1>
         <Box sx={{ marginTop: 2 }}></Box>
