@@ -49,6 +49,7 @@ function EditProfile(props) {
   }, []);
 
   return (
+    
     <Box sx={{ height: "calc(100vh - 59px)" }}>
 
       <Box sx={{ mt: 3, mb: 2 }}>
