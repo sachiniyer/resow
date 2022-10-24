@@ -27,20 +27,13 @@ function SavedPost(props) {
 
   return (
     <>
-      <section>
-        <br></br>
-        <SearchBar></SearchBar>
-        <br></br>
-        <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <SearchBar/> 
           {data && data.map((item) => (
             <PostCard
               key={item.id}
               info={item}
             />
           ))}
-        </Box>
-      </section>
-
       <Box sx={{ position: "fixed", bottom: 20 }}>
         <Button component={Link} to="/UserProfile" variant="contained" color="success">Back to Profile</Button>
       </Box>
