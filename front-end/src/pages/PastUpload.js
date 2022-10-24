@@ -27,17 +27,13 @@ function PastUpload(props) {
 
     return (
       <>
-      <section className="PastUpload">
-        <br></br>
         <SearchBar></SearchBar>
-        <br></br>
         { data && data.map((item) => (
           <PostCard 
             key={item.id}  
             info={item}
           />
         ))}
-      </section>
 
       <Box sx={{position: "fixed", bottom: 20}}>
             <Button component={Link} to="/UserProfile" variant="contained" color="success">Back to Profile</Button>
