@@ -69,7 +69,7 @@ function EditProfile(props) {
       </Box>
 
       <Stack spacing={1} direction="column" alignItems="center">
-        <TextFieldContainer label="Full Name" icon=<AccountCircle /> text={userDetails.fullname} />
+        <TextFieldContainer label="Full Name" icon=<AccountCircle /> text={userDetails.full_name} />
         <TextFieldContainer label="Username" icon=<AlternateEmailIcon /> text={userDetails.username} />
         <TextFieldContainer label="Email ID" icon=<EmailIcon /> text={userDetails.email} />
         <TextFieldContainer label="Phone Number" icon=<LocalPhoneIcon /> text={userDetails.tel} />
