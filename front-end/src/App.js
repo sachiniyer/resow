@@ -13,7 +13,6 @@ import ItemsList from './pages/ItemsList'
 import ItemDetails from './pages/ItemDetails'
 import PastUpload from './pages/PastUpload'
 import SavedPost from './pages/SavedPost'
-import ChatPage from './pages/ChatPage'
 import EditProfile from './pages/EditProfile'
 function App() {
   return (
@@ -61,10 +60,6 @@ function App() {
 
             {/* a route for the past upload page */}
             <Route path="/PastUpload" element={<PastUpload />} />
-
-            {/* a route for the past upload page */}
-            <Route path="/User#?ChatInbox" element={<ChatPage />} />
-
           </Routes>
         </Router>
       </main>
