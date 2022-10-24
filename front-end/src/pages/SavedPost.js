@@ -4,6 +4,8 @@ import SearchBar from '../components/SearchBar';
 import PostCard from '../components/Post';
 import axios from "axios";
 import { useEffect,useState } from 'react';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 
 function SavedPost(props) {
 
@@ -36,6 +38,10 @@ function SavedPost(props) {
           />
         ))}
       </section>
+
+      <Box sx={{position: "fixed", bottom: 20}}>
+            <Button component={Link} to="/UserProfile.js" variant="contained" color="success">Back to Profile</Button>
+      </Box>
     </>
     );
   }
