@@ -78,7 +78,11 @@ function UploadItem() {
         </label>    
         </IconButton>
 
-        <TextField fullWidth label="Post Title" id="title" />
+        
+        <Box sx={{ borderRadius: '7px', m: 1, p: 0.95, color: 'grey.800', bgcolor: '#e5e4e2' }}>
+          <TextField fullWidth label="Post Title" id="title" />
+        </Box>
+        <Box sx={{ borderRadius: '7px', m: 1, p: 0.95, color: 'grey.800', bgcolor: '#e5e4e2' }}>
         <TextField
           fullWidth
           placeholder="Post Description"
@@ -87,13 +91,19 @@ function UploadItem() {
           maxRows={5}
           id='description'
         />
+        </Box>
 
+        
         <Button sx={{ marginTop: 2 }} color="success" href="/PastUpload" variant="contained">Past Uploads</Button>
 
         <ButtonGroup sx={{marginTop: 2, justifyContent: 'center'}} variant="contained" aria-label="outlined success button group">
           <Button href='/' color="success">Discard</Button>
           <Button onClick={postItem} color="success">Post</Button>
         </ButtonGroup>
+
+
+
+        
       </Box>
       
       
