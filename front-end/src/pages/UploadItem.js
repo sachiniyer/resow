@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import * as React from 'react';
 import { useEffect,useState } from 'react';
 import ImgCarousel from '../components/carousel/ImgCarousel';
@@ -104,14 +103,8 @@ function UploadItem() {
           </Stack>
         </ButtonGroup>
 
-
-
-
-
         
       </Box>
-      
-      
     </Box>
     </>
   );
