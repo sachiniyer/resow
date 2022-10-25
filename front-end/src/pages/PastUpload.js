@@ -27,6 +27,7 @@ function PastUpload(props) {
 
     return (
       <>
+        <h2>Past Uploads</h2>
         <SearchBar></SearchBar>
         { data && data.map((item) => (
           <PostCard 
