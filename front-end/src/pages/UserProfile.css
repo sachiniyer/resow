@@ -1,16 +1,15 @@
 .UserProfile{
-    /* position:absolute;
+    position:absolute;
     top: 15vh;
     right:0px;
-    left:0px; */
-    background-color: #282c34;
+    left:0px;
 }
 
 .TopPart{
-    padding: 15px;
+    padding: 0px;
     margin: 0px;
     margin-top: 2px;
-    color: white;
+    color: black;
     object-position: center top;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
