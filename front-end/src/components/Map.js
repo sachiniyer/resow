@@ -42,6 +42,22 @@ function MapWrapper(props) {
   const popRef = useRef()
   popRef.current = pop
 
+  const handleMapClick = async (event) => {
+    //  https://stackoverflow.com/a/60643670
+    mapRef.current.removeOverlay("popup")
+    const clickedCoord = mapRef.current.getCoordinateFromPixel(event.pixel)
+    const clickedFeatures = mapRef.current.getFeaturesAtPixel(event.pixel)
+    if (clickedFeatures.length > 0) {
+      popRef.current.show(event.coordinate, document.getElementById("popup"))
+      const transformedCoord = transform(clickedCoord, 'EPSG:3857', 'EPSG:4326')
+      await matchData(transformedCoord)
+    }
+    else {
+      popRef.current.hide()
+    }
+  }
+
+
   useEffect(() => {
     // I did not use mockaroo here, because I could not find an easy way to do it.
     const featuresLayerURL = "/samplefeatures";
@@ -78,12 +94,11 @@ function MapWrapper(props) {
 
     setPop(initialPop)
     setMap(initialMap)
-
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const matchData = async (coords) => {
     const result = await axios(
-      "https://my.api.mockaroo.com/items/" + "match" + "?key=59c3eda0"
+      "https://my.api.mockaroo.com/items/" + 2 + "?key=59c3eda0"
     );
     setImage(result.data.imgList[0])
     setProfile(result.data.profileURL)
@@ -92,20 +107,6 @@ function MapWrapper(props) {
     setLocation(result.data.location)
   }
 
-  const handleMapClick = async (event) => {
-    //  https://stackoverflow.com/a/60643670
-    mapRef.current.removeOverlay("popup")
-    const clickedCoord = mapRef.current.getCoordinateFromPixel(event.pixel)
-    const clickedFeatures = mapRef.current.getFeaturesAtPixel(event.pixel)
-    if (clickedFeatures.length > 0) {
-      popRef.current.show(event.coordinate, document.getElementById("popup"))
-      const transformedCoord = transform(clickedCoord, 'EPSG:3857', 'EPSG:4326')
-      await matchData(transformedCoord)
-    }
-    else {
-      popRef.current.hide()
-    }
-  }
   return (
     <>
       <Box component="span" sx={{ display: "block", height: "calc(100vh - 59px)", width: "100vw", m: 0, p: 0 }} ref={mapElement}></Box>
