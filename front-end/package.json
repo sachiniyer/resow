@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "ol": "^7.1.0",
+    "ol-popup": "^5.0.0",
     "react-openlayers": "^0.3.0"
   }
 }
