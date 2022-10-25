@@ -79,10 +79,10 @@ function UploadItem() {
         </IconButton>
 
         
-        <Box sx={{ borderRadius: '7px', m: 1, p: 0.95, color: 'grey.800', bgcolor: '#e5e4e2' }}>
+        <Box sx={{ borderRadius: '7px', m: 0.5, p: 0.2, color: 'grey.800', bgcolor: '#e5e4e2' }}>
           <TextField fullWidth label="Post Title" id="title" />
         </Box>
-        <Box sx={{ borderRadius: '7px', m: 1, p: 0.95, color: 'grey.800', bgcolor: '#e5e4e2' }}>
+        <Box sx={{ borderRadius: '7px', m: 0.5, p: 0.2, color: 'grey.800', bgcolor: '#e5e4e2' }}>
         <TextField
           fullWidth
           placeholder="Post Description"
