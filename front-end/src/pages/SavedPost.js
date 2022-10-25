@@ -27,6 +27,7 @@ function SavedPost(props) {
 
   return (
     <>
+        <h2>Saved Posts</h2>
         <SearchBar/> 
           {data && data.map((item) => (
             <PostCard
