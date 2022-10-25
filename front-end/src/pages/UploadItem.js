@@ -93,15 +93,20 @@ function UploadItem() {
         />
         </Box>
 
-        
-        <Button sx={{ marginTop: 2 }} color="success" href="/PastUpload" variant="contained">Past Uploads</Button>
-
-        <ButtonGroup sx={{marginTop: 2, justifyContent: 'center'}} variant="contained" aria-label="outlined success button group">
+        <Stack spacing={2} direction= "column" alignItems="center" >
+          <Button sx={{ marginTop: 2 }} color="success" href="/PastUpload" variant="contained">Past Uploads</Button>
           <Stack spacing={2} direction="row" alignItems="center" justifyContent="center">
             <Button sx={{ width: 100}} href='/' color="success" variant="contained">Discard</Button>
             <Button sx={{ width: 100}} onClick={postItem} color="success" variant="contained">Post</Button>
           </Stack>
-        </ButtonGroup>
+
+        </Stack>
+
+
+
+        
+        
+       
 
         
       </Box>
