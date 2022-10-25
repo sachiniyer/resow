@@ -7,10 +7,10 @@
 }
 
 .TopPart{
-    padding: 0px;
+    padding: 15px;
     margin: 0px;
     margin-top: 2px;
-    color: black;
+    color: white;
     object-position: center top;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
