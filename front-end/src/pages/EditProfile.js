@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from "axios";
 
 import Box from '@mui/material/Box';
@@ -32,11 +32,11 @@ function TextFieldContainer(props) {
 
 function EditProfile(props) {
 
-  const [userDetails,setUserDetails] = useState([]);
+  const [userDetails, setUserDetails] = useState([]);
 
   useEffect(() => {
-    async function fetchData(){
-      const response = await axios (
+    async function fetchData() {
+      const response = await axios(
         "https://my.api.mockaroo.com/user_mock_data2.json?key=13a3e900"
       );
 
@@ -49,8 +49,8 @@ function EditProfile(props) {
   }, []);
 
   return (
-    
-    <Box sx={{ height: "calc(100vh - 59px)" }}>
+
+    <Box sx={{ height: "calc(100vh - 53px)" }}>
 
       <Box sx={{ mt: 3, mb: 2 }}>
         <Stack direction="row" style={{ justifyContent: "center", display: "absolute" }} >
