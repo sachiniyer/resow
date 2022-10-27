@@ -43,7 +43,8 @@ function UserProfile(props) {
 
   return (
     <>
-      <div className="UserProfile">
+
+      <Box sx={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column', height: 'calc(100vh - 53px)' }}> 
 
         <div className="TopPart">
           <Stack direction="row" style={{ justifyContent: "center", display: "absolute" }} >
@@ -78,9 +79,9 @@ function UserProfile(props) {
           </Stack>
         </Box>
   
-      </div>
-      </>
-      );
+      </Box>
+    </>
+  );
 }
 
 export default UserProfile;
