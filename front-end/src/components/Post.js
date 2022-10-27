@@ -38,7 +38,6 @@ export default function PostCard(props) {
           <Box sx={{ color: "#2596be", marginLeft: "1em", width: 0.9, flexWrap: "wrap", wordWrap: "break-word", fontSize: { xs: "15px", sm: "20px", md: "20px" }, textAlign: "left" }}>
             {props.info.location}
           </Box>
-
         </Box>
       </Card >
   );
