@@ -42,7 +42,7 @@ function MapWrapper(props) {
   const popRef = useRef()
   popRef.current = pop
 
-  let firstclick = false 
+  let firstclick = false
 
   const handleMapClick = async (event) => {
     //  https://stackoverflow.com/a/60643670
@@ -114,7 +114,7 @@ function MapWrapper(props) {
 
   return (
     <>
-      <Box component="span" sx={{ display: "block", height: "calc(100vh - 59px)", width: "100vw", m: 0, p: 0 }} ref={mapElement}></Box>
+      <Box component="span" sx={{ display: "block", height: "calc(100vh - 53px)", width: "100vw", m: 0, p: 0 }} ref={mapElement}></Box>
       <Box id="popup" sx={{ display: "none", zIndex: 99999 }}>
         <PreviewWindow image={image} profile={profile} seller={seller} title={title} location={location} />
       </Box>
