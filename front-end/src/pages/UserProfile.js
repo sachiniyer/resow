@@ -51,10 +51,10 @@ function UserProfile(props) {
             <Avatar
               src={userDetails.avatar}
               alt="Profile Picture"
-              sx={{ border: 1, width: 120, height: 120 }}
+              sx={{ border: "solid 0.5px", borderColor:"black", width: 120, height: 120 }}
             />
           </Stack>
-           <h2 className="FullName"> {userDetails.full_name} </h2>
+           <h3 className="FullName"> {userDetails.full_name} </h3>
            <p className="Username"> @{userDetails.username} </p>
         </div>
 
@@ -67,7 +67,7 @@ function UserProfile(props) {
           </Stack>
         </Box>
 
-        <Box sx={{m: 2}}>
+        <Box sx={{m: 5}}>
           <Stack spacing={2} direction= "column" alignItems="center" >
             <Stack spacing={2} direction = "row" alignItems="center" justifyContent="center">
               <Button color="success" href="/PastUpload" variant="contained">Past Uploads</Button>
