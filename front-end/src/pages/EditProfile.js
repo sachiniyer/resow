@@ -57,7 +57,7 @@ function EditProfile(props) {
           <Avatar
             src={userDetails.avatar}
             alt="Profile Picture"
-            sx={{ border: 1, width: 120, height: 120 }}
+            sx={{ border: "solid 0.5px", borderColor:"black", width: 120, height: 120 }}
           />
           <Fab component="label" sx={{ display: "absolute", mt: "80px", ml: "-40px", zIndex: 'tooltip' }} size="small" color="success" >
             <input hidden accept="image/*" type="file" />

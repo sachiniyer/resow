@@ -53,7 +53,7 @@ function Footer() {
           </Box>
         </Box>
       </Box>
-      <Box sx={{height: 53, backgroundColor:"#282c34"}}>
+      <Box sx={{height: 53}}>
       </Box>
     </>
   );

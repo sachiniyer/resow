@@ -13,7 +13,7 @@ import Divider from '@mui/material/Divider';
 export default function Message(props){
 
     return (
-        <List sx={{zIndex: 1,width: { xs: 0.9, sm: 0.7, md: 0.5 },maxWidth: 360,border: 'solid 1px',bgcolor: 'white',position:"fixed",borderRadius:2}}>
+        <List sx={{zIndex: 1,width: { xs: 0.9, sm: 0.7, md: 0.5 },maxWidth: 360,border: 'solid 0.5px',borderColor:"black",bgcolor: 'white',position:"fixed",borderRadius:2}}>
 
             <ListItem>
                 <ListItemAvatar>

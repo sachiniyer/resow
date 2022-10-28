@@ -3,7 +3,6 @@ import { useEffect,useState } from 'react';
 import ImgCarousel from '../components/carousel/ImgCarousel';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
 import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
@@ -93,21 +92,10 @@ function UploadItem() {
         />
         </Box>
 
-        <Stack spacing={2} direction= "column" alignItems="center" >
-          <Button sx={{ marginTop: 2 }} color="success" href="/PastUpload" variant="contained">Past Uploads</Button>
-          <Stack spacing={2} direction="row" alignItems="center" justifyContent="center">
-            <Button sx={{ width: 100}} href='/' color="success" variant="contained">Discard</Button>
-            <Button sx={{ width: 100}} onClick={postItem} color="success" variant="contained">Post</Button>
-          </Stack>
-
+        <Stack spacing={2} direction="row" alignItems="center" justifyContent="center">
+          <Button sx={{ width: 100}} href='/' color="success" variant="contained">Discard</Button>
+          <Button sx={{ width: 100}} onClick={postItem} color="success" variant="contained">Post</Button>
         </Stack>
-
-
-
-        
-        
-       
-
         
       </Box>
     </Box>
