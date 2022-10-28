@@ -24,6 +24,7 @@ function ItemList(props) {
 
     return (
       <>
+      <Box sx={{height:10}}></Box>
       <SearchBar/>
         {itemList && itemList.map((item) => (
           <PostCard key={item.id} info = {item}/>
