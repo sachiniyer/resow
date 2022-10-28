@@ -44,16 +44,16 @@ export default function ItemDetails({match}){
         <Box sx={{width:{xs:0.9,sm:0.5,md: 0.3}, display: 'flex'}}>
             <Box sx={{width:0.3,height:1,textAlign:"center",justifyContent:"center"}}>
                 <AspectRatio ratio="1/1"> 
-                 <Avatar sx={{border:"solid",justifyContent:"center",width: 0.5}} alt="thumbnail" src={itemDetails.profileURL}/> 
+                 <Avatar sx={{border:"solid 0.5px",borderColor:"black",justifyContent:"center",width: 0.5}} alt="thumbnail" src={itemDetails.profileURL}/> 
                 </AspectRatio>
-                <Box sx={{width:1, wordWrap: "break-word",fontSize: "10px"}}>
+                <Box sx={{width:1, wordWrap: "break-word",fontSize: "10px",color:"black"}}>
                     {itemDetails.sellerName}
                 </Box>
             </Box>
             <Box sx={{width:0.05}}></Box>
             <Box sx={{width: 1}}>
                 <Box sx={{height:0.1}}></Box>
-                <Box sx={{width:1, flexWrap:"wrap", wordWrap: "break-word",fontSize: {xs:"15px",sm:"20px",md: "20px"}, textAlign:"left"}}>
+                <Box sx={{width:1, flexWrap:"wrap", wordWrap: "break-word",fontSize: {xs:"15px",sm:"20px",md: "20px"}, textAlign:"left",color:"black"}}>
                   {itemDetails.title}
                 </Box>
                 <Box sx={{marginTop:1,wordWrap: "break-word", fontSize: "12px", textAlign:"left", color:"#2596be"}}>
@@ -62,7 +62,7 @@ export default function ItemDetails({match}){
             </Box>
           </Box>
           {open ? (<ContactBox info={itemDetails}/>) : null}
-          <Box sx={{borderTop:"solid",width:{xs:0.9,sm:0.5,md: 0.3}, marginTop:1.5, paddingTop:1.5, textAlign:"left",marginBottom:7,fontSize: "15px"}}>
+          <Box sx={{color:"black",borderTop:"solid",width:{xs:0.9,sm:0.5,md: 0.3}, marginTop:1.5, paddingTop:1.5, textAlign:"left",marginBottom:7,fontSize: "15px"}}>
             {itemDetails.descriptions}
           </Box>
           <ClickAwayListener onClickAway={handleClickAway}>
