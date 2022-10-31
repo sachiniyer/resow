@@ -60,6 +60,7 @@ export default function ItemDetails({match}){
       window.location.replace("/");
     };
     const cancel= () => {return};
+    
     const askRedirect = useConfirm(
       "Please sign in to save the post",
       redirect,
@@ -146,7 +147,7 @@ export default function ItemDetails({match}){
 
       );
       setItemDetails(result.data);
-      setIsMyPost(itemDetails.sellerId !== userId)
+      setIsMyPost(itemDetails.sellerId === userId)
     }
 
     useEffect(() => {
