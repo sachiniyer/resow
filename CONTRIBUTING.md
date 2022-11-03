@@ -65,6 +65,7 @@ To be updated when the project reaches the stage
 ### Sprint 2
 - Product Owner: Tasnim Ahmed
 - Scrum Master: Bhavicka Mohta
+
 ### Sprint 3
 - TBD
 ### Sprint 4
