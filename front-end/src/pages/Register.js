@@ -1,4 +1,6 @@
 import * as React from 'react';
+import axios from 'axios'
+
 import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
@@ -16,11 +18,15 @@ function SignUp(props) {
 
   return (
       <Box sx={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column', height: 'calc(100vh - 53px)' }}>
+
         <Box justifyContent="center" alignItems="center" sx={{mx: 'auto'}}>
+
           <Box sx={{ marginTop: '20vh' }}></Box>
+          
           <TextField fullWidth label="Username" id="username" sx={{ m: 1 }} />
           <TextField fullWidth type={showPassword ? "text" : "password"} label="Password" id="password" sx={{ m: 1 }} />
           <TextField fullWidth type={showPassword ? "text" : "password"} label="Confirm Password" id="passwordConf" sx={{ m: 1 }} />
+
           <Stack spacing={2} direction= "column" alignItems="center" >
             <VisibilityIcon onClick={() => setShowPassword(s => !s)} sx={{cursor: 'pointer'}}/>
             <Button color="success" sx={{ m: 2 }} 
@@ -30,8 +36,9 @@ function SignUp(props) {
                 let passwordConf = document.getElementById('passwordConf').value
                 const url = 'https://63532326d0bca53a8ebaecb3.mockapi.io/users'
                 let data = {username: username, password: password}
-                if (password == passwordConf) {
+                if (password === passwordConf) {
                   if (username && password && passwordConf) {
+                    //use axios to send data to the backend
                     const response = await fetch(url, {
                       method: 'POST', // *GET, POST, PUT, DELETE, etc.
                       //mode: 'cors', // no-cors, *cors, same-origin
@@ -63,10 +70,11 @@ function SignUp(props) {
             >
               Register
             </Button>
-            <Button color="success" href="/SignIn">Sign In</Button>
+            <Button color="success" href="/SignIn"> Sign In </Button>
           </Stack>
-          
+
         </Box>
+
       </Box>
   );
 }
