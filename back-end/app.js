@@ -11,8 +11,9 @@ require("dotenv").config({ silent: true }) // load environmental variables from 
 const app = express() // instantiate an Express object
 
 //-------------------------------------IMPORT ROUTES----------------------------------------------------
+
 const postsRoute = require('./routes/posts') // load route for posts
-const userRoutes = require('./routes/users') // load route for users
+const userRoute = require('./routes/users') // load route for users
 
 //-------------------------------------MIDDLEWARE BELOW----------------------------------------------------
 
@@ -25,6 +26,7 @@ app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming P
 // make 'public' directory publicly readable with static content
 app.use("/static", express.static("public"))
 app.use('/posts', postsRoute)
+app.use('/users', userRoute)
 
 dbUser = process.env.DB_USER
 dbPass = process.env.DB_PWORD
@@ -44,12 +46,6 @@ app.get("/", (req, res) => {
 app.post('/sign-in', (req, res) => {
     res.send(req.body)
 })
-
-app.post("/users", (req, res) => {
-    //route for making a post request to create a new user
-    res.send("Hello world!")
-})
-
 
 // export the express app we created to make it available to other modules
 module.exports = app
