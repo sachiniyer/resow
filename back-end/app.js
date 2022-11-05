@@ -5,11 +5,14 @@ const path = require("path")
 const multer = require("multer") // middleware to handle HTTP POST requests with file uploads
 const axios = require("axios") // middleware for making requests to APIs
 const morgan = require("morgan") // middleware for nice logging of incoming HTTP requests
-const postsRoute = require('./routes/posts') // load route for posts
 const cors = require('cors') // allow cross origin requests (cors)
 require("dotenv").config({ silent: true }) // load environmental variables from a hidden file named .env
 
 const app = express() // instantiate an Express object
+
+//-------------------------------------IMPORT ROUTES----------------------------------------------------
+const postsRoute = require('./routes/posts') // load route for posts
+const userRoutes = require('./routes/users') // load route for users
 
 //-------------------------------------MIDDLEWARE BELOW----------------------------------------------------
 
