@@ -17,9 +17,14 @@ const PostSchema = mongoose.Schema({
         type: Date,
         required: true
     },
+    owner: {
+        type: String,
+        required: true
+    },
     createdAt: {
         type: Date,
-        defualt: Date.now
+        required: true,
+        default: Date.now()
     },
     images: Array
 })
