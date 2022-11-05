@@ -10,9 +10,6 @@ import Stack from '@mui/material/Stack';
 
 
 function SignUp(props) {
-  const theme = {
-    spacing: 8,
-  }
 
   const [showPassword, setShowPassword] = useState(false);
 
