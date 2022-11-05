@@ -7,22 +7,26 @@ const UserSchema = mongoose.Schema({
     },
     emailID: {
         type: String,
-        required: true
+        required: true,
+        index: true
+    },
+    password: {
+        type: String,
+        required: true,
+        index: true
     },
     dob: {
         type: Date,
         required: true
     },
-    password: {
-        type: String,
-        required: true
-    },
     phone: {
-        type: Date,
+        type: Number,
         required: true,
-        default: Date.now()
     },
-    profilepic: Array
+    img: {
+        data: Buffer,
+        contentType: String 
+    }
 })
 
 module.exports = mongoose.model('Users', UserSchema)
