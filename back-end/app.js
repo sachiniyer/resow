@@ -43,15 +43,6 @@ app.get("/", (req, res) => {
     res.send("Hello world!")
 })
 
-app.post('/sign-in', (req, res) => {
-    res.send(req.body)
-})
-
-app.post("/users", (req, res) => {
-    //route for making a post request to create a new user
-    res.send("Hello world!")
-})
-
 app.get("/item-list", (req, res) => {
 
     axios
