@@ -1,14 +1,16 @@
 const express = require("express")
 const router = express.Router()
+const User = require("../models/userschema")
 
+router.get('/', (req,res) => {
 
-router.get('/specific', (req,res) => {
-
-    res.send("User Details")
+    res.send("We are on users")
 
 });
 
-
+router.post('/', (req,res)=> {
+    console.log(req.body) 
+});
 
 
 module.exports = router;
