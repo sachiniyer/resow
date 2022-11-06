@@ -1,5 +1,4 @@
 import * as React from 'react';
-import axios from 'axios'
 
 import { useState } from 'react';
 import TextField from '@mui/material/TextField';
@@ -10,9 +9,6 @@ import Stack from '@mui/material/Stack';
 
 
 function SignUp(props) {
-  const theme = {
-    spacing: 8,
-  }
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -22,31 +18,35 @@ function SignUp(props) {
         <Box justifyContent="center" alignItems="center" sx={{mx: 'auto'}}>
 
           <Box sx={{ marginTop: '20vh' }}></Box>
+          <Stack spacing={1} direction="column" alignItems="center" sx={{ m:1, minWidth: 290 }}>
+            <TextField fullWidth label="Fullname" id="fullname" sx={{ m: 1}} />
+            <TextField fullWidth label="Email ID" id="email" sx={{ m: 1}} />
+            <TextField fullWidth label="Phone Number" id="phone" sx={{ m: 1 }} />
+            <TextField fullWidth type={showPassword ? "text" : "password"} label="Password" id="password" sx={{ m: 1 }} />
+            <TextField fullWidth type={showPassword ? "text" : "password"} label="Confirm Password" id="passwordConf" sx={{ m: 1 }} />
+          </Stack>
           
-          <TextField fullWidth label="Username" id="username" sx={{ m: 1 }} />
-          <TextField fullWidth type={showPassword ? "text" : "password"} label="Password" id="password" sx={{ m: 1 }} />
-          <TextField fullWidth type={showPassword ? "text" : "password"} label="Confirm Password" id="passwordConf" sx={{ m: 1 }} />
-
           <Stack spacing={2} direction= "column" alignItems="center" >
             <VisibilityIcon onClick={() => setShowPassword(s => !s)} sx={{cursor: 'pointer'}}/>
             <Button color="success" sx={{ m: 2 }} 
               onClick={ async () => {
-                let username = document.getElementById('username').value
+                let fullname = document.getElementById('fullname').value
+                let emailID = document.getElementById('email').value
                 let password = document.getElementById('password').value
+                let phonenumber = document.getElementById('phone').value
                 let passwordConf = document.getElementById('passwordConf').value
-                const url = 'https://63532326d0bca53a8ebaecb3.mockapi.io/users'
-                let data = {username: username, password: password}
+                const url = 'http://localhost:3000/users' //change this
+                let data = {fullname: fullname,emailID: emailID, password: password, phone: phonenumber}
                 if (password === passwordConf) {
-                  if (username && password && passwordConf) {
+                  if (emailID && password && passwordConf) {
                     //use axios to send data to the backend
                     const response = await fetch(url, {
                       method: 'POST', // *GET, POST, PUT, DELETE, etc.
-                      //mode: 'cors', // no-cors, *cors, same-origin
+                      mode: 'cors', // no-cors, *cors, same-origin
                       //cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
                       //credentials: 'same-origin', // include, *same-origin, omit
                       headers: {
                         'Content-Type': 'application/json'
-                        // 'Content-Type': 'application/x-www-form-urlencoded',
                       },
                       redirect: 'follow', // manual, *follow, error
                       referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
@@ -68,7 +68,7 @@ function SignUp(props) {
 
               }}
             >
-              Register
+              Register  
             </Button>
             <Button color="success" href="/SignIn"> Sign In </Button>
           </Stack>

@@ -5,12 +5,15 @@ const path = require("path")
 const multer = require("multer") // middleware to handle HTTP POST requests with file uploads
 const axios = require("axios") // middleware for making requests to APIs
 const morgan = require("morgan") // middleware for nice logging of incoming HTTP requests
-const postsRoute = require('./routes/posts') // load route for posts
 const cors = require('cors') // allow cross origin requests (cors)
 require("dotenv").config({ silent: true }) // load environmental variables from a hidden file named .env
 
 const app = express() // instantiate an Express object
 
+//-------------------------------------IMPORT ROUTES----------------------------------------------------
+
+const postsRoute = require('./routes/posts') // load route for posts
+const userRoute = require('./routes/users') // load route for users
 
 //-------------------------------------MIDDLEWARE BELOW----------------------------------------------------
 
@@ -23,6 +26,7 @@ app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming P
 // make 'public' directory publicly readable with static content
 app.use("/static", express.static("public"))
 app.use('/posts', postsRoute)
+app.use('/users', userRoute)
 
 dbUser = process.env.DB_USER
 dbPass = process.env.DB_PWORD
@@ -36,15 +40,6 @@ mongoose.connect(`mongodb+srv://${dbUser}:${dbPass}${DBString}`, () => {
 
 // route for HTTP GET requests to the root document
 app.get("/", (req, res) => {
-    res.send("Hello world!")
-})
-
-app.post('/sign-in', (req, res) => {
-    res.send(req.body)
-})
-
-app.post("/users", (req, res) => {
-    //route for making a post request to create a new user
     res.send("Hello world!")
 })
 
