@@ -16,10 +16,6 @@ const UserSchema = mongoose.Schema({
         index: true,
         minlength: 5
     },
-    dob: {
-        type: Date,
-        required: true
-    },
     phone: {
         type: Number,
         required: true,
