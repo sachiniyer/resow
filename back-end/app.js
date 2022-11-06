@@ -11,6 +11,7 @@ require("dotenv").config({ silent: true }) // load environmental variables from 
 
 const app = express() // instantiate an Express object
 
+
 //-------------------------------------MIDDLEWARE BELOW----------------------------------------------------
 
 // use the morgan middleware to log all incoming http requests
@@ -94,6 +95,7 @@ app.get("/past-upload", (req, res) => {
 
 })
 
+// get request from the front end when it needs the item details
 app.get("/item/:itemId", (req, res) =>{
     route = `${process.env.ITEM_LIST_URI}`+"/"+req.params.itemId+`/?key=${process.env.KEY}`
     axios
@@ -102,6 +104,74 @@ app.get("/item/:itemId", (req, res) =>{
     .catch(err => next(err)) // pass any errors to express
 })
 
+// post request when the user wants to save the post
+app.post("/item/save", (req, res) => {
+    
+    const data = {
+        user_id : req.body.user_id,
+        post_id : req.body.post_id
+    }
 
+    const url = `${process.env.SAVE_POST_URI}`
+
+    axios.post(url,data)
+    .then((response) => {
+        return res.json({
+            message:"The post has been saved successfully",
+            id:response.data.id   
+        })
+    })
+    .catch(error =>{
+        return res.json({
+            message:"error"
+        })
+    })
+})
+
+// delete request when the user wants to unsave the post
+app.delete("/item/save/:saveId", (req,res) => {
+
+    axios.delete("https://635f28c83e8f65f283ad5a6c.mockapi.io/savepost"+"/"+req.params.saveId)
+    .then(() =>{
+        return res.json({
+            message:"The post has been unsaved successfully"
+        })
+    })
+    .catch(error =>{
+        console.log(response)
+        return res.json({
+            message:"error"
+        })
+    })
+
+})
+
+app.delete("/item/:deleteId",(req,res) => {
+
+    // =======================================================================
+    //
+    // MOCKAROO API DOESN'T SUPPORT DELETE
+    // WILL BE UPDATED WHEN THE DB IS IMPLEMENTED
+    //
+    // axios.delete("random_URL_That_stores_item_details/"+req.params.deleteId)
+    // .then(() =>{
+    //     return res.json({
+    //         message:"The post has been deleted successfully"
+    //     })
+    // })
+    // .catch(error =>{
+    //     console.log(response)
+    //     return res.json({
+    //         message:"error"
+    //     })
+    // })
+    //
+    // =======================================================================
+    return res.json({
+        message:"The post has been deleted successfully"
+    })
+})
+
+        
 // export the express app we created to make it available to other modules
 module.exports = app
