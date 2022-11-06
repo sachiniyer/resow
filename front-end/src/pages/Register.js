@@ -21,7 +21,7 @@ function SignUp(props) {
           <Box sx={{ marginTop: '20vh' }}></Box>
           <Stack spacing={1} direction="column" alignItems="center" sx={{ m:1, minWidth: 290 }}>
             <TextField fullWidth label="Email ID" id="username" sx={{ m: 1}} />
-            <TextField fullWidth label="Phone Number" id="u" sx={{ m: 1 }} />
+            <TextField fullWidth label="Phone Number" id="phone" sx={{ m: 1 }} />
             <TextField fullWidth type={showPassword ? "text" : "password"} label="Password" id="password" sx={{ m: 1 }} />
             <TextField fullWidth type={showPassword ? "text" : "password"} label="Confirm Password" id="passwordConf" sx={{ m: 1 }} />
           </Stack>
@@ -32,20 +32,20 @@ function SignUp(props) {
               onClick={ async () => {
                 let username = document.getElementById('username').value
                 let password = document.getElementById('password').value
+                let phonenumber = document.getElementById('phone').value
                 let passwordConf = document.getElementById('passwordConf').value
-                const url = 'https://63532326d0bca53a8ebaecb3.mockapi.io/users'
-                let data = {username: username, password: password}
+                const url = 'http://localhost:3000/users' //change this
+                let data = {username: username, password: password, phone: phonenumber}
                 if (password === passwordConf) {
                   if (username && password && passwordConf) {
                     //use axios to send data to the backend
                     const response = await fetch(url, {
                       method: 'POST', // *GET, POST, PUT, DELETE, etc.
-                      //mode: 'cors', // no-cors, *cors, same-origin
+                      mode: 'cors', // no-cors, *cors, same-origin
                       //cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
                       //credentials: 'same-origin', // include, *same-origin, omit
                       headers: {
                         'Content-Type': 'application/json'
-                        // 'Content-Type': 'application/x-www-form-urlencoded',
                       },
                       redirect: 'follow', // manual, *follow, error
                       referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
