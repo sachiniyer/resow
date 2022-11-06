@@ -3,7 +3,7 @@ const router = express.Router()
 const User = require("../models/userschema")
 
 router.get('/', (req,res) => {
-
+    //Bhavicka should work on this
     res.send("We are on users")
 
 });
