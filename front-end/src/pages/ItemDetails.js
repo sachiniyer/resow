@@ -147,7 +147,8 @@ export default function ItemDetails({match}){
   async function fetchData() {
 
     const result = await axios(
-      "https://my.api.mockaroo.com/items/"+postId+"?key=59c3eda0"
+      // "https://my.api.mockaroo.com/items/"+postId+"?key=59c3eda0"
+      `${process.env.REACT_APP_SERVER_HOSTNAME}/item/${postId}`
 
     );
     setItemDetails(result.data);
