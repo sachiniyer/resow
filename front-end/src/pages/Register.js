@@ -19,11 +19,13 @@ function SignUp(props) {
         <Box justifyContent="center" alignItems="center" sx={{mx: 'auto'}}>
 
           <Box sx={{ marginTop: '20vh' }}></Box>
+          <Stack spacing={1} direction="column" alignItems="center" sx={{ m:1, minWidth: 290 }}>
+            <TextField fullWidth label="Email ID" id="username" sx={{ m: 1}} />
+            <TextField fullWidth label="Phone Number" id="u" sx={{ m: 1 }} />
+            <TextField fullWidth type={showPassword ? "text" : "password"} label="Password" id="password" sx={{ m: 1 }} />
+            <TextField fullWidth type={showPassword ? "text" : "password"} label="Confirm Password" id="passwordConf" sx={{ m: 1 }} />
+          </Stack>
           
-          <TextField fullWidth label="Username" id="username" sx={{ m: 1 }} />
-          <TextField fullWidth type={showPassword ? "text" : "password"} label="Password" id="password" sx={{ m: 1 }} />
-          <TextField fullWidth type={showPassword ? "text" : "password"} label="Confirm Password" id="passwordConf" sx={{ m: 1 }} />
-
           <Stack spacing={2} direction= "column" alignItems="center" >
             <VisibilityIcon onClick={() => setShowPassword(s => !s)} sx={{cursor: 'pointer'}}/>
             <Button color="success" sx={{ m: 2 }} 
