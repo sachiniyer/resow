@@ -24,7 +24,7 @@ const UserSchema = mongoose.Schema({
         type: Number,
         required: true,
     },
-    img: Array   //change this later: take only one image
+    img: Array   //take only one image - front end limit setting
 })
 
 module.exports = mongoose.model('Users', UserSchema)
