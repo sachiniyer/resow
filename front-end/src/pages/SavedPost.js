@@ -16,7 +16,7 @@ function SavedPost(props) {
     async function fetchData() {
 
       const result = await axios(
-        "https://my.api.mockaroo.com/items/?key=59c3eda0"
+        `${process.env.REACT_APP_SERVER_HOSTNAME}/saved-post`
       );
 
       setData(result.data);
@@ -27,7 +27,7 @@ function SavedPost(props) {
 
   return (
     <>
-        <h2>Saved Posts</h2>
+        <Box sx = {{color:"black", fontSize:"40px",margin:"10px"}}>Saved Post</Box>
         <SearchBar/> 
           {data && data.map((item) => (
             <PostCard

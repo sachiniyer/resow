@@ -13,10 +13,11 @@ function ItemList(props) {
 
   async function fetchData() {
     const result = await axios(
-      "https://my.api.mockaroo.com/items/?key=59c3eda0"
+      `${process.env.REACT_APP_SERVER_HOSTNAME}/item-list`
     );
     setItemList(result.data);
   }
+  
 
   useEffect(() => {
     fetchData();
