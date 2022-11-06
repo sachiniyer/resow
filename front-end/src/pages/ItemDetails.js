@@ -15,7 +15,6 @@ import TurnedInIcon from '@mui/icons-material/TurnedIn';
 
 export default function ItemDetails({match}){
 
-
   // placeholder for userId. will fetch data in the future.
   const userId = 1;
 
@@ -72,51 +71,42 @@ export default function ItemDetails({match}){
   );
 
 
-  // a function to send save info to the server
-  async function savePost() {
-    
-    // placeholder
+  async function savePost(){
     let user_id = 1;
     let post_id = postId;
     let data = {user_id:user_id, post_id:post_id};
 
-    const url = 'https://635f28c83e8f65f283ad5a6c.mockapi.io/savepost'
-
-    await fetch(url, {
-      method: 'POST', 
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      redirect: 'follow', 
-      referrerPolicy: 'no-referrer', 
-      body: JSON.stringify(data)
+    axios
+    .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/item/save`,data)
+    .then(response => {
+      console.log(response.data.message)
+      setSaveId(response.data.id)
     })
-    .then((response) => response.json())
-    .then((res) => setSaveId(res.id))
-    .then(console.log("The user saved the post"))
+    .catch (err => {console.log(err)})
   }
 
   // a function to send save info to the server
   async function unsavePost() {
 
-    const url = 'https://635f28c83e8f65f283ad5a6c.mockapi.io/savepost/'+saveId;
-
-    await fetch(url, {
-      method: 'DELETE', 
+    axios
+    .delete(`${process.env.REACT_APP_SERVER_HOSTNAME}/item/save/${saveId}`)
+    .then(response =>{
+      console.log(response.data.message)
     })
-    .then(console.log("The user cancelled saving the post"))
+    .catch(err =>{console.log(err)})
+
   }
 
   async function deletePost(){
 
-    const url = "randomURL/thatstorespostdetails" + postId ;
-
-    await fetch(url,{
-      method:"DELETE",
+    axios.delete(`${process.env.REACT_APP_SERVER_HOSTNAME}/item/${saveId}`)
+    .then(response =>{
+      console.log(response.data.message)
     })
-    .then(console.log("post"))
     .then(alert("the post is deleted"))
     .then(window.location.replace("/Map/ItemsList"))
+    .catch(err => {console.log(err)})
+
   }
 
   // a switching function to check the state of saving
@@ -147,11 +137,11 @@ export default function ItemDetails({match}){
   async function fetchData() {
 
     const result = await axios(
-      "https://my.api.mockaroo.com/items/"+postId+"?key=59c3eda0"
-
+      `${process.env.REACT_APP_SERVER_HOSTNAME}/item/${postId}`
     );
     setItemDetails(result.data);
     setIsMyPost(itemDetails.sellerId === userId)
+    // note: the request which checks the "ifMyPost" should be added after the db is implemented
   }
 
   useEffect(() => {
