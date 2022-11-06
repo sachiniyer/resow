@@ -23,10 +23,7 @@ const UserSchema = mongoose.Schema({
         type: Number,
         required: true,
     },
-    img: {
-        data: Buffer,
-        contentType: String 
-    }
+    img: Array
 })
 
 module.exports = mongoose.model('Users', UserSchema)
