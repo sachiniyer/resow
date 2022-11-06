@@ -1,5 +1,4 @@
 import * as React from 'react';
-import axios from 'axios'
 
 import { useState } from 'react';
 import TextField from '@mui/material/TextField';
@@ -20,7 +19,8 @@ function SignUp(props) {
 
           <Box sx={{ marginTop: '20vh' }}></Box>
           <Stack spacing={1} direction="column" alignItems="center" sx={{ m:1, minWidth: 290 }}>
-            <TextField fullWidth label="Email ID" id="username" sx={{ m: 1}} />
+            <TextField fullWidth label="Fullname" id="fullname" sx={{ m: 1}} />
+            <TextField fullWidth label="Email ID" id="email" sx={{ m: 1}} />
             <TextField fullWidth label="Phone Number" id="phone" sx={{ m: 1 }} />
             <TextField fullWidth type={showPassword ? "text" : "password"} label="Password" id="password" sx={{ m: 1 }} />
             <TextField fullWidth type={showPassword ? "text" : "password"} label="Confirm Password" id="passwordConf" sx={{ m: 1 }} />
@@ -30,14 +30,15 @@ function SignUp(props) {
             <VisibilityIcon onClick={() => setShowPassword(s => !s)} sx={{cursor: 'pointer'}}/>
             <Button color="success" sx={{ m: 2 }} 
               onClick={ async () => {
-                let username = document.getElementById('username').value
+                let fullname = document.getElementById('fullname').value
+                let emailID = document.getElementById('email').value
                 let password = document.getElementById('password').value
                 let phonenumber = document.getElementById('phone').value
                 let passwordConf = document.getElementById('passwordConf').value
                 const url = 'http://localhost:3000/users' //change this
-                let data = {username: username, password: password, phone: phonenumber}
+                let data = {fullname: fullname,emailID: emailID, password: password, phone: phonenumber}
                 if (password === passwordConf) {
-                  if (username && password && passwordConf) {
+                  if (emailID && password && passwordConf) {
                     //use axios to send data to the backend
                     const response = await fetch(url, {
                       method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -67,7 +68,7 @@ function SignUp(props) {
 
               }}
             >
-              Register
+              Register  
             </Button>
             <Button color="success" href="/SignIn"> Sign In </Button>
           </Stack>
