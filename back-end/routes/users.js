@@ -2,11 +2,11 @@ const express = require("express")
 const router = express.Router()
 const User = require("../models/userschema")
 
-router.get('/', (req,res) => {
+router.get('/:userId', async (req, res) => {
     //Bhavicka should work on this
-    res.send("We are on users")
-
-});
+    //route for querying the db for a particular user with postId when signed in
+    res.send("Which User?")
+})
 
 router.post('/', async (req,res)=> {
 
@@ -28,6 +28,11 @@ router.post('/', async (req,res)=> {
         console.log(err)
     }
 
-});
+})
+
+router.patch('/:userId', async (req, res) => {
+    //route for updating a user profile (edit profile page), updates just the title for now
+    
+})
 
 module.exports = router;
