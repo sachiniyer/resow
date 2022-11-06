@@ -13,7 +13,8 @@ const UserSchema = mongoose.Schema({
     password: {
         type: String,
         required: true,
-        index: true
+        index: true,
+        minlength: 5
     },
     dob: {
         type: Date,
@@ -23,7 +24,7 @@ const UserSchema = mongoose.Schema({
         type: Number,
         required: true,
     },
-    img: Array
+    img: Array   //change this later: take only one image
 })
 
 module.exports = mongoose.model('Users', UserSchema)
