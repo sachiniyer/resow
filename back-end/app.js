@@ -14,6 +14,7 @@ const app = express() // instantiate an Express object
 
 const postsRoute = require('./routes/posts') // load route for posts
 const userRoute = require('./routes/users') // load route for users
+const savePostRoute = require('./routes/saveposts')
 
 //-------------------------------------MIDDLEWARE BELOW----------------------------------------------------
 
@@ -27,6 +28,7 @@ app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming P
 app.use("/static", express.static("public"))
 app.use('/posts', postsRoute)
 app.use('/users', userRoute)
+app.use('/saveposts', savePostRoute)
 
 dbUser = process.env.DB_USER
 dbPass = process.env.DB_PWORD
@@ -43,6 +45,7 @@ app.get("/", (req, res) => {
     res.send("Hello world!")
 })
 
+// route for the item list (will refactor after USER and POST schema is complete)
 app.get("/item-list", (req, res) => {
 
     axios
@@ -58,23 +61,23 @@ app.get("/item-list", (req, res) => {
 
 })
 
-// placeholder for now. Will update when the authentication is done
+// SAVED POSTS: placeholder for now. Will update when the authentication is done
 app.get("/saved-post", (req, res) => {
 
     axios
     .get(`${process.env.ITEM_LIST_URI}/?key=${process.env.KEY}`)
-    .then(apiResponse => res.json(apiResponse.data)) // pass data along directly to client
+    .then(apiResponse => res.json(apiResponse.data)) 
     .catch(err => {
         console.error(err)
         res.status(400).json({
           error: err,
           status: 'failed to retrieve item list from the database',
         })
-      }) // pass any errors to express
+      }) 
 
 })
 
-// placeholder for now. Will update when the authentication is done
+// PAST UPLOADS: placeholder for now. Will update when the authentication is done
 app.get("/past-upload", (req, res) => {
 
     axios
@@ -97,74 +100,6 @@ app.get("/item/:itemId", (req, res) =>{
     .get(route)
     .then(apiResponse => res.json(apiResponse.data)) // pass data along directly to client
     .catch(err => next(err)) // pass any errors to express
-})
-
-// post request when the user wants to save the post
-app.post("/item/save", (req, res) => {
-    
-    const data = {
-        user_id : req.body.user_id,
-        post_id : req.body.post_id
-    }
-
-    const url = `${process.env.SAVE_POST_URI}`
-
-    axios.post(url,data)
-    .then((response) => {
-        return res.json({
-            message:"The post has been saved successfully",
-            id:response.data.id   
-        })
-    })
-    .catch(error =>{
-        return res.json({
-            message:"error"
-        })
-    })
-})
-
-// delete request when the user wants to unsave the post
-app.delete("/item/save/:saveId", (req,res) => {
-
-    axios.delete("https://635f28c83e8f65f283ad5a6c.mockapi.io/savepost"+"/"+req.params.saveId)
-    .then(() =>{
-        return res.json({
-            message:"The post has been unsaved successfully"
-        })
-    })
-    .catch(error =>{
-        console.log(response)
-        return res.json({
-            message:"error"
-        })
-    })
-
-})
-
-app.delete("/item/:deleteId",(req,res) => {
-
-    // =======================================================================
-    //
-    // MOCKAROO API DOESN'T SUPPORT DELETE
-    // WILL BE UPDATED WHEN THE DB IS IMPLEMENTED
-    //
-    // axios.delete("random_URL_That_stores_item_details/"+req.params.deleteId)
-    // .then(() =>{
-    //     return res.json({
-    //         message:"The post has been deleted successfully"
-    //     })
-    // })
-    // .catch(error =>{
-    //     console.log(response)
-    //     return res.json({
-    //         message:"error"
-    //     })
-    // })
-    //
-    // =======================================================================
-    return res.json({
-        message:"The post has been deleted successfully"
-    })
 })
 
         

@@ -11,15 +11,17 @@ import ClickAwayListener from '@mui/material/ClickAwayListener';
 import IconButton from '@mui/material/IconButton';
 import TurnedInNotIcon from '@mui/icons-material/TurnedInNot';
 import TurnedInIcon from '@mui/icons-material/TurnedIn';
+import {useParams} from "react-router-dom";
 
 
-export default function ItemDetails({match}){
+export default function ItemDetails(props){
 
   // placeholder for userId. will fetch data in the future.
   const userId = 1;
 
   // The postId obtained from the parameter.
-  const postId = match;
+  let {id} = useParams();
+  const postId = {id}.id;
 
   // The item details which contains all the information about the post. 
   const [itemDetails,setItemDetails] = useState({});
@@ -31,7 +33,7 @@ export default function ItemDetails({match}){
   const [open, setOpen] = useState(false);
 
   // a boolean flag to check if the post is the post uploaded by the user
-  const [isMyPost,setIsMyPost] = useState(false);
+  const [isMyPost,setIsMyPost] = useState(true);
 
   // a boolean flag to check if a user has logged in or not. (need passport authentication)
   const [isLoggedIn,setIsLoggedIn] = useState(true);
@@ -74,13 +76,13 @@ export default function ItemDetails({match}){
   async function savePost(){
     let user_id = 1;
     let post_id = postId;
-    let data = {user_id:user_id, post_id:post_id};
+    let data = {userId:user_id, postId:post_id};
 
     axios
-    .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/item/save`,data)
+    .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/saveposts`,data)
     .then(response => {
-      console.log(response.data.message)
-      setSaveId(response.data.id)
+      console.log("the post is saved successfully")
+      setSaveId(response.data._id)
     })
     .catch (err => {console.log(err)})
   }
@@ -89,9 +91,9 @@ export default function ItemDetails({match}){
   async function unsavePost() {
 
     axios
-    .delete(`${process.env.REACT_APP_SERVER_HOSTNAME}/item/save/${saveId}`)
+    .delete(`${process.env.REACT_APP_SERVER_HOSTNAME}/saveposts/${saveId}`)
     .then(response =>{
-      console.log(response.data.message)
+      console.log("the user doesn't save the post any more.")
     })
     .catch(err =>{console.log(err)})
 
@@ -99,10 +101,7 @@ export default function ItemDetails({match}){
 
   async function deletePost(){
 
-    axios.delete(`${process.env.REACT_APP_SERVER_HOSTNAME}/item/${saveId}`)
-    .then(response =>{
-      console.log(response.data.message)
-    })
+    axios.delete(`${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`)
     .then(alert("the post is deleted"))
     .then(window.location.replace("/Map/ItemsList"))
     .catch(err => {console.log(err)})
@@ -140,11 +139,24 @@ export default function ItemDetails({match}){
       `${process.env.REACT_APP_SERVER_HOSTNAME}/item/${postId}`
     );
     setItemDetails(result.data);
-    setIsMyPost(itemDetails.sellerId === userId)
-    // note: the request which checks the "ifMyPost" should be added after the db is implemented
+  }
+
+  async function checkSave() {
+
+    const result = await axios(
+      `${process.env.REACT_APP_SERVER_HOSTNAME}/saveposts/${userId}&${postId}`
+    );
+    if (result.data.length === 0){
+      setIsSaved(false)
+    }
+    else{
+      setIsSaved(true)
+      setSaveId(result.data[0]._id)
+    }
   }
 
   useEffect(() => {
+    checkSave();
     fetchData();
   }, []);
 
