@@ -1,5 +1,11 @@
 const mongoose = require('mongoose')
 
+function getCoord(value) {
+    if (typeof value !== 'undefined') {
+        return parseFloat(value.toString());
+    }
+    return value;
+}
 const PostSchema = mongoose.Schema({
     title: {
         type: String,
@@ -21,12 +27,16 @@ const PostSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    lattitude: {
-        type: Number,
+    latitude: {
+        type: mongoose.Decimal128,
+        default: 0,
+        get: getCoord,
         required: true
     },
     longitude: {
-        type: Number,
+        type: mongoose.Decimal128,
+        default: 0,
+        get: getCoord,
         required: true
     },
     createdAt: {
