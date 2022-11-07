@@ -8,7 +8,6 @@ router.get('/', async (_, res) => {
         let retObj = {}
         retObj.type = "FeatureCollection"
         retObj.features = []
-        let count = 0
         for (let i of posts) {
             retObj.features.push({
                 type: "Feature",
@@ -18,7 +17,6 @@ router.get('/', async (_, res) => {
                     coordinates: [i.longitude, i.latitude],
                 },
             })
-            count++
         }
         res.json(retObj)
     }
