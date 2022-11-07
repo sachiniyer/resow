@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
         res.json(posts)
     }
     catch (err) {
-        res.json({message: err, location: 'Retrieving posts from DB'})
+        res.json({message: err.message, location: 'Retrieving posts from DB'})
     }
 })
 
@@ -20,7 +20,7 @@ router.get('/:postId', async (req, res) => {
         res.json(post)
     }
     catch (err) {
-        res.json({message: err})
+        res.json({message: err.message})
     }
 })
 
@@ -31,7 +31,7 @@ router.delete('/:postId', async (req, res) => {
         res.json(removedPost)
     }
     catch (err) {
-        res.json({message: err})
+        res.json({message: err.message})
     }
 })
 
@@ -44,7 +44,7 @@ router.patch('/:postId', async (req, res) => {
         res.json(updatedPost)
     }
     catch (err) {
-        res.json({message: err})
+        res.json({message: err.message})
     }
 })
 
@@ -66,7 +66,7 @@ router.post('/', async (req, res) => {
         res.json(savedPost)
     }
     catch (err) {
-        res.json({message: err})
+        res.json({message: err.message})
     }
 })
 
