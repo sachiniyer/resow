@@ -10,7 +10,7 @@ import Avatar from '@mui/material/Avatar';
 
 export default function PreviewWindow(props) {
   return (
-    <Card component={Link} to={"/Map/ItemsList"} sx={{ display: 'flex', width: 0.9, maxWidth: 200, borderRadius: '5%' }}>
+    <Card component={Link} to={props.href} sx={{ display: 'flex', width: 0.9, maxWidth: 200, borderRadius: '5%' }}>
       <CardActionArea>
         <CardMedia
           style={{ borderBottom: "solid" }}
