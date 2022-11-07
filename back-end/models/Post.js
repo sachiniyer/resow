@@ -21,7 +21,7 @@ const PostSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    lattitude: {
+    latitude: {
         type: Number,
         required: true
     },
