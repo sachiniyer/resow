@@ -2,13 +2,12 @@ const express = require("express")
 const router = express.Router()
 const Post = require('../models/Post')
 
-router.get('/', async (req, res) => {
+router.get('/', async (_, res) => {
     try {
         const posts = await Post.find()
         let returnobj = {}
         returnobj.type = "FeatureCollection"
         returnobj.features = []
-        let count = 0
         for (let i of posts) {
             returnobj.features.push({
                 type: "Feature",
@@ -17,9 +16,6 @@ router.get('/', async (req, res) => {
                     type: "Point",
                     coordinates: [i.longitude, i.latitude],
                 },
-                properties: {
-                    OBJECTID: i.id
-                }
             })
             count++
         }
