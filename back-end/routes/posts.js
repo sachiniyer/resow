@@ -27,7 +27,7 @@ router.get('/:postId', async (req, res) => {
 router.delete('/:postId', async (req, res) => {
     //route for deleting a post
     try {
-        const removedPost = await Post.remove({_id: req.params.postId})
+        const removedPost = await Post.remove({ _id: req.params.postId })
         res.json(removedPost)
     }
     catch (err) {
@@ -39,8 +39,8 @@ router.patch('/:postId', async (req, res) => {
     //route for updating a post, updates just the title for now
     try {
         const updatedPost = await Post.updateOne(
-            {_id: req.params.postId}, 
-            { $set: {title: req.body.title}})
+            { _id: req.params.postId },
+            { $set: { title: req.body.title } })
         res.json(updatedPost)
     }
     catch (err) {
@@ -56,7 +56,7 @@ router.post('/', async (req, res) => {
         timeStart: req.body.timeStart,
         timeEnd: req.body.timeEnd,
         owner: req.body.owner,
-        lattitude: req.body.lattitude,
+        latitude: req.body.latitude,
         longitude: req.body.longitude,
         images: req.body.images
     })
