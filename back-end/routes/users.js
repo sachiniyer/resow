@@ -5,7 +5,13 @@ const User = require("../models/userschema")
 router.get('/:userId', async (req, res) => {
     //Bhavicka should work on this
     //route for querying the db for a particular user with postId when signed in
-    res.send("Which User?")
+    try {
+        const user = await User.findById(req.params.userId)
+        res.json(user)
+    }
+    catch (err) {
+        res.json({message: err.message})
+    }
 })
 
 router.post('/', async (req,res)=> {
