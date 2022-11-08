@@ -17,7 +17,7 @@ import {useParams} from "react-router-dom";
 export default function ItemDetails(props){
 
   // placeholder for userId. will fetch data in the future.
-  const userId = 1;
+  const userId = "6369ab2e483f068aaa9bd7e0";
 
   // The postId obtained from the parameter.
   let {id} = useParams();
@@ -26,6 +26,10 @@ export default function ItemDetails(props){
   // The item details which contains all the information about the post. 
   const [itemDetails,setItemDetails] = useState({});
 
+  // The upload details which contains all the information about the user.
+  const [uploaderId, setUploaderId] = useState();
+  const [uploaderDetails, setUploaderDetails] = useState({});
+
   // placeholder for saveid. will fetch data in the future. 
   const [saveId,setSaveId] = useState(2);  
 
@@ -33,7 +37,7 @@ export default function ItemDetails(props){
   const [open, setOpen] = useState(false);
 
   // a boolean flag to check if the post is the post uploaded by the user
-  const [isMyPost,setIsMyPost] = useState(true);
+  const [isMyPost,setIsMyPost] = useState(false);
 
   // a boolean flag to check if a user has logged in or not. (need passport authentication)
   const [isLoggedIn,setIsLoggedIn] = useState(true);
@@ -133,12 +137,21 @@ export default function ItemDetails(props){
     setOpen(false);
   };
 
-  async function fetchData() {
+  async function fetchItemData() {
 
     const result = await axios(
-      `${process.env.REACT_APP_SERVER_HOSTNAME}/item/${postId}`
+      `${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`
     );
     setItemDetails(result.data);
+    setUploaderId(result.data.owner)
+    setIsMyPost(result.data.owner === userId)
+  }
+
+  async function fetchUploaderData(){
+    const result = await axios(
+      `${process.env.REACT_APP_SERVER_HOSTNAME}/users/${uploaderId}`
+    );
+    setUploaderDetails(result.data)
   }
 
   async function checkSave() {
@@ -157,22 +170,23 @@ export default function ItemDetails(props){
 
   useEffect(() => {
     checkSave();
-    fetchData();
-  }, []);
+    fetchItemData();
+    fetchUploaderData();
+  }, [uploaderId]);
 
   return(
       <>
       <Box sx={{width:{xs:0.9,sm:0.5,md: 0.3}, paddingTop:1}}>
-          <ImgCarousel imgList = {itemDetails.imgList}/>  
+          <ImgCarousel imgList = {itemDetails.images} />  
       </Box>
 
       <Box sx={{width:{xs:0.9,sm:0.5,md: 0.3}, display: 'flex',borderBottom:"solid"}}>
           <Box sx={{width:0.3,height:1,textAlign:"center",justifyContent:"center"}}>
               <AspectRatio ratio="1/1"> 
-                <Avatar sx={{border:"solid 0.5px",borderColor:"black",justifyContent:"center",width: 0.5}} alt="thumbnail" src={itemDetails.profileURL}/> 
+                <Avatar sx={{border:"solid 0.5px",borderColor:"black",justifyContent:"center",width: 0.5}}  src="dsd"/> 
               </AspectRatio>
               <Box sx={{width:1, wordWrap: "break-word",fontSize: "10px",color:"black"}}>
-                {itemDetails.sellerName}
+                {uploaderDetails.fullname}
               </Box>
           </Box>
 
@@ -191,7 +205,7 @@ export default function ItemDetails(props){
           </Box>
         </Box>
         
-        {open ? (<ContactBox info={itemDetails}/>) : null}
+        {open ? (<ContactBox info={uploaderDetails}/>) : null}
         <Box sx={{color:"black",borderTop:"solid",width:{xs:0.9,sm:0.5,md: 0.3}, textAlign:"left",marginBottom:7,fontSize: "15px"}}>
         <Box sx={{textAlign:"right",marginTop:"-35px",marginBottom:"10px"}}>
           {isSaved
@@ -199,7 +213,7 @@ export default function ItemDetails(props){
           : <IconButton onClick={switchSaved}><TurnedInNotIcon/></IconButton>
           }
         </Box>
-          {itemDetails.descriptions}
+          {itemDetails.description}
         </Box>
 
         {isMyPost
