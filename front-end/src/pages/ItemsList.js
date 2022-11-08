@@ -16,7 +16,6 @@ function ItemList(props) {
       `${process.env.REACT_APP_SERVER_HOSTNAME}/posts`
     );
     setItemList(result.data);
-    console.log(result.data)
   }
   
 

@@ -16,7 +16,7 @@ function SavedPost(props) {
     async function fetchData() {
 
       const result = await axios(
-        `${process.env.REACT_APP_SERVER_HOSTNAME}/saved-post`
+        `${process.env.REACT_APP_SERVER_HOSTNAME}/posts`
       );
 
       setData(result.data);
@@ -31,7 +31,7 @@ function SavedPost(props) {
         <SearchBar/> 
           {data && data.map((item) => (
             <PostCard
-              key={item.id}
+              key={item._id}
               info={item}
             />
           ))}

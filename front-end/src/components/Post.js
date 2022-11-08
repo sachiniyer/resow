@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 export default function PostCard(props) {
 
   const link = "/ItemDetails/" + props.info._id
-  console.log(props.info.title)
 
   return (
       <Card sx={{

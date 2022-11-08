@@ -47,54 +47,6 @@ app.get("/", (req, res) => {
   res.send("Hello world!")
 })
 
-// route for the item list (will refactor after USER and POST schema is complete)
-app.get("/item-list", (req, res) => {
-
-  axios
-    .get(`${process.env.ITEM_LIST_URI}/?key=${process.env.KEY}`)
-    .then(apiResponse => res.json(apiResponse.data)) // pass data along directly to client
-    .catch(err => {
-      console.error(err)
-      res.status(400).json({
-        error: err,
-        status: 'failed to retrieve item list from the database',
-      })
-    }) // pass any errors to express
-
-})
-
-// SAVED POSTS: placeholder for now. Will update when the authentication is done
-app.get("/saved-post", (req, res) => {
-
-  axios
-    .get(`${process.env.ITEM_LIST_URI}/?key=${process.env.KEY}`)
-    .then(apiResponse => res.json(apiResponse.data))
-    .catch(err => {
-      console.error(err)
-      res.status(400).json({
-        error: err,
-        status: 'failed to retrieve item list from the database',
-      })
-    })
-
-})
-
-// PAST UPLOADS: placeholder for now. Will update when the authentication is done
-app.get("/past-upload", (req, res) => {
-
-  axios
-    .get(`${process.env.ITEM_LIST_URI}/?key=${process.env.KEY}`)
-    .then(apiResponse => res.json(apiResponse.data)) // pass data along directly to client
-    .catch(err => {
-      console.error(err)
-      res.status(400).json({
-        error: err,
-        status: 'failed to retrieve item list from the database',
-      })
-    }) // pass any errors to express
-
-})
-
 // get request from the front end when it needs the item details
 app.get("/item/:itemId", (req, res) => {
   route = `${process.env.ITEM_LIST_URI}` + "/" + req.params.itemId + `/?key=${process.env.KEY}`
