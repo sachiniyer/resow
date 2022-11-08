@@ -13,7 +13,7 @@ function ItemList(props) {
 
   async function fetchData() {
     const result = await axios(
-      `${process.env.REACT_APP_SERVER_HOSTNAME}/item-list`
+      `${process.env.REACT_APP_SERVER_HOSTNAME}/posts`
     );
     setItemList(result.data);
   }
@@ -28,7 +28,7 @@ function ItemList(props) {
       <Box sx={{height:10}}></Box>
       <SearchBar/>
         {itemList && itemList.map((item) => (
-          <PostCard key={item.id} info = {item}/>
+          <PostCard key={item._id} info = {item}/>
         ))}
         <Box sx={{position: "fixed", bottom: 20}}>
             <Button component={Link} to="/" variant="contained" color="success">Map</Button>

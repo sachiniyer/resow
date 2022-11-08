@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function PostCard(props) {
 
-  const link = "/ItemDetails/" + props.info.id
+  const link = "/ItemDetails/" + props.info._id
 
   return (
       <Card sx={{
@@ -25,9 +25,10 @@ export default function PostCard(props) {
             maxWidth: { xs: 100, md: 150 },
             mt: "auto",
             mb: "auto",
+            objectFit:"cover"
           }}
           alt="thumbnail"
-          src={props.info.imgList[0]}
+          src={props.info.images[0]}
         />
         <Box sx={{ width: 1 }}>
           <Box sx={{ height: 0.1 }}></Box>

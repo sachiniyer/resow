@@ -20,6 +20,7 @@ const UserSchema = mongoose.Schema({
         type: Number,
         required: true,
     },
+    savedPosts: Array,
     img: Array   //take only one image - front end limit setting
 })
 
