@@ -38,6 +38,20 @@ router.post('/', async (req,res)=> {
 
 router.patch('/:userId', async (req, res) => {
     //route for updating a user profile (edit profile page), updates just the title for now
+    try {
+        const updatedUser = await User.updateOne(
+            { _id: req.params.userId },
+            { $set: { fullname: req.body.fullname,
+                      emailID: req.body.emailID,
+                      password: req.body.password,
+                      phone: req.body.phone
+                     } 
+            })
+        res.json(updatedUser)
+    }
+    catch (err) {
+        res.json({message: err.message})
+    }
     
 })
 
