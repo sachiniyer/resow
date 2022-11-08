@@ -14,7 +14,6 @@ const app = express() // instantiate an Express object
 
 const postsRoute = require('./routes/posts') // load route for posts
 const userRoute = require('./routes/users') // load route for users
-const savePostRoute = require('./routes/saveposts')
 const mapRoute = require('./routes/map')
 
 //-------------------------------------MIDDLEWARE BELOW----------------------------------------------------
@@ -29,7 +28,6 @@ app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming P
 app.use("/static", express.static("public"))
 app.use('/posts', postsRoute)
 app.use('/users', userRoute)
-app.use('/saveposts', savePostRoute)
 app.use('/map', mapRoute)
 
 dbUser = process.env.DB_USER
@@ -46,16 +44,6 @@ mongoose.connect(`mongodb+srv://${dbUser}:${dbPass}${DBString}`, () => {
 app.get("/", (req, res) => {
   res.send("Hello world!")
 })
-
-// get request from the front end when it needs the item details
-app.get("/item/:itemId", (req, res) => {
-  route = `${process.env.ITEM_LIST_URI}` + "/" + req.params.itemId + `/?key=${process.env.KEY}`
-  axios
-    .get(route)
-    .then(apiResponse => res.json(apiResponse.data)) // pass data along directly to client
-    .catch(err => next(err)) // pass any errors to express
-})
-
 
 // export the express app we created to make it available to other modules
 module.exports = app
