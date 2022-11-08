@@ -21,7 +21,7 @@ export default function Message(props){
                     <MailIcon/>
                 </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary={props.info.email} sx={{color:"black"}}/>
+                <ListItemText primary={props.info.emailID} sx={{color:"black"}}/>
             </ListItem>
 
             <Divider variant="inset" component="li" />
