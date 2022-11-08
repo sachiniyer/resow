@@ -58,6 +58,7 @@ router.post('/', async (req, res) => {
         owner: req.body.owner,
         latitude: req.body.latitude,
         longitude: req.body.longitude,
+        location:req.body.location,
         images: req.body.images
     })
 
