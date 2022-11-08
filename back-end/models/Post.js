@@ -23,6 +23,10 @@ const PostSchema = mongoose.Schema({
         type: Date,
         required: true
     },
+    location:{
+        type: String,
+        required: true
+    },
     owner: {
         type: String,
         required: true
