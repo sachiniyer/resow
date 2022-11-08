@@ -30,8 +30,8 @@ export default function ItemDetails(props){
   const [uploaderId, setUploaderId] = useState();
   const [uploaderDetails, setUploaderDetails] = useState({});
 
-  // placeholder for saveid. will fetch data in the future. 
-  const [saveId,setSaveId] = useState(2);  
+  // The path to the profile image of the uploader
+  const [imgPath, setImgPath] =useState();
 
   // a boolean flag to check if the user opened the contact info box
   const [open, setOpen] = useState(false);
@@ -78,16 +78,12 @@ export default function ItemDetails(props){
 
 
   async function savePost(){
-    let user_id = 1;
+    let user_id = userId;
     let post_id = postId;
     let data = {userId:user_id, postId:post_id};
 
     axios
-    .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/saveposts`,data)
-    .then(response => {
-      console.log("the post is saved successfully")
-      setSaveId(response.data._id)
-    })
+    .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/saved-posts`,data)
     .catch (err => {console.log(err)})
   }
 
@@ -95,10 +91,7 @@ export default function ItemDetails(props){
   async function unsavePost() {
 
     axios
-    .delete(`${process.env.REACT_APP_SERVER_HOSTNAME}/saveposts/${saveId}`)
-    .then(response =>{
-      console.log("the user doesn't save the post any more.")
-    })
+    .delete(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/saved-posts/userId=${userId}&postId=${postId}`)
     .catch(err =>{console.log(err)})
 
   }
@@ -152,27 +145,30 @@ export default function ItemDetails(props){
       `${process.env.REACT_APP_SERVER_HOSTNAME}/users/${uploaderId}`
     );
     setUploaderDetails(result.data)
+    setImgPath(result.data.img[0])
   }
 
   async function checkSave() {
 
     const result = await axios(
-      `${process.env.REACT_APP_SERVER_HOSTNAME}/saveposts/${userId}&${postId}`
+      `${process.env.REACT_APP_SERVER_HOSTNAME}/users/saved-posts/userId=${userId}&postId=${postId}`
     );
     if (result.data.length === 0){
       setIsSaved(false)
     }
     else{
       setIsSaved(true)
-      setSaveId(result.data[0]._id)
     }
   }
 
-  useEffect(() => {
-    checkSave();
+  useEffect(() => { 
     fetchItemData();
     fetchUploaderData();
   }, [uploaderId]);
+
+  useEffect(()=>{
+    checkSave();
+  },[])
 
   return(
       <>
@@ -183,7 +179,7 @@ export default function ItemDetails(props){
       <Box sx={{width:{xs:0.9,sm:0.5,md: 0.3}, display: 'flex',borderBottom:"solid"}}>
           <Box sx={{width:0.3,height:1,textAlign:"center",justifyContent:"center"}}>
               <AspectRatio ratio="1/1"> 
-                <Avatar sx={{border:"solid 0.5px",borderColor:"black",justifyContent:"center",width: 0.5}}  src="dsd"/> 
+                <Avatar sx={{border:"solid 0.5px",borderColor:"black",justifyContent:"center",width: 0.5}}  src={imgPath}/> 
               </AspectRatio>
               <Box sx={{width:1, wordWrap: "break-word",fontSize: "10px",color:"black"}}>
                 {uploaderDetails.fullname}
