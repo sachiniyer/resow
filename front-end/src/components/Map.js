@@ -62,7 +62,7 @@ function MapWrapper(props) {
     if (clickedFeatures.length > 0) {
       popRef.current.show(event.coordinate, document.getElementById("popup"))
       //const transformedCoord = transform(clickedCoord, 'EPSG:3857', 'EPSG:4326')
-      setHref(`/itemdetails?id=${clickedFeatures[0].getId()}`)
+      setHref(`/itemdetails/${clickedFeatures[0].getId()}`)
       await matchData(clickedFeatures[0].getId())
     }
     else {
