@@ -40,7 +40,8 @@ export default function ItemDetails(props){
   const [isMyPost,setIsMyPost] = useState(false);
 
   // a boolean flag to check if a user has logged in or not. (need passport authentication)
-  const [isLoggedIn,setIsLoggedIn] = useState(true);
+  const isLoggedIn = true
+  // const [isLoggedIn,setIsLoggedIn] = useState(true);
 
   // a boolean flag to check if it is saved or not.
   const [isSaved,setIsSaved] = useState(false);
