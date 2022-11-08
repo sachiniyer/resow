@@ -43,8 +43,8 @@ router.patch('/:userId', async (req, res) => {
             { $set: { fullname: req.body.fullname,
                       emailID: req.body.emailID,
                       password: req.body.password,
-                      phone: req.body.phone
-                     } 
+                      phone: req.body.phone,
+                      img: req.body.img } 
             })
         res.json(updatedUser)
     }
