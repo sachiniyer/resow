@@ -2,6 +2,18 @@ const express = require("express")
 const router = express.Router()
 const User = require("../models/userschema")
 
+
+router.get('/', async (req, res) => {
+    //route for retrieving the list of all users
+    try {
+        const users = await User.find()
+        res.json(users)
+    }
+    catch (err) {
+        res.json({message: err.message, location: 'Retrieving users from DB'})
+    }
+})
+
 router.get('/:userId', async (req, res) => {
     //route for querying the db for a particular user with userId when signed in
     try {
@@ -54,17 +66,6 @@ router.patch('/:userId', async (req, res) => {
         res.json({message: err.message})
     }
     
-})
-
-router.get('/', async (req, res) => {
-    //route for retrieving the list of all users
-    try {
-        const users = await User.find()
-        res.json(users)
-    }
-    catch (err) {
-        res.json({message: err.message, location: 'Retrieving posts from DB'})
-    }
 })
 
 router.delete('/:userId', async (req, res) => {
