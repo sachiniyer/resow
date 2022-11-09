@@ -23,7 +23,7 @@ const PostSchema = mongoose.Schema({
         type: Date,
         required: true
     },
-    location:{
+    location: {
         type: String,
         required: true
     },
