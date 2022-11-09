@@ -8,8 +8,21 @@ chai.use(chaiHttp);
 
 let newUserId
 
+describe("GET request to /users route", () => {
+  it("it should respond with an HTTP 200 status code and an object in the response body", done => {   
+      chai
+        .request(app)
+        .get("/users")
+        .end((err, res) => {
+          assert.equal(res.status, 200) // use should to make BDD-style assertions
+          assert.exists(res.body[0]._id) //our route sends back an object with multiple users
+          done() // resolve the Promise that these tests create so mocha can move on
+        })
+  })
+})
 
-/*describe('/GET user', () => {
+
+/*describe('GET specific user', () => {
   it('it should GET all the user', (done) => {
     chai.request(server)
         .get('/users')
@@ -22,8 +35,7 @@ let newUserId
 });*/
 
 
-
-describe("POST request to /post new user", () => {
+describe("POST request to post new user", () => {
   it('it should respond with a HTTP 200 status code and the new created user', (done) => {
       let user = {
           fullname: "First Last",
@@ -46,4 +58,29 @@ describe("POST request to /post new user", () => {
   });
 
 });
+
+/*describe('PATCH specific user', () => {
+  it('??', (done) => {
+    chai.request(server)
+        .get('/users')
+        .end((err, res) => {
+              
+          done();
+        });
+  });
+
+});*/
+
+/*describe('DELETE specific user', () => {
+  it('??', (done) => {
+    chai.request(server)
+        .get('/users')
+        .end((err, res) => {
+              
+          done();
+        });
+  });
+
+});*/
+
 
