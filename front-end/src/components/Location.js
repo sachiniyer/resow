@@ -59,6 +59,11 @@ const findLocation = async () => {
       })
   }
 }
+
+export const locationDifference(a1, a2) {
+  return Math.sqrt(Math.abs(a1[0] - a2[0]) + Math.abs(a1[1] - a2[0]))
+}
+
 export const getLocation = () => {
   if (getLocationCookie() !== "") {
     return getLocationCookie().split('&').map(function (x) {
