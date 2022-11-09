@@ -146,7 +146,9 @@ export default function ItemDetails(props){
       `${process.env.REACT_APP_SERVER_HOSTNAME}/users/${uploaderId}`
     );
     setUploaderDetails(result.data)
-    setImgPath(result.data.img[0])
+    if(result.data.img){
+      setImgPath(result.data.img[0])
+    }
   }
 
   async function checkSave() {
