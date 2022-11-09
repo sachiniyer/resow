@@ -5,34 +5,6 @@ const app = require('../app')
 
 chai.use(chaiHttp);
 
-
-// describe("GET request to /posts route", () => {
-//     it("it should respond with an HTTP 200 status code and an object in the response body", done => {   
-//         chai
-//           .request(app)
-//           .get("/posts")
-//           .end((err, res) => {
-//             assert.equal(res.status, 200) // use should to make BDD-style assertions
-//             assert.exists(res.body[0]._id) //our route sends back an object with multiple posts
-//             done() // resolve the Promise that these tests create so mocha can move on
-//           })
-//     })
-// })
-
-// describe("GET request to /posts/:postId route", () => {
-//     it("it should respond with an HTTP 200 status code and a post with title and description", done => {   
-//         chai
-//           .request(app)
-//           .get("/posts/6369b88a9020da2afc9a002b")
-//           .end((err, res) => {
-//             assert.equal(res.status, 200) // correct status 200
-//             assert.exists(res.body[0]._id) // our route sends back an object with a title
-//             // assert.equal(res.body._id, '6369b88a9020da2afc9a002b') // our route sends back an object with the correct _id
-//             done() // resolve the Promise that these tests create so mocha can move on
-//           })
-//     })
-// })
-
 describe("GET request to /users/saved-posts/userId=:userId&postId=:postId route", () => {
     it("it should respond with an HTTP 200 status code and the user who saved the post", done => {   
         chai
