@@ -80,9 +80,6 @@ router.delete('/:userId', async (req, res) => {
 
 router.get('/saved-posts/userId=:userId&postId=:postId', async (req, res) => {
 
-    console.log(req.params.userId)
-    console.log(req.params.postId)
-
     try {
         const user = await User.find(
             {
