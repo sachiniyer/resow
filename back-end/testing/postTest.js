@@ -48,6 +48,7 @@ describe("GET request to /posts/:postId route", () => {
   })
 })
 
+
 describe("POST request to /posts route", () => {
   it("it should respond with an HTTP 200 status code and the created post", done => {
     let post = {
@@ -91,3 +92,44 @@ describe("DELETE request to /posts/:postId route", () => {
   })
 })
 
+/*describe("PATCH request to /posts/:postId route", () => {
+  it("it should respond with an HTTP 200 status code and update the post created by the post test above", done => {
+    let post = new Post({
+      title: "The Chronicles of Narnia",
+      description: "C.S. Lewis",
+      timeStart: "2018-03-29T17:34:00.000Z",
+      timeEnd: "2018-03-29T17:34:00.000Z",
+      location: "300 West 4th St. NYC",
+      owner: "6369abfa14b5d4cb75cec8e2",
+      latitude: "40.93",
+      longitude: "50.53",
+      images: ["/resowLogo.png",
+        "/sample.png",
+        "/sample2.png"]
+      })
+    chai
+      .request(app)
+      .patch(`/posts/${newPostId}`)
+      .send({
+        title: "The Chronicles of Narnia",
+        description: "C.S. Lewis",
+        timeStart: "2018-03-29T17:34:00.000Z",
+        timeEnd: "2018-03-29T17:34:00.000Z",
+        location: "300 West 4th St. NYC",
+        owner: "6369abfa14b5d4cb75cec8e2",
+        latitude: "40.93",
+        longitude: "50.53",
+        images: ["/resowLogo.png",
+          "/sample.png",
+          "/sample2.png"]
+        })
+      .end((err, res) => {
+        assert.equal(res.status, 200)
+        assert.equal(res.body.acknowledged, true) // our route sends back an object with acknowledged == true
+        assert.equal(res.body.title, "The Chronicles of Narnia")
+        assert.equal(res.body.description, "C.S. Lewis")
+
+        done() // resolve the Promise that these tests create so mocha can move on
+      })
+  })
+})*/
