@@ -34,9 +34,9 @@ describe("GET request to /users route", () => {
 
 });*/
 
-describe('GET specific user (request to users/:userId route', () => {
+describe('GET specific user (GET request to users/:userId route)', () => {
   it('it should respond with an HTTP 200 status code and a specific user object with all its details', (done) => {
-    chai.request(server)
+    chai.request(app)
         .get('/users/6369abfa14b5d4cb75cec8e2')
         .end((err, res) => {
           assert.equal(res.status, 200) // correct status 200
@@ -100,5 +100,18 @@ describe("POST request to post new user", () => {
   });
 
 });*/
+
+describe('DELETE specific user (DELETE request to users/:userId route)', () => {
+  it('it should respond with an HTTP 200 status code and confirm the deletion update', (done) => {
+    chai.request(app)
+        .delete(`/users/${newUserId}`)
+        .end((err, res) => {
+          assert.equal(res.status, 200)
+          assert.equal(res.body.acknowledged, true) // our route sends back an object with acknowledged == true
+          done() // resolve the Promise that these tests create so mocha can move on
+        });
+  });
+
+});
 
 
