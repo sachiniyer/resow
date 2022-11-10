@@ -21,18 +21,23 @@ describe("GET request to /users route", () => {
   })
 })
 
-
-/*describe('GET specific user', () => {
-  it('it should GET all the user', (done) => {
-    chai.request(server)
-        .get('/users')
+describe('GET specific user (GET request to users/:userId route)', () => {
+  it('it should respond with an HTTP 200 status code and a specific user object with all its details', (done) => {
+    chai.request(app)
+        .get('/users/6369abfa14b5d4cb75cec8e2')
         .end((err, res) => {
-              
-          done();
+          assert.equal(res.status, 200) // correct status 200
+          assert.exists(res.body.fullname) // our route sends back an object with a fullname
+          asssert.exists(res.body.emailID) // our route sends back an object with an emailID
+          assert.exists(res.body.password) // our route sends back an object with a password
+          assert.exists(res.body.phone) // our route sends back an object with a phone
+          assert.exists(res.body.img) // our route sends back an object with an img
+          assert.equal(res.body._id, '6369abfa14b5d4cb75cec8e2') // our route sends back an object with the correct _id
+          done() // resolve the Promise that these tests create so mocha can move on
         });
   });
 
-});*/
+});
 
 
 describe("POST request to post new user", () => {
@@ -71,16 +76,17 @@ describe("POST request to post new user", () => {
 
 });*/
 
-/*describe('DELETE specific user', () => {
-  it('??', (done) => {
-    chai.request(server)
-        .get('/users')
+describe('DELETE specific user (DELETE request to users/:userId route)', () => {
+  it('it should respond with an HTTP 200 status code and confirm the deletion update', (done) => {
+    chai.request(app)
+        .delete(`/users/${newUserId}`)
         .end((err, res) => {
-              
-          done();
+          assert.equal(res.status, 200)
+          assert.equal(res.body.acknowledged, true) // our route sends back an object with acknowledged == true
+          done() // resolve the Promise that these tests create so mocha can move on
         });
   });
 
-});*/
+});
 
 
