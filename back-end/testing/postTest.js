@@ -48,17 +48,6 @@ describe("GET request to /posts/:postId route", () => {
   })
 })
 
-describe("GET request to /posts/:postId route", () => {
-  it("it should respond with 404 error when valid post id is passed but post does not exist", done => {
-    chai
-      .request(app)
-      .get("/posts/6369b88a9020da2afc9a002b48575")
-      .end((err, res) => {
-        assert.equal(res.status, 404) // correct status 200
-        done() // resolve the Promise that these tests create so mocha can move on
-      })
-  })
-})
 
 describe("POST request to /posts route", () => {
   it("it should respond with an HTTP 200 status code and the created post", done => {
