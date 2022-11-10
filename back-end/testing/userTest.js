@@ -64,17 +64,38 @@ describe("POST request to post new user", () => {
 
 });
 
-/*describe('PATCH specific user', () => {
-  it('??', (done) => {
-    chai.request(server)
-        .get('/users')
-        .end((err, res) => {
-              
-          done();
-        });
+
+
+
+
+describe('PATCH for specific user (PATCH request to users/:userId route)', () => {
+  it('it should respond with a HTTP 200 status code and update the user object', (done) => {
+    let changed_user  = {
+        fullname: "Change Last",
+        emailID: "cll@nyu.edu",
+        password: "express42",
+        phone: 9999999999999
+    }   
+    
+    
+    
+    chai
+      .request(app)
+      .patch(`/users/${newUserId}`)
+      .send(changed_user)
+      .end((err, res) => {
+        assert.equal(res.status, 200) // correct status 200
+        assert.equal(res.body.fullname,"Change Last") // our route sends back an object with a fullname
+        assert.equal(res.body.emailID, "cll@nyu.edu") // our route sends back an object with an emailID
+        assert.equal(res.body.password, "express42") // our route sends back an object with a password
+        assert.equal(res.body.phone, 9999999999999) // our route sends back an object with a phone
+        assert.exists(res.body.img) // our route sends back an object with an img
+        assert.equal(res.body._id, `${newUserId}`) // our route sends back an object with the correct _id   
+        done();
+      });
   });
 
-});*/
+});
 
 describe('DELETE specific user (DELETE request to users/:userId route)', () => {
   it('it should respond with an HTTP 200 status code and confirm the deletion update', (done) => {
