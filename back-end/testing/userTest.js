@@ -69,7 +69,7 @@ describe("POST request to post new user", () => {
 
 
 describe('PATCH for specific user (PATCH request to users/:userId route)', () => {
-  it('it should respond with a HTTP 200 status code and update the user object', (done) => {
+  it('it should respond with a HTTP 200 status code and confirm that it updated the user object', (done) => {
     let changed_user  = {
         fullname: "Change Last",
         emailID: "cll@nyu.edu",
@@ -77,22 +77,31 @@ describe('PATCH for specific user (PATCH request to users/:userId route)', () =>
         phone: 9999999999999
     }   
     
-    
-    
     chai
       .request(app)
       .patch(`/users/${newUserId}`)
       .send(changed_user)
       .end((err, res) => {
         assert.equal(res.status, 200) // correct status 200
-        assert.equal(res.body.fullname,"Change Last") // our route sends back an object with a fullname
-        assert.equal(res.body.emailID, "cll@nyu.edu") // our route sends back an object with an emailID
-        assert.equal(res.body.password, "express42") // our route sends back an object with a password
-        assert.equal(res.body.phone, 9999999999999) // our route sends back an object with a phone
+        assert.equal(res.body.acknowledged, true) // our route sends back an object with acknowledged == true
+        assert.equal(res.body.modifiedCount, 1) // our route sends back an object with modifiedCount 1
+        done();
+      });
+  });
+
+  it('it should have updated the user object fields', (done) => {
+    chai
+      .request(app)
+      .get(`/users/${newUserId}`)
+      .end((err, res) => {
+        assert.equal(res.body.fullname,"Change Last") // our route sends back an object with the changed fullname
+        assert.equal(res.body.emailID, "cll@nyu.edu") // our route sends back an object with the changed emailID
+        assert.equal(res.body.password, "express42") // our route sends back an object with the changed password
+        assert.equal(res.body.phone, 9999999999999) // our route sends back an object with the changed phone
         assert.exists(res.body.img) // our route sends back an object with an img
         assert.equal(res.body._id, `${newUserId}`) // our route sends back an object with the correct _id   
         done();
-      });
+      })
   });
 
 });
