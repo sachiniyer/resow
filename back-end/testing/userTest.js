@@ -64,17 +64,56 @@ describe("POST request to post new user", () => {
 
 });
 
-/*describe('PATCH specific user', () => {
-  it('??', (done) => {
-    chai.request(server)
-        .get('/users')
-        .end((err, res) => {
-              
-          done();
-        });
+describe('PATCH for specific user (PATCH request to users/:userId route)', () => {
+  it('it should respond with a HTTP 200 status code and confirm that it updated the user object', (done) => {
+    let changedUser  = {
+        fullname: "Change Last",
+        emailID: "cll@nyu.edu",
+        password: "express42",
+        phone: 9999999999999
+    }   
+    
+    chai
+      .request(app)
+      .patch(`/users/${newUserId}`)
+      .send(changedUser)
+      .end((err, res) => {
+        assert.equal(res.status, 200) // correct status 200
+        assert.equal(res.body.acknowledged, true) // our route sends back an object with acknowledged == true
+        assert.equal(res.body.modifiedCount, 1) // our route sends back an object with modifiedCount 1
+        done();
+      });
   });
 
-});*/
+  it('it should have updated the user object fields', (done) => {
+    chai
+      .request(app)
+      .get(`/users/${newUserId}`)
+      .end((err, res) => {
+        assert.equal(res.body.fullname,"Change Last") // our route sends back an object with the changed fullname
+        assert.equal(res.body.emailID, "cll@nyu.edu") // our route sends back an object with the changed emailID
+        assert.equal(res.body.password, "express42") // our route sends back an object with the changed password
+        assert.equal(res.body.phone, 9999999999999) // our route sends back an object with the changed phone
+        assert.exists(res.body.img) // our route sends back an object with an img
+        assert.equal(res.body._id, `${newUserId}`) // our route sends back an object with the correct _id   
+        done();
+      })
+  });
+
+});
+
+describe('PATCH for user when you send it without a body', () => {
+  it('it should respond with a HTTP 200 status code and acknowledge that it could not update the user object', (done) => {
+    chai
+      .request(app)
+      .patch(`/users/${newUserId}`)
+      .end((err, res) => {
+        assert.equal(res.status, 200) // correct status 200
+        assert.equal(res.body.acknowledged, false) // our route sends back an object with acknowledged == false
+        done();
+      });
+  })
+});
 
 describe('DELETE specific user (DELETE request to users/:userId route)', () => {
   it('it should respond with an HTTP 200 status code and confirm the deletion update', (done) => {
