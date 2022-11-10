@@ -70,7 +70,7 @@ describe("POST request to post new user", () => {
 
 describe('PATCH for specific user (PATCH request to users/:userId route)', () => {
   it('it should respond with a HTTP 200 status code and confirm that it updated the user object', (done) => {
-    let changed_user  = {
+    let changedUser  = {
         fullname: "Change Last",
         emailID: "cll@nyu.edu",
         password: "express42",
@@ -80,7 +80,7 @@ describe('PATCH for specific user (PATCH request to users/:userId route)', () =>
     chai
       .request(app)
       .patch(`/users/${newUserId}`)
-      .send(changed_user)
+      .send(changedUser)
       .end((err, res) => {
         assert.equal(res.status, 200) // correct status 200
         assert.equal(res.body.acknowledged, true) // our route sends back an object with acknowledged == true

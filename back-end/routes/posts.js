@@ -36,7 +36,7 @@ router.delete('/:postId', async (req, res) => {
 })
 
 router.patch('/:postId', async (req, res) => {
-    //route for updating a post, includes only the parameters which should be updatable
+    //route for updating a post, includes only the parameters which should be updatable (update front-end in future to have this functionality)
     try {
         const updatedPost = await Post.updateOne(
             { _id: req.params.postId },
