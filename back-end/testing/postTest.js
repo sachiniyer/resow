@@ -106,7 +106,7 @@ describe("PATCH request to /posts/:postId route", () => {
       .request(app)
       .get(`/posts/${newPostId}`)
       .end((err, res) => {
-        assert.equal(res.body.title,"The Chronicles of Narnia") // our route sends back an object with the changed title
+        assert.equal(res.body.title, "The Chronicles of Narnia") // our route sends back an object with the changed title
         assert.equal(res.body.description, "C.S. Lewis") // our route sends back an object with the changed description
         assert.equal(res.body.timeEnd, "2018-04-29T17:34:00.000Z") // our route sends back an object with the changed timeEnd
         assert.equal(res.body.latitude, "50.93") // our route sends back an object with the changed phone
@@ -116,7 +116,7 @@ describe("PATCH request to /posts/:postId route", () => {
         done();
       })
   })
-  
+
 })
 
 

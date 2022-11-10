@@ -64,10 +64,6 @@ describe("POST request to post new user", () => {
 
 });
 
-
-
-
-
 describe('PATCH for specific user (PATCH request to users/:userId route)', () => {
   it('it should respond with a HTTP 200 status code and confirm that it updated the user object', (done) => {
     let changedUser  = {
@@ -104,6 +100,19 @@ describe('PATCH for specific user (PATCH request to users/:userId route)', () =>
       })
   });
 
+});
+
+describe('PATCH for user when you send it without a body', () => {
+  it('it should respond with a HTTP 200 status code and acknowledge that it could not update the user object', (done) => {
+    chai
+      .request(app)
+      .patch(`/users/${newUserId}`)
+      .end((err, res) => {
+        assert.equal(res.status, 200) // correct status 200
+        assert.equal(res.body.acknowledged, false) // our route sends back an object with acknowledged == false
+        done();
+      });
+  })
 });
 
 describe('DELETE specific user (DELETE request to users/:userId route)', () => {
