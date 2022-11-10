@@ -21,19 +21,6 @@ describe("GET request to /users route", () => {
   })
 })
 
-
-/*describe('GET specific user', () => {
-  it('it should GET all the user', (done) => {
-    chai.request(server)
-        .get('/users')
-        .end((err, res) => {
-              
-          done();
-        });
-  });
-
-});*/
-
 describe('GET specific user (GET request to users/:userId route)', () => {
   it('it should respond with an HTTP 200 status code and a specific user object with all its details', (done) => {
     chai.request(app)
@@ -78,18 +65,6 @@ describe("POST request to post new user", () => {
 });
 
 /*describe('PATCH specific user', () => {
-  it('??', (done) => {
-    chai.request(server)
-        .get('/users')
-        .end((err, res) => {
-              
-          done();
-        });
-  });
-
-});*/
-
-/*describe('DELETE specific user', () => {
   it('??', (done) => {
     chai.request(server)
         .get('/users')
