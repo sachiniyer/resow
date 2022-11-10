@@ -36,11 +36,19 @@ router.delete('/:postId', async (req, res) => {
 })
 
 router.patch('/:postId', async (req, res) => {
-    //route for updating a post, updates just the title for now
+    //route for updating a post, includes only the parameters which should be updatable
     try {
         const updatedPost = await Post.updateOne(
             { _id: req.params.postId },
-            { $set: { title: req.body.title } })
+            { $set: { title: req.body.title,
+                      description: req.body.description,
+                      timeEnd: req.body.timeEnd,
+                      location: req.body.location,
+                      latitude: req.body.latitude,
+                      longitude: req.body.longitude,
+                      images: req.body.images
+                    } 
+            })
         res.json(updatedPost)
     }
     catch (err) {
