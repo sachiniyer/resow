@@ -48,6 +48,7 @@ describe("GET request to /posts/:postId route", () => {
   })
 })
 
+
 describe("POST request to /posts route", () => {
   it("it should respond with an HTTP 200 status code and the created post", done => {
     let post = {
@@ -78,6 +79,43 @@ describe("POST request to /posts route", () => {
   })
 })
 
+describe("PATCH request to /posts/:postId route", () => {
+  it("it should respond with an HTTP 200 status code and confirm that it updated the post", done => {
+    let changedPost = {
+      title: "The Chronicles of Narnia",
+      description: "C.S. Lewis",
+      timeEnd: "2018-04-29T17:34:00.000Z",
+      latitude: "50.93",
+      images: ["/resowLogo.png",
+        "/sample.png"]
+      }
+    chai
+      .request(app)
+      .patch(`/posts/${newPostId}`)
+      .send(changedPost)
+      .end((err, res) => {
+        assert.equal(res.status, 200)
+        assert.equal(res.body.acknowledged, true) // our route sends back an object with acknowledged == true
+        assert.equal(res.body.modifiedCount, 1) // our route sends back an object with modifiedCount 1
+        done() // resolve the Promise that these tests create so mocha can move on
+      })
+  })
+
+})
+
+describe('PATCH for post when you send it without a body', () => {
+  it('it should respond with a HTTP 200 status code and acknowledge that it could not update the user object', (done) => {
+    chai
+      .request(app)
+      .patch(`/posts/${newPostId}`)
+      .end((err, res) => {
+        assert.equal(res.status, 200) // correct status 200
+        assert.equal(res.body.acknowledged, false) // our route sends back an object with acknowledged == false
+        done();
+      });
+  })
+});
+
 describe("DELETE request to /posts/:postId route", () => {
   it("it should respond with an HTTP 200 status code and acknowledge the deletion of the post created by the post test above", done => {
     chai
@@ -90,4 +128,5 @@ describe("DELETE request to /posts/:postId route", () => {
       })
   })
 })
+
 
