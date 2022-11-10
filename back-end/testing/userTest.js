@@ -34,6 +34,24 @@ describe("GET request to /users route", () => {
 
 });*/
 
+describe('GET specific user (request to users/:userId route', () => {
+  it('it should respond with an HTTP 200 status code and a specific user object with all its details', (done) => {
+    chai.request(server)
+        .get('/users/6369abfa14b5d4cb75cec8e2')
+        .end((err, res) => {
+          assert.equal(res.status, 200) // correct status 200
+          assert.exists(res.body.fullname) // our route sends back an object with a fullname
+          asssert.exists(res.body.emailID) // our route sends back an object with an emailID
+          assert.exists(res.body.password) // our route sends back an object with a password
+          assert.exists(res.body.phone) // our route sends back an object with a phone
+          assert.exists(res.body.img) // our route sends back an object with an img
+          assert.equal(res.body._id, '6369abfa14b5d4cb75cec8e2') // our route sends back an object with the correct _id
+          done() // resolve the Promise that these tests create so mocha can move on
+        });
+  });
+
+});
+
 
 describe("POST request to post new user", () => {
   it('it should respond with a HTTP 200 status code and the new created user', (done) => {
