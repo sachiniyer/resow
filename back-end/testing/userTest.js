@@ -28,7 +28,7 @@ describe('GET specific user (GET request to users/:userId route)', () => {
         .end((err, res) => {
           assert.equal(res.status, 200) // correct status 200
           assert.exists(res.body.fullname) // our route sends back an object with a fullname
-          asssert.exists(res.body.emailID) // our route sends back an object with an emailID
+          assert.exists(res.body.emailID) // our route sends back an object with an emailID
           assert.exists(res.body.password) // our route sends back an object with a password
           assert.exists(res.body.phone) // our route sends back an object with a phone
           assert.exists(res.body.img) // our route sends back an object with an img
