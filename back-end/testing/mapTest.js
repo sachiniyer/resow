@@ -6,6 +6,7 @@ const Post = require('../models/Post')
 
 chai.use(chaiHttp);
 
+
 describe("GET request to /map route", () => {
   before(() => {
     Post.find = async () => { return [{ id: 1, longitude: 2, latitude: 3 }] };
@@ -56,6 +57,38 @@ describe("GET request to /map/features route", () => {
           title: 3,
           location: "[ 4, 5 ]"
         }.toString())
+        done()
+      })
+  })
+})
+
+
+describe("GET request to /map route that fails", () => {
+  before(() => {
+    Post.find = async () => { return [{ id: 1, }] };
+  });
+  it("it should respond with an HTTP 200 status code and an object in the response body", done => {
+    chai
+      .request(app)
+      .get("/map")
+      .end((err, res) => {
+        assert.equal(res.status, 500)
+        done()
+      })
+  })
+})
+
+
+describe("GET request to /map/features route that fails", () => {
+  before(() => {
+    Post.findById = async () => { return { id: 1, } };
+  });
+  it("it should respond with an HTTP 200 status code and an object in the response body", done => {
+    chai
+      .request(app)
+      .get("/map/feature")
+      .end((err, res) => {
+        assert.equal(res.status, 500)
         done()
       })
   })
