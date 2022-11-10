@@ -8,7 +8,7 @@ router.get('/', async (_, res) => {
         let retObj = {}
         for (let i of posts) {
             if (!(i.id && i.latitude && i.longitude))
-                throw "missing a field in a post"
+                return res.sendStatus(500)
         }
         retObj.type = "FeatureCollection"
         retObj.features = []
@@ -31,20 +31,15 @@ router.get('/', async (_, res) => {
 })
 
 router.get('/feature', async (req, res) => {
-    try {
-        let post = await Post.findById(req.query.id)
-        let retObj = {}
-        if (!(post.images && post.profileURL && post.title && post.latitude && post.longitude))
-            throw "missing a field"
-        retObj.imgList = post.images
-        retObj.profileURL = post.profileURL
-        retObj.title = post.title
-        retObj.location = "[ " + post.latitude + ", " + post.longitude + "]"
-        res.json(retObj)
-    }
-    catch (err) {
-        res.json({ message: err.message, location: 'Retrieving posts from DB' })
-    }
+    let post = await Post.findById(req.query.id)
+    let retObj = {}
+    if (!(post.images && post.profileURL && post.title && post.latitude && post.longitude))
+        return res.sendStatus(500)
+    retObj.imgList = post.images
+    retObj.profileURL = post.profileURL
+    retObj.title = post.title
+    retObj.location = "[ " + post.latitude + ", " + post.longitude + "]"
+    res.json(retObj)
 })
 
 
