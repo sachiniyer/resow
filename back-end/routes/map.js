@@ -16,6 +16,7 @@ router.get('/', async (_, res) => {
                     type: "Point",
                     coordinates: [i.longitude, i.latitude],
                 },
+                properties: {}
             })
         }
         res.json(retObj)
