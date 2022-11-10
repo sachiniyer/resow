@@ -47,7 +47,7 @@ describe("GET request to /map/features route", () => {
   it("it should respond with an HTTP 200 status code and an object in the response body", done => {
     chai
       .request(app)
-      .get("/map")
+      .get("/map/feature")
       .end((err, res) => {
         assert.equal(res.status, 200)
         assert.exists(res.body.toString(), {
