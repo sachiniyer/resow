@@ -119,6 +119,18 @@ describe("PATCH request to /posts/:postId route", () => {
 
 })
 
+describe('PATCH for post when you send it without a body', () => {
+  it('it should respond with a HTTP 200 status code and acknowledge that it could not update the user object', (done) => {
+    chai
+      .request(app)
+      .patch(`/posts/${newPostId}`)
+      .end((err, res) => {
+        assert.equal(res.status, 200) // correct status 200
+        assert.equal(res.body.acknowledged, false) // our route sends back an object with acknowledged == false
+        done();
+      });
+  })
+});
 
 describe("DELETE request to /posts/:postId route", () => {
   it("it should respond with an HTTP 200 status code and acknowledge the deletion of the post created by the post test above", done => {
