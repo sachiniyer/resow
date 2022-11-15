@@ -17,7 +17,7 @@ import {useParams} from "react-router-dom";
 export default function ItemDetails(props){
 
   // placeholder for userId. will fetch data in the future.
-  const userId = "6369ab2e483f068aaa9bd7e0";
+  const userId = "6369abfa14b5d4cb75cec8e2";
 
   // The postId obtained from the parameter.
   let {id} = useParams();

@@ -10,7 +10,7 @@ import Box from '@mui/material/Box';
 function SavedPost(props) {
 
   // const userId = "6369ac0214b5d4cb75cec8e4"
-  const userId = "6369ac2814b5d4cb75cec8e7"
+  const userId = "6369abfa14b5d4cb75cec8e2"
 
   const [data, setData] = useState([]);
 
