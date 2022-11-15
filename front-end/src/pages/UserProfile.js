@@ -9,12 +9,11 @@ import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 
 import EmailIcon from '@mui/icons-material/Email';
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 
 function TextContainer(props){
   return(
-    <Box sx={{ border: 1, borderRadius: '15px', m: 1, p: 1, minWidth: '30%', minHeight:'10%', color:'grey.800', bgcolor:'#e5e4e2'}}> 
+    <Box sx={{ border: 1, borderRadius: '15px', m: 1, p: 1, minWidth: '30%', minHeight:'10%', color:'grey.800'}}> 
       <Stack spacing = {5} direction = "row" alignItems="center" justifyContent="center">
         {props.icon} {props.text} 
       </Stack>
@@ -25,16 +24,17 @@ function TextContainer(props){
 
 function UserProfile(props) {
 
-  const [userDetails,setUserDetails] = useState([]);
+  //const userId = "636c5b948446b4d5cdadd5ea";
+
+  const [userDetails,setUserDetails] = useState({});
 
   useEffect(() => {
-    async function fetchData(){
-      const response = await axios (
-        "https://my.api.mockaroo.com/users.json?key=13a3e900"
+
+    async function fetchData() {
+
+      const result = await axios(`${process.env.REACT_MOCK_DATA}` //'https://my.api.mockaroo.com/user_mock_data.json?key=13a3e900'
       );
-
-      setUserDetails(response.data);
-
+      setUserDetails(result.data);
     }
 
     fetchData();
@@ -54,16 +54,13 @@ function UserProfile(props) {
               sx={{ border: "solid 0.5px", borderColor:"black", width: 120, height: 120 }}
             />
           </Stack>
-           <h3 className="FullName"> {userDetails.full_name} </h3>
-           <p className="Username"> @{userDetails.username} </p>
+           <h3 className="FullName"> {userDetails.fullname} </h3>
         </div>
 
         <Box sx={{ width: '100%', height: "100%"}} className = "UserDetails">
           <Stack direction= "column" alignItems="center">
-
-            <TextContainer icon = <EmailIcon fontSize="large"/> text = {userDetails.email} />
+            <TextContainer icon = <EmailIcon fontSize="large"/> text = {userDetails.emailID} />
             <TextContainer icon = <LocalPhoneIcon fontSize="large"/> text = {userDetails.phone} />
-            <TextContainer icon = <HomeRoundedIcon fontSize="large"/>text = {userDetails.location} />
           </Stack>
         </Box>
 

@@ -26,6 +26,7 @@ router.get('/:userId', async (req, res) => {
 })
 
 router.post('/', async (req,res)=> {
+    //route for adding a new user (user registration page)
 
     const user = new User({
         fullname: req.body.fullname,

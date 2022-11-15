@@ -35,7 +35,7 @@ function SignUp(props) {
                 let password = document.getElementById('password').value
                 let phonenumber = document.getElementById('phone').value
                 let passwordConf = document.getElementById('passwordConf').value
-                const url = 'http://localhost:3000/users' //change this
+                const url = `${process.env.REACT_APP_SERVER_HOSTNAME}/users` //'http://localhost:5002/users'
                 let data = {fullname: fullname,emailID: emailID, password: password, phone: phonenumber}
                 if (password === passwordConf) {
                   if (emailID && password && passwordConf) {
