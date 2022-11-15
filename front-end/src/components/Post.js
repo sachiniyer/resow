@@ -27,8 +27,8 @@ export default function PostCard(props) {
             mb: "auto",
             objectFit:"cover"
           }}
-          alt="thumbnail"
-          src={props.info.images[0]}
+          alt="/resowLogo.png"
+          src={props.info.images.length!==0 ?props.info.images[0] : "/resowLogo.png"}
         />
         <Box sx={{ width: 1 }}>
           <Box sx={{ height: 0.1 }}></Box>
