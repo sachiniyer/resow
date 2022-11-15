@@ -50,11 +50,17 @@ Audit fix is not that important
 ```
 cd back-end
 npm install
-npm start
-
+npx nodemon server
 ```
+Note that the env file should contain the necessary information including the MongoDB account credentials and the port number
 ## 6. instructions for building and testing the project
 To be updated when the project reaches the stage
+### Testing
+```
+cd back-end
+npm install
+npm test
+```
 
 
 ## 7. Product Owner & Scrum Master
@@ -67,7 +73,8 @@ To be updated when the project reaches the stage
 - Scrum Master: Bhavicka Mohta
 
 ### Sprint 3
-- TBD
+- Product Owner: Sachin Iyer
+- Scrum Master: Minwu Kim
 ### Sprint 4
 - TBD
 
