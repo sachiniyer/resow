@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const Post = require('../models/Post')
+const User = require('../models/userschema')
 
 router.get('/', async (req, res) => {
     //route for retrieving the list of all posts
@@ -10,6 +11,33 @@ router.get('/', async (req, res) => {
     }
     catch (err) {
         res.json({message: err.message, location: 'Retrieving posts from DB'})
+    }
+})
+
+router.get('/past-uploads/:userId', async (req,res) => {
+    try {
+        const pastUploads = await Post.find(
+            {owner:req.params.userId}
+        )
+        res.json(pastUploads)
+    }
+    catch (err) {
+        res.json({message: err.message})
+    }
+})
+
+router.get('/saved-posts/:userId',async(req,res)=>{
+    try{
+        const user = await User.findById(req.params.userId)
+        postIdList = user.savedPosts
+
+        const savedPosts = await Post.find(
+            {_id:{$in:postIdList}}
+        )
+        res.json(savedPosts)
+    }
+    catch (err){
+        res.json({message: err.message})
     }
 })
 
