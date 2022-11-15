@@ -46,13 +46,29 @@ npm start
 ```
 Audit fix is not that important
 
+Add these info below in the env file in the front end:
+```
+REACT_APP_SERVER_HOSTNAME=http://localhost:5002
+PORT=7002 
+```
+
 ### Backend
 ```
 cd back-end
 npm install
 npx nodemon server
 ```
-Note that the env file should contain the necessary information including the MongoDB account credentials and the port number
+Add these info below in the env file in the back end:
+```
+DB_USER=leafweaf
+DB_PWORD=PDldDoI4ojWFs8X8
+DB_STRING=@cluster0.0jjqfl3.mongodb.net/?retryWrites=true&w=majority
+FRONT_END_URI=localhost:7002
+
+PORT=5002
+FRONT_END_URI=localhost:7002
+```
+
 ## 6. instructions for building and testing the project
 To be updated when the project reaches the stage
 ### Testing
