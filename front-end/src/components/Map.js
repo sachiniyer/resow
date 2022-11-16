@@ -143,16 +143,16 @@ function MapWrapper(_) {
     const result = await axios(
       `${process.env.REACT_APP_SERVER_HOSTNAME}/map/feature?id=${id}`
     );
-    if (result.data.imgList.length > 0)
+    if (result.data.imgList && result.data.imgList.length > 0)
       setImage(result.data.imgList[0])
-    if (result.data.profileURL)
-      setProfile(result.data.profileURL)
+    if (result.data.profile && result.data.profile.length > 0)
+      setProfile(result.data.profile[0])
     if (result.data.sellerName)
       setSeller(result.data.sellerName)
     if (result.data.title)
       setTitle(result.data.title)
-    if (result.data.itemLocation)
-      setItemLocation(result.data.itemLocation)
+    if (result.data.location)
+      setItemLocation(result.data.location.toString())
   }
 
   return (
