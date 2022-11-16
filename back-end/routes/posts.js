@@ -2,12 +2,30 @@ const express = require("express")
 const router = express.Router()
 const Post = require('../models/Post')
 const User = require('../models/userschema')
+const {getDistance,sortedList} = require('../geocode/location')
+
 
 router.get('/', async (req, res) => {
     //route for retrieving the list of all posts
     try {
         const posts = await Post.find()
         res.json(posts)
+    }
+    catch (err) {
+        res.json({message: err.message, location: 'Retrieving posts from DB'})
+    }
+})
+
+
+router.get('/longitude=:longitude&latitude=:latitude', async (req, res)=> {
+
+    try{
+        const posts = await Post.find()
+
+        longitude = parseFloat(req.params.longitude)
+        latitude = parseFloat(req.params.latitude) 
+
+        res.json(sortedList(longitude,latitude,posts))
     }
     catch (err) {
         res.json({message: err.message, location: 'Retrieving posts from DB'})
