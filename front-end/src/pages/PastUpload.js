@@ -9,7 +9,6 @@ import Box from '@mui/material/Box';
 
 function PastUpload(props) {
 
-  // const userId = "6369abfa14b5d4cb75cec8e2"
   const userId = "636bcc297a31971b0db1af29"
 
   const [data, setData] = useState([]);
