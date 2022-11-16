@@ -13,7 +13,7 @@ export default function PreviewWindow(props) {
     <Card component={Link} to={props.href} sx={{ display: 'flex', width: 0.9, maxWidth: 200, borderRadius: '5%' }}>
       <CardActionArea>
         <CardMedia
-          style={{ borderBottom: "solid" }}
+          style={{ borderBottom: "solid 0.7px" }}
           component="img"
           height="200"
           image={props.image}
@@ -22,7 +22,7 @@ export default function PreviewWindow(props) {
         <CardContent>
           <Box sx={{ display: 'grid', gap: 0, gridTemplateColumns: 'repeat(2, 1fr)' }}>
             <Box sx={{ width: 60 }}>
-              <Avatar sx={{ border: "solid", width: 60, height: 60, marginLeft: -1, marginTop: -1 }} alt="thumbnail" src={props.profile} />
+              <Avatar sx={{ border: "solid 0.7px", width: 60, height: 60, marginLeft: -1, marginTop: -1 }} alt="thumbnail" src={props.profile} />
               <Box sx={{ width: 80, wordWrap: "break-word", marginTop: 0, marginLeft: -2, fontSize: 10 }}>
                 {props.seller}
               </Box>
