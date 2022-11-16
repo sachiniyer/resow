@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     //route for retrieving the list of all posts
     try {
         const posts = await Post.find()
-        res.json(posts)
+        res.json(posts.reverse())
     }
     catch (err) {
         res.json({message: err.message, location: 'Retrieving posts from DB'})
@@ -37,7 +37,7 @@ router.get('/past-uploads/:userId', async (req,res) => {
         const pastUploads = await Post.find(
             {owner:req.params.userId}
         )
-        res.json(pastUploads)
+        res.json(pastUploads.reverse())
     }
     catch (err) {
         res.json({message: err.message})
@@ -52,7 +52,7 @@ router.get('/saved-posts/:userId',async(req,res)=>{
         const savedPosts = await Post.find(
             {_id:{$in:postIdList}}
         )
-        res.json(savedPosts)
+        res.json(savedPosts.reverse())
     }
     catch (err){
         res.json({message: err.message})
