@@ -25,6 +25,23 @@ describe("GET request to /posts route", () => {
   })
 })
 
+describe("GET request to /posts/longitude=:longitude&latitude=:latitude route", () => {
+  before(() => {
+    Post.find = async () => { return [{ _id: 1, longitude: 2, latitude: 3 }] };
+  });
+
+  it("it should respond with an HTTP 200 status code and an object in the response body", done => {
+    chai
+      .request(app)
+      .get("/posts/longitude=-80&latitude=40.01")
+      .end((err, res) => {
+        assert.equal(res.status, 200) // use should to make BDD-style assertions
+        assert.exists(res.body[0]._id) //our route sends back an object with multiple posts
+        done() // resolve the Promise that these tests create so mocha can move on
+      })
+  })
+})
+
 describe("GET request to /posts/:postId route", () => {
   before(() => {
     Post.findById = async (_) => {
