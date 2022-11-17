@@ -5,15 +5,19 @@ import Box from '@mui/material/Box';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import SearchBar from '../components/SearchBar';
+import { getLocation } from '../components/Location'
 
 
 function ItemList(props) {
+
+  let longitude = getLocation()[0];
+  let latitude = getLocation()[1];
 
   const [itemList,setItemList] = useState([]);
 
   async function fetchData() {
     const result = await axios(
-      `${process.env.REACT_APP_SERVER_HOSTNAME}/posts`
+      `${process.env.REACT_APP_SERVER_HOSTNAME}/posts/longitude=`+longitude+"&latitude="+latitude
     );
     setItemList(result.data);
   }
