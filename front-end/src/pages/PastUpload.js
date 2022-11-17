@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 
-import SearchBar from '../components/SearchBar';
 import PostCard from '../components/Post';
 import axios from "axios";
 import { useEffect,useState } from 'react';
@@ -34,7 +33,6 @@ function PastUpload(props) {
     return (
       <>
         <Box sx = {{color:"black", fontSize:"40px",margin:"10px"}}>Past Uploads</Box>
-        <SearchBar></SearchBar>
         { data && data.map((item) => (
           <PostCard 
             key={item._id}  
