@@ -25,11 +25,32 @@ router.get('/:userId', async (req, res) => {
     }
 })
 
-router.post('/', async (req,res)=> {
-    //route for adding a new user (user registration page)
-
+ //route for adding a new user (user registration page)
+router.post('/register', async (req,res)=> {
     const user = new User({
         fullname: req.body.fullname,
+        emailID: req.body.emailID,
+        password: req.body.password,
+        dob: req.body.dob,
+        phone: req.body.phone,
+        img: req.body.img
+    });
+
+    try {
+        const savedUser = await user.save()
+        res.json(savedUser)
+    }
+    catch (err) {
+        //possible error - user already exists
+        res.json({message: err})
+        console.log(err)
+    }
+
+})
+
+/*//login router to check if the entered details are correct or not (Log In Page)
+router.post('/logIn', async (req,res)=> {
+    const user =User({
         emailID: req.body.emailID,
         password: req.body.password,
         dob: req.body.dob,
@@ -46,7 +67,10 @@ router.post('/', async (req,res)=> {
         console.log(err)
     }
 
-})
+})*/
+
+
+
 
 
 
