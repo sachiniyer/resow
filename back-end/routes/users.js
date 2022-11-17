@@ -1,4 +1,6 @@
+const { NextPlan } = require("@mui/icons-material")
 const express = require("express")
+const jwt = require("jsonwebtoken") // used for authentication with JSON Web Tokens
 const router = express.Router()
 const User = require("../models/userschema")
 
@@ -30,11 +32,13 @@ router.post('/register', async (req,res)=> {
     const user = new User({
         fullname: req.body.fullname,
         emailID: req.body.emailID,
-        password: req.body.password,
+        password: req.body.password,   //hash the password
         dob: req.body.dob,
         phone: req.body.phone,
         img: req.body.img
     });
+
+    //jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
 
     try {
         const savedUser = await user.save()
@@ -48,31 +52,28 @@ router.post('/register', async (req,res)=> {
 
 })
 
-/*//login router to check if the entered details are correct or not (Log In Page)
-router.post('/logIn', async (req,res)=> {
-    const user =User({
-        emailID: req.body.emailID,
-        password: req.body.password,
-        dob: req.body.dob,
-        phone: req.body.phone,
-        img: req.body.img
-    });
+//login router to check if the entered details are correct or not (Log In Page)
+router.post('/logIn', async (req,res, )=> {
+    const {emailID, password} = req.body;
 
     try {
-        const savedUser = await user.save()
-        res.json(savedUser)
+        //check if the user exists or not 
+        const user = await User.findOne({emailID: emailID});
+        if (!user) throw new Error("User not found")
+
+        //checking if the pasword match or not
+        const dbPassword = user.password
+        if(dbPassword != password) throw new Error("Incorrect password, try again")
+
+        res.json(user)
     }
     catch (err) {
-        res.json({message: err})
+        //next(err)
+        res.json({message: err});
         console.log(err)
     }
 
-})*/
-
-
-
-
-
+})
 
 router.patch('/:userId', async (req, res) => {
     //route for updating a user profile (edit profile page)
