@@ -1,6 +1,5 @@
 const express = require("express")
 const jwt = require("jsonwebtoken") // used for authentication with JSON Web Tokens
-const cookieParser = require("cookie-parser")
 const router = express.Router()
 const User = require("../models/userschema")
 
