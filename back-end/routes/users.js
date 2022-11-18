@@ -3,6 +3,8 @@ const jwt = require("jsonwebtoken") // used for authentication with JSON Web Tok
 const router = express.Router()
 const User = require("../models/userschema")
 
+const { createTokens } = require('./jwt-config')
+
 
 router.get('/', async (req, res) => {
     //route for retrieving the list of all users
@@ -57,14 +59,17 @@ router.post('/logIn', async (req,res, )=> {
 
     try {
         //check if the user exists or not 
-        const user = await User.findOne({emailID: emailID});
-        if (!user) throw new Error("User not found")
-
-        //checking if the pasword match or not
+        const user = await User.findOne({emailID: emailID})
         const dbPassword = user.password
-        if(dbPassword != password) throw new Error("Incorrect password, try again")
-
-        res.json(user)
+        if (!user) throw new Error("User not found")
+        else if(dbPassword != password) throw new Error("Incorrect password, try again")  //checking if the pasword match or not
+        else {
+            const accessToken = createTokens(user)
+            res.cookies("acces-token", accessToken, {
+                maxAge: 60*60*24*30*1000,
+            })
+            res.json(user)
+        }
     }
     catch (err) {
         //next(err)
