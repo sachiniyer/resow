@@ -17,8 +17,19 @@ router.get('/', async (req, res) => {
     }
 })
 
+//have to remove this after fixing the tokenization
 router.get('/:userId', async (req, res) => {
-    //route for querying the db for a particular user with userId when signed in
+    try {
+        const user = await User.findById(req.params.userId)
+        res.json(user)
+    }
+    catch (err) {
+        res.json({message: err.message})
+    }
+})
+
+router.get('/profile', async (req, res) => {
+    //route for fetching a particular user after logging in
     try {
         const user = await User.findById(req.params.userId)
         res.json(user)
@@ -65,7 +76,7 @@ router.post('/logIn', async (req,res, )=> {
         else if(dbPassword != password) throw new Error("Incorrect password, try again")  //checking if the pasword match or not
         else {
             const accessToken = createTokens(user)
-            res.cookies("acces-token", accessToken, {
+            res.cookie("acces-token", accessToken, {
                 maxAge: 60*60*24*30*1000,
             })
             res.json(user)
