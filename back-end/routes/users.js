@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken") // used for authentication with JSON Web Tok
 const router = express.Router()
 const User = require("../models/userschema")
 
-const { createTokens } = require('./jwt-config')
+const { createTokens, validateToken } = require('./jwt-config')
 
 
 router.get('/', async (req, res) => {
@@ -28,15 +28,9 @@ router.get('/:userId', async (req, res) => {
     }
 })
 
-router.get('/profile', async (req, res) => {
+router.get('/profile',validateToken, async (req, res) => {
     //route for fetching a particular user after logging in
-    try {
-        const user = await User.findById(req.params.userId)
-        res.json(user)
-    }
-    catch (err) {
-        res.json({message: err.message})
-    }
+   res.json("profile")
 })
 
  //route for adding a new user (user registration page)
