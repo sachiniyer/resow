@@ -45,5 +45,23 @@ app.get("/", (req, res) => {
   res.send("Hello world!")
 })
 
+app.get('/location', async (req,res) =>{
+   
+  try{ 
+      let long = "-73.9965";   
+      let lat = "40.7295";     
+
+      const response = await axios(
+          'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=pjson&featureTypes=&location='+param
+      );
+      
+      console.log(response.data)
+      res.json({address:response.data.address.Address})
+  }
+  catch(err){
+      console.log({message:err.message})
+  }
+})
+
 // export the express app we created to make it available to other modules
 module.exports = app
