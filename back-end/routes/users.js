@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken") // used for authentication with JSON Web Tok
 const router = express.Router()
 const User = require("../models/userschema")
 
-//const { createTokens, validateToken } = require('./jwt-config')
+const { createTokens, validateToken } = require('./jwt-config')
 
 
 router.get('/', async (req, res) => {
@@ -66,21 +66,31 @@ router.post('/register', async (req,res)=> {
 
 //login router to check if the entered details are correct or not (Log In Page) - AUTHORIZATION and AUTHENTICATION
 router.post('/logIn', async (req,res, )=> {
-    const {emailID, password} = req.body;
 
     try {
         //check if the user exists or not 
-        const user = await User.findOne({emailID: emailID})
-        const dbPassword = user.password
+        const user = await User.findOne({emailID: req.body.emailID})
         if (!user) throw new Error("User not found")
-        else if(dbPassword != password) throw new Error("Incorrect password, try again")  //checking if the pasword match or not
-        else {
-            const accessToken = createTokens(user)
-            res.cookie("acces-token", accessToken, {
-                maxAge: 60*60*24*30*1000,
-            })
-            res.json(user)
+
+        const dbPassword = user.password
+        if(dbPassword != req.body.password) throw new Error("Incorrect password, try again")  //checking if the pasword match or not
+
+
+        const payload = {
+            id: user._id, 
+            emailID: user.emailID
         }
+
+        const accessToken = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: "7d"})
+
+        res.status(200).send({
+            success: true, 
+            message: "Logged in successfully", 
+            token: "Bearer " + accessToken
+        })
+
+        //res.cookie("acces-token", accessToken, {maxAge: 60*60*24*30*1000})
+        //res.json(user)
     }
     catch (err) {
         //next(err)
