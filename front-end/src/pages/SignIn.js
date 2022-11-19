@@ -25,7 +25,7 @@ function SignIn(props) {
               let username = document.getElementById('username').value
               let password = document.getElementById('password').value
               if (username && password) {
-                await fetch('https://63532326d0bca53a8ebaecb3.mockapi.io/users')
+                await fetch(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/login`)
                   .then((response) => console.log(response.json()))
                   .then(function (users) {
                     console.log(typeof (users));
