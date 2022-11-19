@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken") // used for authentication with JSON Web Tok
 const router = express.Router()
 const User = require("../models/userschema")
 
-const { createTokens, validateToken } = require('./jwt-config')
+//const { createTokens, validateToken } = require('./jwt-config')
 
 
 router.get('/', async (req, res) => {
@@ -36,31 +36,32 @@ router.post('/register', async (req,res)=> {
         password: req.body.password,   //hash the password
         dob: req.body.dob,
         phone: req.body.phone,
-        img: req.body.img
+        img: req.body.img //this one can be removed from this section
     });
 
     //jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
 
     try {
+
+        //check here if the user exists already - if exists then throw error
         const savedUser = await user.save()
-        res.json(savedUser)
+        res.send({
+            success: true, 
+            message: "User created successfully", 
+            user: {
+                id: savedUser._id, 
+                emailID: savedUser.emailID
+            }
+        })
     }
     catch (err) {
-        //possible error - user already exists
-        res.json({message: err})
+        res.send({
+            success: false, 
+            message: err.message
+        })
         console.log(err)
     }
 
-})
-
-router.get('/profile', async (req, res) => {
-    try {
-        //const user = await User.findById(req.params.userId)
-        res.json("hello")
-    }
-    catch (err) {
-        res.json({message: err.message})
-    }
 })
 
 //login router to check if the entered details are correct or not (Log In Page) - AUTHORIZATION and AUTHENTICATION
@@ -87,6 +88,16 @@ router.post('/logIn', async (req,res, )=> {
         console.log(err)
     }
 
+})
+
+router.get('/profile', async (req, res) => {
+    try {
+        //const user = await User.findById(req.params.userId)
+        res.json("hello")
+    }
+    catch (err) {
+        res.json({message: err.message})
+    }
 })
 
 
