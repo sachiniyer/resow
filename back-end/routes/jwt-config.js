@@ -1,5 +1,33 @@
-const {sign, verify} = require("jsonwebtoken")
+const passportJWT = require("passport-jwt")
+const JwtStrategy = passportJWT.Strategy
+const ExtractJwt = passportJWT.ExtractJwt
 
+let jwtOptions = {}
+
+jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken(); //extracts the token string exclusing the bearer part from the header - also validates the token
+jwtOptions.secretOrKey = process.env.JWT_SECRET 
+
+const jwtStrategy = new JwtStrategy(jwtOptions, function (jwt_payload, next) {
+    //console.log("JWT payload received", jwt_payload) // debugging
+
+    User.findOne({id: jwt_payload.id}, function(err, user) {
+        if (err) {
+            return done(err, false);
+        }
+        if (user) {
+            return done(null, user);
+        } else {
+            return done(null, false);
+        }
+    });
+})
+
+module.exports = {
+    jwtOptions,
+    jwtStrategy,
+}
+
+/*const {sign, verify} = require("jsonwebtoken")
 
 //this function creates a token and returns it to the place where it is being imported
 const createTokens = (user) => {
@@ -27,4 +55,4 @@ const validateToken = (req, res, next) => {
 }
 
 
-module.exports = {createTokens, validateToken}
+module.exports = {createTokens, validateToken}*/
