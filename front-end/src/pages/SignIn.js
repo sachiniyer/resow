@@ -14,13 +14,23 @@ function SignIn(props) {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', height: 'calc(100vh - 53px)' }} className="SignIn" justifyContent="center">
       <Box justifyContent="center" alignItems="center" sx={{ mx: 'auto' }}>
+
         <Box sx={{ marginTop: '20vh' }}></Box>
-        <Avatar sx={{border: "solid", borderColor:"black", width: 100, height: 100, m: 1, margin: '0 auto' }} alt="profile pic" src={props.profileURL} />
-        <TextField fullWidth label="Username" id="username" sx={{ m: 1 }} />
-        <TextField type={showPassword ? "text" : "password"} fullWidth label="Password" id="password" sx={{ m: 1 }} />
-        <VisibilityIcon onClick={() => setShowPassword(s => !s)} sx={{ cursor: 'pointer' }} />
+        
+        <Avatar sx={{border: "solid", borderColor:"black", width: 150, height: 150, m: 1, margin: '0 auto' }} alt="profile pic" src={props.logo} />
+
+        <h3> Welcome to Resow </h3>
+
+        <Box justifyContent="center" alignItems="center" sx={{ m: 2 }}>
+          <TextField fullWidth label="Email" id="emailID" sx={{ m: 1 }} />
+          <TextField type={showPassword ? "text" : "password"} fullWidth label="Password" id="password" sx={{ m: 1 }} />
+          <VisibilityIcon onClick={() => setShowPassword(s => !s)} sx={{ cursor: 'pointer' }} />  
+        </Box>
+
+        
+
         <Stack spacing={2} direction="column" alignItems="center" >
-          <Button color="success" variant="contained" sx={{ m: 2 }}
+          <Button color="success" variant="contained" sx={{ width: 100 }}
             onClick={async () => {
               let username = document.getElementById('username').value
               let password = document.getElementById('password').value
@@ -52,7 +62,7 @@ function SignIn(props) {
           >
             Sign In
           </Button>
-          <Button color="success" variant="contained" href="/Register">Register</Button>
+          <Button color="success" variant="contained"  href="/Register" sx={{ width: 100 }}>Register</Button>
         </Stack>
       </Box>
     </Box>
