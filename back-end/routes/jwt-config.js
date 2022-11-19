@@ -15,7 +15,7 @@ const validateToken = (req, res, next) => {
     }
 
     try{
-        const validateToken = verify (accessToken,"jsonsecretToken" )
+        const validateToken = verify(accessToken,"jsonsecretToken")
         if(validateToken){
             req.authenticated = true
             return next()
