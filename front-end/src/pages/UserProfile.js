@@ -32,7 +32,7 @@ function UserProfile(props) {
 
     async function fetchData() {
 
-      const result = await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile` //'https://my.api.mockaroo.com/user_mock_data.json?key=13a3e900'
+      const result = await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`
       );
       setUserDetails(result.data);
     }
