@@ -110,7 +110,15 @@ router.post('/login', async (req,res, )=> {
 
 router.get('/profile', passport.authenticate('jwt', {session: false}), async (req, res) => {
     try {
-        res.json("hello")
+        res.json({
+            success: true,
+            user: {
+              id: req.body.id,
+              emailID: req.body.emailID,
+            },
+            message:
+              "Congratulations: you have accessed this route because you have a valid JWT token!",
+          })
     }
     catch (err) {
         res.json({message: err.message})
