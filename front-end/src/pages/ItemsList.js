@@ -6,15 +6,11 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
-import SearchBar from '../components/SearchBar';
 import { getLocation } from '../components/Location'
 
 
 function ItemList(props) {
   
-
-  let longitude = getLocation()[0];
-  let latitude = getLocation()[1];
 
   let longitude = getLocation()[0];
   let latitude = getLocation()[1];
