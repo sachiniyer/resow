@@ -6,6 +6,7 @@ const multer = require("multer") // middleware to handle HTTP POST requests with
 const axios = require("axios") // middleware for making requests to APIs
 const morgan = require("morgan") // middleware for nice logging of incoming HTTP requests
 const cors = require('cors') // allow cross origin requests (cors)
+const cookieParser = require("cookie-parser")
 require("dotenv").config({ silent: true }) // load environmental variables from a hidden file named .env
 
 const app = express() // instantiate an Express object
@@ -24,6 +25,7 @@ app.use(morgan("dev")) // morgan has a few logging default styles - dev is a nic
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(cors())
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
+app.use(cookieParser())
 // make 'public' directory publicly readable with static content
 app.use("/static", express.static("public"))
 app.use('/posts', postsRoute)
