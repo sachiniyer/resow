@@ -1,6 +1,7 @@
 import './UserProfile.css';
 import * as React from 'react';
 import { useEffect,useState } from 'react';
+import { useNavigate } from "react-router-dom"
 import axios from "axios";
 
 import Button from '@mui/material/Button';
@@ -24,22 +25,29 @@ function TextContainer(props){
 
 function UserProfile(props) {
 
-  //const userId = "636c5b948446b4d5cdadd5ea";
-
   const [userDetails,setUserDetails] = useState({});
+  const navigate = useNavigate()
+  
+
 
   useEffect(() => {
-
     async function fetchData() {
-
-      const result = await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`
-      );
+      const token = localStorage.getItem('token')
+      const result = await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`, {headers: {
+        Authorization: token
+      }})
+      .then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
+        navigate("/SignIn")
+      })
       setUserDetails(result.data);
     }
 
     fetchData();
 
-  }, []);
+  }, [navigate]);
 
   return (
     <>
@@ -72,7 +80,6 @@ function UserProfile(props) {
             </Stack>
             <Button color="success" href="/UserProfile/EditProfile" variant="contained">Edit Profile</Button>
             <Button color="success" href="/" variant="contained">Sign Out</Button>
-            <Button color="success" href="/SignIn" variant="contained">Sign In</Button>
           </Stack>
         </Box>
   

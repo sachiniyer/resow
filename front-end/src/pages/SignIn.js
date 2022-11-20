@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
@@ -9,6 +10,7 @@ import Stack from '@mui/material/Stack';
 import axios from "axios"
 
 function SignIn(props) {
+  const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false);
 
   const [emailID, setEmailID] = useState('')
@@ -23,9 +25,10 @@ function SignIn(props) {
       console.log(`User successfully logged in: ${responseServer.emailID}`)
       console.log(responseServer.token)
       localStorage.setItem('token', responseServer.token) // store the token into localStorage
+      navigate('/UserProfile')
     }
   
-  }, [responseServer])
+  }, [responseServer, navigate])
 
 
   const handleSubmit = async e => {
@@ -37,7 +40,8 @@ function SignIn(props) {
       
       // send a POST request with the data to the server api to authenticate
       const response = await axios.post(
-        `http://localhost:5002/users/login`, {emailID: emailID, password: password}
+        `${process.env.REACT_APP_SERVER_HOSTNAME}/users/login`, 
+        {emailID: emailID, password: password}
       )
 
       // store the response data into the data state variable
