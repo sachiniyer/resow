@@ -1,6 +1,7 @@
 import './UserProfile.css';
 import * as React from 'react';
 import { useEffect,useState } from 'react';
+import { useNavigate } from "react-router-dom"
 import axios from "axios";
 
 import Button from '@mui/material/Button';
@@ -24,26 +25,31 @@ function TextContainer(props){
 
 function UserProfile(props) {
 
-  //const userId = "636c5b948446b4d5cdadd5ea";
-
   const [userDetails,setUserDetails] = useState({});
+  const navigate = useNavigate()
+
 
   useEffect(() => {
-
     async function fetchData() {
-
-      const result = await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`
-      );
-      setUserDetails(result.data);
+      const token = localStorage.getItem('token')
+      await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`, {headers: {
+        Authorization: token
+      }})
+      .then(res => {
+        console.log(res)
+        setUserDetails(res.data)
+      }).catch(err => {
+        console.log(err)
+        navigate("/SignIn")
+      })
     }
 
     fetchData();
 
-  }, []);
+  }, [navigate]);
 
   return (
     <>
-
       <Box sx={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column', height: 'calc(100vh - 53px)' }}> 
 
         <div className="TopPart">
@@ -66,13 +72,11 @@ function UserProfile(props) {
 
         <Box sx={{m: 5}}>
           <Stack spacing={2} direction= "column" alignItems="center" >
-            <Stack spacing={2} direction = "row" alignItems="center" justifyContent="center">
-              <Button color="success" href="/PastUpload" variant="contained">Past Uploads</Button>
-              <Button color="success" href="/UserProfile/SavedPost" variant="contained">Saved Posts</Button>
-            </Stack>
+            <Button color="success" href="/PastUpload" variant="contained">Past Uploads</Button>
+            <Button color="success" href="/UserProfile/SavedPost" variant="contained">Saved Posts</Button>
             <Button color="success" href="/UserProfile/EditProfile" variant="contained">Edit Profile</Button>
-            <Button color="success" href="/" variant="contained">Sign Out</Button>
-            <Button color="success" href="/SignIn" variant="contained">Sign In</Button>
+            <Button color="success" href="/" variant="contained" onClick={() => 
+            localStorage.removeItem('token')} > Sign Out </Button>
           </Stack>
         </Box>
   

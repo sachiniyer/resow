@@ -44,7 +44,7 @@ function App() {
 
             {/* a route for the SignIn page */}
             <Route path="/SignIn" element={<SignIn
-              profileURL="/resowLogo.png" />} />
+              logo ="/resowLogo.png" />} />
 
             {/* a route for the Register page */}
             <Route path="/Register" element={<Register />} />
