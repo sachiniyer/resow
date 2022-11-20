@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from "react"
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
@@ -14,23 +14,35 @@ function SignIn(props) {
   const [emailID, setEmailID] = useState('')
   const [password, setPassword] = useState('')
 
+  const [responseServer, setResponse] = useState({}) // the API will return an object with a JWT token, if the user logs in successfully
+
+
+  useEffect(() => {
+    // if the user is logged-in, save the token to local storage
+    if (responseServer.success && responseServer.token) {
+      console.log(`User successfully logged in: ${responseServer.emailID}`)
+      console.log(responseServer.token)
+      localStorage.setItem('token', responseServer.token) // store the token into localStorage
+    }
+  
+  }, [responseServer])
+
 
   const handleSubmit = async e => {
     // prevent the HTML form from actually submitting
     e.preventDefault()
 
     try {
-
       //console.log(emailID, password) //for debugging
-      let data = {emailID: emailID, password: password}
       
       // send a POST request with the data to the server api to authenticate
       const response = await axios.post(
-        `http://localhost:5002/users/login`, data
+        `http://localhost:5002/users/login`, {emailID: emailID, password: password}
       )
 
       // store the response data into the data state variable
       console.log(`Server response: ${JSON.stringify(response.data, null, 0)}`)
+      setResponse(response.data)
     } catch (err) {
       // request failed... user entered invalid credentials
       console.log(err)

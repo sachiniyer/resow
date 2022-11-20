@@ -93,6 +93,7 @@ router.post('/login', async (req,res, )=> {
 
         res.status(200).send({
             success: true, 
+            emailID: req.body.emailID,
             message: "Logged in successfully", 
             token: "Bearer " + accessToken
         })
