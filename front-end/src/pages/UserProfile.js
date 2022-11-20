@@ -26,23 +26,26 @@ function TextContainer(props){
 function UserProfile(props) {
 
   const [userDetails,setUserDetails] = useState({});
+  //const [userId, setUserId] = useState({});
+  //const [userEmail, setUserEmail] = useState({});
+  //const [userPhone, setUserPhone] = useState({});
   const navigate = useNavigate()
-  
 
 
   useEffect(() => {
+
     async function fetchData() {
       const token = localStorage.getItem('token')
-      const result = await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`, {headers: {
+      await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`, {headers: {
         Authorization: token
       }})
       .then(res => {
-        console.log(res)
+        console.log(res.data)
+        setUserDetails(res.data.user)
       }).catch(err => {
         console.log(err)
         navigate("/SignIn")
       })
-      setUserDetails(result.data);
     }
 
     fetchData();
@@ -51,7 +54,6 @@ function UserProfile(props) {
 
   return (
     <>
-
       <Box sx={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column', height: 'calc(100vh - 53px)' }}> 
 
         <div className="TopPart">
@@ -74,10 +76,8 @@ function UserProfile(props) {
 
         <Box sx={{m: 5}}>
           <Stack spacing={2} direction= "column" alignItems="center" >
-            <Stack spacing={2} direction = "row" alignItems="center" justifyContent="center">
-              <Button color="success" href="/PastUpload" variant="contained">Past Uploads</Button>
-              <Button color="success" href="/UserProfile/SavedPost" variant="contained">Saved Posts</Button>
-            </Stack>
+            <Button color="success" href="/PastUpload" variant="contained">Past Uploads</Button>
+            <Button color="success" href="/UserProfile/SavedPost" variant="contained">Saved Posts</Button>
             <Button color="success" href="/UserProfile/EditProfile" variant="contained">Edit Profile</Button>
             <Button color="success" href="/" variant="contained">Sign Out</Button>
           </Stack>
