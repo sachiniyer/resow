@@ -111,16 +111,22 @@ router.post('/login', async (req,res, )=> {
 
 router.get('/profile', passport.authenticate('jwt', {session: false}), async (req, res) => {
     try {
-        const user = await User.findOne(req.body.emailID)
-        console.log(user)
+        const authHeader = req.headers.authorization;
+        const token = authHeader.split(' ')[1];
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRET );  
+        let userId = decoded.id  
+        console.log(userId)
+
+        const user = await User.findById(userId)
+
+
+        //res.json(user)
         res.json({
-            success: true,
-            user: {
-              id: user.id,
-              emailID: user.emailID,
-            },
-            message:
-              "Congratulations: you have accessed this route because you have a valid JWT token!",
+            id: userId,
+            fullname: user.fullname,
+            emailID: user.emailID, 
+            phone: user.phone
           })
     }
     catch (err) {

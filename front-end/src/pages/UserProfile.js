@@ -40,8 +40,8 @@ function UserProfile(props) {
         Authorization: token
       }})
       .then(res => {
-        console.log(res.data)
-        setUserDetails(res.data.user)
+        console.log(res)
+        setUserDetails(res.data)
       }).catch(err => {
         console.log(err)
         navigate("/SignIn")
