@@ -20,17 +20,6 @@ router.get('/', async (req, res) => {
     }
 })
 
-/*//have to fis thix after the tokenization
-router.get('/:userId', async (req, res) => {
-    try {
-        const user = await User.findById(req.params.userId)
-        res.json(user)
-    }
-    catch (err) {
-        res.json({message: err.message})
-    }
-})*/
-
  //route for adding a new user (user registration page)
 router.post('/register', async (req,res)=> {
     const user = new User({
@@ -116,18 +105,25 @@ router.get('/profile', passport.authenticate('jwt', {session: false}), async (re
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET );  
         let userId = decoded.id  
-        console.log(userId)
-
         const user = await User.findById(userId)
 
-
-        //res.json(user)
         res.json({
             id: userId,
             fullname: user.fullname,
             emailID: user.emailID, 
             phone: user.phone
           })
+    }
+    catch (err) {
+        res.json({message: err.message})
+    }
+})
+
+//need to check if we need this router later since the user profile is fetched after authentication
+router.get('/:userId', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.userId)
+        res.json(user)
     }
     catch (err) {
         res.json({message: err.message})

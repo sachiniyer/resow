@@ -26,14 +26,10 @@ function TextContainer(props){
 function UserProfile(props) {
 
   const [userDetails,setUserDetails] = useState({});
-  //const [userId, setUserId] = useState({});
-  //const [userEmail, setUserEmail] = useState({});
-  //const [userPhone, setUserPhone] = useState({});
   const navigate = useNavigate()
 
 
   useEffect(() => {
-
     async function fetchData() {
       const token = localStorage.getItem('token')
       await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`, {headers: {
