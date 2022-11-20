@@ -30,6 +30,26 @@ function SignIn(props) {
   
   }, [responseServer, navigate])
 
+  useEffect(() => {
+    async function checkLoggedIn() {
+      const token = localStorage.getItem('token')
+      await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`, {headers: {
+        Authorization: token
+      }})
+      .then(res => {
+        console.log(res)
+        navigate("/UserProfile")
+      }).catch(err => {
+        console.log(err)
+        navigate("/SignIn")
+        
+      })
+    }
+
+    checkLoggedIn();
+
+  }, [navigate]);
+
 
   const handleSubmit = async e => {
     // prevent the HTML form from actually submitting
