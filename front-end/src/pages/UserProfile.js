@@ -75,7 +75,8 @@ function UserProfile(props) {
             <Button color="success" href="/PastUpload" variant="contained">Past Uploads</Button>
             <Button color="success" href="/UserProfile/SavedPost" variant="contained">Saved Posts</Button>
             <Button color="success" href="/UserProfile/EditProfile" variant="contained">Edit Profile</Button>
-            <Button color="success" href="/" variant="contained">Sign Out</Button>
+            <Button color="success" href="/" variant="contained" onClick={() => 
+            localStorage.removeItem('token')} > Sign Out </Button>
           </Stack>
         </Box>
   
