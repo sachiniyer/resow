@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom"
 import axios from "axios";
 
 import Box from '@mui/material/Box';
@@ -13,40 +14,34 @@ import Fab from '@mui/material/Fab';
 
 import InputAdornment from '@mui/material/InputAdornment';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import EmailIcon from '@mui/icons-material/Email';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 
-function TextFieldContainer(props) {
-  return (
-    <Box sx={{ borderRadius: '7px', m: 1, p: 0.95, color: 'grey.800', bgcolor: '#e5e4e2' }}>
-      <TextField label={props.label}
-        InputProps={{ startAdornment: (<InputAdornment position="start"> {props.icon} </InputAdornment>), }}
-        variant="standard"
-        defaultValue={props.text}
-        color="success" />
-    </Box>
-  );
-}
 
 function EditProfile(props) {
 
   const [userDetails, setUserDetails] = useState([]);
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios(
-        "https://my.api.mockaroo.com/user_mock_data2.json?key=13a3e900"
-      );
-
-      setUserDetails(response.data);
-
+      const token = localStorage.getItem('token')
+      await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`, {headers: {
+        Authorization: token
+      }})
+      .then(res => {
+        console.log(res)
+        setUserDetails(res.data)
+      }).catch(err => {
+        console.log(err)
+        navigate("/SignIn")
+      })
     }
 
     fetchData();
 
-  }, []);
+  }, [navigate]);
+
 
   return (
 
@@ -67,11 +62,24 @@ function EditProfile(props) {
       </Box>
 
       <Stack spacing={1} direction="column" alignItems="center">
-        <TextFieldContainer label="Full Name" icon=<AccountCircle /> text={userDetails.full_name} />
-        <TextFieldContainer label="Username" icon=<AlternateEmailIcon /> text={userDetails.username} />
-        <TextFieldContainer label="Email ID" icon=<EmailIcon /> text={userDetails.email} />
-        <TextFieldContainer label="Phone Number" icon=<LocalPhoneIcon /> text={userDetails.phone} />
-        <TextFieldContainer label="Location" icon=<HomeRoundedIcon /> text={userDetails.location} />
+        <TextField label="Fullname"
+          InputProps={{ startAdornment: (<InputAdornment position="start"> <AccountCircle/> </InputAdornment>), }} 
+          variant="standard" 
+          defaultValue={userDetails.fullname} 
+          color="success" />
+
+        <TextField label="Email ID"
+          InputProps={{ startAdornment: (<InputAdornment position="start"> <EmailIcon /> </InputAdornment>), }} 
+          variant="standard" 
+          defaultValue={userDetails.emailId}
+          color="success" />
+          <p>{userDetails.emailId}</p>
+        
+        <TextField label="Phone Number"
+          InputProps={{ startAdornment: (<InputAdornment position="start"> <LocalPhoneIcon /> </InputAdornment>), }} 
+          variant="standard" 
+          defaultValue={userDetails.phone}
+          color="success" />
       </Stack>
 
       <Box sx={{ m: 2 }}>
