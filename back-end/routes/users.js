@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken") // used for authentication with JSON Web Tok
 const passport = require("passport") 
 const router = express.Router()
 const User = require("../models/userschema")
-
+const bcrypt = require('bcrypt');
 
 const { jwtOptions, jwtStrategy } = require("./jwt-config.js") // import setup options for using JWT in passport
 passport.use(jwtStrategy)
@@ -22,22 +22,28 @@ router.get('/', async (req, res) => {
 
  //route for adding a new user (user registration page)
 router.post('/register', async (req,res)=> {
-    const user = new User({
-        fullname: req.body.fullname,
-        emailID: req.body.emailID,
-        password: req.body.password,   //hash the password
-        dob: req.body.dob,
-        phone: req.body.phone,
-        img: req.body.img //this one can be removed from this section
-    });
-
+    
     //jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
 
     try {
 
-        //check here if the user exists already - if exists then throw error
-        const savedUser = await user.save()
-        res.send({
+        // const users = await User.find({emailID:req.body.emailID});
+        // if (users.length!==0){
+        //     throw new Error("The email is already in use")
+        // }
+
+        bcrypt.hash(req.body.password,10)
+        .then(hashedPassword =>{
+            const user = new User({
+                fullname: req.body.fullname,
+                emailID: req.body.emailID,
+                password: hashedPassword,   //hash the password
+                dob: req.body.dob,
+                phone: req.body.phone,
+                img: req.body.img //this one can be removed from this section
+            });
+            const savedUser = user.save()
+            res.send({
             success: true, 
             message: "User created successfully", 
             user: {
@@ -45,6 +51,9 @@ router.post('/register', async (req,res)=> {
                 emailID: savedUser.emailID
             }
         })
+        })
+        //check here if the user exists already - if exists then throw error
+        
     }
     catch (err) {
         res.send({
@@ -71,24 +80,31 @@ router.post('/login', async (req,res, )=> {
         if (!user) throw new Error("User not found")
 
         const dbPassword = user.password
-        if(dbPassword != req.body.password) throw new Error("Incorrect password, try again")  //checking if the pasword match or not
-
-        const payload = {
-            id: user._id, 
-            emailID: user.emailID
-        }
-
-        const accessToken = jwt.sign(payload, jwtOptions.secretOrKey, {expiresIn: "7d"})
-
-        res.status(200).send({
-            success: true, 
-            emailID: req.body.emailID,
-            message: "Logged in successfully", 
-            token: "Bearer " + accessToken
+        bcrypt.compare(req.body.password,dbPassword)
+        .then(validPass => {
+                if (!validPass){
+                    throw new Error("Incorrect password, try again")
+                }
+                else{
+                    const payload = {
+                        id: user._id, 
+                        emailID: user.emailID
+                    }
+                    const accessToken = jwt.sign(payload, jwtOptions.secretOrKey, {expiresIn: "7d"})
+                    res.status(200).send({
+                        success: true, 
+                        emailID: req.body.emailID,
+                        message: "Logged in successfully", 
+                        token: "Bearer " + accessToken
+                    })
+                }
+            }  
+        )
+        .catch(err =>{
+            res.status(400).json({message: err.message});
+            console.log(err)
         })
-
-        //res.cookie("acces-token", accessToken, {maxAge: 60*60*24*30*1000})
-        //res.json(user)
+       
     }
     catch (err) {
         //next(err)
