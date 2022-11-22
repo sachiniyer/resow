@@ -44,10 +44,13 @@ router.get('/past-uploads/:userId', async (req,res) => {
     }
 })
 
-router.get('/saved-posts/:userId',async(req,res)=>{
+router.get('/saved-posts/userId=:userId',async(req,res)=>{
     try{
-        const user = await User.findById(req.params.userId)
-        postIdList = user.savedPosts
+        const user = await User.find({_id:req.params.userId})
+        if (user.length===0){
+            res.json([])
+        }
+        postIdList = user[0].savedPosts
 
         const savedPosts = await Post.find(
             {_id:{$in:postIdList}}
