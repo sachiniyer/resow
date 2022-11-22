@@ -34,17 +34,34 @@ router.post('/register', async (req,res)=> {
     //jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
 
     try {
+        //check if the user exists with the same email or not 
+        const user = await User.findOne({emailID: req.body.emailID})
+        console.log(req.body.emailID)
 
-        //check here if the user exists already - if exists then throw error
-        const savedUser = await user.save()
-        res.send({
-            success: true, 
-            message: "User created successfully", 
-            user: {
+        if(!user){
+            const savedUser = await newuser.save()
+
+            const payload = {
                 id: savedUser._id, 
                 emailID: savedUser.emailID
             }
-        })
+            const accessToken = jwt.sign(payload, jwtOptions.secretOrKey, {expiresIn: "7d"})
+
+            res.send({
+                success: true,
+                message: "User created successfully", 
+                token: "Bearer " + accessToken,
+                newuser: {
+                    id: savedUser._id, 
+                    emailID: savedUser.emailID
+                }
+             })
+        }
+        else{
+            if(user.emailID == req.body.emailID) {
+                throw new Error("An account already exists with the same email")
+            }
+        }    
     }
     catch (err) {
         res.send({
