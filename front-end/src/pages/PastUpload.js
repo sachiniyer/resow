@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom"
 import PostCard from '../components/Post';
 import axios from "axios";
 import { useEffect,useState } from 'react';
@@ -8,11 +8,13 @@ import Box from '@mui/material/Box';
 
 function PastUpload(props) {
 
-  const userId = "636bcc297a31971b0db1af29"
+  const [userId,setUserId] = useState("")
 
   const [data, setData] = useState([]);
 
   const [noSavedPost, setNoSavedPost] = useState(true);
+
+  const navigate = useNavigate()
 
 
   useEffect(() => {
@@ -28,12 +30,30 @@ function PastUpload(props) {
     }
 
     fetchData();
-  }, []);
+  }, [userId]);
+
+
+  useEffect(() => {
+    async function fetchData() {
+      const token = localStorage.getItem('token')
+      await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`, {headers: {
+        Authorization: token
+      }})
+      .then(res => {
+        setUserId(res.data.id)
+      }).catch(err => {
+        navigate("/SignIn")
+      })
+    }
+
+    fetchData();
+
+  }, [navigate]);
 
     return (
       <>
         <Box sx = {{color:"black", fontSize:"40px",margin:"10px"}}>Past Uploads</Box>
-        { data && data.map((item) => (
+        {data && data.map((item) => (
           <PostCard 
             key={item._id}  
             info={item}
