@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useNavigate } from "react-router-dom"
 import { useEffect,useState } from 'react';
 import ImgCarousel from '../components/carousel/ImgCarousel';
 import ContactBox from '../components/ContactBox';
@@ -16,8 +17,27 @@ import {useParams} from "react-router-dom";
 
 export default function ItemDetails(props){
 
-  // placeholder for userId. will fetch data in the future.
-  const userId = "636a9761296699bf91aa3b48";
+  const [userId,setUserId] = useState("")
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    async function fetchData() {
+      const token = localStorage.getItem('token')
+      await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`, {headers: {
+        Authorization: token
+      }})
+      .then(res => {
+        setUserId(res.data.id)
+        setIsLoggedIn(true)
+      }).catch(err => {
+        setUserId("")
+      })
+    }
+
+    fetchData();
+
+  }, [navigate]);
 
   // The postId obtained from the parameter.
   let {id} = useParams();
@@ -40,8 +60,7 @@ export default function ItemDetails(props){
   const [isMyPost,setIsMyPost] = useState(false);
 
   // a boolean flag to check if a user has logged in or not. (need passport authentication)
-  const isLoggedIn = true
-  // const [isLoggedIn,setIsLoggedIn] = useState(true);
+  const [isLoggedIn,setIsLoggedIn] = useState(false);
 
   // a boolean flag to check if it is saved or not.
   const [isSaved,setIsSaved] = useState(false);
@@ -171,7 +190,7 @@ export default function ItemDetails(props){
 
   useEffect(()=>{
     checkSave();
-  },[])
+  },[userId])
 
   return(
       <>
