@@ -22,68 +22,41 @@ router.get('/', async (req, res) => {
 
  //route for adding a new user (user registration page)
 router.post('/register', async (req,res)=> {
-    
-    //jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
 
     try {
         //check if the user exists with the same email or not 
         const user = await User.findOne({emailID: req.body.emailID})
         console.log(req.body.emailID)
 
-<<<<<<< HEAD
         if(!user){
-            const savedUser = await newuser.save()
-
-            const payload = {
-                id: savedUser._id, 
-                emailID: savedUser.emailID
-            }
-            const accessToken = jwt.sign(payload, jwtOptions.secretOrKey, {expiresIn: "7d"})
-
-            res.send({
-                success: true,
-                message: "User created successfully", 
-                token: "Bearer " + accessToken,
-                newuser: {
+            bcrypt.hash(req.body.password,10)
+            .then(hashedPassword =>{
+                const user = new User({
+                    fullname: req.body.fullname,
+                    emailID: req.body.emailID,
+                    password: hashedPassword, 
+                    dob: req.body.dob,
+                    phone: req.body.phone,
+                    img: req.body.img //this one can be removed from this section
+                });
+                const savedUser = user.save()
+                const payload = {
                     id: savedUser._id, 
                     emailID: savedUser.emailID
                 }
-             })
-        }
-        else{
-            if(user.emailID == req.body.emailID) {
-                throw new Error("An account already exists with the same email")
-            }
-        }    
-=======
-        // const users = await User.find({emailID:req.body.emailID});
-        // if (users.length!==0){
-        //     throw new Error("The email is already in use")
-        // }
+                const accessToken = jwt.sign(payload, jwtOptions.secretOrKey, {expiresIn: "7d"})
 
-        bcrypt.hash(req.body.password,10)
-        .then(hashedPassword =>{
-            const user = new User({
-                fullname: req.body.fullname,
-                emailID: req.body.emailID,
-                password: hashedPassword,   //hash the password
-                dob: req.body.dob,
-                phone: req.body.phone,
-                img: req.body.img //this one can be removed from this section
-            });
-            const savedUser = user.save()
-            res.send({
-            success: true, 
-            message: "User created successfully", 
-            user: {
-                id: savedUser._id, 
-                emailID: savedUser.emailID
-            }
-        })
-        })
-        //check here if the user exists already - if exists then throw error
-        
->>>>>>> origin/master
+                res.send({
+                success: true, 
+                message: "User created successfully", 
+                token: "Bearer " + accessToken,
+                user: {
+                    id: savedUser._id, 
+                    emailID: savedUser.emailID
+                }
+            })
+            })
+        }
     }
     catch (err) {
         res.send({
@@ -92,7 +65,6 @@ router.post('/register', async (req,res)=> {
         })
         console.log(err)
     }
-
 })
 
 //login router to check if the entered details are correct or not (Log In Page) - AUTHORIZATION and AUTHENTICATION
