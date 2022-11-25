@@ -47,14 +47,14 @@ router.post('/register', async (req,res)=> {
                 const accessToken = jwt.sign(payload, jwtOptions.secretOrKey, {expiresIn: "7d"})
 
                 res.send({
-                success: true, 
-                message: "User created successfully", 
-                token: "Bearer " + accessToken,
-                user: {
-                    id: savedUser._id, 
-                    emailID: savedUser.emailID
-                }
-            })
+                    success: true, 
+                    message: "User created successfully", 
+                    token: "Bearer " + accessToken,
+                    user: {
+                        id: savedUser._id, 
+                        emailID: savedUser.emailID
+                    }
+                 })
             })
         }
     }
