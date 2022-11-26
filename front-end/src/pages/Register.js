@@ -1,6 +1,8 @@
 import * as React from 'react';
+import axios from "axios"
+import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
-import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -9,8 +11,20 @@ import Stack from '@mui/material/Stack';
 
 
 function SignUp(props) {
-
+  const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false);
+  const [responseServer, setResponse] = useState({}) // the API will return an object with a JWT token, if the user logs in successfully
+
+  useEffect(() => {
+    // if the user is logged-in, save the token to local storage
+    if (responseServer.success && responseServer.token) {
+      console.log(`User successfully registered: ${responseServer.emailID}`)
+      console.log(responseServer.token)
+      localStorage.setItem('token', responseServer.token) // store the token into localStorage
+      navigate('/UserProfile')
+    }
+  
+  }, [responseServer, navigate])
 
   return (
       <Box sx={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column', height: 'calc(100vh - 53px)' }}>
@@ -35,26 +49,15 @@ function SignUp(props) {
                 let password = document.getElementById('password').value
                 let phonenumber = document.getElementById('phone').value
                 let passwordConf = document.getElementById('passwordConf').value
-                const url = `${process.env.REACT_APP_SERVER_HOSTNAME}/users/register` 
                 let data = {fullname: fullname,emailID: emailID, password: password, phone: phonenumber}
                 if (password === passwordConf) {
                   if (emailID && password && passwordConf) {
-                    //use axios to send data to the backend
-                    const response = await fetch(url, {
-                      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-                      mode: 'cors', // no-cors, *cors, same-origin
-                      //cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                      //credentials: 'same-origin', // include, *same-origin, omit
-                      headers: {
-                        'Content-Type': 'application/json'
-                      },
-                      redirect: 'follow', // manual, *follow, error
-                      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-                      body: JSON.stringify(data) // body data type must match "Content-Type" header
-                    })
-                    .then((response) => response.json())
-                    .then((data) => console.log('response:',data))
-                    .then(alert('Registered!'));
+                    const response = await axios.post(
+                      `${process.env.REACT_APP_SERVER_HOSTNAME}/users/register`, 
+                      data
+                    )
+                    console.log(`Server response: ${JSON.stringify(response.data, null, 0)}`)
+                    setResponse(response.data)
                   }
                   else {
                     alert('All fields must be filled')
