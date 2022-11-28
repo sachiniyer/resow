@@ -75,3 +75,22 @@ export default function EditPost(props){
       redirect,
       cancel
     );
+
+    async function savePost(){
+        let user_id = userId;
+        let post_id = postId;
+        let data = {userId:user_id, postId:post_id};
+    
+        axios
+        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/saved-posts`,data)
+        .catch (err => {console.log(err)})
+      }
+    
+      // a function to send save info to the server
+      async function unsavePost() {
+    
+        axios
+        .delete(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/saved-posts/userId=${userId}&postId=${postId}`)
+        .catch(err =>{console.log(err)})
+    
+      }
