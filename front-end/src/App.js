@@ -74,6 +74,10 @@ function App() {
 
             {/* a route for the past upload page */}
             <Route path="/PastUpload" element={<PastUpload />} />
+
+            {/* a route for the edit post page */}
+            <Route path="/ItemDetails/:id/EditPost" element={<EditPost />} />
+            
           </Routes>
         </Router>
       </main>
