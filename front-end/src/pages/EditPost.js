@@ -245,6 +245,7 @@ export default function EditPost(props){
                   value={itemDetails.location}
                 //   onChange={handleChange} 
                   />
+                  <br></br>
                 </Box>
             </Box>
           </Box>
@@ -265,8 +266,9 @@ export default function EditPost(props){
 
           <Box sx={{ m: 2 }}>
         <Stack spacing={2} direction="row" alignItems="center" justifyContent="center">
-          <Button color="success" href={"/ItemDetails/:"+postId+"/EditPost"} variant="contained">Save Changes</Button>
-          <Button color="success" href={"/ItemDetails/:"+postId+"/EditPost"} variant="contained">Revert Changes</Button>
+        {/* add onClick function to handle save */}
+          <Button color="success" href={"/ItemDetails/:"+postId} variant="contained">Save Changes</Button> 
+          <Button color="success" href={"/ItemDetails/:"+postId} variant="contained">Revert Changes</Button>
         </Stack>
       </Box>
 
