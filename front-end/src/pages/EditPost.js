@@ -181,6 +181,23 @@ export default function EditPost(props){
         checkSave();
       },[])
 
+      const [itemPics,setItemPics] = useState([])
+
+      function handleUpload(event) {
+        console.log('Event:', event)
+        console.log('Event.target:', event.target)
+        console.log('Event.target.files:', event.target.files)
+    
+        if (event.target.files[0]) {
+          let file = event.target.files[0];
+          let reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onloadend = () => {
+            setItemPics([...itemPics, reader.result])
+          }
+        }
+      }
+
       return(
         <>
         <Box sx={{width:{xs:0.9,sm:0.5,md: 0.3}, paddingTop:1}}>
