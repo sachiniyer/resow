@@ -177,3 +177,66 @@ export default function EditPost(props){
       useEffect(()=>{
         checkSave();
       },[])
+
+      return(
+        <>
+        <Box sx={{width:{xs:0.9,sm:0.5,md: 0.3}, paddingTop:1}}>
+            <ImgCarousel imgList = {itemDetails.images} />  
+            <IconButton color="primary" aria-label="upload picture" component="label">
+          <input
+            hidden
+            accept="image/*"
+            style={{ display: 'none' }}
+            id="raised-button-file"
+            multiple
+            type="file"
+            onChange={handleUpload}
+          />
+          <label htmlFor="raised-button-file">
+            <PhotoCamera />
+          </label>    
+          </IconButton>
+        </Box>
+  
+        <Box sx={{width:{xs:0.9,sm:0.5,md: 0.3}, display: 'flex',borderBottom:"solid"}}>
+            <Box sx={{width:0.3,height:1,textAlign:"center",justifyContent:"center"}}>
+                <AspectRatio ratio="1/1"> 
+                  <Avatar sx={{border:"solid 0.5px",borderColor:"black",justifyContent:"center",width: 0.5}}  src={imgPath}/> 
+                </AspectRatio>
+                <Box sx={{width:1, wordWrap: "break-word",fontSize: "10px",color:"black"}}>
+                  {uploaderDetails.fullname}
+                </Box>
+            </Box>
+  
+            <Box sx={{width:0.05}}>
+            </Box>
+  
+            <Box sx={{width: 1}}>
+                <Box sx={{height:0.1}}>
+                </Box>
+                <Box sx={{width:1, flexWrap:"wrap", wordWrap: "break-word",fontSize: {xs:"15px",sm:"20px",md: "20px"}, textAlign:"left",color:"black"}}>
+                <TextField label="Title"
+                  value={itemDetails.title}
+                  onChange={handleChange} />
+                </Box>
+                <Box sx={{marginTop:1,wordWrap: "break-word", fontSize: "12px", textAlign:"left", color:"#2596be"}}>
+                <TextField label="Location"
+                  value={itemDetails.location}
+                  onChange={handleChange} />
+                </Box>
+            </Box>
+          </Box>
+          
+          {open ? (<ContactBox info={uploaderDetails}/>) : null}
+          <Box sx={{color:"black",borderTop:"solid",width:{xs:0.9,sm:0.5,md: 0.3}, textAlign:"left",marginBottom:7,fontSize: "15px"}}>
+          <Box sx={{textAlign:"right",marginTop:"-35px",marginBottom:"10px"}}>
+            {isSaved
+            ? <IconButton onClick={switchSaved}><TurnedInIcon/></IconButton>
+            : <IconButton onClick={switchSaved}><TurnedInNotIcon/></IconButton>
+            }
+          </Box>
+          <TextField label="Description"
+                  value={itemDetails.description}
+                  onChange={handleChange} />
+          </Box>
+  
