@@ -6,6 +6,7 @@ import ContactBox from '../components/ContactBox';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 import AspectRatio from '@mui/joy/AspectRatio';
 import axios from "axios";
 import ClickAwayListener from '@mui/material/ClickAwayListener';
