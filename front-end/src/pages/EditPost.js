@@ -246,6 +246,8 @@ export default function EditPost(props){
                 //   onChange={handleChange} 
                   />
                   <br></br>
+                  <br></br>
+                  <br></br>
                 </Box>
             </Box>
           </Box>
