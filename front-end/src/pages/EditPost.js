@@ -237,12 +237,14 @@ export default function EditPost(props){
                 <Box sx={{width:1, flexWrap:"wrap", wordWrap: "break-word",fontSize: {xs:"15px",sm:"20px",md: "20px"}, textAlign:"left",color:"black"}}>
                 <TextField label="Title"
                   value={itemDetails.title}
-                  onChange={handleChange} />
+                //   onChange={handleChange} 
+                />
                 </Box>
                 <Box sx={{marginTop:1,wordWrap: "break-word", fontSize: "12px", textAlign:"left", color:"#2596be"}}>
                 <TextField label="Location"
                   value={itemDetails.location}
-                  onChange={handleChange} />
+                //   onChange={handleChange} 
+                  />
                 </Box>
             </Box>
           </Box>
@@ -257,7 +259,8 @@ export default function EditPost(props){
           </Box>
           <TextField label="Description"
                   value={itemDetails.description}
-                  onChange={handleChange} />
+                //   onChange={handleChange} 
+                  />
           </Box>
 
           <Box sx={{ m: 2 }}>
