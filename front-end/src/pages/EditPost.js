@@ -94,3 +94,86 @@ export default function EditPost(props){
         .catch(err =>{console.log(err)})
     
       }
+
+      async function deletePost(){
+
+        axios.delete(`${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`)
+        .then(alert("the post is deleted"))
+        .then(window.location.replace("/Map/ItemsList"))
+        .catch(err => {console.log(err)})
+    
+      }
+    
+      async function updatePost(){
+        axios.patch(`${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`)
+        .then(alert("the post is updated"))
+        .then(window.location.replace({"/ItemDetails/:":postId}))
+        .catch(err => {console.log(err)})
+      }
+    
+      // a switching function to check the state of saving
+      const switchSaved = () => {
+        if (!isLoggedIn){
+          askRedirect();
+        }
+        else {
+          if (isSaved){
+            unsavePost();
+            setIsSaved(!isSaved);
+          }
+          else{
+            savePost();
+            setIsSaved(!isSaved);
+          }
+        }
+      }
+    
+      const handleClick = () => {
+        setOpen((prev) => !prev);
+      };
+    
+      const handleClickAway = () => {
+        setOpen(false);
+      };
+    
+      async function fetchItemData() {
+    
+        const result = await axios(
+          `${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`
+        );
+        setItemDetails(result.data);
+        setUploaderId(result.data.owner)
+        setIsMyPost(result.data.owner === userId)
+      }
+    
+      async function fetchUploaderData(){
+        const result = await axios(
+          `${process.env.REACT_APP_SERVER_HOSTNAME}/users/${uploaderId}`
+        );
+        setUploaderDetails(result.data)
+        if(result.data.img){
+          setImgPath(result.data.img[0])
+        }
+      }
+    
+      async function checkSave() {
+    
+        const result = await axios(
+          `${process.env.REACT_APP_SERVER_HOSTNAME}/users/saved-posts/userId=${userId}&postId=${postId}`
+        );
+        if (result.data.length === 0){
+          setIsSaved(false)
+        }
+        else{
+          setIsSaved(true)
+        }
+      }
+    
+      useEffect(() => { 
+        fetchItemData();
+        fetchUploaderData();
+      }, [uploaderId]);
+    
+      useEffect(()=>{
+        checkSave();
+      },[])
