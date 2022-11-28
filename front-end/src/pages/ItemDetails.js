@@ -235,9 +235,14 @@ export default function ItemDetails(props){
         </Box>
 
         {isMyPost
-        ? <Box sx={{position: "fixed",bottom: 20}}>
-            <Button onClick={deletePost} color="success" variant="contained"> Delete post</Button>
-          </Box>
+        ? <Stack spacing={2} direction="row" alignItems="center" justifyContent="center">
+        <Button sx={{ width: 100}} onClick={deletePost} color="success" variant="contained">Delete post</Button>
+        <Button sx={{ width: 100}} href={"/ItemDetails/:"+postId+"/EditPost"} color="success" variant="contained">Post</Button>
+      </Stack> 
+        
+        // <Box sx={{position: "fixed",bottom: 20}}>
+        //     <Button onClick={deletePost} color="success" variant="contained"> Delete post</Button>
+        //   </Box>
           
         : <ClickAwayListener onClickAway={handleClickAway}>
             <Box sx={{position: "fixed",bottom: 20}}>
