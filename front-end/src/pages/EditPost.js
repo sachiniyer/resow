@@ -198,6 +198,8 @@ export default function EditPost(props){
         }
       }
 
+    //   to write: handleChange
+
       return(
         <>
         <Box sx={{width:{xs:0.9,sm:0.5,md: 0.3}, paddingTop:1}}>
