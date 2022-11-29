@@ -6,6 +6,7 @@ const User = require("../models/userschema")
 const bcrypt = require('bcrypt');
 
 const { jwtOptions, jwtStrategy } = require("./jwt-config.js") // import setup options for using JWT in passport
+const { body, validationResult } = require('express-validator');
 passport.use(jwtStrategy)
 
 
@@ -130,7 +131,8 @@ router.get('/profile', passport.authenticate('jwt', {session: false}), async (re
             id: userId,
             fullname: user.fullname,
             emailID: user.emailID, 
-            phone: user.phone
+            phone: user.phone,
+            img: user.img
           })
     }
     catch (err) {
@@ -150,9 +152,14 @@ router.get('/:userId', async (req, res) => {
 })
 
 
-router.patch('/:userId', async (req, res) => {
+router.patch('/:userId', body('emailID').isEmail(), body('phone').isMobilePhone(),async (req, res) => {
     //route for updating a user profile (edit profile page)
     try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()){
+            return res.status(200).json({ message: errors.array()[0].param });
+        }
+
         const updatedUser = await User.updateOne(
             { _id: req.params.userId },
             { $set: { fullname: req.body.fullname,
@@ -161,9 +168,11 @@ router.patch('/:userId', async (req, res) => {
                       img: req.body.img
                     } 
             })
-        res.json(updatedUser)
+        res.json({message:"ok"})
     }
     catch (err) {
+        console.log("here")
+        console.log(err.message)
         res.json({message: err.message})
     }
     

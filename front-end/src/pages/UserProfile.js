@@ -36,7 +36,6 @@ function UserProfile(props) {
         Authorization: token
       }})
       .then(res => {
-        //console.log(res)
         setUserDetails(res.data)
       }).catch(err => {
         console.log(err)

@@ -104,7 +104,6 @@ function MapWrapper(_) {
       source: vectorSource,
       declutter: true
     });
-    console.log(getLocation())
     const initialView = new View({
       projection: 'EPSG:3857',
       center: fromLonLat(getLocation()),
