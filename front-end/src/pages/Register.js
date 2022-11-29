@@ -1,6 +1,8 @@
 import * as React from 'react';
+import axios from "axios"
+import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
-import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -9,8 +11,29 @@ import Stack from '@mui/material/Stack';
 
 
 function SignUp(props) {
-
+  const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false);
+  const [responseServer, setResponse] = useState({}) // the API will return an object with a JWT token, if the user logs in successfully
+
+  useEffect(() => {
+    async function setToken() {
+
+      if (responseServer.success) {
+        
+        const response = await axios.post(
+          `${process.env.REACT_APP_SERVER_HOSTNAME}/users/login`, 
+          {emailID: responseServer.emailID, password: responseServer.password}
+        )
+        console.log(`User registered successfully: ${JSON.stringify(response.data, null, 0)}`)
+        localStorage.setItem('token', response.data.token) // store the token into localStorage
+        navigate('/UserProfile')
+
+      }
+    }
+
+    setToken();
+
+  }, [responseServer, navigate]);
 
   return (
       <Box sx={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column', height: 'calc(100vh - 53px)' }}>
@@ -35,26 +58,14 @@ function SignUp(props) {
                 let password = document.getElementById('password').value
                 let phonenumber = document.getElementById('phone').value
                 let passwordConf = document.getElementById('passwordConf').value
-                const url = `${process.env.REACT_APP_SERVER_HOSTNAME}/users/register` 
-                let data = {fullname: fullname,emailID: emailID, password: password, phone: phonenumber}
+                let data = {fullname: fullname, emailID: emailID, password: password, phone: phonenumber}
                 if (password === passwordConf) {
                   if (emailID && password && passwordConf) {
-                    //use axios to send data to the backend
-                    const response = await fetch(url, {
-                      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-                      mode: 'cors', // no-cors, *cors, same-origin
-                      //cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                      //credentials: 'same-origin', // include, *same-origin, omit
-                      headers: {
-                        'Content-Type': 'application/json'
-                      },
-                      redirect: 'follow', // manual, *follow, error
-                      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-                      body: JSON.stringify(data) // body data type must match "Content-Type" header
-                    })
-                    .then((response) => response.json())
-                    .then((data) => console.log('response:',data))
-                    .then(alert('Registered!'));
+                    const response = await axios.post(
+                      `${process.env.REACT_APP_SERVER_HOSTNAME}/users/register`, 
+                      data
+                    )
+                    setResponse(response.data)
                   }
                   else {
                     alert('All fields must be filled')

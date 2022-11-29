@@ -23,38 +23,38 @@ router.get('/', async (req, res) => {
 
  //route for adding a new user (user registration page)
 router.post('/register', async (req,res)=> {
-    
-    //jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
 
     try {
+        //check if the user exists with the same email or not 
+        const user = await User.findOne({emailID: req.body.emailID})
 
-        // const users = await User.find({emailID:req.body.emailID});
-        // if (users.length!==0){
-        //     throw new Error("The email is already in use")
-        // }
-
-        bcrypt.hash(req.body.password,10)
-        .then(hashedPassword =>{
-            const user = new User({
-                fullname: req.body.fullname,
-                emailID: req.body.emailID,
-                password: hashedPassword,   //hash the password
-                dob: req.body.dob,
-                phone: req.body.phone,
-                img: req.body.img //this one can be removed from this section
-            });
-            const savedUser = user.save()
-            res.send({
-            success: true, 
-            message: "User created successfully", 
-            user: {
-                id: savedUser._id, 
-                emailID: savedUser.emailID
-            }
-        })
-        })
-        //check here if the user exists already - if exists then throw error
-        
+        if(!user){
+            bcrypt.hash(req.body.password,10)
+            .then(hashedPassword =>{
+                const newUser = new User({
+                    fullname: req.body.fullname,
+                    emailID: req.body.emailID,
+                    password: hashedPassword, 
+                    dob: req.body.dob,
+                    phone: req.body.phone,
+                    img: req.body.img //this one can be removed from this section
+                });
+                newUser.save().then(
+                    () =>{
+                        res.status(200).send({
+                            success: true,
+                            message: "User created successfully",  
+                            emailID: req.body.emailID,
+                            password: req.body.password
+                        })
+                    }
+                )
+            })
+            .catch(err =>{
+                res.status(400).json({message: err.message});
+                console.log(err)
+            })
+        }
     }
     catch (err) {
         res.send({
@@ -63,7 +63,6 @@ router.post('/register', async (req,res)=> {
         })
         console.log(err)
     }
-
 })
 
 //login router to check if the entered details are correct or not (Log In Page) - AUTHORIZATION and AUTHENTICATION
@@ -78,6 +77,7 @@ router.post('/login', async (req,res, )=> {
 
         //check if the user exists or not 
         const user = await User.findOne({emailID: req.body.emailID})
+        console.log(user)
         if (!user) throw new Error("User not found")
 
         const dbPassword = user.password
@@ -122,7 +122,10 @@ router.get('/profile', passport.authenticate('jwt', {session: false}), async (re
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET );  
         let userId = decoded.id  
+        console.log(userId)
         const user = await User.findById(userId)
+
+        console.log(user)
 
         res.json({
             id: userId,
