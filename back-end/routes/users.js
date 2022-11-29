@@ -76,6 +76,7 @@ router.post('/login', async (req,res, )=> {
 
         //check if the user exists or not 
         const user = await User.findOne({emailID: req.body.emailID})
+        console.log(user)
         if (!user) throw new Error("User not found")
 
         const dbPassword = user.password
