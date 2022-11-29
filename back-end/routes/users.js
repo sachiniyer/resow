@@ -53,6 +53,10 @@ router.post('/register', async (req,res)=> {
                     emailID: req.body.emailID
                 })
             })
+            .catch(err =>{
+                res.status(400).json({message: err.message});
+                console.log(err)
+            })
         }
     }
     catch (err) {
