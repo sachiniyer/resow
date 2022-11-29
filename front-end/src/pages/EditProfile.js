@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom"
 import axios from "axios";
 
 import Box from '@mui/material/Box';
@@ -13,40 +14,88 @@ import Fab from '@mui/material/Fab';
 
 import InputAdornment from '@mui/material/InputAdornment';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import EmailIcon from '@mui/icons-material/Email';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 
-function TextFieldContainer(props) {
-  return (
-    <Box sx={{ borderRadius: '7px', m: 1, p: 0.95, color: 'grey.800', bgcolor: '#e5e4e2' }}>
-      <TextField label={props.label}
-        InputProps={{ startAdornment: (<InputAdornment position="start"> {props.icon} </InputAdornment>), }}
-        variant="standard"
-        defaultValue={props.text}
-        color="success" />
-    </Box>
-  );
-}
 
 function EditProfile(props) {
 
   const [userDetails, setUserDetails] = useState([]);
+  const [fullname, setFullname] = useState("");
+  const [emailID, setEmailID] = useState("");
+  const [phone, setPhone] = useState("");
+  const [img, setImg] = useState([""]);
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios(
-        "https://my.api.mockaroo.com/user_mock_data2.json?key=13a3e900"
-      );
-
-      setUserDetails(response.data);
-
+      const token = localStorage.getItem('token')
+      await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`, {headers: {
+        Authorization: token
+      }})
+      .then(res => {
+        setUserDetails(res.data)
+        setFullname(res.data.fullname)
+        setEmailID(res.data.emailID);
+        setPhone(res.data.phone);
+        setImg(res.data.img);
+      }).catch(err => {
+        console.log(err)
+        navigate("/SignIn")
+      })
     }
 
     fetchData();
 
-  }, []);
+  }, [navigate]);
+
+  const revertInfo = () => {
+    setEmailID(userDetails.emailID);
+    setFullname(userDetails.fullname);
+    setPhone(userDetails.phone);
+    setImg(userDetails.img);
+  };
+
+  async function editProfile(){
+
+    const userInfo = {
+      fullname:`${fullname}`,
+      emailID:`${emailID}`,
+      phone:`${phone}`,
+      img:{img}
+    }
+
+    axios.patch(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/${userDetails.id}`,userInfo)
+    .then(res => {
+      if (res.data.message==="ok"){
+        alert("the profile has been updated")
+        window.location.replace("/UserProfile")
+      }
+      if (res.data.message==="emailID"){
+        alert("invalid email format!")
+        .then(revertInfo())
+      }
+      if (res.data.message==="phone"){
+        alert("invalid phone number format!")
+        .then(revertInfo())
+      }
+    })
+    .catch(err => {
+      revertInfo();
+    })
+
+  }
+
+  const imgRoute = () => {
+    if(img!==[]){
+      return img[0]
+    }
+    else{
+      return ""
+    }
+  }
+
 
   return (
 
@@ -55,8 +104,7 @@ function EditProfile(props) {
       <Box sx={{ mt: 3, mb: 2 }}>
         <Stack direction="row" style={{ justifyContent: "center", display: "absolute" }} >
           <Avatar
-            src={userDetails.avatar}
-            alt="Profile Picture"
+            src = {imgRoute()}
             sx={{ border: "solid 0.5px", borderColor:"black", width: 120, height: 120 }}
           />
           <Fab component="label" sx={{ display: "absolute", mt: "80px", ml: "-40px", zIndex: 'tooltip' }} size="small" color="success" >
@@ -67,17 +115,33 @@ function EditProfile(props) {
       </Box>
 
       <Stack spacing={1} direction="column" alignItems="center">
-        <TextFieldContainer label="Full Name" icon=<AccountCircle /> text={userDetails.full_name} />
-        <TextFieldContainer label="Username" icon=<AlternateEmailIcon /> text={userDetails.username} />
-        <TextFieldContainer label="Email ID" icon=<EmailIcon /> text={userDetails.email} />
-        <TextFieldContainer label="Phone Number" icon=<LocalPhoneIcon /> text={userDetails.phone} />
-        <TextFieldContainer label="Location" icon=<HomeRoundedIcon /> text={userDetails.location} />
+        <TextField label="Fullname"
+          InputProps={{ startAdornment: (<InputAdornment position="start"> <AccountCircle/> </InputAdornment>), }} 
+          variant="standard" 
+          value={fullname} 
+          onChange={event => setFullname(event.target.value)}
+          color="success" />
+
+        <TextField label="Email ID"
+          InputProps={{ startAdornment: (<InputAdornment position="start"> <EmailIcon /> </InputAdornment>), }} 
+          variant="standard" 
+          value = {emailID}
+          onChange={event => setEmailID(event.target.value)}
+          color="success" />
+          <p>{userDetails.emailId}</p>
+        
+        <TextField label="Phone Number"
+          InputProps={{ startAdornment: (<InputAdornment position="start"> <LocalPhoneIcon /> </InputAdornment>), }} 
+          variant="standard" 
+          value={phone}
+          onChange={event => setPhone(event.target.value)}
+          color="success" />
       </Stack>
 
       <Box sx={{ m: 2 }}>
         <Stack spacing={2} direction="row" alignItems="center" justifyContent="center">
-          <Button color="success" href="/UserProfile" variant="contained">Save Changes</Button>
-          <Button color="success" href="/UserProfile" variant="contained">Revert Changes</Button>
+          <Button onClick={editProfile} color="success" variant="contained">Save Changes</Button>
+          <Button onClick={revertInfo} color="success" variant="contained">Revert Changes</Button>
         </Stack>
       </Box>
 

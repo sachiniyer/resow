@@ -3,12 +3,30 @@ const multer = require('multer')
 const router = express.Router()
 const Post = require('../models/Post')
 const User = require('../models/userschema')
+const {getDistance,sortedList} = require('../geocode/location')
+
 
 router.get('/', async (req, res) => {
     //route for retrieving the list of all posts
     try {
         const posts = await Post.find()
-        res.json(posts)
+        res.json(posts.reverse())
+    }
+    catch (err) {
+        res.json({message: err.message, location: 'Retrieving posts from DB'})
+    }
+})
+
+
+router.get('/longitude=:longitude&latitude=:latitude', async (req, res)=> {
+
+    try{
+        const posts = await Post.find()
+
+        longitude = parseFloat(req.params.longitude)
+        latitude = parseFloat(req.params.latitude) 
+
+        res.json(sortedList(longitude,latitude,posts))
     }
     catch (err) {
         res.json({message: err.message, location: 'Retrieving posts from DB'})
@@ -20,22 +38,25 @@ router.get('/past-uploads/:userId', async (req,res) => {
         const pastUploads = await Post.find(
             {owner:req.params.userId}
         )
-        res.json(pastUploads)
+        res.json(pastUploads.reverse())
     }
     catch (err) {
         res.json({message: err.message})
     }
 })
 
-router.get('/saved-posts/:userId',async(req,res)=>{
+router.get('/saved-posts/userId=:userId',async(req,res)=>{
     try{
-        const user = await User.findById(req.params.userId)
-        postIdList = user.savedPosts
+        const user = await User.find({_id:req.params.userId})
+        if (user.length===0){
+            res.json([])
+        }
+        postIdList = user[0].savedPosts
 
         const savedPosts = await Post.find(
             {_id:{$in:postIdList}}
         )
-        res.json(savedPosts)
+        res.json(savedPosts.reverse())
     }
     catch (err){
         res.json({message: err.message})

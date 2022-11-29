@@ -6,6 +6,7 @@ const multer = require("multer") // middleware to handle HTTP POST requests with
 const axios = require("axios") // middleware for making requests to APIs
 const morgan = require("morgan") // middleware for nice logging of incoming HTTP requests
 const cors = require('cors') // allow cross origin requests (cors)
+const cookieParser = require("cookie-parser")
 require("dotenv").config({ silent: true }) // load environmental variables from a hidden file named .env
 
 const app = express() // instantiate an Express object
@@ -24,6 +25,7 @@ app.use(morgan("dev")) // morgan has a few logging default styles - dev is a nic
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(cors())
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
+app.use(cookieParser())
 // make 'public' directory publicly readable with static content
 app.use("/static", express.static("public"))
 app.use('/posts', postsRoute)
@@ -43,6 +45,24 @@ mongoose.connect(`mongodb+srv://${dbUser}:${dbPass}${DBString}`, () => {
 // route for HTTP GET requests to the root document
 app.get("/", (req, res) => {
   res.send("Hello world!")
+})
+
+app.get('/location', async (req,res) =>{
+   
+  try{ 
+      let long = "-73.9965";   
+      let lat = "40.7295";     
+
+      const response = await axios(
+          'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=pjson&featureTypes=&location='+param
+      );
+      
+      console.log(response.data)
+      res.json({address:response.data.address.Address})
+  }
+  catch(err){
+      console.log({message:err.message})
+  }
 })
 
 // export the express app we created to make it available to other modules
