@@ -281,6 +281,30 @@ describe("GET request to /posts route", () => {
     })
   })
 
+  describe('PATCH for post when you send it with an invalid post id', () => {
+  it('it should respond with a HTTP 200 status code and acknowledge that it could not update the user object', (done) => {
+    chai
+      .request(app)
+      .patch(`/posts/invalidpostid`)
+      .end((err, res) => {
+        assert.equal(res.status, 200) // correct status 200
+        done();
+      });
+  })
+});
+
+describe("DELETE request to /posts/:postId route with invalid post id", () => {
+  it("it should respond with an HTTP 200 status code", done => {
+    chai
+      .request(app)
+      .delete(`/posts/invalidpostid`)
+      .end((err, res) => {
+        assert.equal(res.status, 200)
+        done() // resolve the Promise that these tests create so mocha can move on
+      })
+  })
+})
+
 
   describe("GET request to /map route", () => {
     before(() => {
