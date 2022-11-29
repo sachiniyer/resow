@@ -8,12 +8,77 @@ import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Stack from '@mui/material/Stack';
-
+import { useNavigate } from "react-router-dom"
+import { getLocation } from '../components/Location'
 
 function UploadItem() {
 
   const [carouselPics, setCarouselPics] = useState([])
   const [uploadFiles, setUploadFiles] = useState([]);
+  const [userId, setUserId] = useState("")
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    async function fetchData() {
+      const token = localStorage.getItem('token')
+      await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`, {headers: {
+        Authorization: token
+      }})
+      .then(res => {
+        setUserId(res.data.id)
+        setIsLoggedIn(true)
+      })
+      .then(res => {
+        if (!isLoggedIn){
+          askRedirect();
+        }
+      })
+      .catch(err => {
+        setUserId("")
+      })
+    }
+
+    fetchData();
+
+  }, [navigate]);
+
+
+  const useConfirm = (message = null, onConfirm, onCancel) => {
+    if (!onConfirm || typeof onConfirm !== "function") {
+      return;
+    }
+    if (onCancel && typeof onCancel !== "function") {
+      return;
+    }
+  
+    const confirmAction = () => {
+      if (window.confirm(message)) {
+        onConfirm();
+      } else {
+        onCancel();
+      }
+    };
+  
+    return confirmAction;
+  };
+
+  const redirect = () =>{
+    window.location.replace("/SignIn");
+  };
+  const cancel= () => {
+    console.log('isLoggedIn:', isLoggedIn)
+    return};
+  
+  const askRedirect = useConfirm(
+    "Please sign in to upload a post",
+    redirect,
+    cancel
+  );
+
+//---------------------------------------------------------------------------------------
 
   function updateStates(file) {
     console.log('uploadFiles:', uploadFiles)
@@ -48,9 +113,10 @@ function UploadItem() {
     data.append('title', title)
     data.append('description', description)
     data.append('location', "60 Washington Sq, New York, NY 10012")
-    data.append('owner', 'Andy Hammy')
-    data.append('latitude', '30.2')
-    data.append('longitude', '25.4')
+    data.append('ownerID', userId)
+    let [longitude, latitude] = getLocation()
+    data.append('latitude', latitude)
+    data.append('longitude', longitude)
 
     const url = `${process.env.REACT_APP_SERVER_HOSTNAME}/posts`
 
