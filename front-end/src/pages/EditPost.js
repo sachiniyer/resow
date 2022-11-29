@@ -116,15 +116,6 @@ export default function EditPost(props){
         .catch(err =>{console.log(err)})
     
       }
-
-      async function deletePost(){
-
-        axios.delete(`${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`)
-        .then(alert("the post is deleted"))
-        .then(window.location.replace("/Map/ItemsList"))
-        .catch(err => {console.log(err)})
-    
-      }
     
       async function updatePost(){
         axios.patch(`${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`)
