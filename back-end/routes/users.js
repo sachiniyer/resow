@@ -31,7 +31,7 @@ router.post('/register', async (req,res)=> {
         if(!user){
             bcrypt.hash(req.body.password,10)
             .then(hashedPassword =>{
-                const user = new User({
+                const newUser = new User({
                     fullname: req.body.fullname,
                     emailID: req.body.emailID,
                     password: hashedPassword, 
@@ -39,7 +39,7 @@ router.post('/register', async (req,res)=> {
                     phone: req.body.phone,
                     img: req.body.img //this one can be removed from this section
                 });
-                const savedUser = user.save()
+                const savedUser = newUser.save()
                 const payload = {
                     id: savedUser._id, 
                     emailID: savedUser.emailID
@@ -49,8 +49,8 @@ router.post('/register', async (req,res)=> {
                 res.status(200).send({
                     success: true,
                     message: "User created successfully",  
-                    token: "Bearer " + accessToken, 
-                    emailID: req.body.emailID
+                    emailID: req.body.emailID,
+                    token: "Bearer " + accessToken
                 })
             })
             .catch(err =>{
@@ -124,7 +124,10 @@ router.get('/profile', passport.authenticate('jwt', {session: false}), async (re
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET );  
         let userId = decoded.id  
+        console.log(userId)
         const user = await User.findById(userId)
+
+        console.log(user)
 
         res.json({
             id: userId,
