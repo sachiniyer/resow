@@ -18,7 +18,7 @@ import TextField from '@mui/material/TextField';
 
 export default function EditPost(props){
 
-    const [userId,setUserId] = useState("")
+  const [userId,setUserId] = useState("")
 
   const navigate = useNavigate()
 
@@ -46,6 +46,10 @@ export default function EditPost(props){
   
     // The item details which contains all the information about the post. 
     const [itemDetails,setItemDetails] = useState({});
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [location, setLocation] = useState("");
+    const [images, setImages] = useState([""]);
   
     // The upload details which contains all the information about the user.
     const [uploaderId, setUploaderId] = useState();
