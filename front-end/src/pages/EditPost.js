@@ -18,8 +18,27 @@ import TextField from '@mui/material/TextField';
 
 export default function EditPost(props){
 
-    // placeholder for userId. will fetch data in the future.
-    const userId = "636a9761296699bf91aa3b48";
+    const [userId,setUserId] = useState("")
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    async function fetchData() {
+      const token = localStorage.getItem('token')
+      await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`, {headers: {
+        Authorization: token
+      }})
+      .then(res => {
+        setUserId(res.data.id)
+        setIsLoggedIn(true)
+      }).catch(err => {
+        setUserId("")
+      })
+    }
+
+    fetchData();
+
+  }, [navigate]);
   
     // The postId obtained from the parameter.
     let {id} = useParams();
@@ -36,13 +55,13 @@ export default function EditPost(props){
     const [imgPath, setImgPath] =useState();
   
     // a boolean flag to check if the user opened the contact info box
-    const [open, setOpen] = useState(false);
+    // const [open, setOpen] = useState(false);
   
     // a boolean flag to check if the post is the post uploaded by the user
     const [isMyPost,setIsMyPost] = useState(false);
   
     // a boolean flag to check if a user has logged in or not. (need passport authentication)
-    const isLoggedIn = true
+    // const isLoggedIn = true
     // const [isLoggedIn,setIsLoggedIn] = useState(true);
   
     // a boolean flag to check if it is saved or not.
@@ -199,6 +218,9 @@ export default function EditPost(props){
       }
 
     //   to write: handleChange
+    function handleChange(event){
+
+    }
 
       return(
         <>
