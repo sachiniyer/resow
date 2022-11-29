@@ -26,7 +26,6 @@ router.post('/register', async (req,res)=> {
     try {
         //check if the user exists with the same email or not 
         const user = await User.findOne({emailID: req.body.emailID})
-        console.log(req.body.emailID)
 
         if(!user){
             bcrypt.hash(req.body.password,10)
@@ -39,19 +38,16 @@ router.post('/register', async (req,res)=> {
                     phone: req.body.phone,
                     img: req.body.img //this one can be removed from this section
                 });
-                const savedUser = newUser.save()
-                const payload = {
-                    id: savedUser._id, 
-                    emailID: savedUser.emailID
-                }
-                const accessToken = jwt.sign(payload, jwtOptions.secretOrKey, {expiresIn: "7d"})
-
-                res.status(200).send({
-                    success: true,
-                    message: "User created successfully",  
-                    emailID: req.body.emailID,
-                    token: "Bearer " + accessToken
-                })
+                newUser.save().then(
+                    () =>{
+                        res.status(200).send({
+                            success: true,
+                            message: "User created successfully",  
+                            emailID: req.body.emailID,
+                            password: req.body.password
+                        })
+                    }
+                )
             })
             .catch(err =>{
                 res.status(400).json({message: err.message});

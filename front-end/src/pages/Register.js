@@ -16,12 +16,12 @@ function SignUp(props) {
   const [responseServer, setResponse] = useState({}) // the API will return an object with a JWT token, if the user logs in successfully
 
   useEffect(() => {
-    // if the user is logged-in, save the token to local storage
-    if (responseServer.success && responseServer.token) {
+    // if the user is registered, save the token to local storage
+    if (responseServer.success) {
       console.log(`User successfully registered: ${responseServer.emailID}`)
-      console.log(responseServer)
-      localStorage.setItem('token', responseServer.token) // store the token into localStorage
-      navigate('/UserProfile')
+      console.log("in register useeffect")
+      //localStorage.setItem('token', responseServer.token) // store the token into localStorage
+      //navigate('/UserProfile')
     }
   
   }, [responseServer, navigate])
@@ -49,7 +49,7 @@ function SignUp(props) {
                 let password = document.getElementById('password').value
                 let phonenumber = document.getElementById('phone').value
                 let passwordConf = document.getElementById('passwordConf').value
-                let data = {fullname: fullname,emailID: emailID, password: password, phone: phonenumber}
+                let data = {fullname: fullname, emailID: emailID, password: password, phone: phonenumber}
                 if (password === passwordConf) {
                   if (emailID && password && passwordConf) {
                     const response = await axios.post(
