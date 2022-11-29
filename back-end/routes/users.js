@@ -46,12 +46,12 @@ router.post('/register', async (req,res)=> {
                 }
                 const accessToken = jwt.sign(payload, jwtOptions.secretOrKey, {expiresIn: "7d"})
 
-                res.send({
-                    success: true, 
-                    message: "User created successfully", 
-                    token: "Bearer " + accessToken,
+                res.status(200).send({
+                    success: true,
+                    message: "User created successfully",  
+                    token: "Bearer " + accessToken, 
                     emailID: req.body.emailID
-                 })
+                })
             })
         }
     }
