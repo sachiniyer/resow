@@ -58,49 +58,8 @@ export default function EditPost(props){
     // The path to the profile image of the uploader
     const [imgPath, setImgPath] =useState();
   
-    // a boolean flag to check if the user opened the contact info box
-    // const [open, setOpen] = useState(false);
-  
-    // a boolean flag to check if the post is the post uploaded by the user
-    const [isMyPost,setIsMyPost] = useState(false);
-  
-    // a boolean flag to check if a user has logged in or not. (need passport authentication)
-    // const isLoggedIn = true
-    // const [isLoggedIn,setIsLoggedIn] = useState(true);
-  
     // a boolean flag to check if it is saved or not.
     const [isSaved,setIsSaved] = useState(false);
-  
-    // a function for alert box
-    const useConfirm = (message = null, onConfirm, onCancel) => {
-      if (!onConfirm || typeof onConfirm !== "function") {
-        return;
-      }
-      if (onCancel && typeof onCancel !== "function") {
-        return;
-      }
-    
-      const confirmAction = () => {
-        if (window.confirm(message)) {
-          onConfirm();
-        } else {
-          onCancel();
-        }
-      };
-    
-      return confirmAction;
-    };
-  
-    const redirect = () =>{
-      window.location.replace("/SignIn");
-    };
-    const cancel= () => {return};
-    
-    const askRedirect = useConfirm(
-      "Please sign in to save the post",
-      redirect,
-      cancel
-    );
 
     async function savePost(){
         let user_id = userId;
@@ -130,10 +89,6 @@ export default function EditPost(props){
     
       // a switching function to check the state of saving
       const switchSaved = () => {
-        if (!isLoggedIn){
-          askRedirect();
-        }
-        else {
           if (isSaved){
             unsavePost();
             setIsSaved(!isSaved);
@@ -142,16 +97,8 @@ export default function EditPost(props){
             savePost();
             setIsSaved(!isSaved);
           }
-        }
+        
       }
-    
-      const handleClick = () => {
-        setOpen((prev) => !prev);
-      };
-    
-      const handleClickAway = () => {
-        setOpen(false);
-      };
     
       async function fetchItemData() {
     
