@@ -2,7 +2,9 @@ import * as React from 'react';
 import axios from "axios"
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-
+import Avatar from '@mui/material/Avatar';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -14,7 +16,10 @@ function SignUp(props) {
   const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false);
   const [responseServer, setResponse] = useState({}) // the API will return an object with a JWT token, if the user logs in successfully
-
+  const [avatarImg, setAvatarImg] = useState();
+  const [uploadImg, setUploadImg] = useState();
+  const [loaded, setLoaded] = useState(0);
+  
   useEffect(() => {
     async function setToken() {
 
@@ -35,6 +40,18 @@ function SignUp(props) {
 
   }, [responseServer, navigate]);
 
+  async function handleUpload(event) {
+    let file = event.target.files[0]
+    let reader = new FileReader();
+    reader.onload = () => {
+      setAvatarImg(reader.result)
+    };
+    if (file) {
+      setUploadImg(event.target.files[0])
+      reader.readAsDataURL(file);
+    } 
+  }
+
   return (
       <Box sx={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column', height: 'calc(100vh - 53px)' }}>
 
@@ -42,6 +59,22 @@ function SignUp(props) {
 
           <Box sx={{ marginTop: '20vh' }}></Box>
           <Stack spacing={1} direction="column" alignItems="center" sx={{ m:1, minWidth: 290 }}>
+            <Avatar sx={{border: "solid", borderColor:"black", width: 150, height: 150, m: 1, margin: '0 auto' }} alt="profile pic" src={avatarImg} />
+            <IconButton color="primary" aria-label="upload picture" component="label">
+              <form role="form">
+                <input
+                  hidden
+                  accept="image/*"
+                  style={{ display: 'none' }}
+                  id="image"
+                  type="file"
+                  onChange={handleUpload}
+                />
+                <label htmlFor="image">
+                  <PhotoCamera />
+                </label>    
+              </form>
+            </IconButton>
             <TextField fullWidth label="Fullname" id="fullname" sx={{ m: 1}} />
             <TextField fullWidth label="Email ID" id="email" sx={{ m: 1}} />
             <TextField fullWidth label="Phone Number" id="phone" sx={{ m: 1 }} />
@@ -56,15 +89,28 @@ function SignUp(props) {
                 let fullname = document.getElementById('fullname').value
                 let emailID = document.getElementById('email').value
                 let password = document.getElementById('password').value
-                let phonenumber = document.getElementById('phone').value
+                let phone = document.getElementById('phone').value
                 let passwordConf = document.getElementById('passwordConf').value
-                let data = {fullname: fullname, emailID: emailID, password: password, phone: phonenumber}
+                const data = new FormData();
+                //let data = {fullname: fullname, emailID: emailID, password: password, phone: phonenumber}
+                data.append('file', uploadImg)
+                data.append('fullname', fullname)
+                data.append('emailID', emailID)
+                data.append('password', password)
+                data.append('phone', phone)
+
+                const url = `${process.env.REACT_APP_SERVER_HOSTNAME}/users/register`
+
+                var config = {
+                  onUploadProgress: function(progressEvent) {
+                    var percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+                    setLoaded(percentCompleted)
+                  }
+                };
+
                 if (password === passwordConf) {
                   if (emailID && password && passwordConf) {
-                    const response = await axios.post(
-                      `${process.env.REACT_APP_SERVER_HOSTNAME}/users/register`, 
-                      data
-                    )
+                    const response = await axios.post(url, data, config)
                     setResponse(response.data)
                   }
                   else {

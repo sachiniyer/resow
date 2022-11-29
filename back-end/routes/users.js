@@ -4,6 +4,7 @@ const passport = require("passport")
 const router = express.Router()
 const User = require("../models/userschema")
 const bcrypt = require('bcrypt');
+const multer = require('multer')
 
 const { jwtOptions, jwtStrategy } = require("./jwt-config.js") // import setup options for using JWT in passport
 const { body, validationResult } = require('express-validator');
@@ -21,8 +22,20 @@ router.get('/', async (req, res) => {
     }
 })
 
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        // store files into a directory named 'uploads'
+        cb(null, 'uploadedFiles/')
+    },
+    filename: function (req, file, cb) {
+        // rename the files to include the current time and date
+        cb(null, file.originalname.replaceAll(' ', '') + "-" + Date.now())
+    }
+})
+var upload = multer({ storage: storage })
+
  //route for adding a new user (user registration page)
-router.post('/register', async (req,res)=> {
+router.post('/register', upload.single('file'), async (req,res)=> {
 
     try {
         //check if the user exists with the same email or not 
@@ -37,9 +50,10 @@ router.post('/register', async (req,res)=> {
                     password: hashedPassword, 
                     dob: req.body.dob,
                     phone: req.body.phone,
-                    img: req.body.img //this one can be removed from this section
+                    imgPath: req.file.path //path to user image
                 });
-                newUser.save().then(
+                newUser.save()
+                .then(
                     () =>{
                         res.status(200).send({
                             success: true,
@@ -132,7 +146,7 @@ router.get('/profile', passport.authenticate('jwt', {session: false}), async (re
             fullname: user.fullname,
             emailID: user.emailID, 
             phone: user.phone,
-            img: user.img
+            img: user.imgPath
           })
     }
     catch (err) {
@@ -152,8 +166,9 @@ router.get('/:userId', async (req, res) => {
 })
 
 
-router.patch('/:userId', body('emailID').isEmail(), body('phone').isMobilePhone(),async (req, res) => {
+router.patch('/:userId', upload.single('file'), body('emailID').isEmail(), body('phone').isMobilePhone(),async (req, res) => {
     //route for updating a user profile (edit profile page)
+    console.log('imgPath:', req.file.path)
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()){
@@ -165,7 +180,7 @@ router.patch('/:userId', body('emailID').isEmail(), body('phone').isMobilePhone(
             { $set: { fullname: req.body.fullname,
                       emailID: req.body.emailID,
                       phone: req.body.phone,
-                      img: req.body.img
+                      imgPath: req.file.path
                     } 
             })
         res.json({message:"ok"})

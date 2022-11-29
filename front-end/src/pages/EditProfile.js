@@ -25,6 +25,8 @@ function EditProfile(props) {
   const [emailID, setEmailID] = useState("");
   const [phone, setPhone] = useState("");
   const [img, setImg] = useState([""]);
+  const [avatarImg, setAvatarImg] = useState();
+  const [uploadImg, setUploadImg] = useState();
 
   const navigate = useNavigate()
 
@@ -39,7 +41,7 @@ function EditProfile(props) {
         setFullname(res.data.fullname)
         setEmailID(res.data.emailID);
         setPhone(res.data.phone);
-        setImg(res.data.img);
+        setImg(res.data.imgPath);
       }).catch(err => {
         console.log(err)
         navigate("/SignIn")
@@ -47,6 +49,7 @@ function EditProfile(props) {
     }
 
     fetchData();
+    imgRoute()
 
   }, [navigate]);
 
@@ -54,19 +57,18 @@ function EditProfile(props) {
     setEmailID(userDetails.emailID);
     setFullname(userDetails.fullname);
     setPhone(userDetails.phone);
-    setImg(userDetails.img);
+    setImg(userDetails.imgPath);
   };
 
   async function editProfile(){
+    const data = new FormData();
 
-    const userInfo = {
-      fullname:`${fullname}`,
-      emailID:`${emailID}`,
-      phone:`${phone}`,
-      img:{img}
-    }
+    data.append('file', uploadImg)
+    data.append('fullname', fullname)
+    data.append('emailID', emailID)
+    data.append('phone', phone)
 
-    axios.patch(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/${userDetails.id}`,userInfo)
+    axios.patch(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/${userDetails.id}`,data)
     .then(res => {
       if (res.data.message==="ok"){
         alert("the profile has been updated")
@@ -88,12 +90,20 @@ function EditProfile(props) {
   }
 
   const imgRoute = () => {
-    if(img!==[]){
-      return img[0]
-    }
-    else{
-      return ""
-    }
+    if(img){setAvatarImg(img)}
+    else{return}
+  }
+
+  async function handleUpload(event) {
+    let file = event.target.files[0]
+    let reader = new FileReader();
+    reader.onload = () => {
+      setAvatarImg(reader.result)
+    };
+    if (file) {
+      setUploadImg(event.target.files[0])
+      reader.readAsDataURL(file);
+    } 
   }
 
 
@@ -104,12 +114,23 @@ function EditProfile(props) {
       <Box sx={{ mt: 3, mb: 2 }}>
         <Stack direction="row" style={{ justifyContent: "center", display: "absolute" }} >
           <Avatar
-            src = {imgRoute()}
+            src = {avatarImg}
             sx={{ border: "solid 0.5px", borderColor:"black", width: 120, height: 120 }}
           />
           <Fab component="label" sx={{ display: "absolute", mt: "80px", ml: "-40px", zIndex: 'tooltip' }} size="small" color="success" >
-            <input hidden accept="image/*" type="file" />
-            <EditIcon />
+            <form role="form">
+                <input
+                  hidden
+                  accept="image/*"
+                  style={{ display: 'none' }}
+                  id="image"
+                  type="file"
+                  onChange={handleUpload}
+                />
+                <label htmlFor="image">
+                  <EditIcon />
+                </label>    
+              </form>
           </Fab >
         </Stack>
       </Box>
