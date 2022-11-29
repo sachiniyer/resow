@@ -50,10 +50,7 @@ router.post('/register', async (req,res)=> {
                     success: true, 
                     message: "User created successfully", 
                     token: "Bearer " + accessToken,
-                    user: {
-                        id: savedUser._id, 
-                        emailID: savedUser.emailID
-                    }
+                    emailID: req.body.emailID
                  })
             })
         }

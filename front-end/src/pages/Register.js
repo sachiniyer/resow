@@ -19,7 +19,7 @@ function SignUp(props) {
     // if the user is logged-in, save the token to local storage
     if (responseServer.success && responseServer.token) {
       console.log(`User successfully registered: ${responseServer.emailID}`)
-      console.log(responseServer.token)
+      console.log(responseServer)
       localStorage.setItem('token', responseServer.token) // store the token into localStorage
       navigate('/UserProfile')
     }
