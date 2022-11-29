@@ -48,7 +48,6 @@ export default function EditPost(props){
     const [itemDetails,setItemDetails] = useState({});
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [location, setLocation] = useState("");
     const [images, setImages] = useState([""]);
   
     // The upload details which contains all the information about the user.
@@ -106,8 +105,10 @@ export default function EditPost(props){
           `${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`
         );
         setItemDetails(result.data);
-        setUploaderId(result.data.owner)
-        setIsMyPost(result.data.owner === userId)
+        setUploaderId(result.data.owner);
+        setTitle(result.title);
+        setDescription(result.description);
+        
       }
     
       async function fetchUploaderData(){
