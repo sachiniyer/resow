@@ -16,12 +16,11 @@ function UploadItem() {
   const [carouselPics, setCarouselPics] = useState([])
   const [uploadFiles, setUploadFiles] = useState([]);
   const [userId, setUserId] = useState("")
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  //const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const navigate = useNavigate()
 
-  useEffect(() => {
+  /*useEffect(() => {
     async function fetchData() {
       const token = localStorage.getItem('token')
       await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`, {headers: {
@@ -43,10 +42,33 @@ function UploadItem() {
 
     fetchData();
 
+  }, [navigate]);*/
+
+
+  useEffect(() => {
+    async function checkLoggedIn() {
+      const token = localStorage.getItem('token')
+      await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`, {headers: {
+        Authorization: token
+      }})
+      .then(res => {
+        //console.log(res)  //for debugging
+        setUserId(res.data.id)
+        //setIsLoggedIn(true)
+        navigate("/UploadItem")
+      }).catch(err => {
+        console.log(err)
+        navigate("/SignIn")
+        
+      })
+    }
+
+    checkLoggedIn();
+
   }, [navigate]);
 
 
-  const useConfirm = (message = null, onConfirm, onCancel) => {
+  /*const useConfirm = (message = null, onConfirm, onCancel) => {
     if (!onConfirm || typeof onConfirm !== "function") {
       return;
     }
@@ -76,7 +98,7 @@ function UploadItem() {
     "Please sign in to upload a post",
     redirect,
     cancel
-  );
+  );*/
 
 //---------------------------------------------------------------------------------------
 
