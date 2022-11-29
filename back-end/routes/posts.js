@@ -1,4 +1,5 @@
 const express = require("express")
+const multer = require('multer')
 const router = express.Router()
 const Post = require('../models/Post')
 const User = require('../models/userschema')
@@ -105,27 +106,49 @@ router.patch('/:postId', async (req, res) => {
     }
 })
 
-router.post('/', async (req, res) => {
-    //route for making a post request to create a new post
-    const post = new Post({
-        title: req.body.title,
-        description: req.body.description,
-        timeStart: req.body.timeStart,
-        timeEnd: req.body.timeEnd,
-        owner: req.body.owner,
-        latitude: req.body.latitude,
-        longitude: req.body.longitude,
-        location:req.body.location,
-        images: req.body.images
-    })
-
-    try {
-        const savedPost = await post.save()
-        res.json(savedPost)
-    }
-    catch (err) {
-        res.json({message: err.message})
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        // store files into a directory named 'uploads'
+        cb(null, 'uploadedFiles/')
+    },
+    filename: function (req, file, cb) {
+        // rename the files to include the current time and date
+        cb(null, file.originalname.replaceAll(' ', '') + "-" + Date.now())
     }
 })
+var upload = multer({ storage: storage })
+
+router.post('/', upload.array('files'), async function (req, res, next) {
+    console.log('req:', req)
+    let imgPaths = []
+    if (req.files.length) {
+        let files = req.files
+        for (let file in files) {
+            imgPaths.push(files[file].path)
+        }
+        res.json( { success: true, message: 'thanks!' })
+    }
+    else res.status(500).send({ success: false, message: 'Oops... something went wrong!' })
+
+    //route for making a post request to create a new post
+    //const post = new Post({
+    //    title: req.body.title,
+    //    description: req.body.description,
+    //    owner: req.body.owner,
+    //    latitude: req.body.latitude,
+    //    longitude: req.body.longitude,
+    //    location:req.body.location,
+    //})
+//
+    //try {
+    //    const savedPost = await post.save()
+    //    res.json(savedPost)
+    //}
+    //catch (err) {
+    //    res.json({message: err.message})
+    //}
+}
+
+)
 
 module.exports = router
