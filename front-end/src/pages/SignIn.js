@@ -22,7 +22,7 @@ function SignIn(props) {
   useEffect(() => {
     // if the user is logged-in, save the token to local storage
     if (responseServer.success && responseServer.token) {
-      console.log(`User successfully logged in: ${responseServer.emailID}`)
+      console.log("User successfully logged in")
       //console.log(responseServer.token) //for debugging
       localStorage.setItem('token', responseServer.token) // store the token into localStorage
       navigate('/UserProfile')
