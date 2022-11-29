@@ -52,8 +52,7 @@ describe("GET request to /users route", () => {
         .send(changedUser)
         .end((err, res) => {
           assert.equal(res.status, 200) // correct status 200
-          assert.equal(res.body.acknowledged, true) // our route sends back an object with acknowledged == true
-          assert.equal(res.body.modifiedCount, 1) // our route sends back an object with modifiedCount 1
+          assert.equal(res.body.message, "ok") 
           done();
         });
     });
@@ -87,8 +86,7 @@ describe("GET request to /users route", () => {
         .send(changedUser)
         .end((err, res) => {
           assert.equal(res.status, 200) // correct status 200
-          assert.equal(res.body.acknowledged, true) // our route sends back an object with acknowledged == true
-          assert.equal(res.body.modifiedCount, 1) // our route sends back an object with modifiedCount 1
+          assert.equal(res.body.message, "ok")           
           done();
         });
     });
@@ -115,7 +113,6 @@ describe("GET request to /users route", () => {
         .patch(`/users/637cfb2d0313ae3676b64bb0`)
         .end((err, res) => {
           assert.equal(res.status, 200) // correct status 200
-          assert.equal(res.body.acknowledged, false) // our route sends back an object with acknowledged == false
           done();
         });
     })
