@@ -198,7 +198,7 @@ export default function ItemDetails(props){
           <ImgCarousel imgList = {itemDetails.images} />  
       </Box>
 
-      <Box sx={{width:{xs:0.9,sm:0.5,md: 0.3}, display: 'flex',borderBottom:"solid"}}>
+      <Box sx={{width:{xs:0.9,sm:0.5,md: 0.3}, display: 'flex',borderBottom:"solid 0.5px"}}>
           <Box sx={{width:0.3,height:1,textAlign:"center",justifyContent:"center"}}>
               <AspectRatio ratio="1/1"> 
                 <Avatar sx={{border:"solid 0.5px",borderColor:"black",justifyContent:"center",width: 0.5}}  src={imgPath}/> 
@@ -224,7 +224,7 @@ export default function ItemDetails(props){
         </Box>
         
         {open ? (<ContactBox info={uploaderDetails}/>) : null}
-        <Box sx={{color:"black",borderTop:"solid",width:{xs:0.9,sm:0.5,md: 0.3}, textAlign:"left",marginBottom:7,fontSize: "15px"}}>
+        <Box sx={{color:"black",borderTop:"solid 0.5px",width:{xs:0.9,sm:0.5,md: 0.3}, textAlign:"left",marginBottom:7,fontSize: "15px"}}>
         <Box sx={{textAlign:"right",marginTop:"-35px",marginBottom:"10px"}}>
           {isSaved
           ? <IconButton onClick={switchSaved}><TurnedInIcon/></IconButton>
