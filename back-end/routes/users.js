@@ -25,8 +25,14 @@ router.get('/', async (req, res) => {
 router.post('/register', async (req,res)=> {
 
     try {
+        /*const errors = validationResult(req);
+        if (!errors.isEmpty()){
+            console.log("in register error")
+            return res.status(200).json({ message: errors.array()[0].param });
+        }*/
         //check if the user exists with the same email or not 
         const user = await User.findOne({emailID: req.body.emailID})
+        if (user) throw new Error("An account already exists with this email")
 
         if(!user){
             bcrypt.hash(req.body.password,10)
@@ -55,12 +61,14 @@ router.post('/register', async (req,res)=> {
                 console.log(err)
             })
         }
+
     }
-    catch (err) {
-        res.send({
+    catch(err) {
+        /*res.status(400).send({
             success: false, 
             message: err.message
-        })
+        })*/
+        res.json({message: err.message});
         console.log(err)
     }
 })
@@ -77,7 +85,6 @@ router.post('/login', async (req,res, )=> {
 
         //check if the user exists or not 
         const user = await User.findOne({emailID: req.body.emailID})
-        console.log(user)
         if (!user) throw new Error("User not found")
 
         const dbPassword = user.password
@@ -108,7 +115,6 @@ router.post('/login', async (req,res, )=> {
        
     }
     catch (err) {
-        //next(err)
         res.json({message: err.message});
         console.log(err)
     }
