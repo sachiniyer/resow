@@ -89,18 +89,22 @@ router.post('/login', body('emailID').isEmail(), async (req,res, )=> {
         if (!req.body.emailID || !req.body.password) {
             res
               .status(401)
-              .json({ success: false, message: `no username or password supplied.` })
+              .json({ success: false, message: `no username or password supplied` })
           }
 
         //check if the user exists or not 
         const user = await User.findOne({emailID: req.body.emailID})
-        if (!user) throw new Error("User not found")
+        if (!user){
+            return res.status(200).send({ success: false, message: "User not found"})
+            //throw new Error("User not found")
+        }
 
         const dbPassword = user.password
         bcrypt.compare(req.body.password,dbPassword)
         .then(validPass => {
                 if (!validPass){
-                    throw new Error("Incorrect password, try again")
+                    //throw new Error("Incorrect password, try again")
+                    return res.status(200).send({ success: false, message: "Incorrect password"})
                 }
                 else{
                     const payload = {

@@ -74,6 +74,14 @@ function SignIn(props) {
           alert("invalid email format!")
           window.location.reload()
         }
+        if (res.data.message==="User not found"){
+          alert("User not found")
+          window.location.reload()
+        }
+        if (res.data.message==="Incorrect password"){
+          alert("Incorrect password, try again")
+          window.location.reload()
+        }
         if (res.data.message==="phone"){
           alert("invalid phone number format!")
           window.location.reload()
