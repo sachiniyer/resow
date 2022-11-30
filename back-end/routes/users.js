@@ -22,17 +22,19 @@ router.get('/', async (req, res) => {
 })
 
  //route for adding a new user (user registration page)
-router.post('/register', async (req,res)=> {
+router.post('/register', body('emailID').isEmail(), body('phone').isMobilePhone(), async (req,res)=> {
 
     try {
-        /*const errors = validationResult(req);
+        const errors = validationResult(req);
         if (!errors.isEmpty()){
             console.log("in register error")
             return res.status(200).json({ message: errors.array()[0].param });
-        }*/
+        }
+
         //check if the user exists with the same email or not 
         const user = await User.findOne({emailID: req.body.emailID})
         if (user) throw new Error("An account already exists with this email")
+        
 
         if(!user){
             bcrypt.hash(req.body.password,10)
@@ -64,10 +66,7 @@ router.post('/register', async (req,res)=> {
 
     }
     catch(err) {
-        /*res.status(400).send({
-            success: false, 
-            message: err.message
-        })*/
+        //console.log("here bottom")
         res.json({message: err.message});
         console.log(err)
     }
@@ -177,7 +176,7 @@ router.patch('/:userId', body('emailID').isEmail(), body('phone').isMobilePhone(
         res.json({message:"ok"})
     }
     catch (err) {
-        console.log("here")
+        //console.log("here")
         console.log(err.message)
         res.json({message: err.message})
     }

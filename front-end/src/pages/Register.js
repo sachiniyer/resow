@@ -61,11 +61,25 @@ function SignUp(props) {
                 let data = {fullname: fullname, emailID: emailID, password: password, phone: phonenumber}
                 if (password === passwordConf) {
                   if (emailID && password && passwordConf) {
-                    const response = await axios.post(
-                      `${process.env.REACT_APP_SERVER_HOSTNAME}/users/register`, 
-                      data
-                    )
-                    setResponse(response.data)
+                    await axios.post(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/register`, data)
+                    .then(res => {
+                      if (res.data.success===true){
+                        alert("User registered successfully")
+                        setResponse(res.data)
+                      }
+                      if (res.data.message === "emailID"){
+                        alert("invalid email format!")
+                        //document.getElementById('emailID').value = ''
+                      }
+                      if (res.data.message==="phone"){
+                        alert("invalid phone number format!")
+                        //.then(document.getElementById('phone').value = '')
+                        
+                      }
+                    })
+
+                    //console.log(`Server response: ${JSON.stringify(response.data, null, 0)}`)
+                    
                   }
                   else {
                     alert('All fields must be filled')
