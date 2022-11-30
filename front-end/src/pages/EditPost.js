@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useEffect,useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import ImgCarousel from '../components/carousel/ImgCarousel';
 import ContactBox from '../components/ContactBox';
 import Box from '@mui/material/Box';
@@ -22,23 +23,23 @@ export default function EditPost(props){
 
   const navigate = useNavigate()
 
-  useEffect(() => {
-    async function fetchData() {
-      const token = localStorage.getItem('token')
-      await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`, {headers: {
-        Authorization: token
-      }})
-      .then(res => {
-        setUserId(res.data.id)
-        setIsLoggedIn(true)
-      }).catch(err => {
-        setUserId("")
-      })
-    }
+//   useEffect(() => {
+//     async function fetchData() {
+//       const token = localStorage.getItem('token')
+//       await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`, {headers: {
+//         Authorization: token
+//       }})
+//       .then(res => {
+//         setUserId(res.data.id)
+//         setIsLoggedIn(true)
+//       }).catch(err => {
+//         setUserId("")
+//       })
+//     }
 
-    fetchData();
+//     fetchData();
 
-  }, [navigate]);
+//   }, [navigate]);
   
     // The postId obtained from the parameter.
     let {id} = useParams();
@@ -80,10 +81,26 @@ export default function EditPost(props){
       }
     
       async function updatePost(){
-        axios.patch(`${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`)
-        .then(alert("the post is updated"))
-        .then(window.location.replace({"/ItemDetails/:":postId}))
-        .catch(err => {console.log(err)})
+        // axios.patch(`${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`)
+        // .then(alert("the post is updated"))
+        // .then(window.location.replace({"/ItemDetails/:":postId}))
+        // .catch(err => {console.log(err)})
+
+        const postInfo = {
+            title:`${title}`,
+            description:`${description}`
+          }
+      
+          axios.patch(`${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`,postInfo)
+          .then(res => {
+            if (res.data.message==="ok"){
+              alert("the post has been updated")
+              window.location.replace(`/ItemDetails/:${postId}`)
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          })
       }
     
       // a switching function to check the state of saving
@@ -165,6 +182,7 @@ export default function EditPost(props){
 
     }
 
+    console.log(description)
       return(
         <>
         <Box sx={{width:{xs:0.9,sm:0.5,md: 0.3}, paddingTop:1}}>
@@ -203,23 +221,25 @@ export default function EditPost(props){
                 </Box>
                 <Box sx={{width:1, flexWrap:"wrap", wordWrap: "break-word",fontSize: {xs:"15px",sm:"20px",md: "20px"}, textAlign:"left",color:"black"}}>
                 <TextField label="Title"
-                  value={itemDetails.title}
-                //   onChange={handleChange} 
+                  variant="standard"
+                  value={title}
+                  onChange={event => setTitle(event.target.value)}
+                  color="success"
                 />
                 </Box>
-                <Box sx={{marginTop:1,wordWrap: "break-word", fontSize: "12px", textAlign:"left", color:"#2596be"}}>
+                {/* <Box sx={{marginTop:1,wordWrap: "break-word", fontSize: "12px", textAlign:"left", color:"#2596be"}}>
                 <TextField label="Location"
                   value={itemDetails.location}
-                //   onChange={handleChange} 
+                  onChange={event => } 
                   />
                   <br></br>
                   <br></br>
                   <br></br>
-                </Box>
+                </Box> */}
             </Box>
           </Box>
           
-          {open ? (<ContactBox info={uploaderDetails}/>) : null}
+          {/* {open ? (<ContactBox info={uploaderDetails}/>) : null} */}
           <Box sx={{color:"black",borderTop:"solid",width:{xs:0.9,sm:0.5,md: 0.3}, textAlign:"left",marginBottom:7,fontSize: "15px"}}>
           <Box sx={{textAlign:"right",marginTop:"-35px",marginBottom:"10px"}}>
             {isSaved
@@ -228,15 +248,17 @@ export default function EditPost(props){
             }
           </Box>
           <TextField label="Description"
-                  value={itemDetails.description}
-                //   onChange={handleChange} 
+                  variant="standard"
+                  value={description}
+                  onChange={event => setDescription(event.target.value)} 
+                  color="success"
                   />
           </Box>
 
           <Box sx={{ m: 2 }}>
         <Stack spacing={2} direction="row" alignItems="center" justifyContent="center">
         {/* add onClick function to handle save */}
-          <Button color="success" href={"/ItemDetails/:"+postId} variant="contained">Save Changes</Button> 
+          <Button color="success" onClick={updatePost} variant="contained">Save Changes</Button> 
           <Button color="success" href={"/ItemDetails/:"+postId} variant="contained">Revert Changes</Button>
         </Stack>
       </Box>
