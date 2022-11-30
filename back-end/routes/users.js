@@ -77,7 +77,7 @@ router.post('/login', body('emailID').isEmail(), async (req,res, )=> {
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()){
-            console.log(errors.array()[0].param)
+            //console.log(errors.array()[0].param)
             return res.status(200).json({ message: errors.array()[0].param });
         }
 

@@ -50,10 +50,6 @@ function SignIn(props) {
 
   }, [navigate]);
 
-  const revertInfo = () => {
-    setEmailID('');
-    setPassword('');
-  };
 
 
   const handleSubmit = async e => {
@@ -76,18 +72,18 @@ function SignIn(props) {
         }
         if (res.data.message==="emailID"){
           alert("invalid email format!")
-          .then(revertInfo())
+          window.location.reload()
         }
         if (res.data.message==="phone"){
           alert("invalid phone number format!")
-          .then(revertInfo())
+          window.location.reload()
         }
 
-        console.log(`Server response: ${JSON.stringify(res.data, null, 0)}`)
+        //console.log(`Server response: ${JSON.stringify(res.data, null, 0)}`)
 
       })
       .catch(err => {
-        revertInfo();
+        window.location.reload()
       })
     } catch (err) {
       // request failed... user entered invalid credentials
