@@ -69,12 +69,11 @@ function SignUp(props) {
                       }
                       if (res.data.message === "emailID"){
                         alert("invalid email format!")
-                        //document.getElementById('emailID').value = ''
+                        window.location.reload()
                       }
                       if (res.data.message==="phone"){
                         alert("invalid phone number format!")
-                        //.then(document.getElementById('phone').value = '')
-                        
+                        window.location.reload()
                       }
                     })
 
