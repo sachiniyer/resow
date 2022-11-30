@@ -50,6 +50,11 @@ function SignIn(props) {
 
   }, [navigate]);
 
+  const revertInfo = () => {
+    setEmailID('');
+    setPassword('');
+  };
+
 
   const handleSubmit = async e => {
     // prevent the HTML form from actually submitting
@@ -59,14 +64,31 @@ function SignIn(props) {
       //console.log(emailID, password) //for debugging
       
       // send a POST request with the data to the server api to authenticate
-      const response = await axios.post(
+      await axios.post(
         `${process.env.REACT_APP_SERVER_HOSTNAME}/users/login`, 
         {emailID: emailID, password: password}
       )
+      .then(res => {
+        if (res.data.message==="ok"){
+          alert("User successfully logged in")
+          // store the response data into the data state variable
+          setResponse(res.data)
+        }
+        if (res.data.message==="emailID"){
+          alert("invalid email format!")
+          .then(revertInfo())
+        }
+        if (res.data.message==="phone"){
+          alert("invalid phone number format!")
+          .then(revertInfo())
+        }
 
-      // store the response data into the data state variable
-      console.log(`Server response: ${JSON.stringify(response.data, null, 0)}`)
-      setResponse(response.data)
+        console.log(`Server response: ${JSON.stringify(res.data, null, 0)}`)
+
+      })
+      .catch(err => {
+        revertInfo();
+      })
     } catch (err) {
       // request failed... user entered invalid credentials
       console.log(err)

@@ -27,7 +27,6 @@ router.post('/register', body('emailID').isEmail(), body('phone').isMobilePhone(
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()){
-            console.log("in register error")
             return res.status(200).json({ message: errors.array()[0].param });
         }
 
@@ -73,9 +72,15 @@ router.post('/register', body('emailID').isEmail(), body('phone').isMobilePhone(
 })
 
 //login router to check if the entered details are correct or not (Log In Page) - AUTHORIZATION and AUTHENTICATION
-router.post('/login', async (req,res, )=> {
+router.post('/login', body('emailID').isEmail(), async (req,res, )=> {
 
     try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()){
+            console.log(errors.array()[0].param)
+            return res.status(200).json({ message: errors.array()[0].param });
+        }
+
         if (!req.body.emailID || !req.body.password) {
             res
               .status(401)
