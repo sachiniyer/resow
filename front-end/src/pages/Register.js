@@ -67,8 +67,12 @@ function SignUp(props) {
                         alert("User registered successfully")
                         setResponse(res.data)
                       }
+                      if (res.data.message==="Email already in use"){
+                        alert("An account already exists with this email")
+                        window.location.reload()
+                      }
                       if (res.data.message === "emailID"){
-                        alert("invalid email format!")
+                        alert("Invalid email format!")
                         window.location.reload()
                       }
                       if (res.data.message==="phone"){

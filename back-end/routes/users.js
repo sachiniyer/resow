@@ -22,7 +22,10 @@ router.get('/', async (req, res) => {
 })
 
  //route for adding a new user (user registration page)
-router.post('/register', body('emailID').isEmail(), body('phone').isMobilePhone(), async (req,res)=> {
+router.post('/register', 
+        body('emailID').trim().isEmail(),
+        body('phone').isMobilePhone(),
+         async (req,res)=> {
 
     try {
         const errors = validationResult(req);
@@ -31,11 +34,13 @@ router.post('/register', body('emailID').isEmail(), body('phone').isMobilePhone(
         }
 
         //check if the user exists with the same email or not 
-        const user = await User.findOne({emailID: req.body.emailID})
-        if (user) throw new Error("An account already exists with this email")
+        const existingUser = await User.findOne({emailID: req.body.emailID})
+        if (existingUser){
+            return res.status(200).send({ success: false, message: "Email already in use"})
+            //throw new Error("An account already exists with this email")
+        }
         
-
-        if(!user){
+        if(!existingUser ){
             bcrypt.hash(req.body.password,10)
             .then(hashedPassword =>{
                 const newUser = new User({
