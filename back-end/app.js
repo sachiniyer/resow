@@ -47,23 +47,23 @@ app.get("/", (req, res) => {
   res.send("Hello world!")
 })
 
-app.get('/location', async (req, res) => {
+app.get('/location', async (req,res) =>{
+   
+  try{ 
+      let long = "-73.9965";   
+      let lat = "40.7295";     
 
-  try {
-    let long = req.query.long;
-    let lat = req.query.lat;
-    const url = 'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=pjson&featureTypes=&location=' + long + "," + lat
-    const response = await axios(url);
-
-    console.log(response.data)
-    res.json({ address: response.data.address.Address })
+      const response = await axios(
+          'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=pjson&featureTypes=&location='+param
+      );
+      
+      console.log(response.data)
+      res.json({address:response.data.address.Address})
   }
-  catch (err) {
-    console.log({ message: err.message })
+  catch(err){
+      console.log({message:err.message})
   }
 })
-
-app.use('/images', express.static('uploadedFiles'))
 
 // export the express app we created to make it available to other modules
 module.exports = app
