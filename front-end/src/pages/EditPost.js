@@ -23,24 +23,6 @@ export default function EditPost(props) {
 
   const navigate = useNavigate()
 
-  //   useEffect(() => {
-  //     async function fetchData() {
-  //       const token = localStorage.getItem('token')
-  //       await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`, {headers: {
-  //         Authorization: token
-  //       }})
-  //       .then(res => {
-  //         setUserId(res.data.id)
-  //         setIsLoggedIn(true)
-  //       }).catch(err => {
-  //         setUserId("")
-  //       })
-  //     }
-
-  //     fetchData();
-
-  //   }, [navigate]);
-
   // The postId obtained from the parameter.
   let { id } = useParams();
   const postId = { id }.id;
