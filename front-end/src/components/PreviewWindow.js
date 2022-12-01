@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Link } from "react-router-dom";
+import { useEffect, useState, Fragment } from 'react';
+import { useNavigate } from "react-router-dom";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -7,10 +8,51 @@ import { CardActionArea } from '@mui/material';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 
+let instanceCount = 0
 
 export default function PreviewWindow(props) {
-  return (
-    <Card component={Link} to={props.href} sx={{ display: 'flex', width: 0.9, maxWidth: 200, borderRadius: '5%' }}>
+  let navigate = useNavigate()
+  let [instanceCheck, setInstanceCheck] = useState(true)
+  let [time, setTime] = useState(0)
+  let [clickable, setClickable] = useState(0)
+
+  let handleClick = () => {
+    const d = new Date()
+    if (d - time > 100) {
+      return navigate(props.href)
+
+    }
+  }
+
+  useEffect(() => {
+    instanceCount++
+    const d = new Date()
+    setTime(d)
+    if (instanceCount > 1) {
+      setInstanceCheck(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (props.clickable && !clickable) {
+
+      const d = new Date()
+      setClickable(true)
+      setTime(d)
+    }
+    if (!props.clickable && clickable) {
+      setClickable(false)
+    }
+  })
+
+  useEffect(() => {
+    return () => {
+      instanceCount--
+    }
+  }, [])
+
+  return (instanceCheck ? (
+    <Card component={"div"} onMouseDown={handleClick} sx={{ display: 'flex', width: 0.9, maxWidth: 200, height: 0.9, maxHeight: 300, borderRadius: '5%' }}>
       <CardActionArea>
         <CardMedia
           style={{ borderBottom: "solid 0.7px" }}
@@ -39,5 +81,5 @@ export default function PreviewWindow(props) {
         </CardContent>
       </CardActionArea>
     </Card>
-  );
+  ) : <Fragment></Fragment>)
 }

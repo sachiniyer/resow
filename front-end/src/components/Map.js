@@ -40,6 +40,7 @@ function MapWrapper(_) {
   const [title, setTitle] = useState()
   const [itemLocation, setItemLocation] = useState()
   const [href, setHref] = useState()
+  const [clickable, setClickable] = useState(true)
   const mapElement = useRef()
   //  https://stackoverflow.com/a/60643670
   const mapRef = useRef()
@@ -65,6 +66,7 @@ function MapWrapper(_) {
         firstclick = true
       }
 
+      setClickable(true)
       popRef.current.show(event.coordinate, document.getElementById("popup"))
       // const transformedCoord = transform(clickedCoord, 'EPSG:3857', 'EPSG:4326')
       setHref(`/itemdetails/${clickedFeatures[0].getId()}`)
@@ -72,6 +74,7 @@ function MapWrapper(_) {
     }
     else {
       popRef.current.hide()
+      setClickable(false)
     }
   }
 
@@ -82,19 +85,22 @@ function MapWrapper(_) {
         const url = `${process.env.REACT_APP_SERVER_HOSTNAME}/map/`
         const xhr = new XMLHttpRequest();
         xhr.open('GET', url);
-        const onError = function () {
+        const onError = function (_) {
+          console.log(xhr.statusText)
           vectorSource.removeLoadedExtent(extent);
           failure();
         }
         xhr.onerror = onError;
-        xhr.onload = function () {
-          if (xhr.status == 200) {
-            const reader = new GeoJSON()
-            const features = reader.readFeatures(xhr.responseText, { dataProjection: 'EPSG:4326', featureProjection: 'EPSG:3857' });
-            vectorSource.addFeatures(features);
-            success(features);
-          } else {
-            onError();
+        xhr.onload = function (_) {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              const reader = new GeoJSON()
+              const features = reader.readFeatures(xhr.responseText, { dataProjection: 'EPSG:4326', featureProjection: 'EPSG:3857' });
+              vectorSource.addFeatures(features);
+              success(features);
+            } else {
+              console.error(xhr.statusText)
+            }
           }
         }
         xhr.send();
@@ -130,6 +136,7 @@ function MapWrapper(_) {
     setView(initialView)
     setMap(initialMap)
     setFeature(featuresLayer)
+    setClickable(false)
     window.addEventListener('maplocationchange', e => {
       if (viewRef.current) {
         viewRef.current.setCenter(fromLonLat(e.detail.coords))
@@ -157,8 +164,8 @@ function MapWrapper(_) {
   return (
     <>
       <Box component="span" sx={{ display: "block", height: "calc(100vh - 53px)", width: "100vw", m: 0, p: 0 }} ref={mapElement}></Box>
-      <Box id="popup" sx={{ display: "none", zIndex: 99999 }}>
-        <PreviewWindow href={href} image={image} profile={profile} seller={seller} title={title} location={itemLocation} />
+      <Box id="popup" sx={{ display: "none", zIndex: 1 }}>
+        <PreviewWindow clickable={clickable} href={href} image={image} profile={profile} seller={seller} title={title} location={itemLocation} />
       </Box>
     </>
   )
