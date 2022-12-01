@@ -177,17 +177,12 @@ export default function EditPost(props){
         }
       }
 
-    //   to write: handleChange
-    function handleChange(event){
-
-    }
-
     console.log(description)
       return(
         <>
         <Box sx={{width:{xs:0.9,sm:0.5,md: 0.3}, paddingTop:1}}>
             <ImgCarousel imgList = {itemDetails.images} />  
-            <IconButton color="primary" aria-label="upload picture" component="label">
+            {/* <IconButton color="primary" aria-label="upload picture" component="label">
           <input
             hidden
             accept="image/*"
@@ -200,7 +195,7 @@ export default function EditPost(props){
           <label htmlFor="raised-button-file">
             <PhotoCamera />
           </label>    
-          </IconButton>
+          </IconButton> */}
         </Box>
   
         <Box sx={{width:{xs:0.9,sm:0.5,md: 0.3}, display: 'flex',borderBottom:"solid"}}>
@@ -227,19 +222,10 @@ export default function EditPost(props){
                   color="success"
                 />
                 </Box>
-                {/* <Box sx={{marginTop:1,wordWrap: "break-word", fontSize: "12px", textAlign:"left", color:"#2596be"}}>
-                <TextField label="Location"
-                  value={itemDetails.location}
-                  onChange={event => } 
-                  />
-                  <br></br>
-                  <br></br>
-                  <br></br>
-                </Box> */}
+                
             </Box>
           </Box>
           
-          {/* {open ? (<ContactBox info={uploaderDetails}/>) : null} */}
           <Box sx={{color:"black",borderTop:"solid",width:{xs:0.9,sm:0.5,md: 0.3}, textAlign:"left",marginBottom:7,fontSize: "15px"}}>
           <Box sx={{textAlign:"right",marginTop:"-35px",marginBottom:"10px"}}>
             {isSaved
