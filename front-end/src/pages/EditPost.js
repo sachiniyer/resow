@@ -58,28 +58,6 @@ export default function EditPost(props) {
   // The path to the profile image of the uploader
   const [imgPath, setImgPath] = useState();
 
-  // a boolean flag to check if it is saved or not.
-  const [isSaved, setIsSaved] = useState(false);
-
-  async function savePost() {
-    let user_id = userId;
-    let post_id = postId;
-    let data = { userId: user_id, postId: post_id };
-
-    axios
-      .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/saved-posts`, data)
-      .catch(err => { console.log(err) })
-  }
-
-  // a function to send save info to the server
-  async function unsavePost() {
-
-    axios
-      .delete(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/saved-posts/userId=${userId}&postId=${postId}`)
-      .catch(err => { console.log(err) })
-
-  }
-
   async function updatePost() {
     // axios.patch(`${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`)
     // .then(alert("the post is updated"))
@@ -104,19 +82,6 @@ export default function EditPost(props) {
       })
   }
 
-  // a switching function to check the state of saving
-  const switchSaved = () => {
-    if (isSaved) {
-      unsavePost();
-      setIsSaved(!isSaved);
-    }
-    else {
-      savePost();
-      setIsSaved(!isSaved);
-    }
-
-  }
-
   async function fetchItemData() {
 
     const result = await axios(
@@ -139,27 +104,10 @@ export default function EditPost(props) {
     }
   }
 
-  async function checkSave() {
-
-    const result = await axios(
-      `${process.env.REACT_APP_SERVER_HOSTNAME}/users/saved-posts/userId=${userId}&postId=${postId}`
-    );
-    if (result.data.length === 0) {
-      setIsSaved(false)
-    }
-    else {
-      setIsSaved(true)
-    }
-  }
-
   useEffect(() => {
     fetchItemData();
     fetchUploaderData();
   }, [uploaderId]);
-
-  useEffect(() => {
-    checkSave();
-  }, [])
 
   const [itemPics, setItemPics] = useState([])
 
@@ -228,12 +176,6 @@ export default function EditPost(props) {
       </Box>
 
       <Box sx={{ color: "black", borderTop: "solid", width: { xs: 0.9, sm: 0.5, md: 0.3 }, textAlign: "left", marginBottom: 7, fontSize: "15px" }}>
-        <Box sx={{ textAlign: "right", marginTop: "-35px", marginBottom: "10px" }}>
-          {isSaved
-            ? <IconButton onClick={switchSaved}><TurnedInIcon /></IconButton>
-            : <IconButton onClick={switchSaved}><TurnedInNotIcon /></IconButton>
-          }
-        </Box>
         <TextField label="Description"
           variant="standard"
           value={description}
