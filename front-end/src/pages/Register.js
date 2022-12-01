@@ -110,8 +110,27 @@ function SignUp(props) {
 
                 if (password === passwordConf) {
                   if (emailID && password && passwordConf) {
-                    const response = await axios.post(url, data, config)
-                    setResponse(response.data)
+                    await axios.post(`${url}/users/register`, data)
+                    .then(res => {
+                      if (res.data.success===true){
+                        alert("User registered successfully")
+                        setResponse(res.data)
+                      }
+                      if (res.data.message==="Email already in use"){
+                        alert("An account already exists with this email")
+                        window.location.reload()
+                      }
+                      if (res.data.message === "emailID"){
+                        alert("Invalid email format!")
+                        window.location.reload()
+                      }
+                      if (res.data.message==="phone"){
+                        alert("invalid phone number format!")
+                        window.location.reload()
+                      }
+                    })
+
+                    //console.log(`Server response: ${JSON.stringify(response.data, null, 0)}`
                   }
                   else {
                     alert('All fields must be filled')

@@ -51,6 +51,7 @@ function SignIn(props) {
   }, [navigate]);
 
 
+
   const handleSubmit = async e => {
     // prevent the HTML form from actually submitting
     e.preventDefault()
@@ -59,14 +60,38 @@ function SignIn(props) {
       //console.log(emailID, password) //for debugging
       
       // send a POST request with the data to the server api to authenticate
-      const response = await axios.post(
+      await axios.post(
         `${process.env.REACT_APP_SERVER_HOSTNAME}/users/login`, 
         {emailID: emailID, password: password}
       )
+      .then(res => {
+        if (res.data.success===true){
+          //alert("User successfully logged in")
+          setResponse(res.data) // store the response data into the data state variable
+        }
+        if (res.data.message==="emailID"){
+          alert("invalid email format!")
+          window.location.reload()
+        }
+        if (res.data.message==="User not found"){
+          alert("User not found")
+          window.location.reload()
+        }
+        if (res.data.message==="Incorrect password"){
+          alert("Incorrect password, try again")
+          window.location.reload()
+        }
+        if (res.data.message==="phone"){
+          alert("invalid phone number format!")
+          window.location.reload()
+        }
 
-      // store the response data into the data state variable
-      console.log(`Server response: ${JSON.stringify(response.data, null, 0)}`)
-      setResponse(response.data)
+        //console.log(`Server response: ${JSON.stringify(res.data, null, 0)}`)
+
+      })
+      .catch(err => {
+        window.location.reload()
+      })
     } catch (err) {
       // request failed... user entered invalid credentials
       console.log(err)
@@ -81,7 +106,7 @@ function SignIn(props) {
 
         <Box sx={{ marginTop: '20vh' }}></Box>
         
-        <Avatar sx={{border: "solid", borderColor:"black", width: 150, height: 150, m: 1, margin: '0 auto' }} alt="profile pic" src={props.logo} />
+        <Avatar sx={{ width: 150, height: 150, m: 1, margin: '0 auto' }} alt="profile pic" src={props.logo} />
 
         <h3> Welcome to Resow </h3>
 

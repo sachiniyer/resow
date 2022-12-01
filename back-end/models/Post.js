@@ -15,14 +15,6 @@ const PostSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    timeStart: {
-        type: Date,
-        required: true
-    },
-    timeEnd: {
-        type: Date,
-        required: true
-    },
     location: {
         type: String,
         required: true
