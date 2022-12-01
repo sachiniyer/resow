@@ -39,7 +39,7 @@ router.get('/feature', async (req, res) => {
     retObj.profile = seller.img
     retObj.imgList = post.images
     retObj.title = post.title
-    retObj.location = "[ " + post.latitude + ", " + post.longitude + "]"
+    retObj.location = post.location
     res.json(retObj)
 })
 

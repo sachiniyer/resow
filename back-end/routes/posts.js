@@ -1,10 +1,33 @@
 const express = require("express")
 const multer = require('multer')
+const multerS3 = require('multer-s3')
+const S3Client = require("@aws-sdk/client-s3").S3Client
 const router = express.Router()
 const Post = require('../models/Post')
 const User = require('../models/userschema')
-const {getDistance,sortedList} = require('../geocode/location')
+const { getDistance, sortedList } = require('../geocode/location')
 
+const createS3Client = () => {
+    return new S3Client({
+        region: process.env.AWS_REGION,
+        credentials: {
+            accessKeyId: process.env.AWS_ACCESS_KEY,
+            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        }
+    });
+}
+
+const s3 = createS3Client();
+var upload = multer({
+    storage: multerS3({
+        s3: s3,
+        acl: 'public-read',
+        bucket: process.env.AWS_BUCKET_NAME,
+        key: function (req, file, cb) {
+            cb(null, file.originalname)
+        },
+    })
+})
 
 router.get('/', async (req, res) => {
     //route for retrieving the list of all posts
@@ -13,53 +36,53 @@ router.get('/', async (req, res) => {
         res.json(posts.reverse())
     }
     catch (err) {
-        res.json({message: err.message, location: 'Retrieving posts from DB'})
+        res.json({ message: err.message, location: 'Retrieving posts from DB' })
     }
 })
 
 
-router.get('/longitude=:longitude&latitude=:latitude', async (req, res)=> {
+router.get('/longitude=:longitude&latitude=:latitude', async (req, res) => {
 
-    try{
+    try {
         const posts = await Post.find()
 
         longitude = parseFloat(req.params.longitude)
-        latitude = parseFloat(req.params.latitude) 
+        latitude = parseFloat(req.params.latitude)
 
-        res.json(sortedList(longitude,latitude,posts))
+        res.json(sortedList(longitude, latitude, posts))
     }
     catch (err) {
-        res.json({message: err.message, location: 'Retrieving posts from DB'})
+        res.json({ message: err.message, location: 'Retrieving posts from DB' })
     }
 })
 
-router.get('/past-uploads/:userId', async (req,res) => {
+router.get('/past-uploads/:userId', async (req, res) => {
     try {
         const pastUploads = await Post.find(
-            {owner:req.params.userId}
+            { owner: req.params.userId }
         )
         res.json(pastUploads.reverse())
     }
     catch (err) {
-        res.json({message: err.message})
+        res.json({ message: err.message })
     }
 })
 
-router.get('/saved-posts/userId=:userId',async(req,res)=>{
-    try{
-        const user = await User.find({_id:req.params.userId})
-        if (user.length===0){
+router.get('/saved-posts/userId=:userId', async (req, res) => {
+    try {
+        const user = await User.find({ _id: req.params.userId })
+        if (user.length === 0) {
             res.json([])
         }
         postIdList = user[0].savedPosts
 
         const savedPosts = await Post.find(
-            {_id:{$in:postIdList}}
+            { _id: { $in: postIdList } }
         )
         res.json(savedPosts.reverse())
     }
-    catch (err){
-        res.json({message: err.message})
+    catch (err) {
+        res.json({ message: err.message })
     }
 })
 
@@ -70,7 +93,7 @@ router.get('/:postId', async (req, res) => {
         res.json(post)
     }
     catch (err) {
-        res.json({message: err.message})
+        res.json({ message: err.message })
     }
 })
 
@@ -81,7 +104,7 @@ router.delete('/:postId', async (req, res) => {
         res.json(removedPost)
     }
     catch (err) {
-        res.json({message: err.message})
+        res.json({ message: err.message })
     }
 })
 
@@ -90,65 +113,51 @@ router.patch('/:postId', async (req, res) => {
     try {
         const updatedPost = await Post.updateOne(
             { _id: req.params.postId },
-            { $set: { title: req.body.title,
-                      description: req.body.description,
-                      timeEnd: req.body.timeEnd,
-                      location: req.body.location,
-                      latitude: req.body.latitude,
-                      longitude: req.body.longitude,
-                      images: req.body.images
-                    } 
+            {
+                $set: {
+                    title: req.body.title,
+                    description: req.body.description,
+                    timeEnd: req.body.timeEnd,
+                    location: req.body.location,
+                    latitude: req.body.latitude,
+                    longitude: req.body.longitude,
+                    images: req.body.images
+                }
             })
         res.json(updatedPost)
     }
     catch (err) {
-        res.json({message: err.message})
+        res.json({ message: err.message })
     }
 })
 
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        // store files into a directory named 'uploads'
-        cb(null, 'uploadedFiles/')
-    },
-    filename: function (req, file, cb) {
-        // rename the files to include the current time and date
-        cb(null, file.originalname.replaceAll(' ', '') + "-" + Date.now())
-    }
-})
-var upload = multer({ storage: storage })
 
 router.post('/', upload.array('files'), async function (req, res, next) {
-    console.log('req:', req)
     let imgPaths = []
     if (req.files.length) {
         let files = req.files
-        for (let file in files) {
-            imgPaths.push(files[file].path)
+        for (let file of files) {
+            imgPaths.push(file.location)
         }
-        res.json( { success: true, message: 'thanks!' })
+        console.log(imgPaths)
+        //route for making a post request to create a new post
+        const post = new Post({
+            title: req.body.title,
+            description: req.body.description,
+            location: req.body.location,
+            owner: req.body.owner,
+            latitude: req.body.latitude,
+            longitude: req.body.longitude,
+            images: imgPaths
+        })
+
+        const savedPost = await post.save()
+        res.json(savedPost)
     }
-    else res.status(500).send({ success: false, message: 'Oops... something went wrong!' })
+    else {
+        res.status(500).send({ success: false, message: 'Oops... something went wrong!' })
+    }
 
-    //route for making a post request to create a new post
-    //const post = new Post({
-    //    title: req.body.title,
-    //    description: req.body.description,
-    //    owner: req.body.owner,
-    //    latitude: req.body.latitude,
-    //    longitude: req.body.longitude,
-    //    location:req.body.location,
-    //})
-//
-    //try {
-    //    const savedPost = await post.save()
-    //    res.json(savedPost)
-    //}
-    //catch (err) {
-    //    res.json({message: err.message})
-    //}
-}
-
-)
+})
 
 module.exports = router
