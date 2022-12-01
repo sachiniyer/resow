@@ -89,7 +89,7 @@ router.post('/login', body('emailID').isEmail(), async (req,res, )=> {
         if (!req.body.emailID || !req.body.password) {
             res
               .status(401)
-              .json({ success: false, message: `no username or password supplied` })
+              .json({ success: false, message: `No username or password supplied` })
           }
 
         //check if the user exists or not 

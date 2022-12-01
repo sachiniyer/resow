@@ -65,10 +65,9 @@ function SignIn(props) {
         {emailID: emailID, password: password}
       )
       .then(res => {
-        if (res.data.message==="ok"){
-          alert("User successfully logged in")
-          // store the response data into the data state variable
-          setResponse(res.data)
+        if (res.data.success===true){
+          //alert("User successfully logged in")
+          setResponse(res.data) // store the response data into the data state variable
         }
         if (res.data.message==="emailID"){
           alert("invalid email format!")
