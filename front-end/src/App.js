@@ -15,8 +15,10 @@ import ItemDetails from './pages/ItemDetails'
 import PastUpload from './pages/PastUpload'
 import SavedPost from './pages/SavedPost'
 import EditProfile from './pages/EditProfile'
-import SignIn from './pages/SignIn';
+import SignIn from './pages/SignIn'
 import Register from './pages/Register'
+import EditPost from './pages/EditPost'
+
 function App() {
   getLocation()
   return (
@@ -74,6 +76,10 @@ function App() {
 
             {/* a route for the past upload page */}
             <Route path="/PastUpload" element={<PastUpload />} />
+
+            {/* a route for the edit post page */}
+            <Route path="/ItemDetails/:id/EditPost" element={<EditPost />} />
+
           </Routes>
         </Router>
       </main>
