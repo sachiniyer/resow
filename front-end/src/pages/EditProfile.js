@@ -59,6 +59,7 @@ function EditProfile(props) {
     setPhone(userDetails.phone);
     setImg(userDetails.imgPath);
     setAvatarImg(img);
+    setUploadImg(img);
   };
 
   async function editProfile(){
