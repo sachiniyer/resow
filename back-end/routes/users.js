@@ -141,10 +141,7 @@ router.get('/profile', passport.authenticate('jwt', {session: false}), async (re
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET );  
         let userId = decoded.id  
-        console.log(userId)
         const user = await User.findById(userId)
-
-        console.log(user)
 
         res.json({
             id: userId,
