@@ -64,8 +64,9 @@ function EditProfile(props) {
 
   async function editProfile(){
     const data = new FormData();
-
-    data.append('file', uploadImg)
+    
+    const d = new Date()
+    data.append('file', uploadImg, d.getTime())
     data.append('fullname', fullname)
     data.append('emailID', emailID)
     data.append('phone', phone)

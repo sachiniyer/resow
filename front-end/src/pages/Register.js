@@ -19,15 +19,15 @@ function SignUp(props) {
   const [avatarImg, setAvatarImg] = useState();
   const [uploadImg, setUploadImg] = useState();
   const [loaded, setLoaded] = useState(0);
-  
+
   useEffect(() => {
     async function setToken() {
 
       if (responseServer.success) {
-        
+
         const response = await axios.post(
-          `${process.env.REACT_APP_SERVER_HOSTNAME}/users/login`, 
-          {emailID: responseServer.emailID, password: responseServer.password}
+          `${process.env.REACT_APP_SERVER_HOSTNAME}/users/login`,
+          { emailID: responseServer.emailID, password: responseServer.password }
         )
         console.log(`User registered successfully: ${JSON.stringify(response.data, null, 0)}`)
         localStorage.setItem('token', response.data.token) // store the token into localStorage
@@ -49,113 +49,112 @@ function SignUp(props) {
     if (file) {
       setUploadImg(event.target.files[0])
       reader.readAsDataURL(file);
-    } 
+    }
   }
 
   return (
-      <Box sx={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column', height: 'calc(100vh - 53px)' }}>
+    <Box sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', height: 'calc(100vh - 53px)' }}>
 
-        <Box justifyContent="center" alignItems="center" sx={{mx: 'auto'}}>
+      <Box justifyContent="center" alignItems="center" sx={{ mx: 'auto' }}>
 
-          <Box sx={{ marginTop: '20vh' }}></Box>
-          <Stack spacing={1} direction="column" alignItems="center" sx={{ m:1, minWidth: 290 }}>
-            <Avatar sx={{border: "solid", borderColor:"black", width: 150, height: 150, m: 1, margin: '0 auto' }} alt="profile pic" src={avatarImg} />
-            <IconButton color="primary" aria-label="upload picture" component="label">
-              <form role="form">
-                <input
-                  hidden
-                  accept="image/*"
-                  style={{ display: 'none' }}
-                  id="image"
-                  type="file"
-                  onChange={handleUpload}
-                />
-                <label htmlFor="image">
-                  <PhotoCamera />
-                </label>    
-              </form>
-            </IconButton>
-            <TextField fullWidth label="Fullname" id="fullname" sx={{ m: 1}} />
-            <TextField fullWidth label="Email ID" id="email" sx={{ m: 1}} />
-            <TextField fullWidth label="Phone Number" id="phone" sx={{ m: 1 }} />
-            <TextField fullWidth type={showPassword ? "text" : "password"} label="Password" id="password" sx={{ m: 1 }} />
-            <TextField fullWidth type={showPassword ? "text" : "password"} label="Confirm Password" id="passwordConf" sx={{ m: 1 }} />
-          </Stack>
-          
-          <Stack spacing={2} direction= "column" alignItems="center" >
-            <VisibilityIcon onClick={() => setShowPassword(s => !s)} sx={{cursor: 'pointer'}}/>
-            <Button color="success" sx={{ m: 2 }} 
-              onClick={ async () => {
-                let fullname = document.getElementById('fullname').value
-                let emailID = document.getElementById('email').value
-                let password = document.getElementById('password').value
-                let phone = document.getElementById('phone').value
-                let passwordConf = document.getElementById('passwordConf').value
-                const data = new FormData();
-                //let data = {fullname: fullname, emailID: emailID, password: password, phone: phonenumber}
-                data.append('file', uploadImg)
-                data.append('fullname', fullname)
-                data.append('emailID', emailID)
-                data.append('password', password)
-                data.append('phone', phone)
+        <Box sx={{ marginTop: '20vh' }}></Box>
+        <Stack spacing={1} direction="column" alignItems="center" sx={{ m: 1, minWidth: 290 }}>
+          <Avatar sx={{ border: "solid", borderColor: "black", width: 150, height: 150, m: 1, margin: '0 auto' }} alt="profile pic" src={avatarImg} />
+          <IconButton color="primary" aria-label="upload picture" component="label">
+            <form role="form">
+              <input
+                hidden
+                accept="image/*"
+                style={{ display: 'none' }}
+                id="image"
+                type="file"
+                onChange={handleUpload}
+              />
+              <label htmlFor="image">
+                <PhotoCamera />
+              </label>
+            </form>
+          </IconButton>
+          <TextField fullWidth label="Fullname" id="fullname" sx={{ m: 1 }} />
+          <TextField fullWidth label="Email ID" id="email" sx={{ m: 1 }} />
+          <TextField fullWidth label="Phone Number" id="phone" sx={{ m: 1 }} />
+          <TextField fullWidth type={showPassword ? "text" : "password"} label="Password" id="password" sx={{ m: 1 }} />
+          <TextField fullWidth type={showPassword ? "text" : "password"} label="Confirm Password" id="passwordConf" sx={{ m: 1 }} />
+        </Stack>
 
-                const url = `${process.env.REACT_APP_SERVER_HOSTNAME}/users/register`
+        <Stack spacing={2} direction="column" alignItems="center" >
+          <VisibilityIcon onClick={() => setShowPassword(s => !s)} sx={{ cursor: 'pointer' }} />
+          <Button color="success" sx={{ m: 2 }}
+            onClick={async () => {
+              let fullname = document.getElementById('fullname').value
+              let emailID = document.getElementById('email').value
+              let password = document.getElementById('password').value
+              let phone = document.getElementById('phone').value
+              let passwordConf = document.getElementById('passwordConf').value
+              const data = new FormData();
+              //let data = {fullname: fullname, emailID: emailID, password: password, phone: phonenumber}
+              // 
+              const d = new Date()
+              data.append('file', uploadImg, d.getTime())
+              data.append('fullname', fullname)
+              data.append('emailID', emailID)
+              data.append('password', password)
+              data.append('phone', phone)
 
-                var config = {
-                  onUploadProgress: function(progressEvent) {
-                    var percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
-                    setLoaded(percentCompleted)
-                  }
-                };
+              const url = `${process.env.REACT_APP_SERVER_HOSTNAME}/users/register`
 
-                if (password === passwordConf) {
-                  if (emailID && password && passwordConf) {
-                    await axios.post(`${url}/users/register`, data)
+              var config = {
+                onUploadProgress: function (progressEvent) {
+                  var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+                  setLoaded(percentCompleted)
+                }
+              };
+
+              if (password === passwordConf) {
+                if (emailID && password && passwordConf) {
+                  await axios.post(url, data)
                     .then(res => {
-                      if (res.data.success===true){
+                      if (res.data.success === true) {
                         alert("User registered successfully")
                         setResponse(res.data)
                       }
-                      if (res.data.message==="Email already in use"){
+                      if (res.data.message === "Email already in use") {
                         alert("An account already exists with this email")
                         window.location.reload()
                       }
-                      if (res.data.message === "emailID"){
+                      if (res.data.message === "emailID") {
                         alert("Invalid email format!")
                         window.location.reload()
                       }
-                      if (res.data.message==="phone"){
+                      if (res.data.message === "phone") {
                         alert("invalid phone number format!")
                         window.location.reload()
                       }
                     })
 
-                    //console.log(`Server response: ${JSON.stringify(response.data, null, 0)}`
-                  }
-                  else {
-                    alert('All fields must be filled')
-                  }
+                  //console.log(`Server response: ${JSON.stringify(response.data, null, 0)}`
                 }
                 else {
-                  alert('Passwords do not match')
-                  document.getElementById('password').value = ''
-                  document.getElementById('passwordConf').value = ''
+                  alert('All fields must be filled')
                 }
+              }
+              else {
+                alert('Passwords do not match')
+                document.getElementById('password').value = ''
+                document.getElementById('passwordConf').value = ''
+              }
 
-              }}
-            >
-              Register  
-            </Button>
-            <Button color="success" href="/SignIn"> Sign In </Button>
-          </Stack>
-
-        </Box>
+            }}
+          >
+            Register
+          </Button>
+          <Button color="success" href="/SignIn"> Sign In </Button>
+        </Stack>
 
       </Box>
+
+    </Box>
   );
 }
-  
-  export default SignUp;
-  
-  
-  
+
+export default SignUp;
