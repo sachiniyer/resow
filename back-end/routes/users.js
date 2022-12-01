@@ -22,13 +22,25 @@ router.get('/', async (req, res) => {
 })
 
  //route for adding a new user (user registration page)
-router.post('/register', async (req,res)=> {
+router.post('/register', 
+        body('emailID').trim().isEmail(),
+        body('phone').isMobilePhone(),
+         async (req,res)=> {
 
     try {
-        //check if the user exists with the same email or not 
-        const user = await User.findOne({emailID: req.body.emailID})
+        const errors = validationResult(req);
+        if (!errors.isEmpty()){
+            return res.status(200).json({ message: errors.array()[0].param });
+        }
 
-        if(!user){
+        //check if the user exists with the same email or not 
+        const existingUser = await User.findOne({emailID: req.body.emailID})
+        if (existingUser){
+            return res.status(200).send({ success: false, message: "Email already in use"})
+            //throw new Error("An account already exists with this email")
+        }
+        
+        if(!existingUser ){
             bcrypt.hash(req.body.password,10)
             .then(hashedPassword =>{
                 const newUser = new User({
@@ -55,36 +67,44 @@ router.post('/register', async (req,res)=> {
                 console.log(err)
             })
         }
+
     }
-    catch (err) {
-        res.send({
-            success: false, 
-            message: err.message
-        })
+    catch(err) {
+        //console.log("here bottom")
+        res.json({message: err.message});
         console.log(err)
     }
 })
 
 //login router to check if the entered details are correct or not (Log In Page) - AUTHORIZATION and AUTHENTICATION
-router.post('/login', async (req,res, )=> {
+router.post('/login', body('emailID').isEmail(), async (req,res, )=> {
 
     try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()){
+            //console.log(errors.array()[0].param)
+            return res.status(200).json({ message: errors.array()[0].param });
+        }
+
         if (!req.body.emailID || !req.body.password) {
             res
               .status(401)
-              .json({ success: false, message: `no username or password supplied.` })
+              .json({ success: false, message: `No username or password supplied` })
           }
 
         //check if the user exists or not 
         const user = await User.findOne({emailID: req.body.emailID})
-        console.log(user)
-        if (!user) throw new Error("User not found")
+        if (!user){
+            return res.status(200).send({ success: false, message: "User not found"})
+            //throw new Error("User not found")
+        }
 
         const dbPassword = user.password
         bcrypt.compare(req.body.password,dbPassword)
         .then(validPass => {
                 if (!validPass){
-                    throw new Error("Incorrect password, try again")
+                    //throw new Error("Incorrect password, try again")
+                    return res.status(200).send({ success: false, message: "Incorrect password"})
                 }
                 else{
                     const payload = {
@@ -108,7 +128,6 @@ router.post('/login', async (req,res, )=> {
        
     }
     catch (err) {
-        //next(err)
         res.json({message: err.message});
         console.log(err)
     }
@@ -122,10 +141,7 @@ router.get('/profile', passport.authenticate('jwt', {session: false}), async (re
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET );  
         let userId = decoded.id  
-        console.log(userId)
         const user = await User.findById(userId)
-
-        console.log(user)
 
         res.json({
             id: userId,
@@ -171,7 +187,7 @@ router.patch('/:userId', body('emailID').isEmail(), body('phone').isMobilePhone(
         res.json({message:"ok"})
     }
     catch (err) {
-        console.log("here")
+        //console.log("here")
         console.log(err.message)
         res.json({message: err.message})
     }
