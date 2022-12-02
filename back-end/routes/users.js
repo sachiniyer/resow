@@ -36,17 +36,6 @@ var upload = multer({
     })
 })
 
-router.get('/', async (req, res) => {
-    //route for retrieving the list of all posts
-    try {
-        const posts = await Post.find()
-        res.json(posts.reverse())
-    }
-    catch (err) {
-        res.json({ message: err.message, location: 'Retrieving posts from DB' })
-    }
-})
-
 
 
 router.get('/', async (req, res) => {
@@ -71,14 +60,10 @@ router.post('/register', upload.single('file'),
             if (!errors.isEmpty()) {
                 return res.status(200).json({ message: errors.array()[0].param });
             }
-
-            //check if the user exists with the same email or not
             const existingUser = await User.findOne({ emailID: req.body.emailID })
             if (existingUser) {
                 return res.status(200).send({ success: false, message: "Email already in use" })
-                //throw new Error("An account already exists with this email")
             }
-
             if (!existingUser) {
                 bcrypt.hash(req.body.password, 10)
                     .then(hashedPassword => {
@@ -107,16 +92,12 @@ router.post('/register', upload.single('file'),
                         console.log(err)
                     })
             }
-
         }
         catch (err) {
-            //console.log("here bottom")
             res.json({ message: err.message });
             console.log(err)
         }
     })
-
-//login router to check if the entered details are correct or not (Log In Page) - AUTHORIZATION and AUTHENTICATION
 router.post('/login', body('emailID').isEmail(), async (req, res,) => {
 
     try {
