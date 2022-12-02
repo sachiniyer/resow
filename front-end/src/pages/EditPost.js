@@ -17,29 +17,11 @@ import TurnedInIcon from '@mui/icons-material/TurnedIn';
 import { useParams } from "react-router-dom";
 import TextField from '@mui/material/TextField';
 
-export default function EditPost(props) {
+function EditPost(props) {
 
   const [userId, setUserId] = useState("")
 
   const navigate = useNavigate()
-
-  //   useEffect(() => {
-  //     async function fetchData() {
-  //       const token = localStorage.getItem('token')
-  //       await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`, {headers: {
-  //         Authorization: token
-  //       }})
-  //       .then(res => {
-  //         setUserId(res.data.id)
-  //         setIsLoggedIn(true)
-  //       }).catch(err => {
-  //         setUserId("")
-  //       })
-  //     }
-
-  //     fetchData();
-
-  //   }, [navigate]);
 
   // The postId obtained from the parameter.
   let { id } = useParams();
@@ -51,35 +33,6 @@ export default function EditPost(props) {
   const [description, setDescription] = useState("");
   const [images, setImages] = useState([""]);
 
-  // The upload details which contains all the information about the user.
-  const [uploaderId, setUploaderId] = useState();
-  const [uploaderDetails, setUploaderDetails] = useState({});
-
-  // The path to the profile image of the uploader
-  const [imgPath, setImgPath] = useState();
-
-  // a boolean flag to check if it is saved or not.
-  const [isSaved, setIsSaved] = useState(false);
-
-  async function savePost() {
-    let user_id = userId;
-    let post_id = postId;
-    let data = { userId: user_id, postId: post_id };
-
-    axios
-      .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/saved-posts`, data)
-      .catch(err => { console.log(err) })
-  }
-
-  // a function to send save info to the server
-  async function unsavePost() {
-
-    axios
-      .delete(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/saved-posts/userId=${userId}&postId=${postId}`)
-      .catch(err => { console.log(err) })
-
-  }
-
   async function updatePost() {
     // axios.patch(`${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`)
     // .then(alert("the post is updated"))
@@ -90,31 +43,18 @@ export default function EditPost(props) {
       title: `${title}`,
       description: `${description}`
     }
-
     axios.patch(`${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`, postInfo)
       .then(res => {
-        if (res.data.message === "ok") {
+        if (res.status === 200) {
           alert("the post has been updated")
           console.log(postId)
           window.location.replace(`/ItemDetails/${postId}`)
         }
+        else console.log(res)
       })
       .catch(err => {
         console.log(err);
       })
-  }
-
-  // a switching function to check the state of saving
-  const switchSaved = () => {
-    if (isSaved) {
-      unsavePost();
-      setIsSaved(!isSaved);
-    }
-    else {
-      savePost();
-      setIsSaved(!isSaved);
-    }
-
   }
 
   async function fetchItemData() {
@@ -123,66 +63,40 @@ export default function EditPost(props) {
       `${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`
     );
     setItemDetails(result.data);
-    setUploaderId(result.data.owner);
-    setTitle(result.title);
-    setDescription(result.description);
+    setTitle(result.data.title);
+    setDescription(result.data.description);
 
-  }
-
-  async function fetchUploaderData() {
-    const result = await axios(
-      `${process.env.REACT_APP_SERVER_HOSTNAME}/users/${uploaderId}`
-    );
-    setUploaderDetails(result.data)
-    if (result.data.imgPath) {
-      setImgPath(result.data.imgPath)
-    }
-  }
-
-  async function checkSave() {
-
-    const result = await axios(
-      `${process.env.REACT_APP_SERVER_HOSTNAME}/users/saved-posts/userId=${userId}&postId=${postId}`
-    );
-    if (result.data.length === 0) {
-      setIsSaved(false)
-    }
-    else {
-      setIsSaved(true)
-    }
   }
 
   useEffect(() => {
     fetchItemData();
-    fetchUploaderData();
-  }, [uploaderId]);
+  }, [navigate]);
 
-  useEffect(() => {
-    checkSave();
-  }, [])
+  // an alternate in case this stops working
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     await axios(
+  //       `${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`
+  //     )
+  //     .then(res => {
+  //       setItemDetails(res.data);
+  //       setTitle(res.data.title);
+  //       setDescription(res.data.description);
+  //     }).catch(err => {
+  //       console.log(err)
+  //     })
+  //   }
 
-  const [itemPics, setItemPics] = useState([])
+  //   fetchData();
+  //   // imgRoute()
 
-  function handleUpload(event) {
-    console.log('Event:', event)
-    console.log('Event.target:', event.target)
-    console.log('Event.target.files:', event.target.files)
+  // }, [navigate]);
 
-    if (event.target.files[0]) {
-      let file = event.target.files[0];
-      let reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        setItemPics([...itemPics, reader.result])
-      }
-    }
-  }
-
-  console.log(description)
   return (
     <>
       <Box sx={{ width: { xs: 0.9, sm: 0.5, md: 0.3 }, paddingTop: 1 }}>
         <ImgCarousel imgList={itemDetails.images} />
+        {/* can work on this in sprint 4 */}
         {/* <IconButton color="primary" aria-label="upload picture" component="label">
           <input
             hidden
@@ -199,43 +113,28 @@ export default function EditPost(props) {
           </IconButton> */}
       </Box>
 
-      <Box sx={{ width: { xs: 0.9, sm: 0.5, md: 0.3 }, display: 'flex', borderBottom: "solid" }}>
-        <Box sx={{ width: 0.3, height: 1, textAlign: "center", justifyContent: "center" }}>
-          <AspectRatio ratio="1/1">
-            <Avatar sx={{ border: "solid 0.5px", borderColor: "black", justifyContent: "center", width: 0.5 }} src={imgPath} />
-          </AspectRatio>
-          <Box sx={{ width: 1, wordWrap: "break-word", fontSize: "10px", color: "black" }}>
-            {uploaderDetails.fullname}
-          </Box>
-        </Box>
-
-        <Box sx={{ width: 0.05 }}>
-        </Box>
+      <Box sx={{ width: { xs: 0.9, sm: 0.5, md: 0.3 }, marginBottom: 2 }}>
 
         <Box sx={{ width: 1 }}>
           <Box sx={{ height: 0.1 }}>
           </Box>
-          <Box sx={{ width: 1, flexWrap: "wrap", wordWrap: "break-word", fontSize: { xs: "15px", sm: "20px", md: "20px" }, textAlign: "left", color: "black" }}>
-            <TextField label="Title"
-              variant="standard"
-              value={title}
-              onChange={event => setTitle(event.target.value)}
-              color="success"
-            />
-          </Box>
 
+          <TextField
+            fullWidth
+            placeholder="Title"
+            value={title}
+            onChange={event => setTitle(event.target.value)}
+            color="success"
+          />
         </Box>
       </Box>
 
-      <Box sx={{ color: "black", borderTop: "solid", width: { xs: 0.9, sm: 0.5, md: 0.3 }, textAlign: "left", marginBottom: 7, fontSize: "15px" }}>
-        <Box sx={{ textAlign: "right", marginTop: "-35px", marginBottom: "10px" }}>
-          {isSaved
-            ? <IconButton onClick={switchSaved}><TurnedInIcon /></IconButton>
-            : <IconButton onClick={switchSaved}><TurnedInNotIcon /></IconButton>
-          }
-        </Box>
-        <TextField label="Description"
-          variant="standard"
+      <Box sx={{ color: "black", width: { xs: 0.9, sm: 0.5, md: 0.3 }, textAlign: "left", marginBottom: 4, fontSize: "15px" }}>
+        <TextField
+          fullWidth
+          multiline
+          rows={4}
+          placeholder="Description"
           value={description}
           onChange={event => setDescription(event.target.value)}
           color="success"
@@ -244,12 +143,13 @@ export default function EditPost(props) {
 
       <Box sx={{ m: 2 }}>
         <Stack spacing={2} direction="row" alignItems="center" justifyContent="center">
-          {/* add onClick function to handle save */}
-          <Button color="success" href={"/ItemDetails/:" + postId} variant="contained">Revert Changes</Button>
-          <Button color="success" onClick={updatePost} href={"/ItemDetails/:" + postId} variant="contained">Save Changes</Button>
+          <Button color="success" href={"/ItemDetails/" + postId} variant="contained">Revert Changes</Button>
+          <Button color="success" onClick={updatePost} variant="contained">Save Changes</Button>
         </Stack>
       </Box>
 
     </>
   )
 }
+
+export default EditPost
