@@ -70,10 +70,10 @@ export default function PreviewWindow(props) {
               </Box>
             </Box>
             <Box sx={{ width: 120 }}>
-              <Box sx={{ width: 100, wordWrap: "break-word", marginTop: 1, marginLeft: 1, fontSize: 10, textAlign: "left" }}>
+              <Box sx={{ width: 100, marginTop: 1, marginLeft: 1, fontSize: 10, textAlign: "left",maxWidth:"90px" }}>
                 {props.title}
               </Box>
-              <Box sx={{ width: 100, wordWrap: "break-word", marginTop: 1.5, marginLeft: 1, fontSize: 10, textAlign: "left", color: "#2596be" }}>
+              <Box sx={{ width: 100, marginTop: 1.5, marginLeft: 1, fontSize: 10, textAlign: "left", color: "#2596be",maxWidth:"90px"  }}>
                 {props.location}
               </Box>
             </Box>
