@@ -33,13 +33,6 @@ function EditPost(props) {
   const [description, setDescription] = useState("");
   const [images, setImages] = useState([""]);
 
-  // The upload details which contains all the information about the user.
-  const [uploaderId, setUploaderId] = useState();
-  const [uploaderDetails, setUploaderDetails] = useState({});
-
-  // The path to the profile image of the uploader
-  const [imgPath, setImgPath] = useState();
-
   async function updatePost() {
     // axios.patch(`${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`)
     // .then(alert("the post is updated"))
@@ -70,27 +63,16 @@ function EditPost(props) {
       `${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`
     );
     setItemDetails(result.data);
-    setUploaderId(result.data.owner);
-    setTitle(result.title);
-    setDescription(result.description);
+    setTitle(result.data.title);
+    setDescription(result.data.description);
 
-  }
-
-  async function fetchUploaderData() {
-    const result = await axios(
-      `${process.env.REACT_APP_SERVER_HOSTNAME}/users/${uploaderId}`
-    );
-    setUploaderDetails(result.data)
-    if (result.data.imgPath) {
-      setImgPath(result.data.imgPath)
-    }
   }
 
   useEffect(() => {
     fetchItemData();
-    fetchUploaderData();
-  }, [uploaderId]);
+  }, [navigate]);
 
+  // an alternate in case this stops working
   // useEffect(() => {
   //   async function fetchData() {
   //     await axios(
@@ -98,9 +80,8 @@ function EditPost(props) {
   //     )
   //     .then(res => {
   //       setItemDetails(res.data);
-  //   setUploaderId(res.data.owner);
-  //   setTitle(res.title);
-  //   setDescription(res.description);
+  //       setTitle(res.data.title);
+  //       setDescription(res.data.description);
   //     }).catch(err => {
   //       console.log(err)
   //     })
@@ -115,6 +96,7 @@ function EditPost(props) {
     <>
       <Box sx={{ width: { xs: 0.9, sm: 0.5, md: 0.3 }, paddingTop: 1 }}>
         <ImgCarousel imgList={itemDetails.images} />
+        {/* can work on this in sprint 4 */}
         {/* <IconButton color="primary" aria-label="upload picture" component="label">
           <input
             hidden
