@@ -17,7 +17,7 @@ import TurnedInIcon from '@mui/icons-material/TurnedIn';
 import { useParams } from "react-router-dom";
 import TextField from '@mui/material/TextField';
 
-export default function EditPost(props) {
+function EditPost(props) {
 
   const [userId, setUserId] = useState("")
 
@@ -108,7 +108,6 @@ export default function EditPost(props) {
     }
   }
 
-  console.log(description)
   return (
     <>
       <Box sx={{ width: { xs: 0.9, sm: 0.5, md: 0.3 }, paddingTop: 1 }}>
@@ -137,13 +136,11 @@ export default function EditPost(props) {
           
             <TextField 
               fullWidth
-              label="Title"
+              placeholder="Title"
               value={title}
               onChange={event => setTitle(event.target.value)}
               color="success"
             />
-   
-
         </Box>
       </Box>
 
@@ -152,7 +149,7 @@ export default function EditPost(props) {
           fullWidth
           multiline
           rows={4}
-          label="Description"
+          placeholder="Description"
           value={description}
           onChange={event => setDescription(event.target.value)}
           color="success"
@@ -169,3 +166,5 @@ export default function EditPost(props) {
     </>
   )
 }
+
+export default EditPost
