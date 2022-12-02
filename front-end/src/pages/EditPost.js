@@ -91,22 +91,25 @@ function EditPost(props) {
     fetchUploaderData();
   }, [uploaderId]);
 
-  const [itemPics, setItemPics] = useState([])
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     await axios(
+  //       `${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`
+  //     )
+  //     .then(res => {
+  //       setItemDetails(res.data);
+  //   setUploaderId(res.data.owner);
+  //   setTitle(res.title);
+  //   setDescription(res.description);
+  //     }).catch(err => {
+  //       console.log(err)
+  //     })
+  //   }
 
-  function handleUpload(event) {
-    console.log('Event:', event)
-    console.log('Event.target:', event.target)
-    console.log('Event.target.files:', event.target.files)
+  //   fetchData();
+  //   // imgRoute()
 
-    if (event.target.files[0]) {
-      let file = event.target.files[0];
-      let reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        setItemPics([...itemPics, reader.result])
-      }
-    }
-  }
+  // }, [navigate]);
 
   return (
     <>
