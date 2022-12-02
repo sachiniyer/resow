@@ -44,14 +44,11 @@ function UploadItem() {
   }, [navigate]);
 
   function updateStates(file) {
-    console.log('uploadFiles:', uploadFiles)
     let reader = new FileReader();
 
     reader.onload = () => {
-      console.log('done loading')
       setUploadFiles(uploadFiles => [...uploadFiles, file]);
       setCarouselPics(itemPics => [...itemPics, reader.result])
-      console.log('itemPics:', carouselPics)
     };
 
     reader.readAsDataURL(file);
@@ -68,7 +65,6 @@ function UploadItem() {
     let title = document.getElementById('title').value
     let description = document.getElementById('description').value
     const data = new FormData();
-    console.log('uploadFiles:', uploadFiles)
     const d = new Date()
     let i = 0
     for (let file in uploadFiles) {
@@ -85,7 +81,6 @@ function UploadItem() {
         navigate("/SignIn")
       })
 
-    console.log(location)
 
     data.append('title', title)
     data.append('description', description)
@@ -105,7 +100,7 @@ function UploadItem() {
     axios.post(url, data, config)
       .then(function (res) {
         alert('posted')
-        //document.location.href = '/PastUpload';
+        window.location.replace("/Map/ItemsList");
       })
       .catch(function (err) {
         console.log('Error:', err)
