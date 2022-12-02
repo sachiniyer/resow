@@ -105,7 +105,7 @@ function UploadItem() {
     axios.post(url, data, config)
       .then(function (res) {
         alert('posted')
-        //document.location.href = '/PastUpload';
+        window.location.replace("/Map/ItemsList");
       })
       .catch(function (err) {
         console.log('Error:', err)
