@@ -151,8 +151,13 @@ function MapWrapper(_) {
     );
     if (result.data.imgList && result.data.imgList.length > 0)
       setImage(result.data.imgList[0])
-    if (result.data.profile && result.data.profile.length > 0)
-      setProfile(result.data.profile[0])
+    if (result.data.owner) {
+      const ownerresult = await axios(
+        `${process.env.REACT_APP_SERVER_HOSTNAME}/users/${result.data.owner}`
+      );
+      if (ownerresult.data.imgPath)
+        setProfile(ownerresult.data.imgPath)
+    }
     if (result.data.sellerName)
       setSeller(result.data.sellerName)
     if (result.data.title)
