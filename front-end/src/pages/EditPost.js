@@ -43,14 +43,14 @@ function EditPost(props) {
       title: `${title}`,
       description: `${description}`
     }
-
     axios.patch(`${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`, postInfo)
       .then(res => {
-        if (res.data.message === "ok") {
+        if (res.status === 200) {
           alert("the post has been updated")
           console.log(postId)
           window.location.replace(`/ItemDetails/${postId}`)
         }
+        else console.log(res)
       })
       .catch(err => {
         console.log(err);
@@ -118,19 +118,19 @@ function EditPost(props) {
         <Box sx={{ width: 1 }}>
           <Box sx={{ height: 0.1 }}>
           </Box>
-          
-            <TextField 
-              fullWidth
-              placeholder="Title"
-              value={title}
-              onChange={event => setTitle(event.target.value)}
-              color="success"
-            />
+
+          <TextField
+            fullWidth
+            placeholder="Title"
+            value={title}
+            onChange={event => setTitle(event.target.value)}
+            color="success"
+          />
         </Box>
       </Box>
 
       <Box sx={{ color: "black", width: { xs: 0.9, sm: 0.5, md: 0.3 }, textAlign: "left", marginBottom: 4, fontSize: "15px" }}>
-        <TextField 
+        <TextField
           fullWidth
           multiline
           rows={4}
@@ -144,7 +144,7 @@ function EditPost(props) {
       <Box sx={{ m: 2 }}>
         <Stack spacing={2} direction="row" alignItems="center" justifyContent="center">
           <Button color="success" href={"/ItemDetails/" + postId} variant="contained">Revert Changes</Button>
-          <Button color="success" onClick={updatePost} href={"/ItemDetails/" + postId} variant="contained">Save Changes</Button>
+          <Button color="success" onClick={updatePost} variant="contained">Save Changes</Button>
         </Stack>
       </Box>
 
