@@ -18,17 +18,6 @@ function PastUpload(props) {
 
   useEffect(() => {
     async function fetchData() {
-      const result = await axios(
-        `${process.env.REACT_APP_SERVER_HOSTNAME}/posts/past-uploads/`+userId
-      );
-      setData(result.data);
-      setNoSavedPost(result.data.length===0)
-    }
-    fetchData();
-  }, [userId]);
-
-  useEffect(() => {
-    async function fetchData() {
       const token = localStorage.getItem('token')
       await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`, {headers: {
         Authorization: token
@@ -41,6 +30,17 @@ function PastUpload(props) {
     }
     fetchData();
   }, [navigate]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const result = await axios(
+        `${process.env.REACT_APP_SERVER_HOSTNAME}/posts/past-uploads/`+userId
+      );
+      setData(result.data);
+      setNoSavedPost(result.data.length===0)
+    }
+    fetchData();
+  }, [userId]);
 
     return (
       <>
