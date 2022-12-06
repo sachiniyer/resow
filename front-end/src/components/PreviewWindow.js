@@ -1,19 +1,26 @@
 import * as React from 'react';
 import { useEffect, useState, Fragment } from 'react';
 import { useNavigate } from "react-router-dom";
+import Avatar from '@mui/material/Avatar';
+import { CardActionArea } from '@mui/material';
+import CardMedia from '@mui/material/CardMedia';
+import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import { CardActionArea } from '@mui/material';
-import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
+
+
+
 
 let instanceCount = 0
 
 export default function PreviewWindow(props) {
+
   let navigate = useNavigate()
+
   let [instanceCheck, setInstanceCheck] = useState(true)
+
   let [time, setTime] = useState(0)
+
   let [clickable, setClickable] = useState(0)
 
   let handleClick = () => {
@@ -52,10 +59,20 @@ export default function PreviewWindow(props) {
   }, [])
 
   return (instanceCheck ? (
-    <Card component={"div"} onMouseDown={handleClick} sx={{ display: 'flex', width: 0.9, maxWidth: 200, height: 0.9, maxHeight: 300, borderRadius: '5%' }}>
+    <Card 
+    component={"div"} 
+    onMouseDown={handleClick} 
+    sx={{ 
+      display: 'flex', 
+      width: 0.9, 
+      maxWidth: 200, 
+      height: 0.9, 
+      maxHeight: 300, 
+      borderRadius: '5%' 
+    }}
+    >
       <CardActionArea>
         <CardMedia
-          style={{ borderBottom: "solid 0.7px" }}
           component="img"
           height="200"
           image={props.image}
