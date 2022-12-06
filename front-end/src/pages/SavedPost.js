@@ -16,20 +16,6 @@ function SavedPost(props) {
 
   const navigate = useNavigate()
 
-
-  useEffect(() => {
-    async function fetchData() {
-      const result = await axios(
-        `${process.env.REACT_APP_SERVER_HOSTNAME}/posts/saved-posts/userId=`+userId
-      );
-      setData(result.data);
-      if (data !==null){
-        setNoSavedPost(result.data.length===0)
-      }
-    }
-    fetchData();
-  }, [userId]);
-
   useEffect(() => {
     async function fetchData() {
       const token = localStorage.getItem('token')
@@ -44,6 +30,19 @@ function SavedPost(props) {
     }
     fetchData();
   }, [navigate]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const result = await axios(
+        `${process.env.REACT_APP_SERVER_HOSTNAME}/posts/saved-posts/userId=`+userId
+      );
+      setData(result.data);
+      if (data !==null){
+        setNoSavedPost(result.data.length===0)
+      }
+    }
+    fetchData();
+  }, [userId]);
 
   return (
     <>
