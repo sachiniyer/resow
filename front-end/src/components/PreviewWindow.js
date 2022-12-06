@@ -1,12 +1,13 @@
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import { CardActionArea } from '@mui/material';
-import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
 import * as React from 'react';
 import { useEffect, useState, Fragment } from 'react';
 import { useNavigate } from "react-router-dom";
+import Avatar from '@mui/material/Avatar';
+import { CardActionArea } from '@mui/material';
+import CardMedia from '@mui/material/CardMedia';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+
 
 
 
@@ -19,7 +20,7 @@ export default function PreviewWindow(props) {
   let [instanceCheck, setInstanceCheck] = useState(true)
 
   let [time, setTime] = useState(0)
-  
+
   let [clickable, setClickable] = useState(0)
 
   let handleClick = () => {
