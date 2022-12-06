@@ -37,9 +37,7 @@ export default function ItemDetails(props) {
           setUserId("")
         })
     }
-
     fetchData();
-
   }, [navigate]);
 
   let { id } = useParams();
@@ -62,6 +60,30 @@ export default function ItemDetails(props) {
 
   const [isSaved, setIsSaved] = useState(false);
 
+  const switchSaved = () => {
+    if (!isLoggedIn) {
+      askRedirect();
+    }
+    else {
+      if (isSaved) {
+        unsavePost();
+        setIsSaved(!isSaved);
+      }
+      else {
+        savePost();
+        setIsSaved(!isSaved);
+      }
+    }
+  }
+
+  const handleClick = () => {
+    setOpen((prev) => !prev);
+  };
+
+  const handleClickAway = () => {
+    setOpen(false);
+  };
+
   const useConfirm = (message = null, onConfirm, onCancel) => {
     if (!onConfirm || typeof onConfirm !== "function") {
       return;
@@ -69,7 +91,6 @@ export default function ItemDetails(props) {
     if (onCancel && typeof onCancel !== "function") {
       return;
     }
-
     const confirmAction = () => {
       if (window.confirm(message)) {
         onConfirm();
@@ -116,35 +137,11 @@ export default function ItemDetails(props) {
       .catch(err => { console.log(err) })
   }
 
-  const switchSaved = () => {
-    if (!isLoggedIn) {
-      askRedirect();
-    }
-    else {
-      if (isSaved) {
-        unsavePost();
-        setIsSaved(!isSaved);
-      }
-      else {
-        savePost();
-        setIsSaved(!isSaved);
-      }
-    }
-  }
-
-  const handleClick = () => {
-    setOpen((prev) => !prev);
-  };
-
-  const handleClickAway = () => {
-    setOpen(false);
-  };
-
   async function fetchItemData() {
 
     const result = await axios(
       `${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`
-    );
+    )
     setItemDetails(result.data);
     setUploaderId(result.data.owner)
     setIsMyPost(result.data.owner === userId)
@@ -161,7 +158,6 @@ export default function ItemDetails(props) {
   }
 
   async function checkSave() {
-
     const result = await axios(
       `${process.env.REACT_APP_SERVER_HOSTNAME}/users/saved-posts/userId=${userId}&postId=${postId}`
     );
