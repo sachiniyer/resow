@@ -10,6 +10,26 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Stack from '@mui/material/Stack';
 import { useNavigate } from "react-router-dom"
 import { getLocation } from '../components/Location'
+import { createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
+
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: '#6fbf73',
+      main: '#4caf50',
+      dark: '#357a38',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#91ff35',
+      main: '#76ff03',
+      dark: '#52b202',
+      contrastText: '#000',
+    },
+  },
+})
 
 function UploadItem() {
 
@@ -125,20 +145,22 @@ function UploadItem() {
                 onChange={handleUpload}
               />
               <label htmlFor="images">
-                <PhotoCamera />
+                <PhotoCamera sx={{color: 'success.main'}}/>
               </label>
             </form>
           </IconButton>
 
-
-          <TextField fullWidth label="Post Title" id="title" />
-          <TextField
-            fullWidth
-            placeholder="Post Description"
-            multiline
-            rows={4}
-            id='description'
-          />
+          <ThemeProvider theme={theme}>
+            <TextField fullWidth label="Post Title" id="title" sx={{color: 'success.main'}}/>
+            <TextField sx={{color: 'success.main'}}
+              fullWidth
+              placeholder="Post Description"
+              multiline
+              rows={4}
+              id='description'
+            />
+          </ThemeProvider>
+          
 
           <Stack spacing={2} direction="row" alignItems="center" justifyContent="center" sx={{ marginBottom: 2 }}>
             <Button sx={{ width: 100 }} href='/' color="success" variant="contained">Discard</Button>
