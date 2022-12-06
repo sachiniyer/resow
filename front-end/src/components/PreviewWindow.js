@@ -52,7 +52,18 @@ export default function PreviewWindow(props) {
   }, [])
 
   return (instanceCheck ? (
-    <Card component={"div"} onMouseDown={handleClick} sx={{ display: 'flex', width: 0.9, maxWidth: 200, height: 0.9, maxHeight: 300, borderRadius: '5%' }}>
+    <Card 
+    component={"div"} 
+    onMouseDown={handleClick} 
+    sx={{ 
+      display: 'flex', 
+      width: 0.9, 
+      maxWidth: 200, 
+      height: 0.9, 
+      maxHeight: 300, 
+      borderRadius: '5%' 
+    }}
+    >
       <CardActionArea>
         <CardMedia
           style={{ borderBottom: "solid 0.7px" }}
