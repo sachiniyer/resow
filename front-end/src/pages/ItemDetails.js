@@ -18,7 +18,7 @@ import { useParams } from "react-router-dom";
 
 export default function ItemDetails(props) {
 
-  const [userId, setUserId] = useState("")
+  const [userId, setUserId] = useState("0")
 
   const navigate = useNavigate()
 
