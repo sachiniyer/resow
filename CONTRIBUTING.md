@@ -93,6 +93,7 @@ npm test
 - Scrum Master: Minwu Kim
 ### Sprint 4
 - Product Owner: Tasnim Ahmed
+- Scrum Master: Bhavicka Mohta
 
 
 
