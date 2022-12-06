@@ -16,22 +16,16 @@ function PastUpload(props) {
 
   const navigate = useNavigate()
 
-
   useEffect(() => {
-
     async function fetchData() {
-
       const result = await axios(
         `${process.env.REACT_APP_SERVER_HOSTNAME}/posts/past-uploads/`+userId
       );
-
       setData(result.data);
       setNoSavedPost(result.data.length===0)
     }
-
     fetchData();
   }, [userId]);
-
 
   useEffect(() => {
     async function fetchData() {
@@ -45,9 +39,7 @@ function PastUpload(props) {
         navigate("/SignIn")
       })
     }
-
     fetchData();
-
   }, [navigate]);
 
     return (
@@ -66,7 +58,6 @@ function PastUpload(props) {
             </Box>
           : null
         }
-
       <Box sx={{position: "fixed", bottom: 20}}>
             <Button component={Link} to="/UserProfile" variant="contained" color="success">Back to Profile</Button>
       </Box>
