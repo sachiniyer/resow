@@ -92,8 +92,7 @@ npm test
 - Product Owner: Sachin Iyer
 - Scrum Master: Minwu Kim
 ### Sprint 4
-- TBD
-
+- Product Owner: Tasnim Ahmed
 
 
 
