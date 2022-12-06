@@ -10,21 +10,21 @@ import Stack from '@mui/material/Stack';
 import axios from "axios"
 
 function SignIn(props) {
+
   const navigate = useNavigate()
+
   const [showPassword, setShowPassword] = useState(false);
 
   const [emailID, setEmailID] = useState('')
+
   const [password, setPassword] = useState('')
 
-  const [responseServer, setResponse] = useState({}) // the API will return an object with a JWT token, if the user logs in successfully
-
+  const [responseServer, setResponse] = useState({}) 
 
   useEffect(() => {
-    // if the user is logged-in, save the token to local storage
     if (responseServer.success && responseServer.token) {
       console.log("User successfully logged in")
-      //console.log(responseServer.token) //for debugging
-      localStorage.setItem('token', responseServer.token) // store the token into localStorage
+      localStorage.setItem('token', responseServer.token) 
       navigate('/UserProfile')
     }
   
@@ -37,7 +37,6 @@ function SignIn(props) {
         Authorization: token
       }})
       .then(res => {
-        //console.log(res)  //for debugging
         navigate("/UserProfile")
       }).catch(err => {
         console.log(err)
@@ -45,29 +44,19 @@ function SignIn(props) {
         
       })
     }
-
     checkLoggedIn();
-
   }, [navigate]);
 
-
-
   const handleSubmit = async e => {
-    // prevent the HTML form from actually submitting
     e.preventDefault()
-
     try {
-      //console.log(emailID, password) //for debugging
-      
-      // send a POST request with the data to the server api to authenticate
       await axios.post(
         `${process.env.REACT_APP_SERVER_HOSTNAME}/users/login`, 
         {emailID: emailID, password: password}
       )
       .then(res => {
         if (res.data.success===true){
-          //alert("User successfully logged in")
-          setResponse(res.data) // store the response data into the data state variable
+          setResponse(res.data) 
         }
         if (res.data.message==="emailID"){
           alert("invalid email format!")
@@ -85,21 +74,14 @@ function SignIn(props) {
           alert("invalid phone number format!")
           window.location.reload()
         }
-
-        //console.log(`Server response: ${JSON.stringify(res.data, null, 0)}`)
-
       })
       .catch(err => {
         window.location.reload()
       })
     } catch (err) {
-      // request failed... user entered invalid credentials
       console.log(err)
-    
     }
   }
-
-  //const [validUser, setvalidUser] = useState(false);
   return (
     <Box sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', height: 'calc(100vh - 53px)' }} className="SignIn" justifyContent="center">
       <Box justifyContent="center" alignItems="center" sx={{ mx: 'auto' }}>
@@ -116,7 +98,6 @@ function SignIn(props) {
             <TextField type={showPassword ? "text" : "password"} fullWidth label="Password" id="password" sx={{ m: 1 }}  onChange={event => setPassword(event.target.value)}/>
             <VisibilityIcon onClick={() => setShowPassword(s => !s)} sx={{ cursor: 'pointer' }} />  
           </Box>
-
           <Stack spacing={2} direction="column" alignItems="center" >
             <Button color="success" variant="contained" sx={{ width: 100 }}
               onClick={handleSubmit}
