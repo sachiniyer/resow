@@ -3,17 +3,18 @@ import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from 'react';
 import ImgCarousel from '../components/carousel/ImgCarousel';
 import ContactBox from '../components/ContactBox';
-import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import AspectRatio from '@mui/joy/AspectRatio';
-import axios from "axios";
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import IconButton from '@mui/material/IconButton';
-import TurnedInNotIcon from '@mui/icons-material/TurnedInNot';
 import TurnedInIcon from '@mui/icons-material/TurnedIn';
+import TurnedInNotIcon from '@mui/icons-material/TurnedInNot';
+import IconButton from '@mui/material/IconButton';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import AspectRatio from '@mui/joy/AspectRatio';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
 import { useParams } from "react-router-dom";
+import axios from "axios";
+
 
 
 export default function ItemDetails(props) {
@@ -34,7 +35,7 @@ export default function ItemDetails(props) {
           setUserId(res.data.id)
           setIsLoggedIn(true)
         }).catch(err => {
-          setUserId("")
+          setUserId("0")
         })
     }
     fetchData();
@@ -48,17 +49,25 @@ export default function ItemDetails(props) {
 
   const [uploaderId, setUploaderId] = useState();
 
-  const [uploaderDetails, setUploaderDetails] = useState({});
-
-  const [imgPath, setImgPath] = useState();
-
-  const [open, setOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [isMyPost, setIsMyPost] = useState(false);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   const [isSaved, setIsSaved] = useState(false);
+
+  const [open, setOpen] = useState(false);
+
+  const [uploaderDetails, setUploaderDetails] = useState({});
+
+  const [imgPath, setImgPath] = useState();
+  
+  const handleClick = () => {
+    setOpen((prev) => !prev);
+  };
+
+  const handleClickAway = () => {
+    setOpen(false);
+  };
 
   const switchSaved = () => {
     if (!isLoggedIn) {
@@ -76,13 +85,6 @@ export default function ItemDetails(props) {
     }
   }
 
-  const handleClick = () => {
-    setOpen((prev) => !prev);
-  };
-
-  const handleClickAway = () => {
-    setOpen(false);
-  };
 
   const useConfirm = (message = null, onConfirm, onCancel) => {
     if (!onConfirm || typeof onConfirm !== "function") {
@@ -162,10 +164,10 @@ export default function ItemDetails(props) {
       `${process.env.REACT_APP_SERVER_HOSTNAME}/users/saved-posts/userId=${userId}&postId=${postId}`
     );
     if (result.data.length === 0) {
-      setIsSaved(false)
+      setIsSaved(false);
     }
     else {
-      setIsSaved(true)
+      setIsSaved(true);
     }
   }
 
