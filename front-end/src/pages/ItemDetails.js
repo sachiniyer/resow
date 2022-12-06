@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from 'react';
 import ImgCarousel from '../components/carousel/ImgCarousel';
 import ContactBox from '../components/ContactBox';
-import TurnedInIcon from '@mui/icons-material/TurnedIn';
 import TurnedInNotIcon from '@mui/icons-material/TurnedInNot';
+import TurnedInIcon from '@mui/icons-material/TurnedIn';
 import IconButton from '@mui/material/IconButton';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import AspectRatio from '@mui/joy/AspectRatio';
