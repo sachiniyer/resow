@@ -18,22 +18,17 @@ function SavedPost(props) {
 
 
   useEffect(() => {
-
     async function fetchData() {
-
       const result = await axios(
         `${process.env.REACT_APP_SERVER_HOSTNAME}/posts/saved-posts/userId=`+userId
       );
-
       setData(result.data);
       if (data !==null){
         setNoSavedPost(result.data.length===0)
       }
     }
-
     fetchData();
   }, [userId]);
-
 
   useEffect(() => {
     async function fetchData() {
@@ -47,9 +42,7 @@ function SavedPost(props) {
         navigate("/SignIn")
       })
     }
-
     fetchData();
-
   }, [navigate]);
 
   return (
