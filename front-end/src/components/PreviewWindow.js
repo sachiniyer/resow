@@ -66,7 +66,6 @@ export default function PreviewWindow(props) {
     >
       <CardActionArea>
         <CardMedia
-          style={{ borderBottom: "solid 0.7px" }}
           component="img"
           height="200"
           image={props.image}
