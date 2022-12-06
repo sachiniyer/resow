@@ -18,7 +18,7 @@ import { useParams } from "react-router-dom";
 
 export default function ItemDetails(props) {
 
-  const [userId, setUserId] = useState("")
+  const [userId, setUserId] = useState("0")
 
   const navigate = useNavigate()
 
@@ -37,38 +37,53 @@ export default function ItemDetails(props) {
           setUserId("")
         })
     }
-
     fetchData();
-
   }, [navigate]);
 
-  // The postId obtained from the parameter.
   let { id } = useParams();
+
   const postId = { id }.id;
 
-  // The item details which contains all the information about the post. 
   const [itemDetails, setItemDetails] = useState({});
 
-  // The upload details which contains all the information about the user.
   const [uploaderId, setUploaderId] = useState();
+
   const [uploaderDetails, setUploaderDetails] = useState({});
 
-  // The path to the profile image of the uploader
   const [imgPath, setImgPath] = useState();
 
-  // a boolean flag to check if the user opened the contact info box
   const [open, setOpen] = useState(false);
 
-  // a boolean flag to check if the post is the post uploaded by the user
   const [isMyPost, setIsMyPost] = useState(false);
 
-  // a boolean flag to check if a user has logged in or not. (need passport authentication)
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // a boolean flag to check if it is saved or not.
   const [isSaved, setIsSaved] = useState(false);
 
-  // a function for alert box
+  const switchSaved = () => {
+    if (!isLoggedIn) {
+      askRedirect();
+    }
+    else {
+      if (isSaved) {
+        unsavePost();
+        setIsSaved(!isSaved);
+      }
+      else {
+        savePost();
+        setIsSaved(!isSaved);
+      }
+    }
+  }
+
+  const handleClick = () => {
+    setOpen((prev) => !prev);
+  };
+
+  const handleClickAway = () => {
+    setOpen(false);
+  };
+
   const useConfirm = (message = null, onConfirm, onCancel) => {
     if (!onConfirm || typeof onConfirm !== "function") {
       return;
@@ -76,7 +91,6 @@ export default function ItemDetails(props) {
     if (onCancel && typeof onCancel !== "function") {
       return;
     }
-
     const confirmAction = () => {
       if (window.confirm(message)) {
         onConfirm();
@@ -110,54 +124,24 @@ export default function ItemDetails(props) {
       .catch(err => { console.log(err) })
   }
 
-  // a function to send save info to the server
   async function unsavePost() {
-
     axios
       .delete(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/saved-posts/userId=${userId}&postId=${postId}`)
       .catch(err => { console.log(err) })
-
   }
 
   async function deletePost() {
-
     axios.delete(`${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`)
       .then(alert("the post is deleted"))
       .then(window.location.replace("/Map/ItemsList"))
       .catch(err => { console.log(err) })
-
   }
-
-  // a switching function to check the state of saving
-  const switchSaved = () => {
-    if (!isLoggedIn) {
-      askRedirect();
-    }
-    else {
-      if (isSaved) {
-        unsavePost();
-        setIsSaved(!isSaved);
-      }
-      else {
-        savePost();
-        setIsSaved(!isSaved);
-      }
-    }
-  }
-
-  const handleClick = () => {
-    setOpen((prev) => !prev);
-  };
-
-  const handleClickAway = () => {
-    setOpen(false);
-  };
 
   async function fetchItemData() {
 
     const result = await axios(
       `${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`
-    );
+    )
     setItemDetails(result.data);
     setUploaderId(result.data.owner)
     setIsMyPost(result.data.owner === userId)
@@ -174,7 +158,6 @@ export default function ItemDetails(props) {
   }
 
   async function checkSave() {
-
     const result = await axios(
       `${process.env.REACT_APP_SERVER_HOSTNAME}/users/saved-posts/userId=${userId}&postId=${postId}`
     );
@@ -200,7 +183,6 @@ export default function ItemDetails(props) {
       <Box sx={{ width: { xs: 0.9, sm: 0.5, md: 0.3 }, paddingTop: 1 }}>
         <ImgCarousel imgList={itemDetails.images} />
       </Box>
-
       <Box sx={{ width: { xs: 0.9, sm: 0.5, md: 0.3 }, display: 'flex', borderBottom: "solid 0.5px" }}>
         <Box sx={{ width: 0.3, height: 1, textAlign: "center", justifyContent: "center" }}>
           <AspectRatio ratio="1/1">
@@ -210,10 +192,8 @@ export default function ItemDetails(props) {
             {uploaderDetails.fullname}
           </Box>
         </Box>
-
         <Box sx={{ width: 0.05 }}>
         </Box>
-
         <Box sx={{ width: 1 }}>
           <Box sx={{ height: 0.1 }}>
           </Box>
@@ -225,7 +205,6 @@ export default function ItemDetails(props) {
           </Box>
         </Box>
       </Box>
-
       {open ? (<ContactBox info={uploaderDetails} />) : null}
       <Box sx={{ color: "black", borderTop: "solid 0.5px", width: { xs: 0.9, sm: 0.5, md: 0.3 }, textAlign: "left", marginBottom: 7, fontSize: "15px" }}>
         <Box sx={{ textAlign: "right", marginTop: "-35px", marginBottom: "10px" }}>
@@ -236,17 +215,11 @@ export default function ItemDetails(props) {
         </Box>
         {itemDetails.description}
       </Box>
-
       {isMyPost
         ? <Stack spacing={2} direction="row" alignItems="center" justifyContent="center">
           <Button sx={{ width: 100 }} onClick={deletePost} color="success" variant="contained">Delete</Button>
           <Button sx={{ width: 100 }} href={"/ItemDetails/" + postId + "/EditPost"} color="success" variant="contained">Edit</Button>
         </Stack>
-
-        // <Box sx={{position: "fixed",bottom: 20}}>
-        //     <Button onClick={deletePost} color="success" variant="contained"> Delete post</Button>
-        //   </Box>
-
         : <ClickAwayListener onClickAway={handleClickAway}>
           <Box sx={{ position: "fixed", bottom: 20 }}>
             <Button onClick={handleClick} color="success" variant="contained"> Contact info</Button>
