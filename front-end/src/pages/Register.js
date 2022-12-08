@@ -80,7 +80,7 @@ function SignUp(props) {
 
       <Box justifyContent="center" alignItems="center" sx={{ mx: 'auto' }}>
 
-        <Box sx={{ marginTop: '20vh' }}></Box>
+        <Box sx={{ marginTop: '9vh' }}></Box>
         <Stack spacing={1} direction="column" alignItems="center" sx={{ m: 1, minWidth: 290 }}>
 
           <Stack direction="row" style={{ justifyContent: "center", display: "absolute" }} >
@@ -114,8 +114,8 @@ function SignUp(props) {
         </Stack>
 
         <Stack spacing={2} direction="column" alignItems="center" >
-          <VisibilityIcon onClick={() => setShowPassword(s => !s)} sx={{ cursor: 'pointer' }} />
-          <Button color="success" sx={{ m: 2 }}
+          <VisibilityIcon onClick={() => setShowPassword(s => !s)} sx={{ cursor: 'pointer', color: 'success.main' }} />
+          <Button color="success" variant="contained" sx={{ m: 2 }}
             onClick={async () => {
               let fullname = document.getElementById('fullname').value
               let emailID = document.getElementById('email').value
@@ -178,7 +178,7 @@ function SignUp(props) {
           >
             Register
           </Button>
-          <Button color="success" href="/SignIn"> Sign In </Button>
+          <Button color="success" variant="contained" href="/SignIn"> Sign In </Button>
         </Stack>
 
       </Box>
