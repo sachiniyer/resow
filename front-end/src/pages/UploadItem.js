@@ -134,7 +134,7 @@ function UploadItem() {
           <h1> Upload Resource</h1>
           <ImgCarousel imgList={carouselPics} />
           <IconButton color="primary" aria-label="upload picture" component="label">
-            <form role="form" className="form" onSubmit={() => { return false }}>
+            <form className="form" onSubmit={() => { return false }}>
               <input className="form-control"
                 hidden
                 accept="image/*"
