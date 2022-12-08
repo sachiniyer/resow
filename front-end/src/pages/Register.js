@@ -18,7 +18,7 @@ function SignUp(props) {
   const [responseServer, setResponse] = useState({}) // the API will return an object with a JWT token, if the user logs in successfully
   const [avatarImg, setAvatarImg] = useState();
   const [uploadImg, setUploadImg] = useState();
-  const [loaded, setLoaded] = useState(0);
+  //const [loaded, setLoaded] = useState(0);
 
   useEffect(() => {
     async function setToken() {
@@ -103,12 +103,12 @@ function SignUp(props) {
 
               const url = `${process.env.REACT_APP_SERVER_HOSTNAME}/users/register`
 
-              var config = {
+              /*var config = {
                 onUploadProgress: function (progressEvent) {
                   var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
                   setLoaded(percentCompleted)
                 }
-              };
+              };*/
 
               if (password === passwordConf) {
                 if (emailID && password && passwordConf) {
