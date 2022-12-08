@@ -9,6 +9,26 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import Stack from '@mui/material/Stack';
 import axios from "axios"
 
+import { createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: '#6fbf73',
+      main: '#4caf50',
+      dark: '#357a38',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#91ff35',
+      main: '#76ff03',
+      dark: '#52b202',
+      contrastText: '#000',
+    },
+  },
+})
+
 function SignIn(props) {
 
   const navigate = useNavigate()
@@ -94,9 +114,11 @@ function SignIn(props) {
 
         <form>
           <Box justifyContent="center" alignItems="center" sx={{ m: 2 }}>
-            <TextField fullWidth label="Email" id="emailID" sx={{ m: 1 }} onChange={event => setEmailID(event.target.value)} />
-            <TextField type={showPassword ? "text" : "password"} fullWidth label="Password" id="password" sx={{ m: 1 }}  onChange={event => setPassword(event.target.value)}/>
-            <VisibilityIcon onClick={() => setShowPassword(s => !s)} sx={{ cursor: 'pointer' }} />  
+            <ThemeProvider theme={theme}>
+              <TextField fullWidth label="Email" id="emailID" sx={{ m: 1 }} onChange={event => setEmailID(event.target.value)} />
+              <TextField type={showPassword ? "text" : "password"} fullWidth label="Password" id="password" sx={{ m: 1 }}  onChange={event => setPassword(event.target.value)}/>
+              <VisibilityIcon onClick={() => setShowPassword(s => !s)} sx={{ cursor: 'pointer', color: 'success.main' }} />
+            </ThemeProvider>  
           </Box>
           <Stack spacing={2} direction="column" alignItems="center" >
             <Button color="success" variant="contained" sx={{ width: 100 }}
