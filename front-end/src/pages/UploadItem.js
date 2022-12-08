@@ -136,7 +136,7 @@ function UploadItem() {
           <Stack spacing={2} direction="row" alignItems="center" justifyContent="center" sx={{ marginBottom: 2 }}>
             
             <IconButton color="primary" aria-label="upload picture" component="label" sx={{color: 'green'}}>
-              <form role="form" className="form" onSubmit={() => { return false }}>
+              <form className="form" onSubmit={() => { return false }}>
                 <input className="form-control"
                   hidden
                   accept="image/*"
