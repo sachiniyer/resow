@@ -66,6 +66,9 @@ function EditProfile(props) {
     setImg(userDetails.imgPath);
     setAvatarImg(img);
     setUploadImg(img);
+
+    navigate("/UserProfile")
+
   };
 
   async function editProfile(){
