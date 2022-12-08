@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css';
 
-import Footer from './components/Footer';
+import Header from './components/Header';
 import { getLocation } from './components/Location'
 
 //Main Pages
@@ -23,7 +23,7 @@ function App() {
   getLocation()
   return (
     <div className="App">
-      <Footer />
+      <Header />
       <main className="App-body">
         <Router>
           <Routes>

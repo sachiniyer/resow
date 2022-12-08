@@ -1,4 +1,4 @@
-import './Footer.css';
+import './Header.css';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -13,7 +13,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import ListIcon from '@mui/icons-material/List';
 
 
-function Footer() {
+function Header() {
 
   return (
     <>
@@ -65,4 +65,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default Header;
