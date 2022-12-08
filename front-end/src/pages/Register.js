@@ -6,14 +6,12 @@ import { useNavigate } from "react-router-dom"
 
 import Avatar from '@mui/material/Avatar';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
-//import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import Stack from '@mui/material/Stack';
 
-//import EditIcon from '@mui/icons-material/Edit';
 import Fab from '@mui/material/Fab';
 
 
