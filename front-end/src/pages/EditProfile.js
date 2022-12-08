@@ -74,15 +74,15 @@ function EditProfile(props) {
     axios.patch(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/${userDetails.id}`,data)
     .then(res => {
       if (res.data.message==="ok"){
-        alert("the profile has been updated")
+        alert("The profile has been updated")
         window.location.replace("/UserProfile")
       }
       if (res.data.message==="emailID"){
-        alert("invalid email format!")
+        alert("Invalid email format!")
         .then(revertInfo())
       }
       if (res.data.message==="phone"){
-        alert("invalid phone number format!")
+        alert("Invalid phone number format!")
         .then(revertInfo())
       }
     })
