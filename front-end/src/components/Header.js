@@ -17,7 +17,7 @@ function Header() {
 
   return (
     <>
-      <Box className="theBox" sx={{ minHeight: '53px', zIndex:999999, position: "fixed", width: 1, alignItems: "center", justifyContent: "center", display: "flex", backgroundColor: "green" }}>
+      <Box className="theBox" sx={{ minHeight: '53px', zIndex:999999, position: "fixed", width: '100vw', alignItems: "center", justifyContent: "center", display: "flex", backgroundColor: "green" }}>
         <a href="/">
           <Box 
             component="img" 
