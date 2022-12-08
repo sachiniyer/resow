@@ -31,6 +31,12 @@ function EditProfile(props) {
   const navigate = useNavigate()
 
   useEffect(() => {
+
+    const imgRoute = () => {
+      if(img){setAvatarImg(img)}
+      else{return}
+    }
+
     async function fetchData() {
       const token = localStorage.getItem('token')
       await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`, {headers: {
@@ -41,7 +47,7 @@ function EditProfile(props) {
         setFullname(res.data.fullname)
         setEmailID(res.data.emailID);
         setPhone(res.data.phone);
-        setImg(res.data.imgPath);
+        setImg(res.data.img);
       }).catch(err => {
         console.log(err)
         navigate("/SignIn")
@@ -51,7 +57,7 @@ function EditProfile(props) {
     fetchData();
     imgRoute()
 
-  }, [navigate]);
+  }, [img, navigate]);
 
   const revertInfo = () => {
     setEmailID(userDetails.emailID);
@@ -60,6 +66,9 @@ function EditProfile(props) {
     setImg(userDetails.imgPath);
     setAvatarImg(img);
     setUploadImg(img);
+
+    navigate("/UserProfile")
+
   };
 
   async function editProfile(){
@@ -74,15 +83,15 @@ function EditProfile(props) {
     axios.patch(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/${userDetails.id}`,data)
     .then(res => {
       if (res.data.message==="ok"){
-        alert("the profile has been updated")
+        alert("The profile has been updated")
         window.location.replace("/UserProfile")
       }
       if (res.data.message==="emailID"){
-        alert("invalid email format!")
+        alert("Invalid email format!")
         .then(revertInfo())
       }
       if (res.data.message==="phone"){
-        alert("invalid phone number format!")
+        alert("Invalid phone number format!")
         .then(revertInfo())
       }
     })
@@ -92,10 +101,7 @@ function EditProfile(props) {
 
   }
 
-  const imgRoute = () => {
-    if(img){setAvatarImg(img)}
-    else{return}
-  }
+  
 
   async function handleUpload(event) {
     let file = event.target.files[0]
@@ -121,7 +127,7 @@ function EditProfile(props) {
             sx={{ border: "solid 0.5px", borderColor:"black", width: 120, height: 120 }}
           />
           <Fab component="label" sx={{ display: "absolute", mt: "80px", ml: "-40px", zIndex: 'tooltip' }} size="small" color="success" >
-            <form role="form">
+            <form>
                 <input
                   hidden
                   accept="image/*"

@@ -51,13 +51,7 @@ function App() {
 
 
             {/* a route for the edit profile page */}
-            <Route path="/UserProfile/EditProfile" element={<EditProfile
-              source="https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg"
-              fullname="Foo Bar"
-              email="foobar@school.edu"
-              username="foobar1"
-              tel="+9711234567"
-              location="New York, USA" />} />
+            <Route path="/UserProfile/EditProfile" element={<EditProfile />} />
 
             {/* a route for the items list page */}
             <Route path="/ItemDetails/:id" element={<ItemDetails />} />
