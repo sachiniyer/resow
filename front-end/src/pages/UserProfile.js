@@ -106,7 +106,7 @@ function UserProfile(props) {
             {/* <Box sx={{display:"flex"}}> */}
             {/* <ButtonGroup variant="contained" color="success"> */}
             <Button color="success" href="/UserProfile/EditProfile" variant="outlined">Edit Profile</Button>
-            <Box sx={{ height: "25px" }}></Box>
+            <Box sx={{ height: "20px" }}></Box>
             <Button color="success" href="/" variant="text" onClick={() =>
               localStorage.removeItem('token')} > Sign Out </Button>
             {/* </ButtonGroup> */}
