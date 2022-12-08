@@ -55,7 +55,7 @@ function SavedPost(props) {
         ))}
         {noSavedPost
           ? <Box sx={{marginTop:"100px"}}>
-              <Box component="img" sx={{width:{xs:0.9,sm:0.6,md: 0.4},objectFit:"cover"}} alt="thumbnail" src={"/resowLogo.png"}></Box>
+              <Box component="img" sx={{width:{xs:0.9,sm:0.6,md: 0.4},objectFit:"cover"}} alt="thumbnail" src={"/resow-green.png"}></Box>
               <Box sx = {{color:"black", fontSize:"30px",width:1}}>There are no saved posts yet</Box>
             </Box>
           : null
