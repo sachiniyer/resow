@@ -21,8 +21,8 @@ function Footer() {
       <a href="/">
             <Box 
               component="img" 
-              sx={{ width: 0.7, fontSize: 30, color: "white", fontWeight: 100, fontFamily: 'monospace', objectFit: "cover", alignItems: "left" }}
-              src="/re-sow.png"
+              sx={{ width: 0.67, fontSize: 30, color: "white", fontWeight: 100, fontFamily: 'monospace', objectFit: "cover", alignItems: "left" }}
+              src="/re-sow logo final.png"
               alt="Re-sow">
             </Box>
           </a>
