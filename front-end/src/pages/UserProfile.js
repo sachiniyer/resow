@@ -92,14 +92,21 @@ function UserProfile(props) {
 
         <Box sx={{ m: 5 }}>
           <Stack spacing={2} direction="column" alignItems="center" >
-            <ButtonGroup variant="contained" color="success">
+            {/* <ButtonGroup variant="contained" color="success">
               <Button color="success" href="/PastUpload" variant="contained">Past Uploads</Button>
               <Button color="success" href="/UserProfile/SavedPost" variant="contained">Saved Posts</Button>
-            </ButtonGroup>
+            </ButtonGroup> */}
+
+            <Stack spacing={2} direction="row" alignItems="center" justifyContent="center">
+              <Button color="success" href="/PastUpload" variant="contained">Past Uploads</Button>
+              <Button color="success" href="/UserProfile/SavedPost" variant="contained">Saved Posts</Button>
+            </Stack>
+
+
             {/* <Box sx={{display:"flex"}}> */}
             {/* <ButtonGroup variant="contained" color="success"> */}
             <Button color="success" href="/UserProfile/EditProfile" variant="outlined">Edit Profile</Button>
-            <Box sx={{ height: "60px" }}></Box>
+            <Box sx={{ height: "20px" }}></Box>
             <Button color="success" href="/" variant="text" onClick={() =>
               localStorage.removeItem('token')} > Sign Out </Button>
             {/* </ButtonGroup> */}
