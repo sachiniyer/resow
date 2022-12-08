@@ -133,7 +133,7 @@ function UploadItem() {
         <Box sx={{ height: '120vh', flexGrow: 0, display: 'flex', justifyContent: 'center', flexDirection: 'column', gap: 2 }}>
           <h1> Upload Resource</h1>
           <ImgCarousel imgList={carouselPics} />
-          <IconButton color="primary" aria-label="upload picture" component="label">
+          <IconButton color="primary" aria-label="upload picture" component="label" >
             <form className="form" onSubmit={() => { return false }}>
               <input className="form-control"
                 hidden
