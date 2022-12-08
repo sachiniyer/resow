@@ -14,6 +14,26 @@ import Stack from '@mui/material/Stack';
 
 import Fab from '@mui/material/Fab';
 
+import { createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: '#6fbf73',
+      main: '#4caf50',
+      dark: '#357a38',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#91ff35',
+      main: '#76ff03',
+      dark: '#52b202',
+      contrastText: '#000',
+    },
+  },
+})
+
 
 function SignUp(props) {
   const navigate = useNavigate()
@@ -84,11 +104,13 @@ function SignUp(props) {
             </Fab >
           </Stack>
 
-          <TextField fullWidth label="Fullname" id="fullname" sx={{ m: 1 }} />
-          <TextField fullWidth label="Email ID" id="email" sx={{ m: 1 }} />
-          <TextField fullWidth label="Phone Number" id="phone" sx={{ m: 1 }} />
-          <TextField fullWidth type={showPassword ? "text" : "password"} label="Password" id="password" sx={{ m: 1 }} />
-          <TextField fullWidth type={showPassword ? "text" : "password"} label="Confirm Password" id="passwordConf" sx={{ m: 1 }} />
+          <ThemeProvider theme={theme}>
+            <TextField fullWidth label="Fullname" id="fullname" sx={{ m: 1 }} />
+            <TextField fullWidth label="Email ID" id="email" sx={{ m: 1 }} />
+            <TextField fullWidth label="Phone Number" id="phone" sx={{ m: 1 }} />
+            <TextField fullWidth type={showPassword ? "text" : "password"} label="Password" id="password" sx={{ m: 1 }} />
+            <TextField fullWidth type={showPassword ? "text" : "password"} label="Confirm Password" id="passwordConf" sx={{ m: 1 }} />
+          </ThemeProvider>
         </Stack>
 
         <Stack spacing={2} direction="column" alignItems="center" >
