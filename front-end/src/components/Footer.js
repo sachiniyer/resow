@@ -21,13 +21,13 @@ function Footer() {
       <a href="/">
             <Box 
               component="img" 
-              sx={{ width: 0.67, fontSize: 30, color: "white", fontWeight: 100, fontFamily: 'monospace', objectFit: "cover", alignItems: "left" }}
+              sx={{ height: 0.4, width: 0.67, fontSize: 30, color: "white", fontWeight: 100, fontFamily: 'monospace', objectFit: "cover", alignItems: "left" }}
               src="/re-sow logo final.png"
               alt="Re-sow">
             </Box>
           </a>
-        {/* <Box sx={{ width: { xs: 0.85, sm: 0.45, md: 0.3 }, margin: 1, display: "flex", justifyContent: "space-between" }}> */}
-        <Box sx={{ width: 0.7, margin: 1, display: "flex", justifyContent: "space-between" }}>
+        <Box sx={{ width: { xs: 0.85, sm: 0.45, md: 0.3 }, margin: 1, display: "flex", justifyContent: "space-between" }}>
+        {/* <Box sx={{ width: 0.7, margin: 1, display: "flex", justifyContent: "space-between" }}> */}
           
           <Box>
             <a href="/">
