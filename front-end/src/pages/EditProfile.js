@@ -47,7 +47,7 @@ function EditProfile(props) {
         setFullname(res.data.fullname)
         setEmailID(res.data.emailID);
         setPhone(res.data.phone);
-        setImg(res.data.imgPath);
+        setImg(res.data.img);
       }).catch(err => {
         console.log(err)
         navigate("/SignIn")
