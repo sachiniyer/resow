@@ -2,18 +2,10 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import ImgCarousel from '../components/carousel/ImgCarousel';
-import ContactBox from '../components/ContactBox';
 import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import AspectRatio from '@mui/joy/AspectRatio';
 import axios from "axios";
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import IconButton from '@mui/material/IconButton';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import TurnedInNotIcon from '@mui/icons-material/TurnedInNot';
-import TurnedInIcon from '@mui/icons-material/TurnedIn';
 import { useParams } from "react-router-dom";
 import TextField from '@mui/material/TextField';
 
@@ -22,23 +14,13 @@ function EditPost(props) {
   const [userId, setUserId] = useState("")
 
   const navigate = useNavigate()
-
-  // The postId obtained from the parameter.
   let { id } = useParams();
   const postId = { id }.id;
-
-  // The item details which contains all the information about the post.
   const [itemDetails, setItemDetails] = useState({});
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [images, setImages] = useState([""]);
 
   async function updatePost() {
-    // axios.patch(`${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`)
-    // .then(alert("the post is updated"))
-    // .then(window.location.replace({"/ItemDetails/:":postId}))
-    // .catch(err => {console.log(err)})
-
     const postInfo = {
       title: `${title}`,
       description: `${description}`
@@ -72,45 +54,11 @@ function EditPost(props) {
     fetchItemData();
   }, [navigate]);
 
-  // an alternate in case this stops working
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     await axios(
-  //       `${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`
-  //     )
-  //     .then(res => {
-  //       setItemDetails(res.data);
-  //       setTitle(res.data.title);
-  //       setDescription(res.data.description);
-  //     }).catch(err => {
-  //       console.log(err)
-  //     })
-  //   }
-
-  //   fetchData();
-  //   // imgRoute()
-
-  // }, [navigate]);
 
   return (
     <>
       <Box sx={{ width: { xs: 0.9, sm: 0.5, md: 0.3 }, paddingTop: 1 }}>
         <ImgCarousel imgList={itemDetails.images} />
-        {/* can work on this in sprint 4 */}
-        {/* <IconButton color="primary" aria-label="upload picture" component="label">
-          <input
-            hidden
-            accept="image/*"
-            style={{ display: 'none' }}
-            id="raised-button-file"
-            multiple
-            type="file"
-            onChange={handleUpload}
-          />
-          <label htmlFor="raised-button-file">
-            <PhotoCamera />
-          </label>    
-          </IconButton> */}
       </Box>
 
       <Box sx={{ width: { xs: 0.9, sm: 0.5, md: 0.3 }, marginBottom: 2 }}>
