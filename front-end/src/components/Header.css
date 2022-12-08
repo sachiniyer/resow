@@ -1,14 +1,4 @@
-.Header {
-    text-align: center;
-    background-color: #187c4e;
-  }
-  
-  .logo {
-    height: 12vmin;
-    border: 0.5vmin solid #fda500;
-  }
-  
-  .App-header {
+.App-header {
     background-color: #187c4e;
     min-height: 15vh;
     display: flex;
@@ -17,5 +7,8 @@
     justify-content: center;
     font-size: calc(10px + 2vmin);
     color: white;
-  }
-  
+}
+a{
+    color:white;
+    text-decoration: none;
+} 
