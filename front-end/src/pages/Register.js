@@ -92,8 +92,7 @@ function SignUp(props) {
               let phone = document.getElementById('phone').value
               let passwordConf = document.getElementById('passwordConf').value
               const data = new FormData();
-              //let data = {fullname: fullname, emailID: emailID, password: password, phone: phonenumber}
-              // 
+              
               const d = new Date()
               data.append('file', uploadImg, d.getTime())
               data.append('fullname', fullname)
