@@ -124,7 +124,7 @@ function EditProfile(props) {
             sx={{ border: "solid 0.5px", borderColor:"black", width: 120, height: 120 }}
           />
           <Fab component="label" sx={{ display: "absolute", mt: "80px", ml: "-40px", zIndex: 'tooltip' }} size="small" color="success" >
-            <form role="form">
+            <form>
                 <input
                   hidden
                   accept="image/*"
