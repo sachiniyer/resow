@@ -133,23 +133,25 @@ function UploadItem() {
         <Box sx={{ height: '120vh', flexGrow: 0, display: 'flex', justifyContent: 'center', flexDirection: 'column', gap: 2 }}>
           <h1> Upload Resource</h1>
           <ImgCarousel imgList={carouselPics} />
-          <IconButton color="primary" aria-label="upload picture" component="label">
-            <form role="form" className="form" onSubmit={() => { return false }}>
-              <input className="form-control"
-                hidden
-                accept="image/*"
-                style={{ display: 'none' }}
-                id="images"
-                multiple
-                type="file"
-                onChange={handleUpload}
-              />
-              <label htmlFor="images">
-                <PhotoCamera sx={{color: 'success.main'}}/>
-              </label>
-            </form>
-          </IconButton>
-
+          <Stack spacing={2} direction="row" alignItems="center" justifyContent="center" sx={{ marginBottom: 2 }}>
+            
+            <IconButton color="primary" aria-label="upload picture" component="label" sx={{color: 'green'}}>
+              <form role="form" className="form" onSubmit={() => { return false }}>
+                <input className="form-control"
+                  hidden
+                  accept="image/*"
+                  style={{ display: 'none' }}
+                  id="images"
+                  multiple
+                  type="file"
+                  onChange={handleUpload}
+                />
+                <label htmlFor="images">
+                  <PhotoCamera sx={{color: 'success.main'}}/>
+                </label>
+              </form>
+            </IconButton>
+          </Stack>
           <ThemeProvider theme={theme}>
             <TextField fullWidth label="Post Title" id="title" sx={{color: 'success.main'}}/>
             <TextField sx={{color: 'success.main'}}
