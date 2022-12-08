@@ -108,7 +108,7 @@ function SignIn(props) {
 
         <Box sx={{ marginTop: '20vh' }}></Box>
         
-        <Avatar sx={{ width: 150, height: 150, m: 1, margin: '0 auto' }} alt="profile pic" src={props.logo} />
+        <Avatar sx={{ width: 150, height: 150, m: 1, margin: '0 auto', border: "solid 1px", borderColor: "#4caf50" }} alt="profile pic" src={props.logo} />
 
         <h3> Welcome to Resow </h3>
 
