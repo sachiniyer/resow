@@ -61,7 +61,7 @@ function SignUp(props) {
         <Stack spacing={1} direction="column" alignItems="center" sx={{ m: 1, minWidth: 290 }}>
           <Avatar sx={{ border: "solid", borderColor: "black", width: 150, height: 150, m: 1, margin: '0 auto' }} alt="profile pic" src={avatarImg} />
           <IconButton color="primary" aria-label="upload picture" component="label">
-            <form role="form">
+            <form>
               <input
                 hidden
                 accept="image/*"
