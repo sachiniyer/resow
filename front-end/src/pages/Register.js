@@ -2,14 +2,19 @@ import * as React from 'react';
 import axios from "axios"
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+
+
 import Avatar from '@mui/material/Avatar';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import IconButton from '@mui/material/IconButton';
+//import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import Stack from '@mui/material/Stack';
+
+//import EditIcon from '@mui/icons-material/Edit';
+import Fab from '@mui/material/Fab';
 
 
 function SignUp(props) {
@@ -59,22 +64,28 @@ function SignUp(props) {
 
         <Box sx={{ marginTop: '20vh' }}></Box>
         <Stack spacing={1} direction="column" alignItems="center" sx={{ m: 1, minWidth: 290 }}>
-          <Avatar sx={{ border: "solid", borderColor: "black", width: 150, height: 150, m: 1, margin: '0 auto' }} alt="profile pic" src={avatarImg} />
-          <IconButton color="primary" aria-label="upload picture" component="label">
-            <form>
-              <input
-                hidden
-                accept="image/*"
-                style={{ display: 'none' }}
-                id="image"
-                type="file"
-                onChange={handleUpload}
-              />
-              <label htmlFor="image">
-                <PhotoCamera />
-              </label>
-            </form>
-          </IconButton>
+
+          <Stack direction="row" style={{ justifyContent: "center", display: "absolute" }} >
+            
+            <Avatar sx={{ border: "solid", borderColor: "#1b5e20", width: 130, height: 130, m: 1, margin: '0 auto' }} alt="profile pic" src={avatarImg} />
+
+            <Fab component="label" sx={{ display: "absolute", mt: "90px", ml: "-40px", zIndex: 'tooltip' }} size="small" color="success" >
+              <form>
+                  <input
+                    hidden
+                    accept="image/*"
+                    style={{ display: 'none' }}
+                    id="image"
+                    type="file"
+                    onChange={handleUpload}
+                  />
+                  <label htmlFor="image">
+                    <PhotoCamera sx={{display: "center"}} />
+                  </label>
+                </form>
+            </Fab >
+          </Stack>
+
           <TextField fullWidth label="Fullname" id="fullname" sx={{ m: 1 }} />
           <TextField fullWidth label="Email ID" id="email" sx={{ m: 1 }} />
           <TextField fullWidth label="Phone Number" id="phone" sx={{ m: 1 }} />
