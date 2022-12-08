@@ -31,6 +31,12 @@ function EditProfile(props) {
   const navigate = useNavigate()
 
   useEffect(() => {
+
+    const imgRoute = () => {
+      if(img){setAvatarImg(img)}
+      else{return}
+    }
+
     async function fetchData() {
       const token = localStorage.getItem('token')
       await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`, {headers: {
@@ -51,7 +57,7 @@ function EditProfile(props) {
     fetchData();
     imgRoute()
 
-  }, [navigate]);
+  }, [img, navigate]);
 
   const revertInfo = () => {
     setEmailID(userDetails.emailID);
@@ -92,10 +98,7 @@ function EditProfile(props) {
 
   }
 
-  const imgRoute = () => {
-    if(img){setAvatarImg(img)}
-    else{return}
-  }
+  
 
   async function handleUpload(event) {
     let file = event.target.files[0]
