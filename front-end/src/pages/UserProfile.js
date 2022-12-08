@@ -43,7 +43,7 @@ function UserProfile(props) {
 
   return (
     <>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', marginTop: "30px" }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', marginTop: '10vw' }}>
 
         {/* <div className="TopPart"> */}
         <Stack direction="row" style={{ justifyContent: "center", display: "absolute" }} >

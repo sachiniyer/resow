@@ -44,7 +44,7 @@ function PastUpload(props) {
 
     return (
       <>
-        <Box sx = {{color:"black", fontSize:"40px",margin:"10px"}}>Past Uploads</Box>
+        <Box sx = {{color:"black", fontSize:"40px", marginTop:"6vh"}}>Past Uploads</Box>
         {data && data.map((item) => (
           <PostCard 
             key={item._id}  
