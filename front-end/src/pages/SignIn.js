@@ -84,7 +84,7 @@ function SignIn(props) {
   }
   return (
     <Box sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', height: 'calc(100vh - 53px)' }} className="SignIn" justifyContent="center">
-      <Box justifyContent="center" alignItems="center" sx={{ mx: 'auto' }}>
+      <Box justifyContent="center" alignItems="center" sx={{ mx: 'auto'}}>
 
         <Box sx={{ marginTop: '20vh' }}></Box>
         
@@ -98,7 +98,7 @@ function SignIn(props) {
             <TextField type={showPassword ? "text" : "password"} fullWidth label="Password" id="password" sx={{ m: 1 }}  onChange={event => setPassword(event.target.value)}/>
             <VisibilityIcon onClick={() => setShowPassword(s => !s)} sx={{ cursor: 'pointer' }} />  
           </Box>
-          <Stack spacing={2} direction="column" alignItems="center" >
+          <Stack spacing={2} direction="column" alignItems="center" sx={{marginBottom: '2vh'}}>
             <Button color="success" variant="contained" sx={{ width: 100 }}
               onClick={handleSubmit}
             > Sign In </Button>
