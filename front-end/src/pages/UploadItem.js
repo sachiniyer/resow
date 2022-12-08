@@ -4,7 +4,6 @@ import axios from "axios";
 import ImgCarousel from '../components/carousel/ImgCarousel';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Stack from '@mui/material/Stack';
@@ -134,8 +133,8 @@ function UploadItem() {
           <h1> Upload Resource</h1>
           <ImgCarousel imgList={carouselPics} />
           <Stack spacing={2} direction="row" alignItems="center" justifyContent="center" sx={{ marginBottom: 2 }}>
-            
-            <IconButton color="primary" aria-label="upload picture" component="label" sx={{color: 'green'}}>
+
+            <Button variant="contained" color="success" startIcon={<PhotoCamera />}>
               <form className="form" onSubmit={() => { return false }}>
                 <input className="form-control"
                   hidden
@@ -147,10 +146,11 @@ function UploadItem() {
                   onChange={handleUpload}
                 />
                 <label htmlFor="images">
-                  <PhotoCamera sx={{color: 'success.main'}}/>
+                  Add Image
                 </label>
-              </form>
-            </IconButton>
+              </form>              
+            </Button>
+
           </Stack>
           <ThemeProvider theme={theme}>
             <TextField fullWidth label="Post Title" id="title" sx={{color: 'success.main'}}/>
