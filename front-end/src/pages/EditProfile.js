@@ -118,7 +118,7 @@ function EditProfile(props) {
 
   return (
 
-    <Box sx={{ height: "calc(100vh - 53px)" }}>
+    <Box sx={{ marginTop: '4vh' }}>
 
       <Box sx={{ mt: 3, mb: 2 }}>
         <Stack direction="row" style={{ justifyContent: "center", display: "absolute" }} >

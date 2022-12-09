@@ -46,7 +46,7 @@ function SavedPost(props) {
 
   return (
     <>
-        <Box sx = {{color:"black", fontSize:"40px",margin:"10px"}}>Saved Posts</Box>
+        <Box sx = {{color:"black", fontSize:"40px", margin:"10px", marginTop: '6vw' }}>Saved Posts</Box>
         {data && data.map((item) => (
           <PostCard 
             key={item._id}  

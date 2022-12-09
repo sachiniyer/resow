@@ -21,7 +21,7 @@ function Header() {
         <a href="/">
           <Box 
             component="img" 
-            sx={{ height: 0.4, width: 0.67, fontSize: 30, color: "white", fontWeight: 100, fontFamily: 'monospace', objectFit: "cover", alignItems: "left" }}
+            sx={{ height: 0.4, width: 0.67, fontSize: 30, color: "white", fontWeight: 100, fontFamily: 'monospace', objectFit: "cover", alignItems: "left", maxHeight: '120px' }}
             src="/re-sow logo final.png"
             alt="Re-sow">
           </Box>
@@ -31,29 +31,29 @@ function Header() {
           
           <Box sx={{margin: '1vh'}}>
             <a href="/">
-              <Avatar sx={{ backgroundColor: "white", width: '10vw', height: '10vw' }}>
-                <LocationOnIcon color="success" fontSize="medium" sx={{ width: '7vw', height: '7vw' }}/>
+              <Avatar sx={{ backgroundColor: "white", width: '10vw', height: '10vw' , maxHeight: '60px', maxWidth: '60px'}}>
+                <LocationOnIcon color="success" fontSize="medium" sx={{ width: '7vw', height: '7vw', maxHeight: '42px', maxWidth: '42px'}}/>
               </Avatar>
             </a>
           </Box>
           <Box sx={{margin: '1vh'}}>
             <a href="/Map/ItemsList">
-              <Avatar sx={{ backgroundColor: "white", width: '10vw', height: '10vw' }}>
-                <ListIcon color="success" fontSize="medium" sx={{ width: '7vw', height: '7vw' }}/>
+              <Avatar sx={{ backgroundColor: "white", width: '10vw', height: '10vw' , maxHeight: '60px', maxWidth: '60px'}}>
+                <ListIcon color="success" fontSize="medium" sx={{ width: '7vw', height: '7vw', maxHeight: '42px', maxWidth: '42px' }}/>
               </Avatar>
             </a>
           </Box>
           <Box sx={{margin: '1vh'}}>
             <a href="/UploadItem">
-              <Avatar sx={{ backgroundColor: "white", width: '10vw', height: '10vw' }}>
-                <AddIcon color="success" fontSize="medium" sx={{ width: '7vw', height: '7vw' }}/>
+              <Avatar sx={{ backgroundColor: "white", width: '10vw', height: '10vw', maxHeight: '60px', maxWidth: '60px' }}>
+                <AddIcon color="success" fontSize="medium" sx={{ width: '7vw', height: '7vw', maxHeight: '42px', maxWidth: '42px' }}/>
               </Avatar>
             </a>
           </Box>
           <Box sx={{margin: '1vh'}}>
             <a href="/UserProfile">
-              <Avatar sx={{ backgroundColor: "white", width: '10vw', height: '10vw' }}>
-                <PersonIcon color="success" fontSize="medium" sx={{ width: '7vw', height: '7vw' }}/>
+              <Avatar sx={{ backgroundColor: "white", width: '10vw', height: '10vw' , maxHeight: '60px', maxWidth: '60px'}}>
+                <PersonIcon color="success" fontSize="medium" sx={{ width: '7vw', height: '7vw', maxHeight: '42px', maxWidth: '42px' }}/>
               </Avatar>
             </a>
           </Box>
