@@ -182,7 +182,7 @@ export default function ItemDetails(props) {
 
   return (
     <>
-      <Box sx={{ width: { xs: 0.9, sm: 0.5, md: 0.3 }, paddingTop: 2 }}>
+      <Box sx={{ width: { xs: 0.9, sm: 0.5, md: 0.3, marginTop: '4vh' }}}>
         <ImgCarousel imgList={itemDetails.images} />
       </Box>
       <Box sx={{ width: { xs: 0.9, sm: 0.5, md: 0.3 }, display: 'flex', borderBottom: "solid 0.5px" }}>

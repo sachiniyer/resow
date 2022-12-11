@@ -18,6 +18,8 @@ import EditProfile from './pages/EditProfile'
 import SignIn from './pages/SignIn'
 import Register from './pages/Register'
 import EditPost from './pages/EditPost'
+import Box from '@mui/material/Box';
+
 
 function App() {
   getLocation()
@@ -25,7 +27,7 @@ function App() {
     <div className="App">
       <Header />
       <main className="App-body">
-        <Router>
+        <Router >
           <Routes>
             {/* a route for the home page */}
             <Route path="/" element={<Homepage />} />
@@ -35,8 +37,7 @@ function App() {
 
 
             {/* a route for the upload item page */}
-            <Route path="/UploadItem" element={<UploadItem/>} />
-
+            <Route path="/UploadItem" element={<UploadItem />} />
 
             {/* a route for the SignIn page */}
             <Route path="/SignIn" element={<SignIn
@@ -47,8 +48,6 @@ function App() {
 
             {/* a route for the items list page */}
             <Route path="/Map/ItemsList" element={<ItemsList />} />
-
-
 
             {/* a route for the edit profile page */}
             <Route path="/UserProfile/EditProfile" element={<EditProfile />} />

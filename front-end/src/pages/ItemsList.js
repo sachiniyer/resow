@@ -58,8 +58,7 @@ function ItemList(props) {
 
     return (
       <>
-      <Box sx={{height:10, marginTop: '10vw'}}></Box>
-        <Container maxWidth="sm">
+        <Container maxWidth="sm" sx={{marginTop: '5vw' }}>
         <TextField fullWidth id="standard-basic" label="Search" variant="filled" color='success'
         onChange={(newValue) => setVal(newValue.target.value)} 
         />
