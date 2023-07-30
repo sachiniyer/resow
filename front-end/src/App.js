@@ -18,7 +18,6 @@ import EditProfile from './pages/EditProfile'
 import SignIn from './pages/SignIn'
 import Register from './pages/Register'
 import EditPost from './pages/EditPost'
-import Box from '@mui/material/Box';
 
 
 function App() {
@@ -41,7 +40,7 @@ function App() {
 
             {/* a route for the SignIn page */}
             <Route path="/SignIn" element={<SignIn
-              logo ="/resow-green.png" />} />
+              logo="/resow-green.png" />} />
 
             {/* a route for the Register page */}
             <Route path="/Register" element={<Register />} />

@@ -112,7 +112,7 @@ function UploadItem() {
 
     var config = {
       onUploadProgress: function (progressEvent) {
-        var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+        Math.round((progressEvent.loaded * 100) / progressEvent.total);
       }
     };
 
@@ -148,13 +148,13 @@ function UploadItem() {
                 <label htmlFor="images">
                   Add Image
                 </label>
-              </form>              
+              </form>
             </Button>
 
           </Stack>
           <ThemeProvider theme={theme}>
-            <TextField fullWidth label="Post Title" id="title" sx={{color: 'success.main'}}/>
-            <TextField sx={{color: 'success.main'}}
+            <TextField fullWidth label="Post Title" id="title" sx={{ color: 'success.main' }} />
+            <TextField sx={{ color: 'success.main' }}
               fullWidth
               placeholder="Post Description"
               multiline
@@ -162,7 +162,7 @@ function UploadItem() {
               id='description'
             />
           </ThemeProvider>
-          
+
 
           <Stack spacing={2} direction="row" alignItems="center" justifyContent="center" sx={{ marginBottom: 2 }}>
             <Button sx={{ width: 100 }} href='/' color="success" variant="contained">Discard</Button>

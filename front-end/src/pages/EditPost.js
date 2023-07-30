@@ -11,8 +11,6 @@ import TextField from '@mui/material/TextField';
 
 function EditPost(props) {
 
-  const [userId, setUserId] = useState("")
-
   const navigate = useNavigate()
   let { id } = useParams();
   const postId = { id }.id;
@@ -39,25 +37,26 @@ function EditPost(props) {
       })
   }
 
-  async function fetchItemData() {
-
-    const result = await axios(
-      `${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`
-    );
-    setItemDetails(result.data);
-    setTitle(result.data.title);
-    setDescription(result.data.description);
-
-  }
 
   useEffect(() => {
+    async function fetchItemData() {
+
+      const result = await axios(
+        `${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`
+      );
+      setItemDetails(result.data);
+      setTitle(result.data.title);
+      setDescription(result.data.description);
+
+    }
+
     fetchItemData();
-  }, [navigate]);
+  }, [navigate, postId]);
 
 
   return (
     <>
-      <Box sx={{ width: { xs: 0.9, sm: 0.5, md: 0.3, marginTop: '4vh' }}}>
+      <Box sx={{ width: { xs: 0.9, sm: 0.5, md: 0.3, marginTop: '4vh' } }}>
         <ImgCarousel imgList={itemDetails.images} />
       </Box>
 

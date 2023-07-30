@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 
 function SavedPost(props) {
 
-  const [userId,setUserId] = useState("")
+  const [userId, setUserId] = useState("")
 
   const [data, setData] = useState([]);
 
@@ -19,14 +19,16 @@ function SavedPost(props) {
   useEffect(() => {
     async function fetchData() {
       const token = localStorage.getItem('token')
-      await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`, {headers: {
-        Authorization: token
-      }})
-      .then(res => {
-        setUserId(res.data.id)
-      }).catch(err => {
-        navigate("/SignIn")
+      await axios(`${process.env.REACT_APP_SERVER_HOSTNAME}/users/profile`, {
+        headers: {
+          Authorization: token
+        }
       })
+        .then(res => {
+          setUserId(res.data.id)
+        }).catch(err => {
+          navigate("/SignIn")
+        })
     }
     fetchData();
   }, [navigate]);
@@ -34,32 +36,32 @@ function SavedPost(props) {
   useEffect(() => {
     async function fetchData() {
       const result = await axios(
-        `${process.env.REACT_APP_SERVER_HOSTNAME}/posts/saved-posts/userId=`+userId
+        `${process.env.REACT_APP_SERVER_HOSTNAME}/posts/saved-posts/userId=` + userId
       );
       setData(result.data);
-      if (data !==null){
-        setNoSavedPost(result.data.length===0)
+      if (data !== null) {
+        setNoSavedPost(result.data.length === 0)
       }
     }
     fetchData();
-  }, [userId]);
+  }, [userId, data]);
 
   return (
     <>
-        <Box sx = {{color:"black", fontSize:"40px", margin:"10px", marginTop: '6vw' }}>Saved Posts</Box>
-        {data && data.map((item) => (
-          <PostCard 
-            key={item._id}  
-            info={item}
-          />
-        ))}
-        {noSavedPost
-          ? <Box sx={{marginTop:"100px"}}>
-              <Box component="img" sx={{width:{xs:0.9,sm:0.6,md: 0.4},objectFit:"cover"}} alt="thumbnail" src={"/resow-green.png"}></Box>
-              <Box sx = {{color:"black", fontSize:"30px",width:1}}>There are no saved posts yet</Box>
-            </Box>
-          : null
-        }
+      <Box sx={{ color: "black", fontSize: "40px", margin: "10px", marginTop: '6vw' }}>Saved Posts</Box>
+      {data && data.map((item) => (
+        <PostCard
+          key={item._id}
+          info={item}
+        />
+      ))}
+      {noSavedPost
+        ? <Box sx={{ marginTop: "100px" }}>
+          <Box component="img" sx={{ width: { xs: 0.9, sm: 0.6, md: 0.4 }, objectFit: "cover" }} alt="thumbnail" src={"/resow-green.png"}></Box>
+          <Box sx={{ color: "black", fontSize: "30px", width: 1 }}>There are no saved posts yet</Box>
+        </Box>
+        : null
+      }
       <Box sx={{ position: "fixed", bottom: 20 }}>
         <Button component={Link} to="/UserProfile" variant="contained" color="success">Back to Profile</Button>
       </Box>

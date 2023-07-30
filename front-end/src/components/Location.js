@@ -4,10 +4,10 @@ function getLocationCookie() {
   let ca = decodedCookie.split(';');
   for (let i = 0; i < ca.length; i++) {
     let c = ca[i];
-    while (c.charAt(0) == ' ') {
+    while (c.charAt(0) === ' ') {
       c = c.substring(1);
     }
-    if (c.indexOf(name) == 0) {
+    if (c.indexOf(name) === 0) {
       return c.substring(name.length, c.length);
     }
   }
@@ -18,7 +18,7 @@ function setCookie(val) {
   let name = 'resowmaplocation='
   let decodedCookie = decodeURIComponent(document.cookie);
   let ca = decodedCookie.split(';');
-  let cleancookie = ca.filter(col => col.indexOf(name) == 0).join()
+  let cleancookie = ca.filter(col => col.indexOf(name) === 0).join()
   document.cookie = "resowmaplocation=" + val + ";" + cleancookie
 }
 

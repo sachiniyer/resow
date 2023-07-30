@@ -60,7 +60,7 @@ export default function ItemDetails(props) {
   const [uploaderDetails, setUploaderDetails] = useState({});
 
   const [imgPath, setImgPath] = useState();
-  
+
   const handleClick = () => {
     setOpen((prev) => !prev);
   };
@@ -139,50 +139,51 @@ export default function ItemDetails(props) {
       .catch(err => { console.log(err) })
   }
 
-  async function fetchItemData() {
-
-    const result = await axios(
-      `${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`
-    )
-    setItemDetails(result.data);
-    setUploaderId(result.data.owner)
-    setIsMyPost(result.data.owner === userId)
-  }
-
-  async function fetchUploaderData() {
-    const result = await axios(
-      `${process.env.REACT_APP_SERVER_HOSTNAME}/users/${uploaderId}`
-    );
-    setUploaderDetails(result.data)
-    if (result.data.imgPath) {
-      setImgPath(result.data.imgPath)
-    }
-  }
-
-  async function checkSave() {
-    const result = await axios(
-      `${process.env.REACT_APP_SERVER_HOSTNAME}/users/saved-posts/userId=${userId}&postId=${postId}`
-    );
-    if (result.data.length === 0) {
-      setIsSaved(false);
-    }
-    else {
-      setIsSaved(true);
-    }
-  }
 
   useEffect(() => {
+    async function fetchItemData() {
+
+      const result = await axios(
+        `${process.env.REACT_APP_SERVER_HOSTNAME}/posts/${postId}`
+      )
+      setItemDetails(result.data);
+      setUploaderId(result.data.owner)
+      setIsMyPost(result.data.owner === userId)
+    }
+
+    async function fetchUploaderData() {
+      const result = await axios(
+        `${process.env.REACT_APP_SERVER_HOSTNAME}/users/${uploaderId}`
+      );
+      setUploaderDetails(result.data)
+      if (result.data.imgPath) {
+        setImgPath(result.data.imgPath)
+      }
+    }
+
     fetchItemData();
     fetchUploaderData();
-  }, [uploaderId]);
+  }, [uploaderId, postId, userId]);
 
   useEffect(() => {
+    async function checkSave() {
+      const result = await axios(
+        `${process.env.REACT_APP_SERVER_HOSTNAME}/users/saved-posts/userId=${userId}&postId=${postId}`
+      );
+      if (result.data.length === 0) {
+        setIsSaved(false);
+      }
+      else {
+        setIsSaved(true);
+      }
+    }
+
     checkSave();
-  }, [userId])
+  }, [userId, postId])
 
   return (
     <>
-      <Box sx={{ width: { xs: 0.9, sm: 0.5, md: 0.3, marginTop: '4vh' }}}>
+      <Box sx={{ width: { xs: 0.9, sm: 0.5, md: 0.3, marginTop: '4vh' } }}>
         <ImgCarousel imgList={itemDetails.images} />
       </Box>
       <Box sx={{ width: { xs: 0.9, sm: 0.5, md: 0.3 }, display: 'flex', borderBottom: "solid 0.5px" }}>

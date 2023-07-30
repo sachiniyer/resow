@@ -50,26 +50,26 @@ export default function PreviewWindow(props) {
     if (!props.clickable && clickable) {
       setClickable(false)
     }
-  })
+  }, [props.clickable, clickable])
 
   useEffect(() => {
     return () => {
       instanceCount--
     }
-  }, [])
+  }, [props.clickable, clickable])
 
   return (instanceCheck ? (
-    <Card 
-    component={"div"} 
-    onMouseDown={handleClick} 
-    sx={{ 
-      display: 'flex', 
-      width: 0.9, 
-      maxWidth: 200, 
-      height: 0.9, 
-      maxHeight: 300, 
-      borderRadius: '5%' 
-    }}
+    <Card
+      component={"div"}
+      onMouseDown={handleClick}
+      sx={{
+        display: 'flex',
+        width: 0.9,
+        maxWidth: 200,
+        height: 0.9,
+        maxHeight: 300,
+        borderRadius: '5%'
+      }}
     >
       <CardActionArea>
         <CardMedia
@@ -87,10 +87,10 @@ export default function PreviewWindow(props) {
               </Box>
             </Box>
             <Box sx={{ width: 120 }}>
-              <Box sx={{ width: 100, marginTop: 1, marginLeft: 1, fontSize: 10, textAlign: "left",maxWidth:"90px" }}>
+              <Box sx={{ width: 100, marginTop: 1, marginLeft: 1, fontSize: 10, textAlign: "left", maxWidth: "90px" }}>
                 {props.title}
               </Box>
-              <Box sx={{ width: 100, marginTop: 1.5, marginLeft: 1, fontSize: 10, textAlign: "left", color: "#2596be",maxWidth:"90px"  }}>
+              <Box sx={{ width: 100, marginTop: 1.5, marginLeft: 1, fontSize: 10, textAlign: "left", color: "#2596be", maxWidth: "90px" }}>
                 {props.location}
               </Box>
             </Box>
