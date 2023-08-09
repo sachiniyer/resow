@@ -1,14 +1,9 @@
-FROM node:16
-
-WORKDIR /usr/src/app
-
-COPY package.json ./
-COPY package-lock.json ./
+FROM node:16-alpine
+WORKDIR /app
 COPY . .
+RUN npm ci
 
-RUN npm install
+ENV NODE_ENV production
 
-
-
-
-CMD ["npm", "run", "start"]
+EXPOSE 3000
+CMD [ "npm", "run", "start" ]

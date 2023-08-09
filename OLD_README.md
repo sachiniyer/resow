@@ -20,5 +20,5 @@ To help eliminate waste of all kinds and connect people through shared resources
 
   Curious about the title ***Re-Sow***? The name is derived by combining the word ***Resource*** and ***Sow***
 
-  ## How To Contribute to the file
+## How To Contribute to the file
 Please check [CONTRIBUTING.md](./CONTRIBUTING.md)
