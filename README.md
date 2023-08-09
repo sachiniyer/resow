@@ -2,7 +2,7 @@
 
 A better Craigslist free section, with a map forward interface.
 
-Deployed at https://resow.sachiniyer.com - _TODO_
+Deployed at https://resow.sachiniyer.com on my [k3s cluster](https://github.com/sachiniyer/cheap_portable_k3s) ([yaml](https://github.com/sachiniyer/k3s-configs/tree/master/resow))
 
 built with:
 - [Minwu Kim](https://github.com/minwukim)
